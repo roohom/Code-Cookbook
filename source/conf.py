@@ -32,7 +32,41 @@ release = '0.1'
 # ones.
 extensions = [
 		'recommonmark',
+		'sphinx.ext.autodoc',
+		'sphinx.ext.autosummary',
+		'sphinx.ext.todo',
+		'sphinx.ext.autosectionlabel',
 ]
+
+
+# -- Options for LaTeX output ------------------------------------------------
+ 
+latex_elements = {
+# The paper size ('letterpaper' or 'a4paper').
+#'papersize': 'letterpaper',
+ 
+# The font size ('10pt', '11pt' or '12pt').
+#'pointsize': '10pt',
+ 
+# Additional stuff for the LaTeX preamble.
+'preamble': '''
+\\hypersetup{unicode=true}
+\\usepackage{CJKutf8}
+\\AtBeginDocument{\\begin{CJK}{UTF8}{gbsn}}
+\\AtEndDocument{\\end{CJK}}
+''',
+}
+ 
+# Grouping the document tree into LaTeX files. List of tuples
+# (source start file, target name, title,
+#  author, documentclass [howto, manual, or own class]).
+latex_documents = [
+    (master_doc, 'Python Manual.tex', 'PYTHON Documentation',
+     'xxxx', 'manual'),
+]
+
+
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
