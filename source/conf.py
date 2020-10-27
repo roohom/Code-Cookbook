@@ -49,7 +49,6 @@ language = 'zh_CN'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = [
-	'sphinx_markdown_tables',
 	'sphinx.ext.napoleon',
 ]
 
