@@ -1,0 +1,14 @@
+# 可能有用的学习链接
+
+## 关于MySQL索引
+
+[数据库索引优化原理，索引的工作机制](https://www.cnblogs.com/mrzhow/p/7594343.html)
+
+## HCatalog
+
+[利用HCatalog管理元数据](https://blog.csdn.net/today20080808/article/details/43484865?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
+
+# Hive - ORC 文件存储格式
+
+[ORC文件存储格式](https://blog.csdn.net/cnhome/article/details/80241197)
+

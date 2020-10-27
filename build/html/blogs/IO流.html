@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IO Stream &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="JDBC" href="JDBC.html" />
+    <link rel="prev" title="Hive SQL50题记录" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">模拟面试题整理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">实时存储NoSQL模拟面试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html">元注解</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html#id2">注解解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">Bigdata Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html">集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html#id9">简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">Flink基础配置与基础原理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hbase.html">Hbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">Hive SQL50题记录</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">字节流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-id-jump-a"><a id="jump">高效流</a></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">字符流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">转换流</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inputstreamreader"><code class="docutils literal notranslate"><span class="pre">InputStreamReader</span></code>:把字节流转换字符流的转换流</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#outputstreamwriter"><code class="docutils literal notranslate"><span class="pre">OutputStreamWriter</span></code>:把字符流转换为字节流的转换流</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">字符缓冲流</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">总结:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">字节流:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">字符流</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">转换流</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">序列化流</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JDBC.html">JDBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%20Cookbook.html">JAVA Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_Maven.html">Maven</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html">面向对象是基于面向过程的编程思想</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html#id2">特征</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html#java-java">Java中最基础的单位是类，类是Java中最基础的单位</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kafka.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">MySQL 50题记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">MySQL语句执行顺序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">SQL JOINS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimpleDataStruct.html">简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Socket.html">Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">Sqoop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">可能有用的学习链接</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">多线程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">大数据平台环境与数仓</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">常用软件梳理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">SCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">拉链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">数据仓库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">Hive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">数据倾斜</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">生产者消费者模型问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">JavaSE_Day08</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">面向对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">常用API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">Java OOP防脱发指南</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/blogs/IO流.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="io-stream">
+<h1><code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code><a class="headerlink" href="#io-stream" title="永久链接至标题">¶</a></h1>
+<p>[TOC]</p>
+<p><a id=top></a></p>
+<div class="section" id="id1">
+<h2>字节流<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>分类:</p>
+<ul>
+<li><p>字节输入流</p>
+<ul>
+<li><p>顶层父类:InputStream</p></li>
+<li><p>用字节流读取文件</p>
+<ul>
+<li><p>FileInputStream</p></li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="nb">len</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">byte</span><span class="p">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">byte</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+<span class="k">while</span><span class="p">((</span><span class="nb">len</span><span class="o">=</span><span class="n">fis</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="nb">str</span> <span class="o">=</span> <span class="n">new</span> <span class="n">String</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字节输出流</p>
+<ul class="simple">
+<li><p>顶层父类:OutputStream</p></li>
+<li><p>用字节流写文件</p>
+<ul>
+<li><p>FileOutputStream</p></li>
+<li><p>bos.write(byte[] buf, int offset, int len)</p></li>
+<li><p>如:bos.write(buf,0,len);
+常用方法</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileOutputStream</span></code> 写</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">write(int</span> <span class="pre">b)</span></code> 向文件中写入一个字节数据</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write(byte[]</span> <span class="pre">buf)</span></code> 向文件中写入多个字节数据(把字节数组中的数据全部写入)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write(byte[]</span> <span class="pre">buf,</span> <span class="pre">int</span> <span class="pre">offset,</span> <span class="pre">int</span> <span class="pre">len)</span></code> 向文件中写入多个字节数据</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">byte[]</span> <span class="pre">buf</span></code> : 是字节数组</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">offset</span></code> : 索引位置(起始位置)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">len</span></code>    : 长度(偏移量),向后取len个字节的数据</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code> 关闭输出流</p></li>
+<li><p>补充String类中的方法</p>
+<ul>
+<li><p>字符串转byte数组 即:<code class="docutils literal notranslate"><span class="pre">String</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">byte[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">byte[]</span> <span class="pre">getBytes[]</span></code></p></li>
+</ul>
+</li>
+<li><p>可能出现的问题以及解决办法:</p>
+<ul>
+<li><p>没有换行</p>
+<ul>
+<li><p>解决:在<code class="docutils literal notranslate"><span class="pre">write()</span></code>中添加”\r\n”</p></li>
+</ul>
+</li>
+<li><p>写入的数据将之前的存在的数据都覆盖了</p>
+<ul>
+<li><p>解决:<code class="docutils literal notranslate"><span class="pre">FileOutputStream类</span></code>的构造方法中有一个参数boolean append用来进行是否在原数据后追加写入，是的话，设置为true</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileInputStream</span></code> 读</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code> 关闭流</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">read()</span></code> 读一个字节数据</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">read(byte[]</span> <span class="pre">bys)</span></code> 读取多个字节,读取最多buf.length()个字节数据，并存储到 buf数组，返回实际读取到的字节数据个数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">read(byte[]</span> <span class="pre">bys,</span> <span class="pre">int</span> <span class="pre">offset,</span> <span class="pre">int</span> <span class="pre">len)</span></code> 从起始位置offset开始读取len个长度的字节</p></li>
+</ul>
+</li>
+<li><p>读写结合，一种高速的写方法</p>
+<ul>
+<li><p>示例:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">FileCopy</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">FileInputStream</span> <span class="n">fis</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="n">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;D:\\initialD.png&quot;</span><span class="p">);</span>
+            <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="s">&quot;D:\\copy\\initialD.jpg&quot;</span><span class="p">);</span>
+            <span class="kt">byte</span><span class="o">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">]</span><span class="p">;</span>
+            <span class="cm">/*</span>
+<span class="cm">            //一个字节一个字节地读</span>
+<span class="cm">            int c ;</span>
+<span class="cm">            while ((c=fis.read())!=-1)</span>
+<span class="cm">                fos.write(c);</span>
+
+<span class="cm">             */</span>
+            <span class="kt">int</span> <span class="n">len</span> <span class="p">;</span>
+            <span class="k">while</span> <span class="p">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">fis</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buf</span><span class="p">))</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">fos</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="k">assert</span> <span class="n">fis</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span>
+                <span class="n">fis</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+                <span class="k">assert</span> <span class="n">fos</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">;</span>
+                <span class="n">fos</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="a-id-jump-a">
+<h2><a id="jump">高效流</a><a class="headerlink" href="#a-id-jump-a" title="永久链接至标题">¶</a></h2>
+<p>高效流:字节高效流、字符高效流</p>
+<ul class="simple">
+<li><p>字节高效流：</p>
+<ul>
+<li><p>本质:字节输入缓冲流只是提供缓冲区，本身不能读取文件，需要依赖于字节输入流实现读取数据</p></li>
+<li><p>缓冲流内置一个缓冲区，默认大小是:8*1024(可以修改)</p></li>
+<li><p>字节输入缓冲流:BufferedInputStream</p>
+<ul>
+<li><p>高效的字节输入流, 封装 普通的字节输入流, 提供缓冲区</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">BufferedInputStream(InputStream</span> <span class="pre">is)</span></code></p></li>
+<li><p>示例:<code class="docutils literal notranslate"><span class="pre">BufferedInputStream</span> <span class="pre">bis</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">BufferedInputStream(new</span> <span class="pre">FileInputStream(&quot;file_path&quot;))</span></code></p></li>
+<li><p>常用方法<code class="docutils literal notranslate"><span class="pre">read()</span></code></p></li>
+</ul>
+</li>
+<li><p>字符输出缓冲流:BufferedOutputStream</p>
+<ul>
+<li><p>高效的字节输出流, 封装 普通的字节输出流, 提供缓冲区</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">BufferedOutputStream(OutputStream</span> <span class="pre">is)</span></code></p></li>
+<li><p>示例:<code class="docutils literal notranslate"><span class="pre">BufferedOutputStream</span> <span class="pre">bos</span> <span class="pre">=</span> <span class="pre">new</span> <span class="pre">BufferedOutputStream(new</span> <span class="pre">FileOutputStream(&quot;file_path&quot;))</span></code></p></li>
+<li><p>常用方法<code class="docutils literal notranslate"><span class="pre">write()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flush()</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字符高效流</p>
+<ul>
+<li><p>BufferedReader()</p>
+<ul>
+<li><p>BufferedReader() br = new BufferedReader(new FileReader(String Path/File file))</p></li>
+</ul>
+</li>
+<li><p>BufferedWriter()</p>
+<ul>
+<li><p>BufferedWtiter() bw = new BufferedWriter(new FileWriter(String Path/File file))</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>字符流<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>字符流:针对纯文本文件进行读写操作的流</p>
+<ul>
+<li><p>本质:底层还是字节流(把字节流进行封装)</p></li>
+<li><p>分类:</p>
+<ul>
+<li><p>字符输入流</p>
+<ul>
+<li><p>顶层父类:Reader</p></li>
+<li><p>读文件:FileReader</p>
+<ul>
+<li><p>FileReader fr = new FileReader(String path/ File file)</p></li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">int</span> <span class="nb">len</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">char</span><span class="p">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">char</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+<span class="k">while</span><span class="p">((</span><span class="nb">len</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">read</span><span class="p">())</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+      <span class="n">String</span> <span class="n">Str</span> <span class="o">=</span> <span class="n">new</span> <span class="n">String</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字符输出流</p>
+<ul>
+<li><p>顶层父类:Writer</p></li>
+<li><p>写文件:FileWriter</p>
+<ul>
+<li><p>FileWriter fw = new FileWriter();</p></li>
+<li><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FileWriter</span> <span class="n">fw</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FileWriter</span><span class="p">(</span><span class="n">String</span> <span class="n">path</span><span class="o">/</span> <span class="n">File</span> <span class="n">file</span><span class="p">);</span>
+<span class="n">fw</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字符输出流:<code class="docutils literal notranslate"><span class="pre">FileWriter</span></code>类</p>
+<ul class="simple">
+<li><p>构造方法</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileWriter(String</span> <span class="pre">Path)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileWriter(File</span> <span class="pre">file)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileWriter(String</span> <span class="pre">path,</span> <span class="pre">boolean</span> <span class="pre">append)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileWriter(File</span> <span class="pre">file,</span> <span class="pre">boolean</span> <span class="pre">b)</span></code></p></li>
+</ul>
+</li>
+<li><p>常用方法</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">close()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write(char[]</span> <span class="pre">cbuf,</span> <span class="pre">int</span> <span class="pre">offset,</span> <span class="pre">int</span> <span class="pre">len)</span></code> 写入多个字符数据</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write(String</span> <span class="pre">str,</span> <span class="pre">int</span> <span class="pre">offset,</span> <span class="pre">int</span> <span class="pre">len)</span></code> 把字符串中部分数写入到文件</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flush()</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>字符输入流:<code class="docutils literal notranslate"><span class="pre">FileReader</span></code>类</p>
+<ul class="simple">
+<li><p>构造方法:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileReader(File</span> <span class="pre">file)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FileReader(String</span> <span class="pre">path)</span></code></p></li>
+</ul>
+</li>
+<li><p>常用方法:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">read()</span></code> //读取一个字符，需要转换为char</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">read(char[]</span> <span class="pre">cbuf)</span></code> 读取多个字符，最多读cbuf.length个字符数据，返回实际读取到的字符个数</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>转换流<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>字符流内部有:编码表、内置缓冲区<br />字符流的本质是字节流<br />一个中文:GBK中占两个字节,UTF-8中占三个字节</p>
+<ul class="simple">
+<li><p>功能:</p>
+<ul>
+<li><p>把字节流转换为字符流: <code class="docutils literal notranslate"><span class="pre">InputStreamReader</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">InputStreamReader(InputStream</span> <span class="pre">in)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InputStreamReader(InputStream</span> <span class="pre">in,</span> <span class="pre">String</span> <span class="pre">charsetName)</span></code></p></li>
+<li><p>InputStreamReader isr = new InputStreamReader(new FileInputStream(String Path))</p></li>
+</ul>
+</li>
+<li><p>把字符流转换为字节流: <code class="docutils literal notranslate"><span class="pre">OutputStreamWriter</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">OutputStreamWriter(OutputStream</span> <span class="pre">out)</span></code> param:字节输出流(FileOutputStream)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OutputStreamWriter(OutputStream</span> <span class="pre">out,</span> <span class="pre">String</span> <span class="pre">charsetName)</span></code> params:字节输出流(FileOutputStream)、编码表名称</p></li>
+<li><p>OutputStreamReader isr = new OutputStreamReader(new FileOutputStream(String Path))</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="inputstreamreader">
+<h3><code class="docutils literal notranslate"><span class="pre">InputStreamReader</span></code>:把字节流转换字符流的转换流<a class="headerlink" href="#inputstreamreader" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="outputstreamwriter">
+<h3><code class="docutils literal notranslate"><span class="pre">OutputStreamWriter</span></code>:把字符流转换为字节流的转换流<a class="headerlink" href="#outputstreamwriter" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>字符缓冲流<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>类似于高效流</p>
+<ul class="simple">
+<li><p>字符缓冲流:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">BufferedReader</span></code> 字符输入缓冲流</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">BufferedReader(Reader</span> <span class="pre">in)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BufferedReader(Reader</span> <span class="pre">in.int</span> <span class="pre">size)</span></code> <code class="docutils literal notranslate"><span class="pre">params</span></code>:字符输入流FileReader , 自定义缓冲区大小</p></li>
+<li><p>特有方法:<code class="docutils literal notranslate"><span class="pre">readLine()</span></code> 读一行数据(以<code class="docutils literal notranslate"><span class="pre">\r\n</span></code>作为读取的结束符号)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BufferedWriter</span></code> 字符输出缓冲流</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">BufferedWriter(Writer</span> <span class="pre">out)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">BufferedWriter(Writer</span> <span class="pre">out,</span> <span class="pre">int</span> <span class="pre">size)</span></code></p></li>
+<li><p>特有方法:<code class="docutils literal notranslate"><span class="pre">newLine()</span></code>  -&gt; 相当于<code class="docutils literal notranslate"><span class="pre">\r\n</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>总结:<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id6">
+<h3>字节流:<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>字节流是<strong>万能流</strong>，可以针对任何类型文件，如文本，视频，图片…</p>
+<ul>
+<li><p>基础流，知道怎么用即可</p></li>
+<li><p>开发中使用的高效流(借助基础流)</p>
+<ul>
+<li><p>读文件: 针对多个字节数据的读取</p></li>
+<li><p>写文件: 针对多个字节数据的写入</p></li>
+<li><p>Template: <a class="reference external" href="#jump">详细使用</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">读</span><span class="p">:</span>
+  <span class="n">BufferedInputStream</span> <span class="n">bis</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BufferedInputStream</span><span class="p">(</span><span class="n">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="s2">&quot;file_path&quot;</span><span class="p">))</span>
+  <span class="n">byte</span><span class="p">[]</span> <span class="n">buf</span> <span class="o">=</span> <span class="n">new</span> <span class="n">byte</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+  <span class="nb">int</span> <span class="nb">len</span><span class="o">=-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">((</span><span class="nb">len</span><span class="o">=</span><span class="n">bis</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">buf</span><span class="p">))</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="p">{</span>
+        <span class="n">bis</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">flush</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3>字符流<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>基础流:FileReader、FileWriter</p></li>
+<li><p>缓冲流:</p>
+<ul>
+<li><p>读文件: 针对多个字节进行读 -&gt; 读一行</p></li>
+<li><p>写文件: 多个字节写入到文件 -&gt; 写一行</p></li>
+<li><p>Template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+<span class="k">while</span><span class="p">((</span><span class="n">line</span> <span class="o">=</span> <span class="n">输入流</span><span class="o">.</span><span class="n">readLine</span><span class="p">())</span><span class="o">!=</span><span class="n">null</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">输出流</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">);</span>
+    <span class="n">输出流</span><span class="o">.</span><span class="n">newLine</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3>转换流<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>在开发中当需要针对特殊编码(不是常用编码)的文件进行读写操作时
+针对的是纯文本文件，非文本文件不能使用，使用后，非文本文件不能使用</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>序列化流<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<p>序列化:在java中书写的类，具备了序列化的特征，只有具备了序列化的特征才能实现对象的序列化
+类需要实现一个序列化接口(Serializable接口)</p>
+<p><a class="reference external" href="#top">返回顶部</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="JDBC.html" class="btn btn-neutral float-right" title="JDBC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-left" title="Hive SQL50题记录" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, roohom
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

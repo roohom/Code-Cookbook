@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>数据倾斜 &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="生产者消费者模型问题" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html" />
+    <link rel="prev" title="数据仓库" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">模拟面试题整理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">实时存储NoSQL模拟面试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html">元注解</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html#id2">注解解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">Bigdata Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html">集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html#id9">简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">Flink基础配置与基础原理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hbase.html">Hbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">Hive SQL50题记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IO%E6%B5%81.html"><code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDBC.html">JDBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%20Cookbook.html">JAVA Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_Maven.html">Maven</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html">面向对象是基于面向过程的编程思想</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html#id2">特征</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html#java-java">Java中最基础的单位是类，类是Java中最基础的单位</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kafka.html">Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">MySQL 50题记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">MySQL语句执行顺序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Redis.html">Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">SQL JOINS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimpleDataStruct.html">简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Socket.html">Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">Sqoop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">可能有用的学习链接</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">多线程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">大数据平台环境与数仓</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">常用软件梳理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">SCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">拉链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">数据仓库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">Hive</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">数据倾斜</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">生产者消费者模型问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">JavaSE_Day08</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">面向对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">常用API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">Java OOP防脱发指南</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>数据倾斜</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/blogs/数据倾斜.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>数据倾斜<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<blockquote>
+<div><p>数据分配不均衡</p>
+</div></blockquote>
+<ul>
+<li><p>根本原因：</p>
+<ul class="simple">
+<li><p>一：数据本身就是倾斜的，某种数据过多(无法干预)</p></li>
+<li><p>二：分配规则：</p>
+<ul>
+<li><p>MapReduce/Hive：默认分区的规则Key哈希取余之后得到Reduce个数</p></li>
+<li><p>情况：</p>
+<ul>
+<li><p>两个reduce，所有的哈希取余都为0</p></li>
+<li><p>一个reduce处理完所有数据</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>解决：</p>
+<ul>
+<li><p>MapReduce：设计java代码</p>
+<ul class="simple">
+<li><p>方案一：给key添加随机数</p></li>
+<li><p>方案二：通过MapReduce的分区规则，随机分区</p>
+<ul>
+<li><p>再使用一个MapReduce来处理上一步的结果，做最终的聚合</p></li>
+</ul>
+</li>
+<li><p>方案三：开启MapReduce中的Combiner</p></li>
+</ul>
+</li>
+<li><p>Hive/SQL：</p>
+<blockquote>
+<div><p>SQL调优的本质就是把不需要参加join的数据过滤掉</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html" class="btn btn-neutral float-right" title="生产者消费者模型问题" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html" class="btn btn-neutral float-left" title="数据仓库" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, roohom
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
