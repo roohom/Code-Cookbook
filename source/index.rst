@@ -8,9 +8,9 @@ Welcome to Code-Cookbook's documentation!
 
 .. toctree::
    :maxdepth: 2
-    :numbered:
    :caption: Contents:
    :glob:
+   :numbered:
    
    
    blogs/*
