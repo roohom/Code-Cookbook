@@ -36,6 +36,7 @@ extensions = [
 		'sphinx.ext.autosummary',
 		'sphinx.ext.todo',
 		'sphinx.ext.autosectionlabel',
+		'sphinx_markdown_tables'
 ]
 
 
