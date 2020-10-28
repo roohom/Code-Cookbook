@@ -44,11 +44,11 @@ values (5, '59');
 
 
 
-![sqlcourse](./course.png)
+![avatar](./course.png)
 
 
 
-![sql](././score.png)
+![avatar](././score.png)
 
 **左连接**，即连接以左表为主，查询出以符合指定连接条件的左表全部内容，并且以指定条件关联右表内容。测试左连接`LEFT JOIN`:
 
@@ -61,7 +61,7 @@ from course c
 
 测试结果：
 
-![s](./left-join.png)
+![avatar](./left-join.png)
 
 
 
@@ -76,7 +76,7 @@ from course c
 
 测试结果：
 
-![right](./right-join.png)
+![avatar](./right-join.png)
 
 **内连接**(即join)，以指定条件连接两表，查询出两张表的交集，测试内连接`INNER JOIN`：
 
@@ -89,9 +89,7 @@ from course c
 
 测试结果：
 
-![join](SQL JOINS.assets/join.png)
-
-
+![avatar](./join.png)
 
 
 
