@@ -36,7 +36,7 @@ extensions = [
 		'sphinx.ext.autosummary',
 		'sphinx.ext.todo',
 		'sphinx.ext.autosectionlabel',
-		'sphinx_markdown_tables'
+		'sphinx-markdown-tables',
 ]
 
 
@@ -86,7 +86,11 @@ source_parsers = {
     '.md': CommonMarkParser,
     '.MD': CommonMarkParser,
 }
-source_suffix = ['.rst', '.md', '.MD']
+source_suffix = ['.rst',
+				 '.md',
+				 '.MD'
+ 
+ ]
 # -----------------------------------------------------
 
 

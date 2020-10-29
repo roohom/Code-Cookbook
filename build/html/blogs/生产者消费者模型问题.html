@@ -1,0 +1,642 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>36. 生产者消费者模型问题 &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="37. JavaSE_Day08" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html" />
+    <link rel="prev" title="35. 数据倾斜" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Apache%20Avro.html">5. Apache Avro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">6. Bigdata Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html">7. 集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html#id9">8. 简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">9. Flink基础配置与基础原理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hbase.html">10. Hbase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">11. Hive SQL50题记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IO%E6%B5%81.html">12. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDBC.html">13. JDBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%20Cookbook.html">14. JAVA Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_Maven.html">15. Maven</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html">16. Java_OOP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">17. 使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kafka.html">18. Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">19. MySQL 50题记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">20. MySQL语句执行顺序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Redis.html">21. Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">22. SQL JOINS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimpleDataStruct.html">23. 简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Socket.html">24. Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">25. Sqoop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">26. 可能有用的学习链接</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">27. Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">28. 多线程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">29. 大数据平台环境与数仓</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">30. 常用软件梳理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">31. SCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">32. 拉链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">33. 数据仓库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">34. Hive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">35. 数据倾斜</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">36. 生产者消费者模型问题</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#milk-glass">36.1. 典型案例一:milk_glass:牛奶生产者和消费者问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">36.2. 典型案例二:多线程猜数字游戏</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">37. JavaSE_Day08</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">38. 面向对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">39. 常用API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">40. Java OOP防脱发指南</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">36. </span>生产者消费者模型问题</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/blogs/生产者消费者模型问题.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">36. </span>生产者消费者模型问题<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<blockquote>
+<div><p>Java中的多线程问题</p>
+</div></blockquote>
+<p><strong>生产者消费者模型</strong>是多线程中的典型案例。当多线程在运行过程中涉及到了对共享资源进行修改时，就会引起线程安全问题，为了解决此安全问题，便引入了同步机制。</p>
+<ul class="simple">
+<li><p>解决方案:</p>
+<ul>
+<li><p>本质:把多线程变成单线程</p></li>
+<li><p>引入线程同步机制(三种方法)</p>
+<ul>
+<li><p>同步代码块</p>
+<ul>
+<li><p>针对run方法中的代码，使用synchronized关键字，把部分代码添加同步机制</p>
+<ul>
+<li><p>同步机制:在同一个而时间，只能有一个线程执行</p>
+<ul>
+<li><p>原理:线程在执行之前先获取到一个锁，然后开始执行线程任务，只有拿到锁的线程执行完包含在synchronized代码块中的内容之后，才会释放锁，才可以让其他线程拿到这个锁</p></li>
+</ul>
+</li>
+<li><p>同步机制，关键是实现利用:锁(对象锁)</p>
+<ul>
+<li><p>锁: 对象锁。任何对象都可以当锁使用</p>
+<ul>
+<li><p>String lock = new String()</p></li>
+<li><p>Object lock = new Object()</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>同步方法</p>
+<ul>
+<li><p>针对方法进行同步，同步方法只能用在方法上</p></li>
+<li><p>格式:public synchronized void method(){…}</p></li>
+<li><p>同步方法中的锁:</p>
+<ul>
+<li><p>非静态方法:锁是this(锁，当前对象)</p></li>
+<li><p>静态方法:静态方法没有对象的概念。所示Class(锁，类名.class)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>锁机制</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="milk-glass">
+<h2><span class="section-number">36.1. </span>典型案例一:milk_glass:牛奶生产者和消费者问题<a class="headerlink" href="#milk-glass" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>奶箱类(Box)：定义一个成员变量，表示第x瓶奶，提供存储牛奶和获取牛奶的操作</p></li>
+<li><p>生产者类(Producer)：实现Runnable接口，重写run()方法，调用存储牛奶的操作</p></li>
+<li><p>消费者类(Customer)：实现Runnable接口，重写run()方法，调用获取牛奶的操作</p></li>
+</ul>
+<p>实现代码:</p>
+<p>奶箱:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ClassName: Box</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:奶箱</span>
+<span class="cm"> * Date: 2020/8/2 21:09</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Box</span> <span class="p">{</span>
+    <span class="c1">//定义一个成员变量，表示第x瓶奶</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">milk</span><span class="p">;</span>
+    <span class="c1">//定义一个成员变量，表示奶箱的状态</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">state</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="c1">//提供存储牛奶和获取牛奶的操作</span>
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="kt">int</span> <span class="n">milk</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//如果有牛奶，等待消费</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">wait</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">//如果没有牛奶，就生产牛奶</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">milk</span> <span class="o">=</span> <span class="n">milk</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;送奶工将第&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">milk</span> <span class="o">+</span> <span class="s">&quot;瓶奶放入奶箱&quot;</span><span class="p">);</span>
+        <span class="c1">//生产完毕之后，修改奶箱状态</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="c1">//唤醒其他等待的线程</span>
+        <span class="n">notifyAll</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">get</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//如果没有牛奶，等待生产</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">wait</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">//如果有牛奶，就消费牛奶</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;用户拿到第&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="na">milk</span> <span class="o">+</span> <span class="s">&quot;瓶奶&quot;</span><span class="p">);</span>
+
+        <span class="c1">//消费完毕之后，修改奶箱状态</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+        <span class="c1">//唤醒其他等待的线程</span>
+        <span class="n">notifyAll</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Producer and Customer：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ClassName: Producer</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:生产者</span>
+<span class="cm"> * Date: 2020/8/2 21:10</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Producer</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="n">Box</span> <span class="n">b</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">Producer</span><span class="p">(</span><span class="n">Box</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">b</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/**</span>
+<span class="cm"> * ClassName: Customer</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:消费者</span>
+<span class="cm"> * Date: 2020/8/2 21:10</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="n">Box</span> <span class="n">b</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">Customer</span><span class="p">(</span><span class="n">Box</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">b</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="cm">/**</span>
+<span class="cm"> * ClassName: Customer</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:消费者</span>
+<span class="cm"> * Date: 2020/8/2 21:10</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Customer</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="n">Box</span> <span class="n">b</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">Customer</span><span class="p">(</span><span class="n">Box</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">b</span><span class="p">.</span><span class="na">get</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>测试类:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ClassName: ProducerAndCustomer</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:</span>
+<span class="cm"> * Date: 2020/8/2 21:08</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ProducerAndCustomer</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//创建奶箱对象，这是共享数据区域</span>
+        <span class="n">Box</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Box</span><span class="p">();</span>
+
+        <span class="c1">//创建生产者对象，把奶箱对象作为构造方法参数传递，因为在这个类中要调用存储牛奶的操作</span>
+        <span class="n">Producer</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Producer</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+        <span class="c1">//创建消费者对象，把奶箱对象作为构造方法参数传递，因为在这个类中要调用获取牛奶的操作</span>
+        <span class="n">Customer</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Customer</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+
+        <span class="c1">//创建2个线程对象，分别把生产者对象和消费者对象作为构造方法参数传递</span>
+        <span class="n">Thread</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+        <span class="n">Thread</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+
+        <span class="c1">//启动线程</span>
+        <span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+        <span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">36.2. </span>典型案例二:多线程猜数字游戏<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>问题描述:</p>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span>* 用两个线程玩猜数字游戏，第一个线程负责随机给出1~100之间的一个整数，第二个线程负责猜出这个数。
+* 要求每当第二个线程给出自己的猜测后，第一个线程都会提示“猜小了”、“猜大了”或“猜对了”。 猜数之前，要求第二个线程要等待第一个线程设置好要猜测的数。
+* 第一个线程设置好猜测数之后，两个线程还要相互等待。
+* 其原则是：第二个线程给出自己的猜测后，等待第一个线程给出的提示；第一个线程给出提示后，等待给第二个线程给出猜测。
+* 如此进行，直到第二个线程给出正确的猜测后，两个线程进入死亡状态
+</pre></div>
+</div>
+<p>实现代码:</p>
+<p>猜数字类，类似于奶箱:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ClassName: NumGuess</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:两个线程猜数字游戏</span>
+<span class="cm"> * Request: * 用两个线程玩猜数字游戏，第一个线程负责随机给出1~100之间的一个整数，第二个线程负责猜出这个数。</span>
+<span class="cm"> *          * 要求每当第二个线程给出自己的猜测后，第一个线程都会提示“猜小了”、“猜大了”或“猜对了”。 猜数之前，要求第二个线程要等待第一个线程设置好要猜测的数。</span>
+<span class="cm"> *          * 第一个线程设置好猜测数之后，两个线程还要相互等待。</span>
+<span class="cm"> *          * 其原则是：第二个线程给出自己的猜测后，等待第一个线程给出的提示；第一个线程给出提示后，等待给第二个线程给出猜测。</span>
+<span class="cm"> *          * 如此进行，直到第二个线程给出正确的猜测后，两个线程进入死亡状态</span>
+<span class="cm"> * Date: 2020/8/2 20:10</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumGuess</span> <span class="p">{</span>
+    <span class="c1">//线程一随机生成的让线程二猜的数字</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+    <span class="c1">//线程二随机生成的猜的数字</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">gsNum</span><span class="p">;</span>
+    <span class="c1">//猜没猜数字</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">guess</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">//给没给数字</span>
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">give</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">//记录开关状态，用于停止程序</span>
+    <span class="kt">boolean</span> <span class="n">stop</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="c1">//用来记录猜数字的区间，为了将猜数字的范围缩小</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="c1">//用来计数猜了多少次的计数器</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">generateNum</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//如果当前执行的线程是生成数者，也就是第一个线程，并且还没有给出一个数字让第二个线程来猜，那么就需要生成一个数字</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">give</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//如果没有数字就生成数字</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;第一个线程正在设置数字...&quot;</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;本次设置的数字是:&quot;</span> <span class="o">+</span> <span class="n">num</span><span class="p">);</span>
+
+            <span class="c1">//生成数字之后，现在有数字了，修改数字状态为true</span>
+            <span class="n">give</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//如果没猜，就等着第二个线程来猜数字</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">guess</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">wait</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="n">gsNum</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">min</span> <span class="o">=</span> <span class="n">gsNum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;第1个线程回答:猜小了&quot;</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">&lt;</span> <span class="n">gsNum</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;第1个线程回答:猜大了&quot;</span><span class="p">);</span>
+            <span class="n">max</span> <span class="o">=</span> <span class="n">gsNum</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;第1个线程回答:你猜的数字是&quot;</span> <span class="o">+</span> <span class="n">gsNum</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;猜对啦！&quot;</span><span class="p">);</span>
+            <span class="c1">//猜对了程序就可以停下来了，将stop置为true</span>
+            <span class="n">stop</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="c1">//return;</span>
+        <span class="p">}</span>
+        <span class="c1">//没猜，或者猜的都不对，就相当于没猜，那么将guess置为false</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="c1">//通知第二个线程，现在可以来猜了，也就是唤醒第二个线程</span>
+        <span class="n">notifyAll</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">guessNum</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//如果第二个线程猜了，等待线程一给出提示</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">wait</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">//如果猜的不对，程序就不需要停止，线程二还需要继续猜，也就是再生成一个数</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">gsNum</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">max</span> <span class="o">-</span> <span class="n">min</span><span class="p">))</span> <span class="o">+</span> <span class="n">min</span><span class="p">;</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;第2个线程第&quot;</span> <span class="o">+</span> <span class="p">(</span><span class="n">count</span><span class="o">++</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;次猜的数字是:&quot;</span> <span class="o">+</span> <span class="n">gsNum</span><span class="p">);</span>
+            <span class="c1">//猜过数字了</span>
+            <span class="n">guess</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">//通知线程一线程二猜过了，可以进行判断了，也就是唤醒等待中的线程一</span>
+        <span class="n">notifyAll</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>给出数字让猜的类:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ClassName: NumGenerator</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:</span>
+<span class="cm"> * Date: 2020/8/2 20:44</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumGenerator</span> <span class="kd">implements</span> <span class="n">Runnable</span><span class="p">{</span>
+
+    <span class="kd">private</span> <span class="n">NumGuess</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">NumGenerator</span><span class="p">(</span><span class="n">NumGuess</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//如果猜的不对，线程一就不需要结束</span>
+        <span class="c1">//一开始没有数字就生成一个数字，有了数字就进行给线程二提示</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">n</span><span class="p">.</span><span class="na">stop</span> <span class="p">)</span>
+            <span class="n">n</span><span class="p">.</span><span class="na">generateNum</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>猜数字者:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ClassName: NumGuesser</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:</span>
+<span class="cm"> * Date: 2020/8/2 20:46</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NumGuesser</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="p">{</span>
+
+    <span class="kd">private</span> <span class="n">NumGuess</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">NumGuesser</span><span class="p">(</span><span class="n">NumGuess</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">n</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//如果猜的不对，线程二就一直猜，直到猜对</span>
+       <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">n</span><span class="p">.</span><span class="na">stop</span><span class="p">)</span>
+           <span class="n">n</span><span class="p">.</span><span class="na">guessNum</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>测试类:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * ClassName: GuessNumTest</span>
+<span class="cm"> * Author: Roohom</span>
+<span class="cm"> * Function:</span>
+<span class="cm"> * Date: 2020/8/2 20:47</span>
+<span class="cm"> * Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">GuessNumTest</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//公用的资源类，里面有共享的变量，类似于生产者和消费者共用的资源，</span>
+        <span class="n">NumGuess</span> <span class="n">n</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumGuess</span><span class="p">();</span>
+        <span class="c1">//将资源作为参数传入数字生成者和猜数者</span>
+        <span class="n">NumGenerator</span> <span class="n">gen</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumGenerator</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="n">NumGuesser</span> <span class="n">gue</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NumGuesser</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+        <span class="c1">//实例化两个线程，启动两个线程</span>
+        <span class="n">Thread</span> <span class="n">t1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span><span class="s">&quot;generator&quot;</span><span class="p">);</span>
+        <span class="n">Thread</span> <span class="n">t2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Thread</span><span class="p">(</span><span class="n">gue</span><span class="p">,</span><span class="s">&quot;guesser&quot;</span><span class="p">);</span>
+        <span class="n">t1</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+        <span class="n">t2</span><span class="p">.</span><span class="na">start</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html" class="btn btn-neutral float-right" title="37. JavaSE_Day08" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html" class="btn btn-neutral float-left" title="35. 数据倾斜" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, roohom
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

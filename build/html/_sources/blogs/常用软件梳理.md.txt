@@ -1,0 +1,390 @@
+# 常用软件梳理
+
+## 软件及开放的端口
+
+- Zookeeper：
+  - 2181：服务端端口
+- Hadoop：
+  - HDFS：NameNodde
+    - 8020：RPC协议端口
+    - 50070：Web-Http端口
+  - YARN：ResourceManager
+    - 8032：RPC协议端口
+    - 8088：Web-Http端口
+  - MapReduce：JobHistoryServer
+    - 10020：RPC协议端口
+    - 19888：Web-Http端口
+- Hive：
+  - 9083：MetaStore
+  - 10000：HiveServer2
+- Hue：
+  - 8888：Hue Web
+- HBASE：
+  - 16010端口：web端口
+  - CDH版本：60010
+
+## Zookeeper基本使用
+
+- 启动服务端
+
+  ~~~shell
+  cd /export/servers/zookeeper-3.4.6/
+  bin/zkServer.sh start
+  ~~~
+
+- 查看状态
+
+  ~~~shell
+  bin/zkServer.sh status
+  ~~~
+
+- 关闭服务
+
+  ~~~shell
+  bin/zkServer.sh stop
+  ~~~
+
+- 客户端连接服务端
+
+  ~~~sehll
+  bin/zkCli.sh -server hostname:port
+  # 连接多台
+  bin/zkCli.sh -server node1:2181,node2:2181,node3:2181
+  ~~~
+
+- 列举：只能使用绝对路径
+
+  ~~~shell
+  ls  path [watch]
+  
+  ls  /
+  ~~~
+
+- 创建
+
+  ~~~shell
+  create [-s] [-e] path data
+  create /itcast hadoop
+  ~~~
+
+- 读取节点
+
+  ~~~shell
+  get path [watch]
+  
+  get /itcast
+  ~~~
+
+- 修改节点
+
+  ~~~shell
+  set path data [version]
+  
+  set /itcast  spark
+  ~~~
+
+- 删除节点
+
+  ~~~shell
+  rmr path
+  
+  rmr /itcast/heima
+  ~~~
+
+- 退出客户端
+
+  ~~~shell
+  quit
+  ~~~
+
+
+
+
+## Hadoop基本使用
+
+- 配置环境变量
+
+  ~~~shell
+  #HADOOP_HOME
+  export HADOOP_HOME=/export/servers/hadoop-2.7.5
+  export PATH=:$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+  ~~~
+
+- 第一次启动
+
+  > 第一次启动需要格式化，以后每次启动就无需再格式化
+
+  - 只需要在NameNode所在的机器格式化
+
+    ~~~shell
+    hdfs namenode -format
+    ~~~
+
+- 启动
+
+  - 根据节点的分配，在每台机器启动服务
+
+    ~~~shell
+    cd /export/servers/hadoop-2.7.5/
+    ~~~
+
+  - 启动HDFS(**不推荐的方式**)
+
+    - 第一台机器：NameNode、DataNode
+
+      ```shell
+      sbin/hadoop-daemon.sh start namenode
+      ```
+
+      ```shell
+      sbin/hadoop-daemon.sh start datanode
+      ```
+
+    - 第二台机器：DataNode
+
+      ```shell
+      sbin/hadoop-daemon.sh start datanode
+      ```
+
+    - 第三台机器：DataNode
+
+      ```shell
+      sbin/hadoop-daemon.sh start datanode
+      ```
+
+  - 启动YARN
+
+    - 第一台机器：NodeManager
+
+      ```shell
+      sbin/yarn-daemon.sh start nodemanager
+      ```
+
+    - 第二台机器：NodeManager
+
+      ```shell
+      sbin/yarn-daemon.sh start nodemanager
+      ```
+
+    - 第三台机器：ResourceManager、NodeManager
+
+      - 启动resourcemanager
+
+        ```shell
+        sbin/yarn-daemon.sh start resourcemanager
+        ```
+
+      - 启动NodeManager
+
+        ```shell
+        sbin/yarn-daemon.sh start nodemanager
+        ```
+
+    - 关闭
+
+      - 将上面的每条命令中的start更换为stop
+
+        ```shell
+        例如：sbin/yarn-daemon.sh stop nodemanager
+        ```
+
+  - 分类启动(**推荐的方式**)
+
+    - 启动和关闭HDFS：
+
+      ~~~
+      start-dfs.sh
+      stop-dfs.sh
+      ~~~
+
+    - 启动和关闭YARN：
+
+      ~~~shell
+      start-yarn.sh
+      stop-yarn.sh
+      ~~~
+
+## Hive的基本使用
+
+- 启动HDFS和YARN
+
+  - 第一台机器
+
+    ~~~shell
+    start-dfs.sh
+    ~~~
+
+  - 第三台机器
+
+    ~~~
+    start-yarn.sh
+    ~~~
+
+- 第一次启动Hive需要初始化元数据
+
+  > 仅第一次启动初始化
+
+  - 启动
+
+    ~~~
+    hive
+    ~~~
+
+### beeline
+
+- 使用
+
+  - 先启动MetaStore
+
+    ~~~shell
+    bin/hive --service metastore
+    ~~~
+
+  - 再启动hiveserver2
+
+    ~~~shell
+    bin/hiveserver2
+    ~~~
+
+  - 启动beeline
+
+    ~~~shell
+     hive --service metastore >> logs/metastore.log 2>&1 &
+    ~~~
+
+    - 后台启动
+
+      ~~~shell
+      hiveserver2 >> logs/hiveserver2.log 2>&1 &
+      ~~~
+
+  - 进入beeline
+
+    - 用法一：
+
+      ~~~
+      beeline
+      ~~~
+
+      - 构建连接
+
+        ~~~beeline
+        !connect jdbc:hive2://node3:10000 root 123456
+        ~~~
+
+    - 用法二：
+
+      ~~~shell
+      beeline -u jdbc:hive2://node3:10000 -n root -p 123456
+      ~~~
+
+    - 退出
+
+      ~~~
+      !quit
+      ~~~
+
+- 上述启动配置过于麻烦
+
+  - 构建启动脚本
+
+    - 构建metastore启动脚本
+
+      ~~~shell
+      #!/bin/bash
+      #HIVE_HOME
+      HIVE_HOME=/export/servers/hive-2.1.0-bin
+      #run metastore
+      $HIVE_HOME/bin/hive --service metastore >> $HIVE_HOME/logs/metastore.log 2>&1 &
+      ~~~
+
+    - 构建HiveServer2启动脚本
+
+      ~~~shell
+      #!/bin/bash
+      #HIVE_HOME
+      HIVE_HOME=/export/servers/hive-2.1.0-bin
+      #run hiveserver2
+      $HIVE_HOME/bin/hiveserver2  >> $HIVE_HOME/logs/hiveserver2.log 2>&1 &
+      ~~~
+
+    - 构建beeline启动脚本
+
+      ~~~shell
+      #!/bin/bash
+      #HIVE_HOME
+      HIVE_HOME=/export/servers/hive-2.1.0-bin
+      #run beeline
+      $HIVE_HOME/bin/beeline -u jdbc:hive2://node3:10000 -n root -p 123456
+      ~~~
+
+------------
+- 在使用Hive时一个常用的场景是使用Hive执行文件，构建定时自动化脚本执行任务，在脚本中动态获取昨天的日期，并将日期作为参数传递给Hive脚本文件中
+
+  - 通过参数传递表名和日期
+
+    ~~~shell
+    #!/bin/bash
+    #动态获取日期
+    yesterday=`date -d '-1 day' +%Y-%m-%d`
+    
+    #动态获取的表名
+    tbName=$1
+    echo $tbName
+    
+    #hive -e "select * from $tbName limit 10"
+    #将脚本的变量转换为Hive中的变量
+    hive --hiveconf tn=$tbName -f /export/datas/hive.hql
+    ~~~
+
+  - hql脚本
+
+    ~~~
+    select * from ${hiveconf:tn} limit 10;
+    ~~~
+
+    
+
+------------
+
+
+
+## HBASE基本使用
+
+- 配置环境变量
+
+  ~~~shell
+  #HBASE_HOME
+  export HBASE_HOME=/export/servers/hbase-2.1.0
+  export PATH=:$PATH:$HBASE_HOME/bin
+  ~~~
+
+- 启动
+
+  - 先启动HDFS和ZK
+
+    - 启动HDFS：等待HDFS退出安全模式再启动HBASE
+
+      ~~~
+      start-dfs.sh
+      ~~~
+
+    - 启动Zookeeper
+
+      ~~~
+      /export/servers/zookeeper-3.4.6/bin/start-zk-all.sh 
+      ~~~
+
+    - 启动HBASE
+
+      ~~~
+      start-hbase.sh
+      ~~~
+
+    - 关闭HBASE
+
+      ~~~
+      stop-hbase.sh
+      ~~~
+
+      

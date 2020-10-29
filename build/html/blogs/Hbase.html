@@ -1,0 +1,1938 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>10. Hbase &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="11. Hive SQL50题记录" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" />
+    <link rel="prev" title="9. Flink基础配置与基础原理" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Apache%20Avro.html">5. Apache Avro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">6. Bigdata Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html">7. 集合</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Collection.html#id9">8. 简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">9. Flink基础配置与基础原理</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Hbase</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">10.1. 介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">10.2. 功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">10.3. 应用场景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">10.4. 特点及概念</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">10.4.1. 特点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">10.4.2. 概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">10.4.3. 列存储</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">10.5. HBASE架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">10.6. 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">10.7. 客户端操作</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ddl">10.7.1. DDL操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dml">10.7.2. DML操作</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">10.8. 存储设计</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">10.8.1. 存储概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">10.8.2. 存储模型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">10.8.3. 存储流程</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">10.8.3.1. 写入</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">10.8.3.2. 读取</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">10.9. 角色功能</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hmaster">10.9.1. HMaster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hregionserver">10.9.2. HRegionServer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zookeeper">10.9.3. Zookeeper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hdfs">10.9.4. HDFS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hbase-java-api">10.10. HBASE Java API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hbasemapreduce">10.11. Hbase与MapReduce的集成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id18">10.11.1. 应用场景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id19">10.11.2. 集成原理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">10.11.3. 读HBASE数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">10.11.4. 写HBASE数据</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bulkload">10.12. BulkLoad</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id22">10.12.1. HBASE导入数据的两种方式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">10.12.2. BulkLoad实现</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hivehbase">10.13. Hive与HBASE集成</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sql-on-hbase">10.13.1. SQL  on HBASE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">10.13.2. Hive与hbase集成</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id25">10.14. HBASE热点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rowkey">10.15. 预分区与Rowkey设计</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id26">10.15.1. 预分区</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">10.15.2. RowKey设计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">10.15.3. 二级索引</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id29">10.15.4. 列族与列的设计</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#lsm">10.16. LSM模型与列族属性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#lsm-log-structured-merge-tree">10.16.1. LSM(Log-Structured Merge-tree)设计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flush">10.16.2. Flush</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compact">10.16.3. Compact</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#split">10.16.4. Split</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id30">10.17. 常用列族属性</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">11. Hive SQL50题记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="IO%E6%B5%81.html">12. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="JDBC.html">13. JDBC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%20Cookbook.html">14. JAVA Cookbook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_Maven.html">15. Maven</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html">16. Java_OOP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">17. 使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kafka.html">18. Kafka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">19. MySQL 50题记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">20. MySQL语句执行顺序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Redis.html">21. Redis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">22. SQL JOINS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimpleDataStruct.html">23. 简单(常用)数据结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Socket.html">24. Socket</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">25. Sqoop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">26. 可能有用的学习链接</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">27. Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">28. 多线程</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">29. 大数据平台环境与数仓</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">30. 常用软件梳理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">31. SCD</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">32. 拉链表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">33. 数据仓库</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">34. Hive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">35. 数据倾斜</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">36. 生产者消费者模型问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">37. JavaSE_Day08</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">38. 面向对象</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">39. 常用API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">40. Java OOP防脱发指南</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">10. </span>Hbase</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/blogs/Hbase.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hbase">
+<h1><span class="section-number">10. </span>Hbase<a class="headerlink" href="#hbase" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2><span class="section-number">10.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>起源</p>
+<ul>
+<li><p>21世纪的前三驾马车</p>
+<ul>
+<li><p>GFS ——————-&gt;  HDFS</p></li>
+<li><p>MapReduce——–&gt; MapReduce</p></li>
+<li><p>Bigtable————-&gt; Hbase</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>背景：大数据量的数据要求高性能的读写</p>
+<ul>
+<li><p>为什么不采用HDFS？</p>
+<ul>
+<li><p>基于文件的颗粒度，必须对整体文件进行操作，读写磁盘</p></li>
+<li><p>慢</p></li>
+</ul>
+</li>
+<li><p>需要设计一款数据库工具，能进行大数据量的实时随机读写的存储</p>
+<ul>
+<li><p>MySQL：小数据量，不能解决大数据量的问题</p></li>
+<li><p>Redis：能满足性能要求，不能满足大数据量的内存成本要求，安全性较差</p></li>
+<li><p>HDFS：能解决大数据量，不能满足实时</p></li>
+</ul>
+</li>
+<li><p><strong>怎么解决大数据量？</strong></p>
+<ul>
+<li><p>需要做分布式</p></li>
+</ul>
+</li>
+<li><p><strong>怎么解决高性能的读写？</strong></p>
+<ul>
+<li><p>基于内存存储</p></li>
+</ul>
+</li>
+<li><p>内存的成本高，易丢失，不可能满足所有数据的存储！</p>
+<ul>
+<li><p>现象：越新的数据，被处理概率越大，越老的数据，被处理的概率相对较小</p></li>
+<li><p>解决：将新的数据存储在内存中，对于老的数据达到一定条件时将内存中的数据写入磁盘[写入HDFS]</p>
+<ul>
+<li><p>冷热数据分离</p></li>
+<li><p>老的数据在HDFS</p></li>
+<li><p>新的数据在内存</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>数据存储在磁盘，如何保证数据安全？</strong></p>
+<ul>
+<li><p>HDFS：基于硬盘做了备份[数据冗余机制]</p></li>
+<li><p>操作系统：做磁盘冗余阵列RAID1</p></li>
+<li><p>Hbase直接基于硬盘存储，硬盘损坏会导致数据丢失，要考虑数据副本</p>
+<ul>
+<li><p>Hbase底层对于文件的存储直接选用了HDFS来保证数据安全性</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>内存的数据丢失如何解决？</strong></p>
+<ul>
+<li><p>操作日志WAL也就是HLog</p>
+<ul>
+<li><p>Write Ahead Log：预写日志</p></li>
+<li><p>预写日志记录内存中所有数据的操作</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>总结：实现分布式高性能读写</p>
+<ul>
+<li><p>基于分布式内存优先对数据读写</p></li>
+<li><p>所有老的数据<strong>持久化</strong>在HDFS</p></li>
+</ul>
+</li>
+<li><p><strong>如果数据在HDFS，从HDFS读，如何解决性能问题？</strong></p>
+<ul>
+<li><p>如何能在一个文件中快速找到一条数据？</p>
+<ul>
+<li><p>构建有序</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id2">
+<h2><span class="section-number">10.2. </span>功能<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>是一个基于分布式内存和HDFS实现存储的随机、实时读写的NoSQL数据库</p>
+<ul>
+<li><p>实现数据的存储</p></li>
+<li><p>提供数据的读写</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">10.3. </span>应用场景<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>电商：订单存储（超过半年的历史订单需要另外勾选查询）</p>
+<ul>
+<li><p>历史订单的存储管理以及查询</p></li>
+</ul>
+</li>
+<li><p>游戏：操作日志</p>
+<ul>
+<li><p>对大量操作日志进行实时的统计分析处理</p></li>
+</ul>
+</li>
+<li><p>金融：消费记录</p>
+<ul>
+<li><p>管理查询所有消费记录</p></li>
+</ul>
+</li>
+<li><p>电信：账单通话记录</p></li>
+<li><p>交通：监控车辆信息</p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">10.4. </span>特点及概念<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id5">
+<h3><span class="section-number">10.4.1. </span>特点<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>分布式：多台机器来搭建集群实现分布式存储</p></li>
+<li><p>内存：基于分布式内存，数据优先写入了机器的内存</p>
+<ul>
+<li><p>内存中的数据达到一定条件，会将内存的数据写入HDFS成为文件</p></li>
+</ul>
+</li>
+<li><p>NoSQL：每个NoSQL都有自己的特点</p></li>
+<li><p>Hbase基于<strong>列存储</strong>，<strong>KV结构</strong>的数据库</p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">10.4.2. </span>概念<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>概念</th>
+<th>MySQL</th>
+<th>HBase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据库</td>
+<td>database</td>
+<td>namespace</td>
+</tr>
+<tr>
+<td>表</td>
+<td>table</td>
+<td>namespace:table</td>
+</tr>
+<tr>
+<td>行</td>
+<td>主键：primary key</td>
+<td>行键：rowkey</td>
+</tr>
+<tr>
+<td>列族</td>
+<td>无</td>
+<td>column family：对列的分组</td>
+</tr>
+<tr>
+<td>列</td>
+<td>column：每一行有多列，每一行列是一致的</td>
+<td>column：每一行可以有多列，每一行的列可以不一样，任何一列必须属于某一个列簇，cf:colName</td>
+</tr>
+<tr>
+<td>多版本</td>
+<td>无</td>
+<td>VERSIONS，一列的值可以存储多个版本</td>
+</tr>
+<tr>
+<td>时间戳</td>
+<td>默认无，可以有</td>
+<td>默认有</td>
+</tr>
+</tbody>
+</table><ul class="simple">
+<li><p>Namespace：命名空间，就是MySQL中数据库的概念，用于区分数据存储</p>
+<ul>
+<li><p>Hbase默认会自带两个namespace：default，Hbase</p></li>
+</ul>
+</li>
+<li><p>Table：表，区分更细的数据的划分</p>
+<ul>
+<li><p>任何一张表必须属于某一个namespace</p></li>
+<li><p>除了default namespace下的表为，其他任何的namespace下的表在使用时都需要加namespace来访问，即<code class="docutils literal notranslate"><span class="pre">namespace:tableName</span></code>，<strong>namespace实际是表名的一部分</strong></p></li>
+</ul>
+</li>
+<li><p>Rowkey：行键，类似于MySQL中的主键</p>
+<ul>
+<li><p>功能：</p>
+<ul>
+<li><p>唯一标识一行的数据</p></li>
+<li><p><strong>构建索引</strong>【整个HBASE只有这一个索引，不能有其他索引】</p>
+<ul>
+<li><p>rowkey是HBASE的<strong>唯一索引</strong></p></li>
+</ul>
+</li>
+<li><p>HBASE底层默认按照ASCII码【<strong>字典顺序</strong>】对Rowkey进行排序，以提高查询效率</p>
+<ul>
+<li><p>牺牲一定写的代价换取基于有序的高性能的查询</p></li>
+<li><p>决定了分区的规则</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>是HBASE中表非常特殊的一列，每张HBASE表都自带这一列，这一列不属于任何列簇</p></li>
+<li><p>难点：Rowkey的值由开发者自行设定</p>
+<ul>
+<li><p><strong>Rowkey的值的设计决定了查询效率</strong></p></li>
+</ul>
+</li>
+<li><p>问题：<strong>只有按照RowKey查询才走索引查询，其他所有查询都直接走全表扫描(如何设计Rowkey让查询效率更高?)</strong></p>
+<ul>
+<li><p>解决：</p>
+<ul>
+<li><p>将查询条件组合作为RowKey  =&gt;  Rowkey的设计(rowkey默认是前缀匹配，如果前缀匹配不上，方法不奏效)</p></li>
+<li><p>二级索引：基于一级索引之上构建一层索引</p>
+<ul>
+<li><p><strong>利用ES构建二级索引</strong></p></li>
+<li><p>举例：</p>
+<ul>
+<li><p>例如按照标题实现对新闻数据的实时检索</p></li>
+<li><p>将除了正文部分的数据列存储在ES中</p></li>
+<li><p>将所有的新闻数据列存储在Hbase中</p></li>
+<li><p>HBASE中以新闻id作为rowkey，ES中以新闻id作为docId</p></li>
+<li><p>根据标题去查询ES得到docId即对应于HBASE中的rowkey，以rowkey去查询HBASE</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Column Family：列簇，对列进行分组</p>
+<ul>
+<li><p>分组是为了提高性能，减少查询数据时的比较</p></li>
+<li><p>如何分组？</p>
+<ul>
+<li><p>组名自定义，可以任意，一般有标识度即可</p></li>
+<li><p><strong>将拥有相似IO属性的列放在一组</strong></p></li>
+<li><p>两组</p>
+<ul>
+<li><p>CF1：经常被读写的列放在一组</p></li>
+<li><p>CF2：不经常被读写的列</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Column：列，类似于MySQL中的列</p>
+<ul>
+<li><p>HBASE中每个Rowkey，可以拥有不用的列</p></li>
+<li><p>除了Rowkey，任何一列都必须属于某一个列族</p></li>
+<li><p>引用列<code class="docutils literal notranslate"><span class="pre">cf:colName</span></code></p></li>
+</ul>
+</li>
+<li><p>VERSIONS：多版本，HBASE中允许一列存储多个版本的值</p>
+<ul>
+<li><p><strong>列簇级别</strong></p>
+<ul>
+<li><p>如果配置某个列族的版本个数为2，那么此列族下所有的单元都具有2个版本</p></li>
+</ul>
+</li>
+<li><p>HBASE允许存储历史版本的值，行和列相交是单元格组</p></li>
+<li><p>默认HBASE查询时，默认会返回最新的值(默认版本数为1)</p></li>
+<li><p>如何区分一列的多个版本的值？</p>
+<ul>
+<li><p>默认通过时间戳来进行区分不同版本的值</p></li>
+<li><p>每个RowKey的每一列自带时间戳，用于区分多版本</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TimeStamp：HBASE中每一个Rowkey的每一列默认自带这个值，会随着数据的更新时间而变化</p>
+<ul>
+<li><p>用于区分多版本</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">10.4.3. </span>列存储<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>与其他数据库进行对比</p>
+<ul>
+<li><p>MySQL：按行存储，写入读取都是行级操作</p>
+<ul>
+<li><p>insert：必须指定一行每一列的值，每一行都有固定的列，如果不指定列，值为null</p></li>
+<li><p>select：先对符合条件的行读取，再对列进行过滤</p></li>
+</ul>
+</li>
+<li><p>Redis：按照K V结构行存储</p></li>
+</ul>
+</li>
+<li><p>Hbase：按列存储</p>
+<ul>
+<li><p>最小颗粒度：列</p></li>
+<li><p>可以为每一行构建不同的列</p></li>
+<li><p>插入：put</p>
+<ul>
+<li><p>put每次只能为某一行插入一列</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>设计思想？为什么这么设计成列存储呢？</strong></p>
+<ul>
+<li><p>优点：<strong>直接基于列进行读写，提高查询的性能</strong></p></li>
+<li><p>按行存储</p>
+<ul>
+<li><p>先读取所有符合条件的行，再进行对列的过滤</p></li>
+</ul>
+</li>
+<li><p>按列存储</p>
+<ul>
+<li><p><strong>直接读取需要的列</strong></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><span class="section-number">10.5. </span>HBASE架构<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>分布式主从架构</p>
+<ul>
+<li><p>HMaster：主节点，负责管理类操作</p></li>
+<li><p>HRegionServer：从节点，有多台，用于构建分布式内存</p>
+<ul>
+<li><p>HBASE是一个数据库，将一条数据写入HBASE，如何实现分布式存储？</p></li>
+<li><p>分的规则：将一张表划分成多个region，不同的region分布在不同的RegionServer中</p>
+<ul>
+<li><p>HBASE中分区的规则</p>
+<ul>
+<li><p>写入一条数据根据分区规则，决定写入哪个分区，写入到对应分区所在的regionServer上</p></li>
+</ul>
+</li>
+<li><p>类似：将一个文件拆分成多个块，将不同的块存储在不同的DN上</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HDFS：是按HBASE底层基于数据磁盘持久化的存储</p>
+<ul>
+<li><p>达到一定的条件，HRegionServer内存总存储的数据会Flush到HDFS上存储为文件</p></li>
+</ul>
+</li>
+<li><p>Zookeeper</p>
+<ul>
+<li><p>辅助选举，实现高可用HA，避免Master单点故障</p></li>
+<li><p>用于存储关键性数据</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2><span class="section-number">10.6. </span>配置<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>配置zookeeper时为什么要写三个机器的地址及端口</p>
+<ul class="simple">
+<li><p>这与zookeeper是否是分布式的无关</p></li>
+<li><p>避免由于在连接其中一台机器时，而恰好该机器宕机了，则自动会尝试连接其他机器</p></li>
+</ul>
+</li>
+<li><p>当初配置hadoop上更改了哪些文件</p>
+<ul>
+<li><p>三个env文件</p></li>
+<li><p>四个site文件</p></li>
+<li><p>一个slaves</p>
+<ul>
+<li><p>内容是集群中三台机器的地址</p></li>
+<li><p>本地优先计算</p>
+<blockquote>
+<div><p>slaves文件里面记录的是集群里所有DataNode的主机名，到底它是怎么作用的呢？slaves文件只作用在NameNode上面，比如我在slaves里面配置了
+host1
+host2
+host3
+三台机器，这时候如果突然间新增了一台机器，比如是host4，会发现在NN上host4也自动加入到集群里面了，HDFS的磁盘容量上来了，这下子不是出问题了？假如host4不是集群的机器，是别人的机器，然后配置的时候指向了NN，这时候NN没有做判断岂不是把数据也有可能写到host4上面？这对数据安全性影响很大。所以可以在hdfs-site.xml里面加限制。</p>
+<p>dfs.hosts
+/home/hadoop-2.0.0-cdh4.5.0/etc/hadoop/slaves
+这相当于是一份对于DN的白名单，只有在白名单里面的主机才能被NN识别。配置了这个之后，就能排除其他DN了。slaves中的内容可以是主机名也可以是IP地址。</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>hbase.rootdir：用于指定HBASE的数据文件存储在hdfs的什么位置</p>
+<ul>
+<li><p>必须是完整的hdfs路径，包含头部</p></li>
+<li><p>如果HDFS做了HA</p>
+<ul>
+<li><p>namenode</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdfs</span><span class="p">:</span><span class="o">//</span><span class="n">mycluster</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>HBASE如何知道谁是Active谁是Namenode？</strong></p>
+<ul class="simple">
+<li><p>将hdfs-site.xml和core-site.xml放入HBASE的conf目录下</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>启动与关闭</p>
+<ul>
+<li><p>先启动HDFS和Zookeeper</p>
+<ul>
+<li><p>HDFS：等待HDFS退出安全模式再启动Hbase</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-dfs.sh
+</pre></div>
+</div>
+</li>
+<li><p>Zookeeper</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/export/servers/zookeeper-3.4.6/bin/start-zk-all.sh
+</pre></div>
+</div>
+</li>
+<li><p>启动Hbase</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="o">-</span><span class="n">hbase</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p>关闭hbase</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stop</span><span class="o">-</span><span class="n">hbase</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h2><span class="section-number">10.7. </span>客户端操作<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>HBASE Shell</p>
+<ul>
+<li><p>直接使用hbase shell启动</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>hbase shell
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section" id="ddl">
+<h3><span class="section-number">10.7.1. </span>DDL操作<a class="headerlink" href="#ddl" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>查看命令方法：<code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">'command'</span></code></p></li>
+<li><p>namespace</p>
+<ul>
+<li><p>列举：<code class="docutils literal notranslate"><span class="pre">list_namespace</span></code></p></li>
+<li><p>创建：<code class="docutils literal notranslate"><span class="pre">create_namespace</span></code></p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create_namespace <span class="s1">&#39;ns1&#39;</span>，<span class="o">{</span><span class="s1">&#39;PROPERTY_NAME&#39;</span><span class="o">=</span>&gt;<span class="s1">&#39;PROPERTY_VALUE&#39;</span><span class="o">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>删除：<code class="docutils literal notranslate"><span class="pre">drop_namespace</span></code></p></li>
+</ul>
+</li>
+<li><p>table</p>
+<ul>
+<li><p>列举：<code class="docutils literal notranslate"><span class="pre">list</span></code></p>
+<ul class="simple">
+<li><p>只能列举用户表，系统表不能被列出</p></li>
+</ul>
+</li>
+<li><p>创建：<code class="docutils literal notranslate"><span class="pre">create</span></code></p>
+<ul>
+<li><p>ns：表示namespace</p></li>
+<li><p>t1：表示表的名称</p></li>
+<li><p>f1：表示列簇的名称</p></li>
+<li><p>语法：创建表的时候至少给定表名和一个列簇</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>create &#39;t1&#39;,&#39;f1&#39;,&#39;f2&#39;,&#39;f3&#39;
+create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCACHE=true}
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>删除：drop</p>
+<ul class="simple">
+<li><p>直接删除表会报错：<code class="docutils literal notranslate"><span class="pre">Table</span> <span class="pre">xxx</span> <span class="pre">is</span> <span class="pre">enabled.Disable</span> <span class="pre">it</span> <span class="pre">first.</span></code></p></li>
+<li><p>所有的表的结构删除或者修改之前，要先确认这张表没有对外提供服务，是一个<strong>禁用</strong>状态</p>
+<ul>
+<li><p>如果删除，要先禁用<code class="docutils literal notranslate"><span class="pre">disable</span></code></p></li>
+<li><p>如果修改，要先禁用，后修改，再启用<code class="docutils literal notranslate"><span class="pre">enable</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>查看：desc</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">desc</span> <span class="s1">&#39;student:stu_info&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="dml">
+<h3><span class="section-number">10.7.2. </span>DML操作<a class="headerlink" href="#dml" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>put：用于<strong>插入/更新</strong>数据</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>put <span class="s1">&#39;ns1:t1&#39;</span>,<span class="s1">&#39;r1&#39;</span>,<span class="s1">&#39;f1:c1&#39;</span>,<span class="s1">&#39;value&#39;</span>,<span class="o">[</span>ts1<span class="o">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>参数含义</p>
+<ul>
+<li><p>ns1：表示namespace</p></li>
+<li><p>t1：表示表名</p></li>
+<li><p>r1：表示rowkey</p></li>
+<li><p>f1：列簇的名称</p></li>
+<li><p>c1：表示列的名称</p></li>
+<li><p>value：这一列的值</p></li>
+<li><p>ts1：时间戳</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>get：用于<strong>读取</strong>数据(一条rowkey数据)，必须指定rowkey</p>
+<ul class="simple">
+<li><p>是HBASE中最快的读取数据的方式（使用rowkey索引）</p></li>
+</ul>
+</li>
+<li><p>scan：用于<strong>扫描</strong>数据</p>
+<ul>
+<li><p>用法一：全表扫描</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scan</span> <span class="s1">&#39;student:stu_info&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>用法二：scan+过滤器</p>
+<ul>
+<li><p>工作中最常用的方式，可以根据查询条件返回所有符合条件的数据</p></li>
+<li><p>范围过滤[左闭右开）</p>
+<ul class="simple">
+<li><p><strong>RowKey是前缀匹配的</strong></p></li>
+<li><p>STARTROW：从哪一条rowkey开始</p></li>
+<li><p>STOPROW：结束于哪一条rowkey</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scan</span> <span class="s1">&#39;student:stu_info&#39;</span><span class="p">,{</span><span class="n">STARTROW</span><span class="o">=&gt;</span><span class="s1">&#39;20200920_001&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>delete：用于<strong>删除</strong>数据</p>
+<ul class="simple">
+<li><p>如果不加版本默认删除最新版本</p></li>
+<li><p>deleteall：删除所有版本</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id11">
+<h2><span class="section-number">10.8. </span>存储设计<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id12">
+<h3><span class="section-number">10.8.1. </span>存储概念<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>分布式存储</p>
+<ul>
+<li><p>分布式内存：RegionServer</p></li>
+<li><p>分布式磁盘：HDFS</p></li>
+</ul>
+</li>
+<li><p>如何实现的：将HBASE中的表构建成分布式的表</p>
+<ul>
+<li><p>HBASE中的每张表可以对应多个分区[Region]</p>
+<ul>
+<li><p>默认创建只有一个分区（Region）</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>与HDFS的区别</p></li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>概念</th>
+<th>HDFS</th>
+<th>HBase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分类</td>
+<td>目录</td>
+<td>NameSpace</td>
+</tr>
+<tr>
+<td>存储类型</td>
+<td>文件</td>
+<td>表</td>
+</tr>
+<tr>
+<td>分的机制</td>
+<td>分块：Block</td>
+<td>分区：Region</td>
+</tr>
+<tr>
+<td>存储节点</td>
+<td>DataNode</td>
+<td>RegionServer</td>
+</tr>
+<tr>
+<td>规则</td>
+<td>大表：128M一个块</td>
+<td>RowKey范围</td>
+</tr>
+</tbody>
+</table><ul class="simple">
+<li><p>Region：HBASE中表的分区，一张HBASE表可以有多个region，每个region存储在不同的RegionServer中</p>
+<ul>
+<li><p><strong>是HBASE做负载均衡的最小单元</strong></p></li>
+<li><p>类似于HDFS中的文件的块</p></li>
+<li><p>一个Region只会归某一个RegionServer所管理</p></li>
+<li><p>一个RegionServer可以管理多个region</p></li>
+<li><p><strong>如何决定数据会写入一张表的哪一个Region中?分区规则是什么？</strong></p>
+<ul>
+<li><p>分区规则：</p>
+<ul>
+<li><p>整个HBASE中的所有数据都是按照<strong>字典顺序【ASCII码的前缀逐位比较</strong>】进行排序的，所有数据存储时每个分区都有一个范围</p>
+<ul>
+<li><p>startKey</p></li>
+<li><p>endKey</p></li>
+</ul>
+</li>
+<li><p>规则：按照rowkey所属的范围来决定写入哪个分区</p></li>
+<li><p>Situation1：<strong>默认</strong>创建的表只有1个分区Region</p>
+<ul>
+<li><p>region0：负无穷~正无穷</p></li>
+</ul>
+</li>
+<li><p>Situation2：创建表的时候指定分区的划分</p>
+<ul>
+<li><p>region0：-oo~100</p></li>
+<li><p>region1：100~200</p></li>
+<li><p>region2：200~300</p></li>
+<li><p>……</p></li>
+<li><p>region9：900~+oo</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Store：列族，按照列族划分不同的Store，这个表有几个列族，region中就有几个Store【<strong>一个Store代表一个列族</strong>】</p>
+<ul>
+<li><p>设计目的：将不同的列区分存储，就是列族的划分</p></li>
+<li><p>一个Region里有多个Store</p></li>
+<li><p>MemStore：内存区域</p>
+<ul>
+<li><p>每个Store都有一个</p></li>
+<li><p>数据先写入MemStore</p></li>
+</ul>
+</li>
+<li><p>StoreFile：HFILE，物理存储在HDFS上的文件</p>
+<ul>
+<li><p>每个Store中有0或者多个StoreFile文件</p></li>
+<li><p>达到一定条件之后，Memstore中的数据会被Flush刷写到HDFS变成StoreFile文件</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h3><span class="section-number">10.8.2. </span>存储模型<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>假设执行<code class="docutils literal notranslate"><span class="pre">put</span> <span class="pre">'ns1:t1','r1','f1:c1','value',[ts1]</span></code></p>
+<ul>
+<li><p>步骤</p>
+<ul>
+<li><p>:one:根据表名请求元数据找到对应的所有Region信息</p></li>
+<li><p>:two:根据RowKey决定存储到哪个region中</p></li>
+<li><p>:three:将写入请求提交给这个region所在的regionserver中</p></li>
+<li><p>:four:根据列族进行判断，决定写入哪个Store中(也会写入memstore，当达到一定条件时，memstore中的数据会被刷写到HDFS变成storefile文件)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id14">
+<h3><span class="section-number">10.8.3. </span>存储流程<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id15">
+<h4><span class="section-number">10.8.3.1. </span>写入<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
+<p><img alt="WriteHbase" src="../_images/WriteHbase.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>默认情况下，执行写入时会写到两个地方：预写式日志（write-ahead log,也称HLog）和MemStore。Hbase默认方式是把写入动作记录在这两个地方，以保证数据持久化。只有当这两个地方的变化信息都写入并确认后，才认为写动作完成。
+MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之前在这里累积。当Memstore填满后，其中的数据会刷写到硬盘，生成一个HFile。HFile是HBase使用的底层存储格式。HFile对应于列族，一个列族可以有多个HFile，但一个HFile不能存储多个列族的数据。在集群的每个节点上，每个列族有一个Memstore。
+大型分布式系统中硬件故障很常见，HBase也不例外。如果MemStore还没有刷写，服务器就崩溃了，内存中没有写入硬盘的数据就会丢失。应对办法是在写动作完成之前先写入WAL。HBase集群中每台服务器都维护一个WAL来记录发生的变化。WAL是底层文件系统上的一个文件。直到WAL新记录成功写入后，写动作才被认为成功完成。
+如果Hbase服务器宕机，没有从MemStore中刷写到HFile的数据可以通过回访WAL来恢复。不需要手动执行。
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Step1：根据表名找到这张表对应的所有Region信息</p>
+<ul>
+<li><p><strong>问：怎么能得到表所对应的所有的Region信息？</strong></p>
+<ul>
+<li><p>通过元数据来获取</p></li>
+<li><p>HBase自带两张表</p>
+<ul>
+<li><p>hbase：meta：记录hbase中所有用户表的元数据信息</p>
+<ul>
+<li><p>两种RowKey</p>
+<ul>
+<li><p>以表明作为rowkey</p></li>
+<li><p>以region名作为rowkey</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>hbase：namespace：记录了当前hbase中所有namespace的信息</p></li>
+</ul>
+</li>
+<li><p>通过put语句中的表名对meta表进行<strong>前缀匹配</strong>，就能得到这张表所有的region信息2</p></li>
+</ul>
+</li>
+<li><p><strong>问：如何能知道Meta表所对应的region位置？</strong></p>
+<ul>
+<li><p>meta表所对应的region信息都记录在zookeeper中</p></li>
+</ul>
+</li>
+<li><p>HBASE中所有的客户端都要先连接zookeeper</p></li>
+</ul>
+</li>
+<li><p>Step2：根据Rowkey以及表的region起始范围进行比较，得到要写入的region</p></li>
+<li><p>Step3：将写入请求提交给这个region所在的regionServer</p>
+<ul>
+<li><p><strong>问：如何能知道这个region所在的regionserver是哪个？</strong></p>
+<ul>
+<li><p>通过元数据来获取这个region所对应的regionserver的地址</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Step4：regionserver将输入写入对应的region，根据列族判断写入哪个Store</p></li>
+<li><p>Step5：<strong>先写WAL(HLog)</strong>，然后将数据写入MemStore</p>
+<ul>
+<li><p><strong>问题：为什么要先写HLog，而后再写MemStore呢？</strong></p></li>
+<li><p>答：**为了防止数据丢失。**如果先写MemStore，写完成之后服务器就挂了，还没有写HLog，而MemStore是内存区域，挂了内存中的数据就丢失了，那么写入的数据也就丢失了。如果先写WAL(HLog)，也就记录了操作日志，当写完HLog和MemStore之后，即是内存数据丢失，也可以根据HLog中的操作日志，在其他HRegionServer中回放这些操作，保证数据的不丢失。</p></li>
+</ul>
+</li>
+<li><p>Step6：写入流程结束，返回客户端</p>
+<ul>
+<li><p>Flush：当Memstore中的数据达到一定条件，会触发将内存中的数据刷写如HDFS变成Sorefile文件</p></li>
+<li><p>Compact：将多个storefile文件进行合并成大文件</p>
+<ul>
+<li><p>Hbase没有删除和更新，删除和更新都是插入一条数据</p></li>
+<li><p>老的数据被标记为更新状态或者是删除状态</p></li>
+<li><p>这个阶段会真正从物理上删除被标记的数据</p></li>
+</ul>
+</li>
+<li><p>Split：如果一个region存储的数据到达一定阈值，一个region会被等分为两个region</p>
+<ul>
+<li><p>分摊单个region存储数据过多，负载过高</p></li>
+<li><p>分由regionserver来分，两个region的去向由Master来分配</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h4><span class="section-number">10.8.3.2. </span>读取<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+<p><img alt="ReadHbase" src="../_images/ReadHbase.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>如果想快速访问数据，通用的原则是数据保持有序且尽可能保存在内存里。HBase实现了这两个目标。HBase读动作必须重新衔接持久化到硬盘上的HFile和内存中MemStore里的数据。HBase在读操作上使用了LRU（最近最少使用算法）缓存技术。这种缓存也叫作BlockCache，和MemStore在一个JVM堆里。BlockCache设计用来保存从HFile里读入内存的频繁访问的数据，避免硬盘读。每个列族都有自己的BlockCache。
+掌握BlockCache是优化HBase性能的一个重要部分。BlockCache中的Block是HBase从硬盘完成一次读取的数据单位。HFile物理存放形式是一个Block的序列外加这些Block的索引。这意味着，从HBase中读取一个Block需要先查找一次该Block然后从硬盘读取。Block是建立索引的最小数据单位，也是从硬盘读取的最小数据单位。Block大小默认为64KB，如果主要用于随机查询，细粒度的Block更好。Block变小会导致索引变大，消耗更多内存。如果主要用于顺序扫描，一次读取多个Block，那个大一点的Block较好。
+从HBase中读出一行，首先检查MemStore，然后检查BlockCache，最后访问HFile。
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>step1：根据表名从元数据获取对应的region信息</p></li>
+<li><p>step2：</p>
+<ul>
+<li><p>有rowkey</p></li>
+<li><p>无rowkey</p></li>
+</ul>
+</li>
+<li><p>step3：根据列族来读取对应Store的数据</p></li>
+<li><p>step4：读</p>
+<ul>
+<li><p>先读memstore</p></li>
+<li><p>如果读memstore【写缓存】没有，就去读BlockCache【读缓存】</p></li>
+<li><p>最后读StoreFile</p>
+<ul>
+<li><p>第一次读取：如果memsotre没有就迫不得已地去读StoreFile</p></li>
+<li><p>以后再去读，就会将读到的数据先写入BlockCache(默认开启)，避免二次读浪费时间</p></li>
+<li><p>缓存释放策略：LRU算法(最近最少被使用)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="id17">
+<h2><span class="section-number">10.9. </span>角色功能<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
+<div class="section" id="hmaster">
+<h3><span class="section-number">10.9.1. </span>HMaster<a class="headerlink" href="#hmaster" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>主要负责集群管理</p>
+<ul>
+<li><p>节点管理：regionserver的状态管理</p>
+<ul>
+<li><p>故障转移</p></li>
+</ul>
+</li>
+<li><p>元数据管理：用于接收所有DDL操作请求</p>
+<ul>
+<li><p>管理meta表以及namespace表的数据</p></li>
+<li><p>与zookeeper连接，将一些管理类的元数据存储在zookeeper中</p></li>
+</ul>
+</li>
+<li><p>region管理：负责管理每个region的分配</p>
+<ul>
+<li><p>故障恢复</p></li>
+<li><p>split阶段的分配</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="hregionserver">
+<h3><span class="section-number">10.9.2. </span>HRegionServer<a class="headerlink" href="#hregionserver" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>接收客户端所有region的读写请求</p></li>
+<li><p>管理region存储数据：分割</p></li>
+<li><p>维护：</p>
+<ul>
+<li><p>WAL</p></li>
+<li><p>MemCache</p></li>
+<li><p>BlockCache</p></li>
+<li><p>将内存的数据Flush成为StoreFile文件</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="zookeeper">
+<h3><span class="section-number">10.9.3. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>构建HA：辅助选举</p></li>
+<li><p>存储关键性的管理类元数据</p></li>
+</ul>
+</div>
+<div class="section" id="hdfs">
+<h3><span class="section-number">10.9.4. </span>HDFS<a class="headerlink" href="#hdfs" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>持久化的实现</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="hbase-java-api">
+<h2><span class="section-number">10.10. </span>HBASE Java API<a class="headerlink" href="#hbase-java-api" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>注意：<strong>所有的HBASE客户端所连接的服务端都是Zookeeper</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">Conf.set(&quot;hbase.zookeeper.quorum&quot;)</span></code>，<code class="docutils literal notranslate"><span class="pre">&quot;node1:2181,node2:2181,node3:2181&quot;</span></code></p>
+<p>Get操作时一个Result对象就代表一个RowKey数据对象</p>
+</div></blockquote>
+</div>
+<div class="section" id="hbasemapreduce">
+<h2><span class="section-number">10.11. </span>Hbase与MapReduce的集成<a class="headerlink" href="#hbasemapreduce" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id18">
+<h3><span class="section-number">10.11.1. </span>应用场景<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>HBASE：分布式存储</p></li>
+<li><p>MapReduce、Spark：分布式计算</p></li>
+<li><p>大数据的本质：一系列大数据的处理软件工具对大量数据进行分析处理</p>
+<ul>
+<li><p>存储：HBASE</p></li>
+<li><p>计算：MapReduce</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id19">
+<h3><span class="section-number">10.11.2. </span>集成原理<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>MapReduce五大阶段</p>
+<ul>
+<li><p>Input</p>
+<ul>
+<li><p>TableInputFormat</p></li>
+</ul>
+</li>
+<li><p>Map</p></li>
+<li><p>Shuffle</p></li>
+<li><p>Reduce</p></li>
+<li><p>Outptut</p>
+<ul>
+<li><p>TableOutputFormat</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h3><span class="section-number">10.11.3. </span>读HBASE数据<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+<p><a class="reference external" href="https://github.com/roohom/Bigdata/blob/master/Hbase/src/main/java/HbaseMapReduce/ReadHbaseTable.java">代码示例传送门</a></p>
+</div>
+<div class="section" id="id21">
+<h3><span class="section-number">10.11.4. </span>写HBASE数据<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+<p><a class="reference external" href="https://github.com/roohom/Bigdata/blob/master/Hbase/src/main/java/HbaseMapReduce/WriteHbaseTable.java">代码示例传送门</a></p>
+<ul>
+<li><p><strong>问题</strong>：如果将代码打包成jar上传至Linux运行会报错<code class="docutils literal notranslate"><span class="pre">ClassNotFoundError:org/apache/hadoop/hbase/HBaseConfiguration</span></code></p>
+<ul>
+<li><p>解决：</p>
+<ul>
+<li><p>将HBASE的jar包放入hadoop的环境变量</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@node1 datas<span class="o">]</span><span class="c1"># hbase mapredcp</span>
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@node1 datas<span class="o">]</span><span class="c1"># hbase mapredcp</span>
+/export/servers/hbase-2.1.0/lib/shaded-clients/hbase-shaded-mapreduce-2.1.0.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/audience-annotations-0.5.0.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/commons-logging-1.2.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/findbugs-annotations-1.3.9-1.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/htrace-core4-4.2.0-incubating.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/log4j-1.2.17.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/slf4j-api-1.7.25.jar
+</pre></div>
+</div>
+</li>
+<li><p>声明环境变量</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>root@node1 datas<span class="o">]</span><span class="c1"># export HADOOP_CLASSPATH=$HADOOP_CLASSPATH:/export/servers/hbase-2.1.0/lib/shaded-clients/hbase-shaded-mapreduce-2.1.0.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/audience-annotations-0.5.0.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/commons-logging-1.2.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/findbugs-annotations-1.3.9-1.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/htrace-core4-4.2.0-incubating.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/log4j-1.2.17.jar:/export/servers/hbase-2.1.0/lib/client-facing-thirdparty/slf4j-api-1.7.25.jar</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="bulkload">
+<h2><span class="section-number">10.12. </span>BulkLoad<a class="headerlink" href="#bulkload" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id22">
+<h3><span class="section-number">10.12.1. </span>HBASE导入数据的两种方式<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>第一种方式：<strong>Put</strong></p>
+<ul>
+<li><p>按照完整的放肆写入写入规则写入数据到HBASE，数据先进入内存</p></li>
+<li><p>问题：如果一次性写入的数据比较大，会导致HBASE的网络、内存、磁盘IO大量地被占用</p></li>
+</ul>
+</li>
+<li><p>第二种方式：<strong>BulkLoad</strong></p>
+<ul>
+<li><p>Step1：将大量的数据转换为HFILE文件</p></li>
+<li><p>Step2：将转换好的文件加载到HBASE对应的列族的目录中</p></li>
+<li><p>优点：避免了数据经过内存</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id23">
+<h3><span class="section-number">10.12.2. </span>BulkLoad实现<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>实现1：代码实现</p>
+<ul>
+<li><p>在HBASE中创建一张空表</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="s1">&#39;mrhbase&#39;</span><span class="p">,</span><span class="s1">&#39;info&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Step1：编辑MapReduce的程序，用于将一个普通文件转换为HFILE文件</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yarn jar bulk.jar bigdata.itcast.cn.hbase.bulk.TransHfileMR /user/hbase/input/testfile.txt /user/hbase/output
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/roohom/Bigdata/blob/master/Hbase/src/main/java/BulkLoad/TransHfileMR.java">代码示例传送门</a></p>
+</li>
+<li><p>Step2：将生成的HFILE文件加载到HBASE的表中</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yarn jar bulk.jar bigdata.itcast.cn.hbase.bulk.BulkLoadToHbase /user/hbase/output
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/roohom/Bigdata/blob/master/Hbase/src/main/java/BulkLoad/BulkToHbase.java">代码示例传送门</a></p>
+</li>
+</ul>
+</li>
+<li><p>实现2：HBASE自带程序</p>
+<ul>
+<li><p>HBASE自带一些MapReduce程序</p>
+<ul>
+<li><p>查看帮助</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yarn jar /export/servers/hbase-2.1.0/lib/hbase-mapreduce-2.1.0.jar
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>ImportTSV：将各种类型的文件通过MapReduce使用bulkload或者Put的方式将数据写入Hbase</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yarn jar /export/servers/hbase-2.1.0/lib/hbase-mapreduce-2.1.0.jar importtsv
+</pre></div>
+</div>
+</li>
+<li><p>方式一：通过put的方式将数据写入这张表</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Usage: importtsv -Dimporttsv.columns<span class="o">=</span>a,b,c &lt;tablename&gt; &lt;inputdir&gt;
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yarn jar /export/servers/hbase-2.1.0/lib/hbase-mapreduce-2.1.0.jar importtsv -Dimporttsv.columns<span class="o">=</span>HBASE_ROW_KEY,info:name,info:age,info:age  mrhbase /user/hbase/input/testfile.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>-Dimporttsv.columns：用于指定文件中的每一列与HBASE表的每一列的对应关系</p></li>
+</ul>
+</li>
+<li><p>方式二：通过bulk方式来实现</p>
+<ul>
+<li><p>step1：用于将输入文件转换为HFILE文件</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yarn jar /export/servers/hbase-2.1.0/lib/hbase-mapreduce-2.1.0.jar importtsv -Dimporttsv.columns<span class="o">=</span>HBASE_ROW_KEY,info:name,info:age,info:age -Dimporttsv.bulk.output<span class="o">=</span>/user/hbase/output mrhbase /user/hbase/input/testfile.txt
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>-Dimporttsv.bulk.output：用于指定生成的HFILE所在的位置</p></li>
+</ul>
+</li>
+<li><p>step2：通过bulkload加载到表中</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>yarn jar /export/servers/hbase-2.1.0/lib/hbase-mapreduce-2.1.0.jar completebulkload  /user/hbase/output mr hbase -loadTable
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>默认分隔符为tsv，如果不是tsv，指定：seperator = 文件的分隔符</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;-Dimporttsv.separator=,&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="hivehbase">
+<h2><span class="section-number">10.13. </span>Hive与HBASE集成<a class="headerlink" href="#hivehbase" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>Hbase自带count命令用于统计一张表中一共有多少行</p>
+</div></blockquote>
+<div class="section" id="sql-on-hbase">
+<h3><span class="section-number">10.13.1. </span>SQL  on HBASE<a class="headerlink" href="#sql-on-hbase" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>在Hive中数学SQL，数据存储在HBASE</p></li>
+<li><p>本质：底层是通过MapReduce来读写HBASE数据</p></li>
+<li><p>Hbase有一个专用的SQL on Hbase工具：Phoenix</p>
+<ul>
+<li><p>这款工具是直接基于Hbase的底层API来实现的</p></li>
+<li><p>这是操作Hbase最快的一款SQL on Hbase工具</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id24">
+<h3><span class="section-number">10.13.2. </span>Hive与hbase集成<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>应用场景：希望使用SQL语句操作HBASE</p></li>
+<li><p>使用前提：</p>
+<ul>
+<li><p>保证Hive中必须有HBASE的jar包</p></li>
+<li><p>修改hive-site.xml：Hive通过SQL访问HBASE，Hive就是HBASE的客户端，就需要连接Zookeeper</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;property&gt;</span>
+	<span class="nt">&lt;name&gt;</span>hive.zookeeper.quorum<span class="nt">&lt;/name&gt;</span>
+	<span class="nt">&lt;value&gt;</span>node1,node2,node3<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+	<span class="nt">&lt;name&gt;</span>hbase.zookeeper.quorum<span class="nt">&lt;/name&gt;</span>
+	<span class="nt">&lt;value&gt;</span>node1,node2,node3<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;property&gt;</span>
+    <span class="nt">&lt;name&gt;</span>hive.server2.enable.doAs<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>修改hive-env.sh</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">HBASE_HOME</span><span class="o">=/</span><span class="n">export</span><span class="o">/</span><span class="n">servers</span><span class="o">/</span><span class="n">hbase</span><span class="o">-</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>试用步骤：</p>
+<ul>
+<li><p>启动Hive</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#先启动metastore服务</span>
+start-metastore.sh 
+<span class="c1">#然后启动hiveserver</span>
+start-hiveserver2.sh
+<span class="c1">#然后启动beeline</span>
+start-beeline.sh
+</pre></div>
+</div>
+</li>
+<li><p>在Hive中创建关联hbase表</p></li>
+<li><p>如果Hbase中表不存在：【用的比较少】</p>
+<ul>
+<li><p>创建测试数据文件</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vim /export/datas/hive-hbase.txt
+<span class="m">1</span>,zhangsan,80
+<span class="m">2</span>,lisi,60
+<span class="m">3</span>,wangwu,30
+<span class="m">4</span>,zhaoliu,70
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>创建测试表</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">--创建测试数据库</span>
+<span class="k">create</span> <span class="k">database</span> <span class="n">course</span><span class="p">;</span>
+<span class="c1">--切换数据库</span>
+<span class="n">use</span> <span class="n">course</span><span class="p">;</span>
+<span class="c1">--创建原始数据表</span>
+<span class="k">create</span> <span class="k">external</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">course</span><span class="p">.</span><span class="n">score</span><span class="p">(</span>
+<span class="n">id</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">cname</span> <span class="n">string</span><span class="p">,</span>
+<span class="n">score</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="k">row</span> <span class="n">format</span> <span class="n">delimited</span> <span class="n">fields</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">&#39;,&#39;</span> <span class="n">stored</span> <span class="k">as</span> <span class="n">textfile</span> <span class="p">;</span>
+<span class="c1">--加载数据文件</span>
+<span class="k">load</span> <span class="k">data</span> <span class="k">local</span> <span class="n">inpath</span> <span class="s1">&#39;/export/datas/hive-hbase.txt&#39;</span> <span class="k">into</span> <span class="k">table</span> <span class="n">score</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>创建一张Hive与HBASE的映射表</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="n">course</span><span class="p">.</span><span class="n">hbase_score</span><span class="p">(</span>
+<span class="n">id</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">cname</span> <span class="n">string</span><span class="p">,</span>
+<span class="n">score</span> <span class="nb">int</span>
+<span class="p">)</span>  
+<span class="n">stored</span> <span class="k">by</span> <span class="s1">&#39;org.apache.hadoop.hive.hbase.HBaseStorageHandler&#39;</span>  
+<span class="k">with</span> <span class="n">serdeproperties</span><span class="p">(</span><span class="ss">&quot;hbase.columns.mapping&quot;</span> <span class="o">=</span> <span class="ss">&quot;cf:name,cf:score&quot;</span><span class="p">)</span> 
+<span class="n">tblproperties</span><span class="p">(</span><span class="ss">&quot;hbase.table.name&quot;</span> <span class="o">=</span> <span class="ss">&quot;hbase_score&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+<li><p>将测试表的数据写入映射表</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span> <span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">mode</span><span class="p">.</span><span class="k">local</span><span class="p">.</span><span class="n">auto</span><span class="o">=</span><span class="k">true</span><span class="p">;</span>
+ <span class="k">insert</span> <span class="n">overwrite</span> <span class="k">table</span> <span class="n">course</span><span class="p">.</span><span class="n">hbase_score</span> <span class="k">select</span> <span class="n">id</span><span class="p">,</span><span class="n">cname</span><span class="p">,</span><span class="n">score</span> <span class="k">from</span> <span class="n">course</span><span class="p">.</span><span class="n">score</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>如果Hbase中表已存在，只能创建外部表【比较常用的方式】</strong></p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>  <span class="k">create</span> <span class="k">external</span> <span class="k">table</span> <span class="n">course</span><span class="p">.</span><span class="n">stu</span><span class="p">(</span>
+  <span class="k">key</span> <span class="n">string</span><span class="p">,</span>
+  <span class="n">name</span> <span class="n">string</span><span class="p">,</span>
+  <span class="n">age</span>  <span class="n">string</span><span class="p">,</span>
+  <span class="n">phone</span> <span class="n">string</span>
+  <span class="p">)</span>  
+  <span class="n">stored</span> <span class="k">by</span> <span class="s1">&#39;org.apache.hadoop.hive.hbase.HBaseStorageHandler&#39;</span>  
+  <span class="k">with</span> <span class="n">serdeproperties</span><span class="p">(</span><span class="ss">&quot;hbase.columns.mapping&quot;</span> <span class="o">=</span> <span class="ss">&quot;:key,basic:name,basic:age,other:phone&quot;</span><span class="p">)</span> 
+  <span class="n">tblproperties</span><span class="p">(</span><span class="ss">&quot;hbase.table.name&quot;</span> <span class="o">=</span> <span class="ss">&quot;student:stu_info&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>注意事项：</p>
+<ul>
+<li><p>Hive关联时</p>
+<ul>
+<li><p>如果Hbase表不存在，<strong>默认以hive表的第一列作为Hbase的rowkey</strong></p></li>
+<li><p>如果表已存在，使用:key来标识rowkey</p></li>
+</ul>
+</li>
+<li><p>Hive与Hbase的关联表</p>
+<ul>
+<li><p>是不能通过load命令加载数据进去的</p></li>
+<li><p>Hbase中的数据时特殊的存储，内存和Storefile存储，必须经过程序写入</p></li>
+<li><p>load命令是直接将文件放入目录的方式实现的，所以不能用于加载数据到hbase</p></li>
+<li><p><strong>只能用insert命令</strong></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id25">
+<h2><span class="section-number">10.14. </span>HBASE热点<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>现象</p>
+<ul>
+<li><p>读写数据时，大量的读写请求都集中在某个Region或者某个RegionServer上，导致某个Region的负载较高，影响读写性能</p></li>
+</ul>
+</li>
+<li><p>原因</p>
+<ul>
+<li><p>分区规则：按照范围分区，所要读写的rowkey在哪个范围就读取哪个分区</p></li>
+<li><p>根本原因：所有(大部分)的rowkey都集中在一个范围</p></li>
+</ul>
+</li>
+<li><p>解决</p>
+<ul>
+<li><p>在创建表的时候要根据rowkey的设计进行合理的规划分区</p>
+<ul>
+<li><p>表建好以后就有多个分区</p></li>
+</ul>
+</li>
+<li><p>rowkey的设计</p>
+<ul>
+<li><p>rowkey作为唯一索引：rowkey的值是最常用的查询条件，可以走索引查询</p></li>
+<li><p>rowkey必须构建散列，<strong>不能是连续的</strong></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="rowkey">
+<h2><span class="section-number">10.15. </span>预分区与Rowkey设计<a class="headerlink" href="#rowkey" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id26">
+<h3><span class="section-number">10.15.1. </span>预分区<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>命令行实现：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="s1">&#39;bs1:t1&#39;</span><span class="p">,</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span><span class="n">SPLITS</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="s1">&#39;30&#39;</span><span class="p">,</span><span class="s1">&#39;40&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p>在Java API中创建分区：表名中包含日期(分割区间<strong>起始值</strong>)</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kt">byte</span><span class="o">[][]</span> <span class="n">splitKeys</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="n">Bytes</span><span class="p">.</span><span class="na">toBytes</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+	<span class="n">Bytes</span><span class="p">.</span><span class="na">toBytes</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+	<span class="n">Bytes</span><span class="p">.</span><span class="na">toBytes</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
+	<span class="n">Bytes</span><span class="p">.</span><span class="na">toBytes</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">admin</span><span class="p">.</span><span class="na">createTable</span><span class="p">(</span><span class="n">tablename</span><span class="p">,</span><span class="n">splitKeys</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<blockquote>
+<div><p>注意：region的范围也是根据rowkey的前缀匹配</p>
+<p><strong>实际工作中先设计rowkey，再做预分区</strong></p>
+</div></blockquote>
+</div>
+<div class="section" id="id27">
+<h3><span class="section-number">10.15.2. </span>RowKey设计<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>Rowkey设计的重要性</p>
+<ul>
+<li><p>唯一标识一行</p></li>
+<li><p>作为HBASE中的唯一索引，既不能创建也不能删除：只有基于rowkey的查询才走索引</p></li>
+<li><p>决定了分区：rowkey不能是有序的，会导致热点问题</p></li>
+</ul>
+</li>
+<li><p>基本原则：设计rowkey必须结合业务需求设计</p></li>
+<li><p>唯一原则：类似于MySQL中主键的概念，必须唯一标识一行</p>
+<ul>
+<li><p>Put：既作为插入语句也作为更新语句</p></li>
+</ul>
+</li>
+<li><p>组合原则：将经常作为查询条件的列组合作为rowkey</p>
+<ul>
+<li><p><strong>HBASE只有rowkey作为索引，只有根据rowkey作为查询条件才能走索引查询</strong></p></li>
+<li><p>举例：</p>
+<ul>
+<li><p>用时间+订单id组作为rowkey</p>
+<ul>
+<li><p>基于时间</p></li>
+<li><p>基于时间+订单id</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>不是经常作为查询条件的列不要作为rowkey，会影响rowkey的长度设计，导致性能下降</p></li>
+<li><p><strong>Rowkey只是利用字段的组合来设计存储，满足查询的需求，并不影响这些字段的实际独立存储</strong></p></li>
+</ul>
+</li>
+<li><p>散列原则</p>
+<ul>
+<li><p>构建随机散列的前缀，避免产生热点问题</p></li>
+<li><p>方案一：在rowkey之前加上一个随机值做组合rowkey</p>
+<ul>
+<li><p>可行，但是会影响读的效率，因为根本不知道随机值是什么</p></li>
+</ul>
+</li>
+<li><p>方案二：基于前缀构建编码</p>
+<ul>
+<li><p>例如将时间戳进行编码，构建组合rowkey</p>
+<ul>
+<li><p>在读的时候先对时间戳进行编码构建rowkey再进行查询</p></li>
+<li><p>查询到以后再进行解码</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>方案三：对以连续值作为rowkey的值进行反转再作为rowkey</p>
+<ul>
+<li><p>在读的时候，先反转构建rowkey再查询</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>长度原则：在满足业务的情况下rowkey的设计越短越好（不建议超过100位）</p>
+<ul>
+<li><p>有比如timestamp_userid_orderid此类的rowkey，由于rowkey是前缀匹配，如果只知道userid或者orderid，那么基于rowkey查询就不可用了</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id28">
+<h3><span class="section-number">10.15.3. </span>二级索引<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>HBASE只有自带的一级索引：rowkey</p></li>
+<li><p>思想：通过走两次索引来实现数据查询，代替全表扫描</p></li>
+<li><p>实现思路：</p>
+<ul>
+<li><p>构建一张索引表</p>
+<ul>
+<li><p>1、先<strong>查询索引表</strong>，根据订单id，走索引查询，得到这个订单在原表中的rowkey</p></li>
+<li><p>2、根据得到的rowkey去查询原表，走索引查询，得到这个订单的所有数据</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>问题：原表和索引表如何进行数据同步？</strong></p>
+<ul>
+<li><p>方案一：在客户端构建两张表的Put对象，只要往原表中插入，就往索引表插入一条</p>
+<ul>
+<li><p>客户端请求增多</p></li>
+<li><p>容易导致数据不一致</p>
+<ul>
+<li><p>可能一条Put失败，一条可成功</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>方案二：自己HBASE中构建协处理器【类似于Hive中的UDF】</p>
+<ul>
+<li><p>协处理器：HBASE中没有功能，可以自己开发</p></li>
+<li><p>HBASE提供了两种协处理器的接口</p>
+<ul>
+<li><p>Observer：观察者类的协处理器</p>
+<ul>
+<li><p>能实现监听，监听原表，只要原表中多了一条数据，让协处理器自动往索引表中插入一条数据</p></li>
+<li><p>类似于MySQL中的触发器</p></li>
+</ul>
+</li>
+<li><p>EndPoint：终端者类的协处理器，一般用于做信息统计，类似于MySQL中的存储过程</p></li>
+</ul>
+</li>
+<li><p>方案三：通过第三方框架来实现</p>
+<ul>
+<li><p>Phoenix：专门问HBASE涉及的一款辅助工具</p>
+<ul>
+<li><p>底层是通过多个封装好的协处理器来实现的</p></li>
+<li><p><strong>可以通过SQL操作HBASE：直接基于HBASE底层的API直接实现的</strong></p></li>
+<li><p><strong>辅助构建各种HBASE中的二级索引，并自动维护</strong></p></li>
+</ul>
+</li>
+<li><p>ES：全文索引引擎</p>
+<ul>
+<li><p>ES+HBASE</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id29">
+<h3><span class="section-number">10.15.4. </span>列族与列的设计<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>列族</p>
+<ul>
+<li><p>个属原则：一般不建议超过3个，会影响性能</p></li>
+<li><p>长度原则：在满足需求的情况下，越短越好（底层存储是冗余的）</p></li>
+</ul>
+</li>
+<li><p>列的设计</p>
+<ul>
+<li><p>与普通的列名称一致，要能通过列名知道这一列的含义</p></li>
+<li><p>多版本，可以利用多版本来实现数据存储</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="lsm">
+<h2><span class="section-number">10.16. </span>LSM模型与列族属性<a class="headerlink" href="#lsm" title="永久链接至标题">¶</a></h2>
+<div class="section" id="lsm-log-structured-merge-tree">
+<h3><span class="section-number">10.16.1. </span>LSM(Log-Structured Merge-tree)设计<a class="headerlink" href="#lsm-log-structured-merge-tree" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>让数据写入先进入内存，后台将数据不断地写入磁盘，提供高性能的读写的特性</p></li>
+<li><p>LOG：WAL</p></li>
+<li><p>特征：通过顺序写来保证写的性能，内存中的数据不断Flush到文件，导致会有多个文件</p></li>
+</ul>
+</div>
+<div class="section" id="flush">
+<h3><span class="section-number">10.16.2. </span>Flush<a class="headerlink" href="#flush" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>在2.x版本之前：Flush是Region级别的，只要有一个MemStore达到阈值触发flush，该region中所有的Memstore都会Flush</p>
+</div></blockquote>
+<ul>
+<li><p>功能：将MemStore中的数据溢写到HDFS中，变成StoreFile文件</p></li>
+<li><p>参数配置：自动触发</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="c">#2.x版本之前的机制</span>
+<span class="c">#region的memstore的触发</span>
+<span class="c">#判断如果某个region中的某个memstore达到这个阈值，那么触发flush，flush这个region的所有memstore</span>
+<span class="na">hbase.hregion.memstore.flush.size</span><span class="o">=</span><span class="s">128M</span>
+<span class="c">#region的触发级别：如果没有memstore达到128，但是所有memstore的大小加在一起大于等于128*4</span>
+<span class="c">#触发整个region的flush</span>
+<span class="na">hbase.hregion.memstore.block.multiplier</span><span class="o">=</span><span class="s">4</span>
+<span class="c">#regionserver的触发级别：所有region所占用的memstore达到阈值，就会触发整个regionserver中memstore的溢写</span>
+<span class="c">#从memstore占用最多的Regin开始flush</span>
+<span class="na">hbase.regionserver.global.memstore.size</span><span class="o">=</span><span class="s">0.4</span>
+<span class="na">hbase.regionserver.global.memstore.size.lower.limit</span> <span class="o">=</span> <span class="s">0.4*0.95 =0.38</span>
+</pre></div>
+</div>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="c">#2.x版本以后的机制</span>
+<span class="c">#设置了一个flush的最小阈值</span>
+<span class="c">#memstore的判断发生了改变：max(&quot;hbase.hregion.memstore.flush.size / column_family_number&quot;,hbase.hregion.percolumnfamilyflush.size.lower.bound.min)</span>
+<span class="c">#如果memstore高于上面这个结果，就会被flush，如果低于这个值，就不flush，如果整个region所有的memstore都低于，全部flush</span>
+<span class="c">#水位线 = max（128 / 列族个数,16）,列族一般给3个 ~ 42M</span>
+<span class="c">#如果memstore的空间大于42,就flush，如果小于就不flush，如果都小于，全部flush</span>
+<span class="na">hbase.hregion.percolumnfamilyflush.size.lower.bound.min</span><span class="o">=</span><span class="s">16M</span>
+<span class="c">#2.x中多了一种机制：In-Memory-compact,如果开启了【不为none】，会在内存中对需要flush的数据进行合并</span>
+<span class="c">#合并后再进行flush，将多个小文件在内存中合并后再flush</span>
+<span class="na">hbase.hregion.compacting.memstore.type</span><span class="o">=</span><span class="s">None|basic</span>
+</pre></div>
+</div>
+</li>
+<li><p>手动触发：<strong>尽量避免HBASE自动触发flush</strong></p>
+<ul class="simple">
+<li><p>HBASE自动触发flush、Compact、Split会导致这个过程占用大量的资源，为了避免影响业务其他的操作，使用定期的手动触发来避免自动触发</p></li>
+<li><p>工作中将以上自动触发的参数调大，在达不到的情况下，定时手动触发</p>
+<ul>
+<li><p>hbase shell：<code class="docutils literal notranslate"><span class="pre">flush</span> <span class="pre">'tableName'</span> <span class="pre">|</span> <span class="pre">'regionName'</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="compact">
+<h3><span class="section-number">10.16.3. </span>Compact<a class="headerlink" href="#compact" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>功能：将StoreFile文件进行合并，变成大文件</p></li>
+<li><p>minor Compaction：轻量级的合并，每次将最老的几个storefile文件合并成一个文件</p></li>
+<li><p>major compaction：重量级的合并，将整个store中的storefile进行合并</p></li>
+<li><p>合并时，会将标记为更新或者删除的数据进行真正的物理删除</p></li>
+<li><p>封装脚本定时运行：在linux命令行执行hbase命令</p>
+<ul class="simple">
+<li><p>一行一个命令，<strong>最后加一个exit</strong></p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hbase</span> <span class="n">shell</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">datas</span><span class="o">/</span><span class="n">hbasesh</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</li>
+<li><p>参数配置</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">hbase.hregion.majorcompaction</span><span class="o">=</span><span class="s">7天</span>
+</pre></div>
+</div>
+<ul>
+<li><p>工作中需要配置手动触发，避免自动触发，以免影响业务</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="na">hbase.hregion.majorcompaction</span><span class="o">=</span><span class="s">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>定期手动触发</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">major_compact</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="split">
+<h3><span class="section-number">10.16.4. </span>Split<a class="headerlink" href="#split" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>功能：当一个region的数据量过大，导致负载比较大，将一个region分裂为两个region</p></li>
+<li><p>参数配置</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span><span class="c">#region阈值</span>
+<span class="na">hbase.hregion.max.filesize</span><span class="o">=</span><span class="s">10GB</span>
+<span class="c">#0.94之前：判断region中是否有一个storefile文件是否达到阈值，如果达到，就分裂</span>
+<span class="na">hbase.regionserver.region.split.policy</span><span class="o">=</span><span class="s">org.apache.hadoop.hbase.regionserver.ConstantSizeRegionSplitPolicy</span>
+
+<span class="c">#0.94开始</span>
+<span class="c">#规则：Math.min(getDesiredMaxFileSize(),initialSize * tableRegionsCount * tableRegionsCount * tableRegionsCount)</span>
+<span class="c">#initialSize = 128 X 2</span>
+<span class="c">#min(10GB,256 x region个数的3次方)</span>
+<span class="na">hbase.regionserver.region.split.policy</span><span class="o">=</span><span class="s">org.apache.hadoop.hbase.regionserver.IncreasingToUpperBoundRegionSplitPolicy</span>
+
+<span class="c">#2.x开始</span>
+<span class="c">#规则：return tableRegionsCount == 1  ? this.initialSize : getDesiredMaxFileSize();</span>
+<span class="c">#判断region个数是否为1，如果为1，就按照256分，如果不为1，就按照10GB来分</span>
+<span class="na">hbase.regionserver.region.split.policy</span><span class="o">=</span><span class="s">org.apache.hadoop.hbase.regionserver.SteppingSplitPolicy</span>
+</pre></div>
+</div>
+</li>
+<li><p>工作中需要避免hbase自动分裂，需要手动干预分裂：导致集群的负载过高</p>
+<ul>
+<li><p>关闭自动分裂</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DisabledRegionSplitPolicy</span>
+</pre></div>
+</div>
+</li>
+<li><p>手动split</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">split</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id30">
+<h2><span class="section-number">10.17. </span>常用列族属性<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>NAME：标记列族的名称</p></li>
+<li><p>TTL：版本存活时间，类似于redis中的expire，设置数据的存活时间</p></li>
+<li><p>VERSIONS：最大版本数，表示某一列最多允许存储多少版本的 值</p></li>
+<li><p>MIN_VERSIONS：最小版本数，一般与TTL搭配使用，当达到TTL时间以后，不会删除所有多版本，默认保留最新的最小版本数</p></li>
+<li><p>BLOOMFILTER：布隆过滤器</p>
+<ul class="simple">
+<li><p>NONE：不开启布隆过滤</p></li>
+<li><p>ROW：行级布隆过滤</p>
+<ul>
+<li><p>当查询数据扫描storefile文件时，如果开启了row级别布隆过滤，会判断当前的storefile文件中是否有需要查询的rowkey，如果有就读文件，如果没有，就跳过这个文件</p></li>
+</ul>
+</li>
+<li><p>ROWCOL：行列级布隆过滤</p>
+<ul>
+<li><p>当查询数据扫描storefile文件时，如果开启了row级别布隆过滤，会判断当前的storefile文件中是否有需要查询的rowkey以及对应的列族和列，如果有就读文件，如果没有，就跳过这个文件</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>IN_MEMORY：最高缓存级别，一般不要开启，meta表的缓存就是这个级别</p></li>
+<li><p>BLOCKCACHE：是否开启列族的缓存，默认都是开启的</p>
+<ul class="simple">
+<li><p>工作中要将不经常读写的列族关闭缓存</p></li>
+<li><p>缓存中使用LRU算法进行淘汰</p></li>
+</ul>
+</li>
+<li><p>BLOCKSIZE：文件块的大小，默认为64KB，不建议调整</p>
+<ul class="simple">
+<li><p>调小：一个文件的块的个数增加，索引增加，占用的内存更多</p></li>
+<li><p>调大：一个文件的块的个数减少，索引减少，占用内存更少</p></li>
+</ul>
+</li>
+<li><p>COMPRESSION：Hbase中写入数据的压缩，就是Hadoop的压缩</p>
+<ul>
+<li><p>让Hadoop先支持压缩机制</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hadoop</span> <span class="n">checknative</span>
+</pre></div>
+</div>
+</li>
+<li><p>让Hbase支持压缩</p>
+<ul>
+<li><p>关闭Hbase的服务</p></li>
+<li><p>配置Hbase的压缩本地库： lib/native/Linux-amd64-64</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">servers</span><span class="o">/</span><span class="n">hbase</span><span class="o">-</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span>
+<span class="n">mkdir</span> <span class="n">lib</span><span class="o">/</span><span class="n">native</span>
+</pre></div>
+</div>
+</li>
+<li><p>将Hadoop的压缩本地库创建一个软链接到Hbase的lib/native目录下</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">servers</span><span class="o">/</span><span class="n">hadoop</span><span class="o">-</span><span class="mf">2.7</span><span class="o">.</span><span class="mi">5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">native</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">servers</span><span class="o">/</span><span class="n">hbase</span><span class="o">-</span><span class="mf">2.1</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">native</span><span class="o">/</span><span class="n">Linux</span><span class="o">-</span><span class="n">amd64</span><span class="o">-</span><span class="mi">64</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>启动Hbase服务</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="o">-</span><span class="n">hbase</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</li>
+<li><p>创建表</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="s1">&#39;testcompress&#39;</span><span class="p">,{</span><span class="n">NAME</span><span class="o">=&gt;</span><span class="s1">&#39;cf1&#39;</span><span class="p">,</span><span class="n">COMPRESSION</span> <span class="o">=&gt;</span> <span class="s1">&#39;SNAPPY&#39;</span><span class="p">}</span>
+<span class="n">put</span> <span class="s1">&#39;testcompress&#39;</span><span class="p">,</span><span class="s1">&#39;001&#39;</span><span class="p">,</span><span class="s1">&#39;cf1:name&#39;</span><span class="p">,</span><span class="s1">&#39;laoda&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-right" title="11. Hive SQL50题记录" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" class="btn btn-neutral float-left" title="9. Flink基础配置与基础原理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, roohom
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
