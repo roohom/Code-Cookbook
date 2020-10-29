@@ -41,6 +41,7 @@ extensions = [
 
 
 # -- Options for LaTeX output ------------------------------------------------
+# -- I have no LaTeX ... -----------------------------------------------------
  
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
