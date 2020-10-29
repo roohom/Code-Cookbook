@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>18. Kafka &mdash; Code-Cookbook 0.1 文档</title>
+  <title>16. Kafka &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="19. MySQL 50题记录" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" />
-    <link rel="prev" title="17. 使用Java在服务端和客户端之间传送文件" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html" /> 
+    <link rel="next" title="17. Redis" href="Redis.html" />
+    <link rel="prev" title="15. 使用Java在服务端和客户端之间传送文件" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,96 +85,91 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Apache%20Avro.html">5. Apache Avro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">6. Bigdata Summary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Collection.html">7. 集合</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Collection.html#id9">8. 简单(常用)数据结构</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">9. Flink基础配置与基础原理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Hbase.html">10. Hbase</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">11. Hive SQL50题记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="IO%E6%B5%81.html">12. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="JDBC.html">13. JDBC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java%20Cookbook.html">14. JAVA Cookbook</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java_Maven.html">15. Maven</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html">16. Java_OOP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">17. 使用Java在服务端和客户端之间传送文件</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">18. Kafka</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">18.1. 消息队列</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mq">18.1.1. 消息队列MQ</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">18.1.2. 同步与异步</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">18.1.3. 应用场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">18.1.4. 缺点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">18.1.5. 消息队列的两种模式</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">5. Bigdata Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html">6. 集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html#id9">7. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">8. Flink基础配置与基础原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">9. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">10. Hive SQL50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IO%E6%B5%81.html">11. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%20Cookbook.html">12. JAVA Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_Maven.html">13. Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_OOP.html">14. Java_OOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">15. 使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">16. Kafka</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">16.1. 消息队列</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mq">16.1.1. 消息队列MQ</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">16.1.2. 同步与异步</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">16.1.3. 应用场景</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">16.1.4. 缺点</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">16.1.5. 消息队列的两种模式</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">18.2. Kafka的介绍和以及应用</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id7">18.2.1. 功能</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">18.2.2. 特点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">18.2.3. 特殊概念</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">18.2.4. 架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">16.2. Kafka的介绍和以及应用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">16.2.1. 功能</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">16.2.2. 特点</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">16.2.3. 特殊概念</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">16.2.4. 架构</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">18.3. 自定义分区规则</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">18.3.1. 规则</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">18.3.2. 实现</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id14">18.3.2.1. 生产者代码设置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id15">18.3.2.2. 自定义随机分区类</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">16.3. 自定义分区规则</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">16.3.1. 规则</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">16.3.2. 实现</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#offset">16.4. 手动控制Offset</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">16.4.1. 自动提交offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topic-offset">16.4.2. 手动提交Topic offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#partition-offset">16.4.3. 手动提交 partition offset</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#offset">18.4. 手动控制Offset</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id16">18.4.1. 自动提交offset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#topic-offset">18.4.2. 手动提交Topic offset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#partition-offset">18.4.3. 手动提交 partition offset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">16.5. Kafka存储及检索</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">16.5.1. 存储机制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">16.5.2. 检索机制</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id17">18.5. Kafka存储及检索</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id18">18.5.1. 存储机制</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id19">18.5.2. 检索机制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">16.6. Kafka安全性保证</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id21">16.6.1. 消息队列的问题</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">16.6.2. 消息队列消费语义</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">16.6.3. 保证生产数据不丢失不重复</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">16.6.4. 保证消费数据不丢失不重复</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id20">18.6. Kafka安全性保证</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id21">18.6.1. 消息队列的问题</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id22">18.6.2. 消息队列消费语义</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">18.6.3. 保证生产数据不丢失不重复</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">18.6.4. 保证消费数据不丢失不重复</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id25">18.7. Kafka常用配置</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#producer-properties">18.7.1. 1、生产者配置：producer.properties</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#consumer-properties">18.7.2. 2、消费者配置：consumer.properties</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#kafka-server-properties">18.7.3. 3、Kafka集群管理配置：server.properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">16.7. Kafka常用配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#producer-properties">16.7.1. 1、生产者配置：producer.properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#consumer-properties">16.7.2. 2、消费者配置：consumer.properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kafka-server-properties">16.7.3. 3、Kafka集群管理配置：server.properties</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">19. MySQL 50题记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">20. MySQL语句执行顺序</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Redis.html">21. Redis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">22. SQL JOINS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SimpleDataStruct.html">23. 简单(常用)数据结构</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Socket.html">24. Socket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">25. Sqoop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">26. 可能有用的学习链接</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">27. Hive - ORC 文件存储格式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">28. 多线程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">29. 大数据平台环境与数仓</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">30. 常用软件梳理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">31. SCD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">32. 拉链表</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">33. 数据仓库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">34. Hive</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">35. 数据倾斜</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">36. 生产者消费者模型问题</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">37. JavaSE_Day08</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">38. 面向对象</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">39. 常用API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">40. Java OOP防脱发指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">17. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimpleDataStruct.html">18. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Socket.html">19. Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">20. 可能有用的学习链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">21. Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">22. 多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">23. 大数据平台环境与数仓</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">24. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">25. SCD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">26. 拉链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">27. 数据仓库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">28. Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">29. 数据倾斜</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">30. 生产者消费者模型问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">31. JavaSE_Day08</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">32. 面向对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">33. 常用API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">34. Java OOP防脱发指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
             
@@ -221,7 +216,9 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">18. </span>Kafka</li>
+          <li><a href="index.html">Blogs</a> &raquo;</li>
+        
+      <li><span class="section-number">16. </span>Kafka</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -241,14 +238,14 @@
            <div itemprop="articleBody">
             
   <div class="section" id="kafka">
-<h1><span class="section-number">18. </span>Kafka<a class="headerlink" href="#kafka" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">16. </span>Kafka<a class="headerlink" href="#kafka" title="永久链接至标题">¶</a></h1>
 <blockquote>
 <div><p>分布式消息订阅发布系统</p>
 </div></blockquote>
 <div class="section" id="id1">
-<h2><span class="section-number">18.1. </span>消息队列<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">16.1. </span>消息队列<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <div class="section" id="mq">
-<h3><span class="section-number">18.1.1. </span>消息队列MQ<a class="headerlink" href="#mq" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.1.1. </span>消息队列MQ<a class="headerlink" href="#mq" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>消息队列：Message queue</p></li>
 <li><p>定义：用于在两个消息系统或者模块之间实现消息数据的缓存，通过队列的方式实现数据传输</p></li>
@@ -260,7 +257,7 @@
 </ul>
 </div>
 <div class="section" id="id2">
-<h3><span class="section-number">18.1.2. </span>同步与异步<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.1.2. </span>同步与异步<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>消息队列在整体的业务模式上是异步模式</p></li>
 <li><p>有一些场景下不能使用异步来实现业务需求</p></li>
@@ -305,7 +302,7 @@
 </ul>
 </div>
 <div class="section" id="id3">
-<h3><span class="section-number">18.1.3. </span>应用场景<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.1.3. </span>应用场景<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>解耦</p></li>
 <li><p>异步处理</p>
@@ -327,7 +324,7 @@
 </ul>
 </div>
 <div class="section" id="id4">
-<h3><span class="section-number">18.1.4. </span>缺点<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.1.4. </span>缺点<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>必须保证消息队列的稳定及安全性</p>
 <ul>
@@ -372,7 +369,7 @@
 </ul>
 </div>
 <div class="section" id="id5">
-<h3><span class="section-number">18.1.5. </span>消息队列的两种模式<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.1.5. </span>消息队列的两种模式<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>点对点模式</p>
 <ul>
@@ -403,9 +400,9 @@
 </div>
 </div>
 <div class="section" id="id6">
-<h2><span class="section-number">18.2. </span>Kafka的介绍和以及应用<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">16.2. </span>Kafka的介绍和以及应用<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id7">
-<h3><span class="section-number">18.2.1. </span>功能<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.2.1. </span>功能<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>定义：分布式的基于订阅发布模式的消息队列系统</p></li>
 <li><p>流式存储、流式计算</p></li>
@@ -413,7 +410,7 @@
 </ul>
 </div>
 <div class="section" id="id8">
-<h3><span class="section-number">18.2.2. </span>特点<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.2.2. </span>特点<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>分布式：解决高并发、存储、故障冗余的问题</p></li>
 <li><p>高吞吐量：分布式</p></li>
@@ -423,7 +420,7 @@
 </ul>
 </div>
 <div class="section" id="id9">
-<h3><span class="section-number">18.2.3. </span>特殊概念<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.2.3. </span>特殊概念<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>生产者：Producer</p>
 <ul class="simple">
@@ -601,7 +598,7 @@
 </ul>
 </div>
 <div class="section" id="id10">
-<h3><span class="section-number">18.2.4. </span>架构<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.2.4. </span>架构<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>Hbase：Table：Region：Store：mem&amp;storefile</p></li>
 <li><p>Kakfa：Topic：Partition：Segment：.log &amp; .index</p></li>
@@ -627,9 +624,9 @@
 </div>
 </div>
 <div class="section" id="id11">
-<h2><span class="section-number">18.3. </span>自定义分区规则<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">16.3. </span>自定义分区规则<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id12">
-<h3><span class="section-number">18.3.1. </span>规则<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.3.1. </span>规则<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>Kafka中一个Topic可以对应多个分区，当写入数据会根据分区规则将这个数据写入对应的分区</p></li>
 <li><p>分区规则：</p>
@@ -649,16 +646,16 @@
 </ul>
 </div>
 <div class="section" id="id13">
-<h3><span class="section-number">18.3.2. </span>实现<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.3.2. </span>实现<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
 <div class="section" id="id14">
-<h4><span class="section-number">18.3.2.1. </span>生产者代码设置<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">16.3.2.1. </span>生产者代码设置<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h4>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//自定义分区方式</span>
 <span class="n">props</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;partitioner.class&quot;</span><span class="p">,</span><span class="s">&quot;bigdata.itcast.cn.kafka.partition.UserPartition&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id15">
-<h4><span class="section-number">18.3.2.2. </span>自定义随机分区类<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">16.3.2.2. </span>自定义随机分区类<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">bigdata.itcast.cn.kafka.partition</span><span class="p">;</span>
 
 <span class="kn">import</span> <span class="nn">org.apache.kafka.clients.producer.Partitioner</span><span class="p">;</span>
@@ -710,9 +707,9 @@
 </div>
 </div>
 <div class="section" id="offset">
-<h2><span class="section-number">18.4. </span>手动控制Offset<a class="headerlink" href="#offset" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">16.4. </span>手动控制Offset<a class="headerlink" href="#offset" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id16">
-<h3><span class="section-number">18.4.1. </span>自动提交offset<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.4.1. </span>自动提交offset<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>offset作用</p>
 <ul class="simple">
@@ -782,7 +779,7 @@
 </ul>
 </div>
 <div class="section" id="topic-offset">
-<h3><span class="section-number">18.4.2. </span>手动提交Topic offset<a class="headerlink" href="#topic-offset" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.4.2. </span>手动提交Topic offset<a class="headerlink" href="#topic-offset" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>为什么要手动管理offset</p>
 <ul class="simple">
@@ -830,14 +827,14 @@
 </ul>
 </div>
 <div class="section" id="partition-offset">
-<h3><span class="section-number">18.4.3. </span>手动提交 partition offset<a class="headerlink" href="#partition-offset" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.4.3. </span>手动提交 partition offset<a class="headerlink" href="#partition-offset" title="永久链接至标题">¶</a></h3>
 <p>[代码示例]</p>
 </div>
 </div>
 <div class="section" id="id17">
-<h2><span class="section-number">18.5. </span>Kafka存储及检索<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">16.5. </span>Kafka存储及检索<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id18">
-<h3><span class="section-number">18.5.1. </span>存储机制<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.5.1. </span>存储机制<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>逻辑【存储单元】+物理【磁盘文件】</p>
 <ul class="simple">
@@ -891,7 +888,7 @@
 </ul>
 </div>
 <div class="section" id="id19">
-<h3><span class="section-number">18.5.2. </span>检索机制<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.5.2. </span>检索机制<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>前导：</p>
 <ul class="simple">
@@ -938,9 +935,9 @@
 </div>
 </div>
 <div class="section" id="id20">
-<h2><span class="section-number">18.6. </span>Kafka安全性保证<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">16.6. </span>Kafka安全性保证<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id21">
-<h3><span class="section-number">18.6.1. </span>消息队列的问题<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.6.1. </span>消息队列的问题<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>问题1：消息队列的稳定性问题</p>
 <ul>
@@ -955,7 +952,7 @@
 </ul>
 </div>
 <div class="section" id="id22">
-<h3><span class="section-number">18.6.2. </span>消息队列消费语义<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.6.2. </span>消息队列消费语义<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>at most once：至多一次</p>
 <ul>
@@ -976,7 +973,7 @@
 </ul>
 </div>
 <div class="section" id="id23">
-<h3><span class="section-number">18.6.3. </span>保证生产数据不丢失不重复<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.6.3. </span>保证生产数据不丢失不重复<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>生产：生产=&gt; Kafka</p></li>
 <li><p>ack确认机制：生产者给Kafka发送数据</p>
@@ -1047,7 +1044,7 @@
 </ul>
 </div>
 <div class="section" id="id24">
-<h3><span class="section-number">18.6.4. </span>保证消费数据不丢失不重复<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">16.6.4. </span>保证消费数据不丢失不重复<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>核心保障：commit offset</p></li>
 <li><p>场景：消费者故障</p></li>
@@ -1073,276 +1070,68 @@
 </div>
 </div>
 <div class="section" id="id25">
-<h2><span class="section-number">18.7. </span>Kafka常用配置<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">16.7. </span>Kafka常用配置<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
 <div class="section" id="producer-properties">
-<h3><span class="section-number">18.7.1. </span>1、生产者配置：producer.properties<a class="headerlink" href="#producer-properties" title="永久链接至标题">¶</a></h3>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bootstrap.servers</td>
-<td>hostname:9092</td>
-<td>KafkaServer端地址</td>
-</tr>
-<tr>
-<td>poducer.type</td>
-<td>sync</td>
-<td>同步或者异步发送，0,1，all</td>
-</tr>
-<tr>
-<td>min.insync.replicas</td>
-<td>3</td>
-<td>如果为同步，最小成功副本数</td>
-</tr>
-<tr>
-<td>buffer.memory</td>
-<td>33554432</td>
-<td>配置生产者本地发送数据的 缓存大小</td>
-</tr>
-<tr>
-<td>compression.type</td>
-<td>none</td>
-<td>配置数据压缩，可配置snappy</td>
-</tr>
-<tr>
-<td>partitioner.class</td>
-<td>Partition</td>
-<td>指定分区的类</td>
-</tr>
-<tr>
-<td>acks</td>
-<td>1</td>
-<td>指定写入数据的保障方式</td>
-</tr>
-<tr>
-<td>request.timeout.ms</td>
-<td>10000</td>
-<td>等待ack确认的时间，超时发送失败</td>
-</tr>
-<tr>
-<td>retries</td>
-<td>0</td>
-<td>发送失败的重试次数</td>
-</tr>
-<tr>
-<td>batch.size</td>
-<td>16384</td>
-<td>批量发送的大小</td>
-</tr>
-<tr>
-<td>metadata.max.age.ms</td>
-<td>300000</td>
-<td>更新缓存的元数据【topic、分区leader等】</td>
-</tr>
-</tbody>
-</table></div>
+<h3><span class="section-number">16.7.1. </span>1、生产者配置：producer.properties<a class="headerlink" href="#producer-properties" title="永久链接至标题">¶</a></h3>
+<p>| 属性                | 值            | 含义                                    |
+| ——————- | ————- | ————————————— |
+| bootstrap.servers   | hostname:9092 | KafkaServer端地址                       |
+| poducer.type        | sync          | 同步或者异步发送，0,1，all              |
+| min.insync.replicas | 3             | 如果为同步，最小成功副本数              |
+| buffer.memory       | 33554432      | 配置生产者本地发送数据的 缓存大小       |
+| compression.type    | none          | 配置数据压缩，可配置snappy              |
+| partitioner.class   | Partition     | 指定分区的类                            |
+| acks                | 1             | 指定写入数据的保障方式                  |
+| request.timeout.ms  | 10000         | 等待ack确认的时间，超时发送失败         |
+| retries             | 0             | 发送失败的重试次数                      |
+| batch.size          | 16384         | 批量发送的大小                          |
+| metadata.max.age.ms | 300000        | 更新缓存的元数据【topic、分区leader等】 |</p>
+</div>
 <div class="section" id="consumer-properties">
-<h3><span class="section-number">18.7.2. </span>2、消费者配置：consumer.properties<a class="headerlink" href="#consumer-properties" title="永久链接至标题">¶</a></h3>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>属性</th>
-<th>值</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bootstrap.servers</td>
-<td>hostname:9092</td>
-<td>指定Kafka的server地址</td>
-</tr>
-<tr>
-<td>group.id</td>
-<td>id</td>
-<td>消费者组的 名称</td>
-</tr>
-<tr>
-<td>consumer.id</td>
-<td>自动分配</td>
-<td>消费者id</td>
-</tr>
-<tr>
-<td>auto.offset.reset</td>
-<td>latest</td>
-<td>新的消费者从哪里读取数据latest,earliest</td>
-</tr>
-<tr>
-<td>auto.commit.enable</td>
-<td>true</td>
-<td>是否自动commit当前的offset</td>
-</tr>
-<tr>
-<td>auto.commit.interval.ms</td>
-<td>1000</td>
-<td>自动提交的时间间隔</td>
-</tr>
-</tbody>
-</table></div>
+<h3><span class="section-number">16.7.2. </span>2、消费者配置：consumer.properties<a class="headerlink" href="#consumer-properties" title="永久链接至标题">¶</a></h3>
+<p>| 属性                    | 值            | 含义                                    |
+| ———————– | ————- | ————————————— |
+| bootstrap.servers       | hostname:9092 | 指定Kafka的server地址                   |
+| group.id                | id            | 消费者组的 名称                         |
+| consumer.id             | 自动分配      | 消费者id                                |
+| auto.offset.reset       | latest        | 新的消费者从哪里读取数据latest,earliest |
+| auto.commit.enable      | true          | 是否自动commit当前的offset              |
+| auto.commit.interval.ms | 1000          | 自动提交的时间间隔                      |</p>
+</div>
 <div class="section" id="kafka-server-properties">
-<h3><span class="section-number">18.7.3. </span>3、Kafka集群管理配置：server.properties<a class="headerlink" href="#kafka-server-properties" title="永久链接至标题">¶</a></h3>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th align="center">属性</th>
-<th>值</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">broker.id</td>
-<td>int类型</td>
-<td align="left">Kafka服务端的唯一id，用于注册zookeeper，一般一台机器一个</td>
-</tr>
-<tr>
-<td align="center">host.name</td>
-<td>hostname</td>
-<td align="left">绑定该broker对应的机器地址</td>
-</tr>
-<tr>
-<td align="center">port</td>
-<td>端口</td>
-<td align="left">Kafka服务端端口</td>
-</tr>
-<tr>
-<td align="center">log.dirs</td>
-<td>目录</td>
-<td align="left">kafka存放数据的路径</td>
-</tr>
-<tr>
-<td align="center">zookeeper.connect</td>
-<td>hostname:2181</td>
-<td align="left">zookeeper的地址</td>
-</tr>
-<tr>
-<td align="center">zookeeper.session.timeout.ms</td>
-<td>6000</td>
-<td align="left">zookeeper会话超时时间</td>
-</tr>
-<tr>
-<td align="center">zookeeper.connection.timeout.ms</td>
-<td>6000</td>
-<td align="left">zookeeper客户端连接超时时间</td>
-</tr>
-<tr>
-<td align="center">num.partitions</td>
-<td>1</td>
-<td align="left">分区的个数</td>
-</tr>
-<tr>
-<td align="center">default.replication.factor</td>
-<td>1</td>
-<td align="left">分区的副本数</td>
-</tr>
-<tr>
-<td align="center">log.segment.bytes</td>
-<td>1073741824</td>
-<td align="left">==单个log文件的大小，默认1G生成一个==</td>
-</tr>
-<tr>
-<td align="center">log.index.interval.bytes</td>
-<td>4096</td>
-<td align="left">log文件每隔多大生成一条index</td>
-</tr>
-<tr>
-<td align="center">log.roll.hours</td>
-<td>168</td>
-<td align="left">==单个log文件生成的时间规则，默认7天一个log==</td>
-</tr>
-<tr>
-<td align="center">log.cleaner.enable</td>
-<td>false</td>
-<td align="left">==false表示删除过期数据，如果为true，进行compact==</td>
-</tr>
-<tr>
-<td align="center">log.cleanup.policy</td>
-<td>delete，compact</td>
-<td align="left">==默认为delete，删除过期数据==</td>
-</tr>
-<tr>
-<td align="center">log.retention.minutes</td>
-<td>分钟值</td>
-<td align="left">==segment生成多少分钟后删除==，做了标记</td>
-</tr>
-<tr>
-<td align="center">log.retention.hours</td>
-<td>小时值</td>
-<td align="left">==segment生成多少小时后删除==</td>
-</tr>
-<tr>
-<td align="center">log.retention.check.interval.ms</td>
-<td>毫秒值</td>
-<td align="left">多长时间检查一次是否有数据要标记删除</td>
-</tr>
-<tr>
-<td align="center">log.cleaner.delete.retention.ms</td>
-<td>毫秒值</td>
-<td align="left">segment标记删除后多长时间删除</td>
-</tr>
-<tr>
-<td align="center">log.cleaner.backoff.ms</td>
-<td>毫秒值</td>
-<td align="left">多长时间检查一次是否有数据要删除</td>
-</tr>
-<tr>
-<td align="center">log.flush.interval.messages</td>
-<td>Long.MaxValue</td>
-<td align="left">消息的条数达到阈值，将触发flush缓存到磁盘</td>
-</tr>
-<tr>
-<td align="center">log.flush.interval.ms</td>
-<td>Long.MaxValue</td>
-<td align="left">隔多长时间将缓存数据写入磁盘</td>
-</tr>
-<tr>
-<td align="center">auto.create.topics.enable</td>
-<td>false</td>
-<td align="left">是否允许自动创建topic，不建议开启</td>
-</tr>
-<tr>
-<td align="center">delete.topic.enable</td>
-<td>true</td>
-<td align="left">允许删除topic</td>
-</tr>
-<tr>
-<td align="center">replica.lag.time.max.ms</td>
-<td>10000</td>
-<td align="left">可用副本的同步超时时间</td>
-</tr>
-<tr>
-<td align="center">replica.lag.max.messages</td>
-<td>4000</td>
-<td align="left">可用副本的同步记录差，该参数在0.9以后被删除</td>
-</tr>
-<tr>
-<td align="center">unclean.leader.election.enable</td>
-<td>true</td>
-<td align="left">允许不在ISR中的副本成为leader</td>
-</tr>
-<tr>
-<td align="center">num.network.threads</td>
-<td>3</td>
-<td align="left">接受客户端请求的线程数</td>
-</tr>
-<tr>
-<td align="center">num.io.threads</td>
-<td>8</td>
-<td align="left">处理读写硬盘的IO的线程数</td>
-</tr>
-<tr>
-<td align="center">background.threads</td>
-<td>4</td>
-<td align="left">后台处理的线程数，例如清理文件等</td>
-</tr>
-</tbody>
-</table><ul>
+<h3><span class="section-number">16.7.3. </span>3、Kafka集群管理配置：server.properties<a class="headerlink" href="#kafka-server-properties" title="永久链接至标题">¶</a></h3>
+<p>|              属性               | 值              | 含义                                                     |
+| :—————————–: | ————— | :——————————————————- |
+|            broker.id            | int类型         | Kafka服务端的唯一id，用于注册zookeeper，一般一台机器一个 |
+|            host.name            | hostname        | 绑定该broker对应的机器地址                               |
+|              port               | 端口            | Kafka服务端端口                                          |
+|            log.dirs             | 目录            | kafka存放数据的路径                                      |
+|        zookeeper.connect        | hostname:2181   | zookeeper的地址                                          |
+|  zookeeper.session.timeout.ms   | 6000            | zookeeper会话超时时间                                    |
+| zookeeper.connection.timeout.ms | 6000            | zookeeper客户端连接超时时间                              |
+|         num.partitions          | 1               | 分区的个数                                               |
+|   default.replication.factor    | 1               | 分区的副本数                                             |
+|        log.segment.bytes        | 1073741824      | ==单个log文件的大小，默认1G生成一个==                    |
+|    log.index.interval.bytes     | 4096            | log文件每隔多大生成一条index                             |
+|         log.roll.hours          | 168             | ==单个log文件生成的时间规则，默认7天一个log==            |
+|       log.cleaner.enable        | false           | ==false表示删除过期数据，如果为true，进行compact==       |
+|       log.cleanup.policy        | delete，compact | ==默认为delete，删除过期数据==                           |
+|      log.retention.minutes      | 分钟值          | ==segment生成多少分钟后删除==，做了标记                  |
+|       log.retention.hours       | 小时值          | ==segment生成多少小时后删除==                            |
+| log.retention.check.interval.ms | 毫秒值          | 多长时间检查一次是否有数据要标记删除                     |
+| log.cleaner.delete.retention.ms | 毫秒值          | segment标记删除后多长时间删除                            |
+|     log.cleaner.backoff.ms      | 毫秒值          | 多长时间检查一次是否有数据要删除                         |
+|   log.flush.interval.messages   | Long.MaxValue   | 消息的条数达到阈值，将触发flush缓存到磁盘                |
+|      log.flush.interval.ms      | Long.MaxValue   | 隔多长时间将缓存数据写入磁盘                             |
+|    auto.create.topics.enable    | false           | 是否允许自动创建topic，不建议开启                        |
+|       delete.topic.enable       | true            | 允许删除topic                                            |
+|     replica.lag.time.max.ms     | 10000           | 可用副本的同步超时时间                                   |
+|    replica.lag.max.messages     | 4000            | 可用副本的同步记录差，该参数在0.9以后被删除              |
+| unclean.leader.election.enable  | true            | 允许不在ISR中的副本成为leader                            |
+|       num.network.threads       | 3               | 接受客户端请求的线程数                                   |
+|         num.io.threads          | 8               | 处理读写硬盘的IO的线程数                                 |
+|       background.threads        | 4               | 后台处理的线程数，例如清理文件等                         |</p>
+<ul>
 <li><p>AR：一个分区的所有副本</p></li>
 <li><p>ISR：一个分区的正在同步的副本，可用副本</p>
 <ul>
@@ -1373,10 +1162,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-right" title="19. MySQL 50题记录" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Redis.html" class="btn btn-neutral float-right" title="17. Redis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html" class="btn btn-neutral float-left" title="17. 使用Java在服务端和客户端之间传送文件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html" class="btn btn-neutral float-left" title="15. 使用Java在服务端和客户端之间传送文件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

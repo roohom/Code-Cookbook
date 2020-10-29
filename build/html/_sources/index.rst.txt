@@ -13,7 +13,9 @@ Roohom's Code-Cookbook
    :numbered:
    
    
-   blogs/*
+   blogs/index
+   Auxiliary tools/index
+   SQL/index
 
 
 Indices and tables

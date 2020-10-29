@@ -511,26 +511,25 @@
     ps -ef | grep redis
     ```
 
-    
-
   - 测试关闭第一台进程
-
-    
 
   - 代码中如何实现连接访问
 
-    ```java
-  //方案三：构建哨兵连接池：第一个参数是master的逻辑名称，第二个参数是哨兵列表，第三个是连接池的配置
+    ~~~
+    方案三：构建哨兵连接池：第一个参数是master的逻辑名称，第二个参数是哨兵列表，第三个是连接池的配置
     HashSet<String> sets = new HashSet<>();
-  sets.add("node1:26379");
+    sets.add("node1:26379");
     sets.add("node2:26379");
-  sets.add("node3:26379");
+    sets.add("node3:26379");
     JedisSentinelPool mymaster = new JedisSentinelPool("mymaster", sets, jedisPoolConfig);
-    //从连接池中获取连接
+    从连接池中获取连接
     jedis = mymaster.getResource();
-    ```
+    ~~~
+
+    - 解决了Master单点故障，但是依旧存在redis集群存储容量负载的问题
+    - 哨兵本身的机制也存在一些缺点
+
   
-    
 
 ### 集群模式
 
@@ -565,12 +564,10 @@
     cp /export/redis-3.2.8/redis.conf  7001/
     ```
 
-    
-
   - 修改7001目录下的配置文件
 
     ```shell
-  cd /export/redis-3.2.8/cluster/7001
+    cd /export/redis-3.2.8/cluster/7001
     vim redis.conf
     #61行：绑定redis server地址
     bind node1
@@ -589,9 +586,9 @@
     ```
   
   - 将配置文件复制给7002和7003，并修改端口为7002和7003
-
+  
     ```shell
-  cd /export/redis-3.2.8/cluster/7001
+    cd /export/redis-3.2.8/cluster/7001
     cp redis.conf ../7002/
     cp redis.conf ../7003/
     vim ../7002/redis.conf
@@ -603,9 +600,9 @@
     ```
   
   - 启动三个redis实例
-
+  
     ```shell
-  cd /export/redis-3.2.8/cluster/7001
+    cd /export/redis-3.2.8/cluster/7001
     redis-server redis.conf
     cd /export/redis-3.2.8/cluster/7002
     redis-server redis.conf
@@ -613,20 +610,16 @@
     redis-server redis.conf
     ```
   
-    
-
   - 安装ruby环境
-
-    - 安装依赖
-
-      ```
-    yum install openssl-devel  zlib-devel  -y
-      ```
   
-    - 将ruby安装包上传到/export目录中
-
+    - 安装依赖
       ```
-    cd /export/
+  yum install openssl-devel  zlib-devel  -y
+      ```
+
+    - 将ruby安装包上传到/export目录中
+      ```
+      cd /export/
       tar -zxvf ruby-2.5.3.tar.gz
       cd ruby-2.5.3
       ./configure --prefix=/usr/local/ruby
@@ -636,19 +629,13 @@
       gem install redis
       ```
   
-      
-
 - 创建redis集群
-
   ```shell
   cd /export/redis-3.2.8/src/
   ./redis-trib.rb create --replicas 0 192.168.88.221:7001 192.168.88.221:7002 192.168.88.221:7003
   ```
 
-  
-
 - 启动客户端测试
-
   ```shell
   cd /export/redis-3.2.8/
   src/redis-cli -c -h node1 -p 7001
@@ -657,7 +644,6 @@
   ```
 
 - Jedis代码中的连接
-
   ```java
   JedisCluster jedisCluster = null;
   

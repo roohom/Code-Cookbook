@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>10. Hbase &mdash; Code-Cookbook 0.1 文档</title>
+  <title>9. Hbase &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="11. Hive SQL50题记录" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" />
-    <link rel="prev" title="9. Flink基础配置与基础原理" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" /> 
+    <link rel="next" title="10. Hive SQL50题记录" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" />
+    <link rel="prev" title="8. Flink基础配置与基础原理" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,115 +85,110 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Apache%20Avro.html">5. Apache Avro</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">6. Bigdata Summary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Collection.html">7. 集合</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Collection.html#id9">8. 简单(常用)数据结构</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">9. Flink基础配置与基础原理</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">10. Hbase</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">10.1. 介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">10.2. 功能</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">10.3. 应用场景</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">10.4. 特点及概念</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">10.4.1. 特点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">10.4.2. 概念</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">10.4.3. 列存储</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">5. Bigdata Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html">6. 集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html#id9">7. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">8. Flink基础配置与基础原理</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9. Hbase</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.1. 介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.2. 功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.3. 应用场景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.4. 特点及概念</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">9.4.1. 特点</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">9.4.2. 概念</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">9.4.3. 列存储</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">10.5. HBASE架构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">10.6. 配置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id10">10.7. 客户端操作</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ddl">10.7.1. DDL操作</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dml">10.7.2. DML操作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">9.5. HBASE架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">9.6. 配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">9.7. 客户端操作</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ddl">9.7.1. DDL操作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dml">9.7.2. DML操作</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">10.8. 存储设计</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">10.8.1. 存储概念</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">10.8.2. 存储模型</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">10.8.3. 存储流程</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id15">10.8.3.1. 写入</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id16">10.8.3.2. 读取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">9.8. 存储设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">9.8.1. 存储概念</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">9.8.2. 存储模型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">9.8.3. 存储流程</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">9.9. 角色功能</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hmaster">9.9.1. HMaster</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hregionserver">9.9.2. HRegionServer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zookeeper">9.9.3. Zookeeper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hdfs">9.9.4. HDFS</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id17">10.9. 角色功能</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#hmaster">10.9.1. HMaster</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hregionserver">10.9.2. HRegionServer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#zookeeper">10.9.3. Zookeeper</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hdfs">10.9.4. HDFS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbase-java-api">9.10. HBASE Java API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbasemapreduce">9.11. Hbase与MapReduce的集成</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id18">9.11.1. 应用场景</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">9.11.2. 集成原理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">9.11.3. 读HBASE数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id21">9.11.4. 写HBASE数据</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#hbase-java-api">10.10. HBASE Java API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#hbasemapreduce">10.11. Hbase与MapReduce的集成</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id18">10.11.1. 应用场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id19">10.11.2. 集成原理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id20">10.11.3. 读HBASE数据</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id21">10.11.4. 写HBASE数据</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bulkload">9.12. BulkLoad</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id22">9.12.1. HBASE导入数据的两种方式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">9.12.2. BulkLoad实现</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#bulkload">10.12. BulkLoad</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id22">10.12.1. HBASE导入数据的两种方式</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">10.12.2. BulkLoad实现</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hivehbase">9.13. Hive与HBASE集成</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sql-on-hbase">9.13.1. SQL  on HBASE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">9.13.2. Hive与hbase集成</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#hivehbase">10.13. Hive与HBASE集成</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#sql-on-hbase">10.13.1. SQL  on HBASE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id24">10.13.2. Hive与hbase集成</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">9.14. HBASE热点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rowkey">9.15. 预分区与Rowkey设计</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id26">9.15.1. 预分区</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">9.15.2. RowKey设计</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">9.15.3. 二级索引</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id29">9.15.4. 列族与列的设计</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id25">10.14. HBASE热点</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rowkey">10.15. 预分区与Rowkey设计</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id26">10.15.1. 预分区</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id27">10.15.2. RowKey设计</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id28">10.15.3. 二级索引</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id29">10.15.4. 列族与列的设计</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lsm">9.16. LSM模型与列族属性</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lsm-log-structured-merge-tree">9.16.1. LSM(Log-Structured Merge-tree)设计</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flush">9.16.2. Flush</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compact">9.16.3. Compact</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#split">9.16.4. Split</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#lsm">10.16. LSM模型与列族属性</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#lsm-log-structured-merge-tree">10.16.1. LSM(Log-Structured Merge-tree)设计</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#flush">10.16.2. Flush</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compact">10.16.3. Compact</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#split">10.16.4. Split</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">9.17. 常用列族属性</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id30">10.17. 常用列族属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">10. Hive SQL50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IO%E6%B5%81.html">11. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%20Cookbook.html">12. JAVA Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_Maven.html">13. Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_OOP.html">14. Java_OOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">15. 使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">16. Kafka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">17. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimpleDataStruct.html">18. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Socket.html">19. Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">20. 可能有用的学习链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">21. Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">22. 多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">23. 大数据平台环境与数仓</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">24. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">25. SCD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">26. 拉链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">27. 数据仓库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">28. Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">29. 数据倾斜</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">30. 生产者消费者模型问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">31. JavaSE_Day08</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">32. 面向对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">33. 常用API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">34. Java OOP防脱发指南</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">11. Hive SQL50题记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="IO%E6%B5%81.html">12. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="JDBC.html">13. JDBC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java%20Cookbook.html">14. JAVA Cookbook</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java_Maven.html">15. Maven</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html">16. Java_OOP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">17. 使用Java在服务端和客户端之间传送文件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Kafka.html">18. Kafka</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">19. MySQL 50题记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">20. MySQL语句执行顺序</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Redis.html">21. Redis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">22. SQL JOINS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SimpleDataStruct.html">23. 简单(常用)数据结构</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Socket.html">24. Socket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">25. Sqoop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">26. 可能有用的学习链接</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">27. Hive - ORC 文件存储格式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">28. 多线程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">29. 大数据平台环境与数仓</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">30. 常用软件梳理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">31. SCD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">32. 拉链表</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">33. 数据仓库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">34. Hive</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">35. 数据倾斜</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">36. 生产者消费者模型问题</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">37. JavaSE_Day08</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">38. 面向对象</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">39. 常用API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">40. Java OOP防脱发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
             
@@ -240,7 +235,9 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">10. </span>Hbase</li>
+          <li><a href="index.html">Blogs</a> &raquo;</li>
+        
+      <li><span class="section-number">9. </span>Hbase</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -260,9 +257,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="hbase">
-<h1><span class="section-number">10. </span>Hbase<a class="headerlink" href="#hbase" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">9. </span>Hbase<a class="headerlink" href="#hbase" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
-<h2><span class="section-number">10.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>起源</p>
 <ul>
@@ -354,7 +351,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="id2">
-<h2><span class="section-number">10.2. </span>功能<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.2. </span>功能<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>是一个基于分布式内存和HDFS实现存储的随机、实时读写的NoSQL数据库</p>
 <ul>
@@ -365,7 +362,7 @@
 </ul>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">10.3. </span>应用场景<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.3. </span>应用场景<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>电商：订单存储（超过半年的历史订单需要另外勾选查询）</p>
 <ul>
@@ -387,9 +384,9 @@
 </ul>
 </div>
 <div class="section" id="id4">
-<h2><span class="section-number">10.4. </span>特点及概念<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.4. </span>特点及概念<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id5">
-<h3><span class="section-number">10.4.1. </span>特点<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.4.1. </span>特点<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>分布式：多台机器来搭建集群实现分布式存储</p></li>
 <li><p>内存：基于分布式内存，数据优先写入了机器的内存</p>
@@ -402,53 +399,17 @@
 </ul>
 </div>
 <div class="section" id="id6">
-<h3><span class="section-number">10.4.2. </span>概念<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>概念</th>
-<th>MySQL</th>
-<th>HBase</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据库</td>
-<td>database</td>
-<td>namespace</td>
-</tr>
-<tr>
-<td>表</td>
-<td>table</td>
-<td>namespace:table</td>
-</tr>
-<tr>
-<td>行</td>
-<td>主键：primary key</td>
-<td>行键：rowkey</td>
-</tr>
-<tr>
-<td>列族</td>
-<td>无</td>
-<td>column family：对列的分组</td>
-</tr>
-<tr>
-<td>列</td>
-<td>column：每一行有多列，每一行列是一致的</td>
-<td>column：每一行可以有多列，每一行的列可以不一样，任何一列必须属于某一个列簇，cf:colName</td>
-</tr>
-<tr>
-<td>多版本</td>
-<td>无</td>
-<td>VERSIONS，一列的值可以存储多个版本</td>
-</tr>
-<tr>
-<td>时间戳</td>
-<td>默认无，可以有</td>
-<td>默认有</td>
-</tr>
-</tbody>
-</table><ul class="simple">
+<h3><span class="section-number">9.4.2. </span>概念<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>| 概念   | MySQL                                  | HBase                                                        |
+| —— | ————————————– | ———————————————————— |
+| 数据库 | database                               | namespace                                                    |
+| 表     | table                                  | namespace:table                                              |
+| 行     | 主键：primary key                      | 行键：rowkey                                                 |
+| 列族   | 无                                     | column family：对列的分组                                    |
+| 列     | column：每一行有多列，每一行列是一致的 | column：每一行可以有多列，每一行的列可以不一样，任何一列必须属于某一个列簇，cf:colName |
+| 多版本 | 无                                     | VERSIONS，一列的值可以存储多个版本                           |
+| 时间戳 | 默认无，可以有                         | 默认有                                                       |</p>
+<ul class="simple">
 <li><p>Namespace：命名空间，就是MySQL中数据库的概念，用于区分数据存储</p>
 <ul>
 <li><p>Hbase默认会自带两个namespace：default，Hbase</p></li>
@@ -558,7 +519,7 @@
 </ul>
 </div>
 <div class="section" id="id7">
-<h3><span class="section-number">10.4.3. </span>列存储<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.4.3. </span>列存储<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>与其他数据库进行对比</p>
 <ul>
@@ -601,7 +562,7 @@
 </div>
 </div>
 <div class="section" id="id8">
-<h2><span class="section-number">10.5. </span>HBASE架构<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.5. </span>HBASE架构<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>分布式主从架构</p>
 <ul>
@@ -637,7 +598,7 @@
 </ul>
 </div>
 <div class="section" id="id9">
-<h2><span class="section-number">10.6. </span>配置<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.6. </span>配置<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>配置zookeeper时为什么要写三个机器的地址及端口</p>
 <ul class="simple">
@@ -718,7 +679,7 @@ host3
 </ul>
 </div>
 <div class="section" id="id10">
-<h2><span class="section-number">10.7. </span>客户端操作<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.7. </span>客户端操作<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>HBASE Shell</p>
 <ul>
@@ -731,7 +692,7 @@ host3
 </li>
 </ul>
 <div class="section" id="ddl">
-<h3><span class="section-number">10.7.1. </span>DDL操作<a class="headerlink" href="#ddl" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.7.1. </span>DDL操作<a class="headerlink" href="#ddl" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>查看命令方法：<code class="docutils literal notranslate"><span class="pre">Help</span> <span class="pre">'command'</span></code></p></li>
 <li><p>namespace</p>
@@ -786,7 +747,7 @@ create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCA
 </ul>
 </div>
 <div class="section" id="dml">
-<h3><span class="section-number">10.7.2. </span>DML操作<a class="headerlink" href="#dml" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.7.2. </span>DML操作<a class="headerlink" href="#dml" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>put：用于<strong>插入/更新</strong>数据</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>put <span class="s1">&#39;ns1:t1&#39;</span>,<span class="s1">&#39;r1&#39;</span>,<span class="s1">&#39;f1:c1&#39;</span>,<span class="s1">&#39;value&#39;</span>,<span class="o">[</span>ts1<span class="o">]</span>
@@ -845,18 +806,18 @@ create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCA
 </div>
 </div>
 <div class="section" id="id11">
-<h2><span class="section-number">10.8. </span>存储设计<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.8. </span>存储设计<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id12">
-<h3><span class="section-number">10.8.1. </span>存储概念<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
-<ul class="simple">
-<li><p>分布式存储</p>
+<h3><span class="section-number">9.8.1. </span>存储概念<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
 <ul>
+<li><p>分布式存储</p>
+<ul class="simple">
 <li><p>分布式内存：RegionServer</p></li>
 <li><p>分布式磁盘：HDFS</p></li>
 </ul>
 </li>
 <li><p>如何实现的：将HBASE中的表构建成分布式的表</p>
-<ul>
+<ul class="simple">
 <li><p>HBASE中的每张表可以对应多个分区[Region]</p>
 <ul>
 <li><p>默认创建只有一个分区（Region）</p></li>
@@ -864,46 +825,17 @@ create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCA
 </li>
 </ul>
 </li>
-<li><p>与HDFS的区别</p></li>
-</ul>
-<table border="1" class="docutils">
-<thead>
-<tr>
-<th>概念</th>
-<th>HDFS</th>
-<th>HBase</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>分类</td>
-<td>目录</td>
-<td>NameSpace</td>
-</tr>
-<tr>
-<td>存储类型</td>
-<td>文件</td>
-<td>表</td>
-</tr>
-<tr>
-<td>分的机制</td>
-<td>分块：Block</td>
-<td>分区：Region</td>
-</tr>
-<tr>
-<td>存储节点</td>
-<td>DataNode</td>
-<td>RegionServer</td>
-</tr>
-<tr>
-<td>规则</td>
-<td>大表：128M一个块</td>
-<td>RowKey范围</td>
-</tr>
-</tbody>
-</table><ul class="simple">
+<li><p>与HDFS的区别</p>
+<p>| 概念     | HDFS             | HBase        |
+| ——– | —————- | ———— |
+| 分类     | 目录             | NameSpace    |
+| 存储类型 | 文件             | 表           |
+| 分的机制 | 分块：Block      | 分区：Region |
+| 存储节点 | DataNode         | RegionServer |
+| 规则     | 大表：128M一个块 | RowKey范围   |</p>
+</li>
 <li><p>Region：HBASE中表的分区，一张HBASE表可以有多个region，每个region存储在不同的RegionServer中</p>
-<ul>
+<ul class="simple">
 <li><p><strong>是HBASE做负载均衡的最小单元</strong></p></li>
 <li><p>类似于HDFS中的文件的块</p></li>
 <li><p>一个Region只会归某一个RegionServer所管理</p></li>
@@ -960,7 +892,7 @@ create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCA
 </ul>
 </div>
 <div class="section" id="id13">
-<h3><span class="section-number">10.8.2. </span>存储模型<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.8.2. </span>存储模型<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>假设执行<code class="docutils literal notranslate"><span class="pre">put</span> <span class="pre">'ns1:t1','r1','f1:c1','value',[ts1]</span></code></p>
 <ul>
@@ -977,9 +909,9 @@ create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCA
 </ul>
 </div>
 <div class="section" id="id14">
-<h3><span class="section-number">10.8.3. </span>存储流程<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.8.3. </span>存储流程<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
 <div class="section" id="id15">
-<h4><span class="section-number">10.8.3.1. </span>写入<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">9.8.3.1. </span>写入<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
 <p><img alt="WriteHbase" src="../_images/WriteHbase.png" /></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>默认情况下，执行写入时会写到两个地方：预写式日志（write-ahead log,也称HLog）和MemStore。Hbase默认方式是把写入动作记录在这两个地方，以保证数据持久化。只有当这两个地方的变化信息都写入并确认后，才认为写动作完成。
 MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之前在这里累积。当Memstore填满后，其中的数据会刷写到硬盘，生成一个HFile。HFile是HBase使用的底层存储格式。HFile对应于列族，一个列族可以有多个HFile，但一个HFile不能存储多个列族的数据。在集群的每个节点上，每个列族有一个Memstore。
@@ -1057,7 +989,7 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </ul>
 </div>
 <div class="section" id="id16">
-<h4><span class="section-number">10.8.3.2. </span>读取<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">9.8.3.2. </span>读取<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
 <p><img alt="ReadHbase" src="../_images/ReadHbase.png" /></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>如果想快速访问数据，通用的原则是数据保持有序且尽可能保存在内存里。HBase实现了这两个目标。HBase读动作必须重新衔接持久化到硬盘上的HFile和内存中MemStore里的数据。HBase在读操作上使用了LRU（最近最少使用算法）缓存技术。这种缓存也叫作BlockCache，和MemStore在一个JVM堆里。BlockCache设计用来保存从HFile里读入内存的频繁访问的数据，避免硬盘读。每个列族都有自己的BlockCache。
 掌握BlockCache是优化HBase性能的一个重要部分。BlockCache中的Block是HBase从硬盘完成一次读取的数据单位。HFile物理存放形式是一个Block的序列外加这些Block的索引。这意味着，从HBase中读取一个Block需要先查找一次该Block然后从硬盘读取。Block是建立索引的最小数据单位，也是从硬盘读取的最小数据单位。Block大小默认为64KB，如果主要用于随机查询，细粒度的Block更好。Block变小会导致索引变大，消耗更多内存。如果主要用于顺序扫描，一次读取多个Block，那个大一点的Block较好。
@@ -1091,9 +1023,9 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </div>
 </div>
 <div class="section" id="id17">
-<h2><span class="section-number">10.9. </span>角色功能<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.9. </span>角色功能<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h2>
 <div class="section" id="hmaster">
-<h3><span class="section-number">10.9.1. </span>HMaster<a class="headerlink" href="#hmaster" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.9.1. </span>HMaster<a class="headerlink" href="#hmaster" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>主要负责集群管理</p>
 <ul>
@@ -1119,7 +1051,7 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </ul>
 </div>
 <div class="section" id="hregionserver">
-<h3><span class="section-number">10.9.2. </span>HRegionServer<a class="headerlink" href="#hregionserver" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.9.2. </span>HRegionServer<a class="headerlink" href="#hregionserver" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>接收客户端所有region的读写请求</p></li>
 <li><p>管理region存储数据：分割</p></li>
@@ -1134,21 +1066,21 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </ul>
 </div>
 <div class="section" id="zookeeper">
-<h3><span class="section-number">10.9.3. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.9.3. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>构建HA：辅助选举</p></li>
 <li><p>存储关键性的管理类元数据</p></li>
 </ul>
 </div>
 <div class="section" id="hdfs">
-<h3><span class="section-number">10.9.4. </span>HDFS<a class="headerlink" href="#hdfs" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.9.4. </span>HDFS<a class="headerlink" href="#hdfs" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>持久化的实现</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="hbase-java-api">
-<h2><span class="section-number">10.10. </span>HBASE Java API<a class="headerlink" href="#hbase-java-api" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.10. </span>HBASE Java API<a class="headerlink" href="#hbase-java-api" title="永久链接至标题">¶</a></h2>
 <blockquote>
 <div><p>注意：<strong>所有的HBASE客户端所连接的服务端都是Zookeeper</strong></p>
 <p><code class="docutils literal notranslate"><span class="pre">Conf.set(&quot;hbase.zookeeper.quorum&quot;)</span></code>，<code class="docutils literal notranslate"><span class="pre">&quot;node1:2181,node2:2181,node3:2181&quot;</span></code></p>
@@ -1156,9 +1088,9 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </div></blockquote>
 </div>
 <div class="section" id="hbasemapreduce">
-<h2><span class="section-number">10.11. </span>Hbase与MapReduce的集成<a class="headerlink" href="#hbasemapreduce" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.11. </span>Hbase与MapReduce的集成<a class="headerlink" href="#hbasemapreduce" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id18">
-<h3><span class="section-number">10.11.1. </span>应用场景<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.11.1. </span>应用场景<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>HBASE：分布式存储</p></li>
 <li><p>MapReduce、Spark：分布式计算</p></li>
@@ -1171,7 +1103,7 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </ul>
 </div>
 <div class="section" id="id19">
-<h3><span class="section-number">10.11.2. </span>集成原理<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.11.2. </span>集成原理<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>MapReduce五大阶段</p>
 <ul>
@@ -1193,11 +1125,11 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </ul>
 </div>
 <div class="section" id="id20">
-<h3><span class="section-number">10.11.3. </span>读HBASE数据<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.11.3. </span>读HBASE数据<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h3>
 <p><a class="reference external" href="https://github.com/roohom/Bigdata/blob/master/Hbase/src/main/java/HbaseMapReduce/ReadHbaseTable.java">代码示例传送门</a></p>
 </div>
 <div class="section" id="id21">
-<h3><span class="section-number">10.11.4. </span>写HBASE数据<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.11.4. </span>写HBASE数据<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
 <p><a class="reference external" href="https://github.com/roohom/Bigdata/blob/master/Hbase/src/main/java/HbaseMapReduce/WriteHbaseTable.java">代码示例传送门</a></p>
 <ul>
 <li><p><strong>问题</strong>：如果将代码打包成jar上传至Linux运行会报错<code class="docutils literal notranslate"><span class="pre">ClassNotFoundError:org/apache/hadoop/hbase/HBaseConfiguration</span></code></p>
@@ -1227,9 +1159,9 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </div>
 <hr class="docutils" />
 <div class="section" id="bulkload">
-<h2><span class="section-number">10.12. </span>BulkLoad<a class="headerlink" href="#bulkload" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.12. </span>BulkLoad<a class="headerlink" href="#bulkload" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id22">
-<h3><span class="section-number">10.12.1. </span>HBASE导入数据的两种方式<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.12.1. </span>HBASE导入数据的两种方式<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>第一种方式：<strong>Put</strong></p>
 <ul>
@@ -1247,7 +1179,7 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </ul>
 </div>
 <div class="section" id="id23">
-<h3><span class="section-number">10.12.2. </span>BulkLoad实现<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.12.2. </span>BulkLoad实现<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>实现1：代码实现</p>
 <ul>
@@ -1325,12 +1257,12 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </div>
 </div>
 <div class="section" id="hivehbase">
-<h2><span class="section-number">10.13. </span>Hive与HBASE集成<a class="headerlink" href="#hivehbase" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.13. </span>Hive与HBASE集成<a class="headerlink" href="#hivehbase" title="永久链接至标题">¶</a></h2>
 <blockquote>
 <div><p>Hbase自带count命令用于统计一张表中一共有多少行</p>
 </div></blockquote>
 <div class="section" id="sql-on-hbase">
-<h3><span class="section-number">10.13.1. </span>SQL  on HBASE<a class="headerlink" href="#sql-on-hbase" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.13.1. </span>SQL  on HBASE<a class="headerlink" href="#sql-on-hbase" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>在Hive中数学SQL，数据存储在HBASE</p></li>
 <li><p>本质：底层是通过MapReduce来读写HBASE数据</p></li>
@@ -1343,7 +1275,7 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
 </ul>
 </div>
 <div class="section" id="id24">
-<h3><span class="section-number">10.13.2. </span>Hive与hbase集成<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.13.2. </span>Hive与hbase集成<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>应用场景：希望使用SQL语句操作HBASE</p></li>
 <li><p>使用前提：</p>
@@ -1471,7 +1403,7 @@ start-beeline.sh
 </div>
 </div>
 <div class="section" id="id25">
-<h2><span class="section-number">10.14. </span>HBASE热点<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.14. </span>HBASE热点<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>现象</p>
 <ul>
@@ -1502,9 +1434,9 @@ start-beeline.sh
 </ul>
 </div>
 <div class="section" id="rowkey">
-<h2><span class="section-number">10.15. </span>预分区与Rowkey设计<a class="headerlink" href="#rowkey" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.15. </span>预分区与Rowkey设计<a class="headerlink" href="#rowkey" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id26">
-<h3><span class="section-number">10.15.1. </span>预分区<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.15.1. </span>预分区<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>命令行实现：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="s1">&#39;bs1:t1&#39;</span><span class="p">,</span><span class="s1">&#39;f1&#39;</span><span class="p">,</span><span class="n">SPLITS</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;10&#39;</span><span class="p">,</span><span class="s1">&#39;20&#39;</span><span class="p">,</span><span class="s1">&#39;30&#39;</span><span class="p">,</span><span class="s1">&#39;40&#39;</span><span class="p">]</span>
@@ -1529,7 +1461,7 @@ start-beeline.sh
 </div></blockquote>
 </div>
 <div class="section" id="id27">
-<h3><span class="section-number">10.15.2. </span>RowKey设计<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.15.2. </span>RowKey设计<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>Rowkey设计的重要性</p>
 <ul>
@@ -1594,7 +1526,7 @@ start-beeline.sh
 </ul>
 </div>
 <div class="section" id="id28">
-<h3><span class="section-number">10.15.3. </span>二级索引<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.15.3. </span>二级索引<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>HBASE只有自带的一级索引：rowkey</p></li>
 <li><p>思想：通过走两次索引来实现数据查询，代替全表扫描</p></li>
@@ -1657,7 +1589,7 @@ start-beeline.sh
 </ul>
 </div>
 <div class="section" id="id29">
-<h3><span class="section-number">10.15.4. </span>列族与列的设计<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.15.4. </span>列族与列的设计<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>列族</p>
 <ul>
@@ -1675,9 +1607,9 @@ start-beeline.sh
 </div>
 </div>
 <div class="section" id="lsm">
-<h2><span class="section-number">10.16. </span>LSM模型与列族属性<a class="headerlink" href="#lsm" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.16. </span>LSM模型与列族属性<a class="headerlink" href="#lsm" title="永久链接至标题">¶</a></h2>
 <div class="section" id="lsm-log-structured-merge-tree">
-<h3><span class="section-number">10.16.1. </span>LSM(Log-Structured Merge-tree)设计<a class="headerlink" href="#lsm-log-structured-merge-tree" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.16.1. </span>LSM(Log-Structured Merge-tree)设计<a class="headerlink" href="#lsm-log-structured-merge-tree" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>让数据写入先进入内存，后台将数据不断地写入磁盘，提供高性能的读写的特性</p></li>
 <li><p>LOG：WAL</p></li>
@@ -1685,7 +1617,7 @@ start-beeline.sh
 </ul>
 </div>
 <div class="section" id="flush">
-<h3><span class="section-number">10.16.2. </span>Flush<a class="headerlink" href="#flush" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.16.2. </span>Flush<a class="headerlink" href="#flush" title="永久链接至标题">¶</a></h3>
 <blockquote>
 <div><p>在2.x版本之前：Flush是Region级别的，只要有一个MemStore达到阈值触发flush，该region中所有的Memstore都会Flush</p>
 </div></blockquote>
@@ -1731,7 +1663,7 @@ start-beeline.sh
 </ul>
 </div>
 <div class="section" id="compact">
-<h3><span class="section-number">10.16.3. </span>Compact<a class="headerlink" href="#compact" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.16.3. </span>Compact<a class="headerlink" href="#compact" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>功能：将StoreFile文件进行合并，变成大文件</p></li>
 <li><p>minor Compaction：轻量级的合并，每次将最老的几个storefile文件合并成一个文件</p></li>
@@ -1765,7 +1697,7 @@ start-beeline.sh
 </ul>
 </div>
 <div class="section" id="split">
-<h3><span class="section-number">10.16.4. </span>Split<a class="headerlink" href="#split" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.16.4. </span>Split<a class="headerlink" href="#split" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>功能：当一个region的数据量过大，导致负载比较大，将一个region分裂为两个region</p></li>
 <li><p>参数配置</p>
@@ -1805,7 +1737,7 @@ start-beeline.sh
 </div>
 </div>
 <div class="section" id="id30">
-<h2><span class="section-number">10.17. </span>常用列族属性<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.17. </span>常用列族属性<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>NAME：标记列族的名称</p></li>
 <li><p>TTL：版本存活时间，类似于redis中的expire，设置数据的存活时间</p></li>
@@ -1887,10 +1819,10 @@ start-beeline.sh
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-right" title="11. Hive SQL50题记录" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-right" title="10. Hive SQL50题记录" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" class="btn btn-neutral float-left" title="9. Flink基础配置与基础原理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" class="btn btn-neutral float-left" title="8. Flink基础配置与基础原理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Roohom's Code-Cookbook
+SQL
 =========================================
 
 .. toctree::
@@ -12,15 +12,4 @@ Roohom's Code-Cookbook
    :glob:
    :numbered:
    
-   
-   blogs/index
-   Auxiliary tools/index
-   SQL/index
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   *

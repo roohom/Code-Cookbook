@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6. Bigdata Summary &mdash; Code-Cookbook 0.1 文档</title>
+  <title>5. Bigdata Summary &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="7. 集合" href="Collection.html" />
-    <link rel="prev" title="5. Apache Avro" href="Apache%20Avro.html" /> 
+    <link rel="next" title="6. 集合" href="Collection.html" />
+    <link rel="prev" title="3. 元注解" href="Annotation.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,92 +85,64 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Apache%20Avro.html">5. Apache Avro</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Bigdata Summary</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#zookeeper">6.1. Zookeeper</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">6.1.1. 功能及应用场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">6.1.2. 概念</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">6.1.3. 架构</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">6.1.4. 设计思想</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">6.1.5. 选举机制</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id6">6.1.5.1. 辅助选举</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#zk">6.1.5.2. ZK选举</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 模拟面试题整理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL模拟面试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Bigdata Summary</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#zookeeper">5.1. Zookeeper</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">5.1.1. 功能及应用场景</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">5.1.2. 概念</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">5.1.3. 架构</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">5.1.4. 设计思想</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">5.1.5. 选举机制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">5.1.6. Zookeeper基本使用</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">6.1.6. Zookeeper基本使用</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#hadoop">6.2. Hadoop</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id8">6.2.1. 功能及应用场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hdfs">6.2.2. <strong>HDFS</strong></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id9">6.2.2.1. 介绍（功能）</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">6.2.2.2. 本质</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id11">6.2.2.3. 架构</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id13">6.2.2.4. 读写流程</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id16">6.2.2.5. 应用场景</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id17">6.2.2.6. 实现逻辑</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id19">6.2.2.7. <strong>数据安全</strong></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id20">6.2.2.8. <strong>元数据安全</strong></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#i-o">6.2.2.9. I/O操作</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#ha">6.2.3. HA</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id22">6.2.3.1. 基本使用</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#mapreduce">6.2.4. MapReduce</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id23">6.2.4.1. 功能</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#yarn">6.2.5. YARN</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id24">6.2.5.1. 介绍</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id25">6.2.5.2. 架构</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id26">6.2.5.3. 组件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id27">6.2.5.4. 运行流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hadoop">5.2. Hadoop</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">5.2.1. 功能及应用场景</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hdfs">5.2.2. <strong>HDFS</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ha">5.2.3. HA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mapreduce">5.2.4. MapReduce</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#yarn">5.2.5. YARN</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html">6. 集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html#id9">7. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">8. Flink基础配置与基础原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">9. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">10. Hive SQL50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IO%E6%B5%81.html">11. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%20Cookbook.html">12. JAVA Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_Maven.html">13. Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_OOP.html">14. Java_OOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">15. 使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">16. Kafka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">17. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimpleDataStruct.html">18. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Socket.html">19. Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">20. 可能有用的学习链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">21. Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">22. 多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">23. 大数据平台环境与数仓</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">24. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">25. SCD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">26. 拉链表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">27. 数据仓库</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">28. Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">29. 数据倾斜</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">30. 生产者消费者模型问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">31. JavaSE_Day08</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">32. 面向对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">33. 常用API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">34. Java OOP防脱发指南</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Collection.html">7. 集合</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Collection.html#id9">8. 简单(常用)数据结构</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">9. Flink基础配置与基础原理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Hbase.html">10. Hbase</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">11. Hive SQL50题记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="IO%E6%B5%81.html">12. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="JDBC.html">13. JDBC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java%20Cookbook.html">14. JAVA Cookbook</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java_Maven.html">15. Maven</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java_OOP.html">16. Java_OOP</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">17. 使用Java在服务端和客户端之间传送文件</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Kafka.html">18. Kafka</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">19. MySQL 50题记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">20. MySQL语句执行顺序</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Redis.html">21. Redis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">22. SQL JOINS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SimpleDataStruct.html">23. 简单(常用)数据结构</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Socket.html">24. Socket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">25. Sqoop</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">26. 可能有用的学习链接</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">27. Hive - ORC 文件存储格式</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">28. 多线程</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">29. 大数据平台环境与数仓</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%A2%B3%E7%90%86.html">30. 常用软件梳理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">31. SCD</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">32. 拉链表</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">33. 数据仓库</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">34. Hive</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">35. 数据倾斜</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">36. 生产者消费者模型问题</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">37. JavaSE_Day08</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#id9">38. 面向对象</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html#api">39. 常用API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">40. Java OOP防脱发指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
             
@@ -217,7 +189,9 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">6. </span>Bigdata Summary</li>
+          <li><a href="index.html">Blogs</a> &raquo;</li>
+        
+      <li><span class="section-number">5. </span>Bigdata Summary</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -237,12 +211,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="bigdata-summary">
-<h1><span class="section-number">6. </span>Bigdata Summary<a class="headerlink" href="#bigdata-summary" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">5. </span>Bigdata Summary<a class="headerlink" href="#bigdata-summary" title="永久链接至标题">¶</a></h1>
 <p>[TOC]</p>
 <div class="section" id="zookeeper">
-<h2><span class="section-number">6.1. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id1">
-<h3><span class="section-number">6.1.1. </span>功能及应用场景<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.1.1. </span>功能及应用场景<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>应用场景</p>
 <ul>
@@ -300,7 +274,7 @@
 </ul>
 </div>
 <div class="section" id="id2">
-<h3><span class="section-number">6.1.2. </span>概念<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.1.2. </span>概念<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>节点</p>
 <ul>
@@ -332,7 +306,7 @@
 </ul>
 </div>
 <div class="section" id="id3">
-<h3><span class="section-number">6.1.3. </span>架构<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.1.3. </span>架构<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>分布式主从架构：<strong>公平节点</strong></p>
 <ul>
@@ -379,7 +353,7 @@
 </ul>
 </div>
 <div class="section" id="id4">
-<h3><span class="section-number">6.1.4. </span>设计思想<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.1.4. </span>设计思想<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
 <blockquote>
 <div><p>通过一个分布式的共享存储来解决分布式所存在的问题</p>
 </div></blockquote>
@@ -435,9 +409,9 @@
 </ul>
 </div>
 <div class="section" id="id5">
-<h3><span class="section-number">6.1.5. </span>选举机制<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.1.5. </span>选举机制<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <div class="section" id="id6">
-<h4><span class="section-number">6.1.5.1. </span>辅助选举<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.1.5.1. </span>辅助选举<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>zookeeper帮别的分布式框架在两个主节点之间选择一个工作的一个备份的</p></li>
 <li><p><strong>方式一</strong>：两个主节点A、B同时向zookeeper创建同一个临时节点(只有一个能创建成功)</p>
@@ -461,7 +435,7 @@
 </ul>
 </div>
 <div class="section" id="zk">
-<h4><span class="section-number">6.1.5.2. </span>ZK选举<a class="headerlink" href="#zk" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.1.5.2. </span>ZK选举<a class="headerlink" href="#zk" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>zookeeper自己内部选择leader</p></li>
 <li><p>三台zookeeper</p>
@@ -543,7 +517,7 @@ server.3<span class="o">=</span>node3:2888:3888
 </div>
 </div>
 <div class="section" id="id7">
-<h3><span class="section-number">6.1.6. </span>Zookeeper基本使用<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.1.6. </span>Zookeeper基本使用<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>Zookeeper文件系统类似于Linux，树形结构，只能使用绝对路径访问，每个节点的存储内容大小不能超过1MB</p></li>
 <li><p>启动服务端</p>
@@ -612,12 +586,12 @@ rmr /itcast/heima
 </div>
 </div>
 <div class="section" id="hadoop">
-<h2><span class="section-number">6.2. </span>Hadoop<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">5.2. </span>Hadoop<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h2>
 <blockquote>
 <div><p>大数据生态系统</p>
 </div></blockquote>
 <div class="section" id="id8">
-<h3><span class="section-number">6.2.1. </span>功能及应用场景<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.2.1. </span>功能及应用场景<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>功能：</p>
 <ul>
@@ -669,12 +643,12 @@ rmr /itcast/heima
 </ul>
 </div>
 <div class="section" id="hdfs">
-<h3><span class="section-number">6.2.2. </span><strong>HDFS</strong><a class="headerlink" href="#hdfs" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.2.2. </span><strong>HDFS</strong><a class="headerlink" href="#hdfs" title="永久链接至标题">¶</a></h3>
 <blockquote>
 <div><p>定义：分布式文件系统</p>
 </div></blockquote>
 <div class="section" id="id9">
-<h4><span class="section-number">6.2.2.1. </span>介绍（功能）<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.1. </span>介绍（功能）<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>HDFS定义：分布式文件系统</p>
 <ul>
@@ -697,13 +671,13 @@ rmr /itcast/heima
 </ul>
 </div>
 <div class="section" id="id10">
-<h4><span class="section-number">6.2.2.2. </span>本质<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.2. </span>本质<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
 <p>将多台机器的文件系统在逻辑上合并成一个整体，对外则是提供统一的文件存储服务</p>
 </div>
 <div class="section" id="id11">
-<h4><span class="section-number">6.2.2.3. </span>架构<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.3. </span>架构<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
 <div class="section" id="id12">
-<h5><span class="section-number">6.2.2.3.1. </span>主从架构<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">5.2.2.3.1. </span>主从架构<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h5>
 <ul class="simple">
 <li><p>主：NameNode</p>
 <ul>
@@ -741,9 +715,9 @@ rmr /itcast/heima
 </div>
 </div>
 <div class="section" id="id13">
-<h4><span class="section-number">6.2.2.4. </span>读写流程<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.4. </span>读写流程<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
 <div class="section" id="id14">
-<h5><span class="section-number">6.2.2.4.1. </span>写：<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">5.2.2.4.1. </span>写：<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h5>
 <ul>
 <li><p>1-客户端会请求NameNode写入HDFS，NameNode会验证请求是否合法，返回结果</p>
 <ul class="simple">
@@ -803,7 +777,7 @@ rmr /itcast/heima
 </ul>
 </div>
 <div class="section" id="id15">
-<h5><span class="section-number">6.2.2.4.2. </span>读：<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">5.2.2.4.2. </span>读：<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h5>
 <ul class="simple">
 <li><p>客户端提交读取请求给NameNode</p></li>
 <li><p>NameNode会验证这个请求是否合法，如果合法，会查询元数据</p>
@@ -826,7 +800,7 @@ rmr /itcast/heima
 </div>
 </div>
 <div class="section" id="id16">
-<h4><span class="section-number">6.2.2.5. </span>应用场景<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.5. </span>应用场景<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
 <blockquote>
 <div><p>离线的大数据量文件存储</p>
 </div></blockquote>
@@ -842,9 +816,9 @@ rmr /itcast/heima
 </ul>
 </div>
 <div class="section" id="id17">
-<h4><span class="section-number">6.2.2.6. </span>实现逻辑<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.6. </span>实现逻辑<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h4>
 <div class="section" id="id18">
-<h5><span class="section-number">6.2.2.6.1. </span>分块机制<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">5.2.2.6.1. </span>分块机制<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h5>
 <p>决定了写入HDFS的文件如何被拆分</p>
 <ul>
 <li><p>解决了HDFS如何实现分布式存储的问题</p></li>
@@ -876,7 +850,7 @@ rmr /itcast/heima
 </div>
 </div>
 <div class="section" id="id19">
-<h4><span class="section-number">6.2.2.7. </span><strong>数据安全</strong><a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.7. </span><strong>数据安全</strong><a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>问题：如果某台机器故障，数据怎么保证不丢失？</p>
 <ul class="simple">
@@ -912,7 +886,7 @@ rmr /itcast/heima
 </ul>
 </div>
 <div class="section" id="id20">
-<h4><span class="section-number">6.2.2.8. </span><strong>元数据安全</strong><a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.8. </span><strong>元数据安全</strong><a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h4>
 <blockquote>
 <div><p>NameNode启动会将元数据读入内存，在运行的过程中元数据的变化都会在内存中更改，由于内存中的元数据变化都没有被写入到本地元数据文件fsimage(FileSystemImage)文件中，所以NameNode会将内存中的元数据变化写入到本地的edits文件中，预防元数据变化的丢失，在NameNode下一次启动时将edits文件中的数据写入fsimage文件中，但是又由于时间长了元数据变化量会非常大，edits文件的大小也会非常大，所以就需要定时将edits文件中的内容写入fsimage实现元数据的同步(合并)，这个定时同步的工作就是由SecondaryNameNode来做的。</p>
 </div></blockquote>
@@ -981,9 +955,9 @@ rmr /itcast/heima
 </ul>
 </div>
 <div class="section" id="i-o">
-<h4><span class="section-number">6.2.2.9. </span>I/O操作<a class="headerlink" href="#i-o" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.2.9. </span>I/O操作<a class="headerlink" href="#i-o" title="永久链接至标题">¶</a></h4>
 <div class="section" id="id21">
-<h5><span class="section-number">6.2.2.9.1. </span>序列化<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">5.2.2.9.1. </span>序列化<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h5>
 <ul>
 <li><ul class="simple">
 <li></li>
@@ -1019,7 +993,7 @@ rmr /itcast/heima
 </div>
 </div>
 <div class="section" id="ha">
-<h3><span class="section-number">6.2.3. </span>HA<a class="headerlink" href="#ha" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.2.3. </span>HA<a class="headerlink" href="#ha" title="永久链接至标题">¶</a></h3>
 <blockquote>
 <div><p>High Availablility</p>
 </div></blockquote>
@@ -1041,7 +1015,7 @@ rmr /itcast/heima
 </ul>
 <p><img alt="HA原理" src="../_images/HA.png" /></p>
 <div class="section" id="id22">
-<h4><span class="section-number">6.2.3.1. </span>基本使用<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.3.1. </span>基本使用<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>第一种：单个进程启动：有些特殊场景下会用，一般用的比较少</p>
 <ul>
@@ -1083,12 +1057,12 @@ stop-all.sh
 </div>
 </div>
 <div class="section" id="mapreduce">
-<h3><span class="section-number">6.2.4. </span>MapReduce<a class="headerlink" href="#mapreduce" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.2.4. </span>MapReduce<a class="headerlink" href="#mapreduce" title="永久链接至标题">¶</a></h3>
 <blockquote>
 <div><p>主要用MapReduce2.x版本</p>
 </div></blockquote>
 <div class="section" id="id23">
-<h4><span class="section-number">6.2.4.1. </span>功能<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.4.1. </span>功能<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>提供分布式计算服务：</p>
 <ul>
@@ -1109,13 +1083,13 @@ stop-all.sh
 </div>
 </div>
 <div class="section" id="yarn">
-<h3><span class="section-number">6.2.5. </span>YARN<a class="headerlink" href="#yarn" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">5.2.5. </span>YARN<a class="headerlink" href="#yarn" title="永久链接至标题">¶</a></h3>
 <blockquote>
 <div><p>Yet Another Resource Negotiator</p>
 <p>定义：分布式资源管理和任务调度框架</p>
 </div></blockquote>
 <div class="section" id="id24">
-<h4><span class="section-number">6.2.5.1. </span>介绍<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.5.1. </span>介绍<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>yarn其实是一个<strong>分布式的资源容器</strong>：将多台机器的硬件资源进行整合，构建一个整体，对外提供统一的资源服务</p></li>
 <li><p>本质：整合多台机器的CPU和内存，搭建一个资源容器，用来盛放（<strong>运行</strong>）分布式程序</p>
@@ -1127,7 +1101,7 @@ stop-all.sh
 </ul>
 </div>
 <div class="section" id="id25">
-<h4><span class="section-number">6.2.5.2. </span>架构<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.5.2. </span>架构<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>分布式主从架构</p>
 <ul class="simple">
@@ -1179,7 +1153,7 @@ stop-all.sh
 </ul>
 </div>
 <div class="section" id="id26">
-<h4><span class="section-number">6.2.5.3. </span>组件<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.5.3. </span>组件<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>ResourceManager</p>
 <ul>
@@ -1216,7 +1190,7 @@ stop-all.sh
 </ul>
 </div>
 <div class="section" id="id27">
-<h4><span class="section-number">6.2.5.4. </span>运行流程<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">5.2.5.4. </span>运行流程<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h4>
 <p>流程</p>
 <ul class="simple">
 <li><p>1-客户端请求提交运行一个分布式程序给ResourceManager(下称RM)</p></li>
@@ -1271,10 +1245,10 @@ stop-all.sh
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Collection.html" class="btn btn-neutral float-right" title="7. 集合" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Collection.html" class="btn btn-neutral float-right" title="6. 集合" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Apache%20Avro.html" class="btn btn-neutral float-left" title="5. Apache Avro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Annotation.html" class="btn btn-neutral float-left" title="3. 元注解" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
