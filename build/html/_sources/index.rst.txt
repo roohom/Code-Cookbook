@@ -6,8 +6,6 @@
 Roohom's Code-Cookbook
 =========================================
 
-大数据
-------
 
 .. toctree::
    :maxdepth: 2
@@ -18,8 +16,7 @@ Roohom's Code-Cookbook
    Bigdata/index
    Bigdata Tools/index
 
-博客
-----
+
 .. toctree::
    :maxdepth: 2
    :caption: 博客
@@ -29,8 +26,7 @@ Roohom's Code-Cookbook
    Blogs/index
    
    
-大数据辅助工具
---------------
+
 .. toctree::
    :maxdepth: 2
    :caption: 大数据辅助工具
@@ -40,8 +36,7 @@ Roohom's Code-Cookbook
    Auxiliary tools/index
    
 
-SQL相关
--------
+
 .. toctree::
    :maxdepth: 2
    :caption: SQL相关
