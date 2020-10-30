@@ -655,3 +655,76 @@ public class UserPartition implements Partitioner {
 
   - 只要follower副本与leader副本没有在规定这个时间内，同步一次，就认为你是一个OSR
 
+## Kafka常用操作指南
+
+### 如何启动
+
+- 第一步：启动集群依赖的Zookeeper
+
+  ~~~shell
+  cd /export/servers/zookeeper-3.4.6/bin/
+  使用start-zk-all.sh或者(CDH版本)zkServer.sh start
+  ~~~
+
+- 第二步：集群每台机器启动Kafka Server
+
+  ~~~shell
+  cd /export/servers/kafka_2.11-1.0.0/
+  bin/kafka-server-start.sh config/server.properties >>/dev/null 2>&1 &
+  ~~~
+
+### 集群管理：管理Topic
+
+> 先切换到Kafka的bin目录下
+
+- 创建Topic
+
+  ~~~shell
+  bin/kafka-topics.sh --create --topic topic_name --partitions 3 --replication-factor 2 --zookeeper node1:2181,node2:2181,node3:2181
+  ~~~
+
+  - 参数说明
+    - `--create`：创建
+    - `--topic`：指定topic的名称
+    - `--partitions`：指定分区个数
+    - `--replication-factor`：指定分区副本因子，也就是副本的个数，在这里分区副本因子是2，代表总共有三个副本，一共存储三份
+    - `--zookeeper`：指定zookeeper的地址
+
+- 列举Topic
+
+  ~~~shell
+  bin/kafka-topics.sh --list --zookeeper node1:2181,node2:2181,node3:2181
+  ~~~
+
+- 查看Topic信息
+
+  ~~~shell
+  bin/kafka-topics.sh --describe --topic topic_name --zookeeper node1:2181,node2:2181,node3:2181
+  ~~~
+
+  - AR：所有副本
+  - ISR：in-sync-replication，可用副本
+  - OSR：out-sync-replication，不可用副本
+
+- 删除Topic
+
+  ~~~shell
+  bin/kafka-topics.sh --delete --topic topic_name --zookeeper node1:2181,node2:2181,node3:2181
+  ~~~
+
+### 生产和消费
+
+- 生产者
+
+  ~~~shell
+  bin/kafka-console-producer.sh --topic topic_name --broker-list node1:9092,node2:9092,node3:9092
+  ~~~
+
+- 消费者
+
+  ~~~shell
+  bin/kafka-console-consumer.sh --topic bigdata2301 --bootstrap-server node1:9092,node2:9092,node3:9092 --from-beginning
+  ~~~
+
+  - 默认从Topic中最新的数据开始消费
+

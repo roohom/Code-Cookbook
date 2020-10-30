@@ -1016,7 +1016,6 @@ MemStore是内存里的写入缓冲区，HBase中数据在永久写入磁盘之�
     major_compact
     ~~~
 
-    
 
 ### Split
 
