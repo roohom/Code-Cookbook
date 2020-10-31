@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bigdata Tools &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="1. Apache Druid" href="Apache%20Druid.html" />
+    <link rel="prev" title="6. 数据倾斜" href="../Bigdata/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">大数据</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bigdata Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">2. Bigdata Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">3. Flink基础配置与基础原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">4. Hadoop搭建总体步骤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">5. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">6. Kafka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">7. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">8. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">9. 常用软件梳理</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">博客</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Bigdata Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Bigdata Tools/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bigdata-tools">
+<h1>Bigdata Tools<a class="headerlink" href="#bigdata-tools" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html#id1">1.1. 架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html#id2">1.2. 预聚合-位图索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html#id3">1.3. 基本使用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">2. Bigdata Summary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html#zookeeper">2.1. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html#hadoop">2.2. Hadoop</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">3. Flink基础配置与基础原理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html#id1">3.1. 环境搭建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html#id13">3.2. Flink运行时组件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html#executiongraph">3.3. ExecutionGraph</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">4. Hadoop搭建总体步骤</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html#linux">4.1. Linux集群环境</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html#id1">4.2. 节点规划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html#id2">4.3. Hadoop分布式上安装</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Hbase.html">5. Hbase</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id1">5.1. 介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id2">5.2. 功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id3">5.3. 应用场景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id4">5.4. 特点及概念</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id8">5.5. HBASE架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id9">5.6. 配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id10">5.7. 客户端操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id11">5.8. 存储设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id17">5.9. 角色功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#hbase-java-api">5.10. HBASE Java API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#hbasemapreduce">5.11. Hbase与MapReduce的集成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#bulkload">5.12. BulkLoad</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#hivehbase">5.13. Hive与HBASE集成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id25">5.14. HBASE热点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#rowkey">5.15. 预分区与Rowkey设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#lsm">5.16. LSM模型与列族属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id30">5.17. 常用列族属性</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Kafka.html">6. Kafka</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#id1">6.1. 消息队列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#id6">6.2. Kafka的介绍和以及应用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#id11">6.3. 自定义分区规则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#offset">6.4. 手动控制Offset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#id17">6.5. Kafka存储及检索</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#id20">6.6. Kafka安全性保证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#id25">6.7. Kafka常用配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html#id26">6.8. Kafka常用操作指南</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Redis.html">7. Redis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id1">7.1. 介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id2">7.2. 应用场景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id3">7.3. 特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#windowsredis">7.4. Windows上使用Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id4">7.5. 数据类型和语法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id6">7.6. 持久化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id7">7.7. 集群搭建</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Zookeeper.html">8. Zookeeper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id1">8.1. 辅助选举</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#zk">8.2. ZK选举</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id2">8.3. 节点类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id3">8.4. 监听机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id4">8.5. 基本使用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">9. 常用软件梳理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#id2">9.1. 软件及开放的端口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#zookeeper">9.2. Zookeeper基本使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hadoop">9.3. Hadoop基本使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hive">9.4. Hive的基本使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hbase">9.5. HBASE基本使用</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Apache%20Druid.html" class="btn btn-neutral float-right" title="1. Apache Druid" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../Bigdata/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html" class="btn btn-neutral float-left" title="6. 数据倾斜" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, roohom
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
