@@ -102,3 +102,11 @@ middleManager、historical	http://node01:8090/console.html
 ~~~
 
 
+
+
+
+## 清理Druid
+
+- 清理CDH版Druid的bin目录下的`/var/druid/segments`和`/var/druid/segement-cache`下的数据
+
+- 清理mysql中的数据
