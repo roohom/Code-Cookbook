@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>8. Zookeeper &mdash; Code-Cookbook 0.1 文档</title>
+  <title>10. Zookeeper &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="9. 常用软件梳理" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" />
-    <link rel="prev" title="7. Redis" href="Redis.html" /> 
+    <link rel="next" title="11. 常用软件梳理" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" />
+    <link rel="prev" title="9. Redis" href="Redis.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,21 +88,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">2. Bigdata Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">3. Flink基础配置与基础原理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">4. Hadoop搭建总体步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html">5. Hbase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kafka.html">6. Kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">7. Redis</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">8. Zookeeper</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">8.1. 辅助选举</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#zk">8.2. ZK选举</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">8.3. 节点类型</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">8.4. 监听机制</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">8.5. 基本使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">3. Bigdata Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">4. Flink基础配置与基础原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html#flink-cep">5. Flink CEP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">6. Hadoop搭建总体步骤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">7. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">8. Kafka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10. Zookeeper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.1. 辅助选举</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zk">10.2. ZK选举</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.3. 节点类型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.4. 监听机制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">10.5. 基本使用</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">9. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">11. 常用软件梳理</a></li>
 </ul>
 </li>
 </ul>
@@ -165,7 +167,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">8. </span>Zookeeper</li>
+      <li><span class="section-number">10. </span>Zookeeper</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -185,9 +187,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="zookeeper">
-<h1><span class="section-number">8. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">10. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
-<h2><span class="section-number">8.1. </span>辅助选举<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.1. </span>辅助选举<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>zookeeper帮别的分布式框架在两个主节点之间选择一个工作的一个备份的</p></li>
 <li><p><strong>方式一</strong>：两个主节点A、B同时向zookeeper创建同一个临时节点(只有一个能创建成功)</p>
@@ -211,7 +213,7 @@
 </ul>
 </div>
 <div class="section" id="zk">
-<h2><span class="section-number">8.2. </span>ZK选举<a class="headerlink" href="#zk" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.2. </span>ZK选举<a class="headerlink" href="#zk" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>zookeeper自己内部选择leader</p></li>
 <li><p>三台zookeeper</p>
@@ -292,7 +294,7 @@ server.3<span class="o">=</span>node3:2888:3888
 </ul>
 </div>
 <div class="section" id="id2">
-<h2><span class="section-number">8.3. </span>节点类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.3. </span>节点类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>类型</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create <span class="o">[</span>-s<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span> path data
@@ -338,7 +340,7 @@ server.3<span class="o">=</span>node3:2888:3888
 </ul>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">8.4. </span>监听机制<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.4. </span>监听机制<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>监听：监控某个节点所发生的变化：创建、删除，修改等</p>
 <ul>
@@ -354,7 +356,7 @@ server.3<span class="o">=</span>node3:2888:3888
 </ul>
 </div>
 <div class="section" id="id4">
-<h2><span class="section-number">8.5. </span>基本使用<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.5. </span>基本使用<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>启动服务端</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/servers/zookeeper-3.4.6/
@@ -430,10 +432,10 @@ rmr /itcast/heima
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-right" title="9. 常用软件梳理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-right" title="11. 常用软件梳理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Redis.html" class="btn btn-neutral float-left" title="7. Redis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Redis.html" class="btn btn-neutral float-left" title="9. Redis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

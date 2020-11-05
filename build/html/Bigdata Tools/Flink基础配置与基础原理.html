@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Flink基础配置与基础原理 &mdash; Code-Cookbook 0.1 文档</title>
+  <title>4. Flink基础配置与基础原理 &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="4. Hadoop搭建总体步骤" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html" />
-    <link rel="prev" title="2. Bigdata Summary" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html" /> 
+    <link rel="next" title="6. Hadoop搭建总体步骤" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html" />
+    <link rel="prev" title="3. Bigdata Summary" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,25 +88,30 @@
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">2. Bigdata Summary</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Flink基础配置与基础原理</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">3.1. 环境搭建</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#local">3.1.1. Local本地模式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#standalone">3.1.2. StandAlone独立集群模式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#standaloneha">3.1.3. StandAloneHA高可用模式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#flink-on-yarn">3.1.4. Flink On Yarn模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">3. Bigdata Summary</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Flink基础配置与基础原理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.1. 环境搭建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#local">4.1.1. Local本地模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standalone">4.1.2. StandAlone独立集群模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standaloneha">4.1.3. StandAloneHA高可用模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flink-on-yarn">4.1.4. Flink On Yarn模式</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">3.2. Flink运行时组件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#executiongraph">3.3. ExecutionGraph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.2. Flink运行时组件</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#executiongraph">4.3. ExecutionGraph</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">4. Hadoop搭建总体步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html">5. Hbase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kafka.html">6. Kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">7. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">8. Zookeeper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">9. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flink-cep">5. Flink CEP</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api">5.1. API</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">6. Hadoop搭建总体步骤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">7. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">8. Kafka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">10. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">11. 常用软件梳理</a></li>
 </ul>
 </li>
 </ul>
@@ -169,7 +174,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">3. </span>Flink基础配置与基础原理</li>
+      <li><span class="section-number">4. </span>Flink基础配置与基础原理</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -189,14 +194,14 @@
            <div itemprop="articleBody">
             
   <div class="section" id="flink">
-<h1><span class="section-number">3. </span>Flink基础配置与基础原理<a class="headerlink" href="#flink" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">4. </span>Flink基础配置与基础原理<a class="headerlink" href="#flink" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
-<h2><span class="section-number">3.1. </span>环境搭建<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.1. </span>环境搭建<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <div class="section" id="local">
-<h3><span class="section-number">3.1.1. </span>Local本地模式<a class="headerlink" href="#local" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">4.1.1. </span>Local本地模式<a class="headerlink" href="#local" title="永久链接至标题">¶</a></h3>
 <p><img alt="本地模式" src="../_images/LocalMode.png" /></p>
 <div class="section" id="id2">
-<h4><span class="section-number">3.1.1.1. </span>原理<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.1.1. </span>原理<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>1.Flink程序由JobClient进行提交</p></li>
 <li><p>2.JobClient将作业提交给JobManager</p></li>
@@ -206,7 +211,7 @@
 </ul>
 </div>
 <div class="section" id="id3">
-<h4><span class="section-number">3.1.1.2. </span>基本使用（本地集群）<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.1.2. </span>基本使用（本地集群）<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>启动命令</p>
 <ul>
@@ -235,10 +240,10 @@
 </div>
 </div>
 <div class="section" id="standalone">
-<h3><span class="section-number">3.1.2. </span>StandAlone独立集群模式<a class="headerlink" href="#standalone" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">4.1.2. </span>StandAlone独立集群模式<a class="headerlink" href="#standalone" title="永久链接至标题">¶</a></h3>
 <p><img alt="StandAlone模式" src="../_images/StandAloneMode.png" /></p>
 <div class="section" id="id4">
-<h4><span class="section-number">3.1.2.1. </span>原理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.2.1. </span>原理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>client客户端提交任务给JobManager</p></li>
 <li><p>JobManager负责申请任务运行所需要的资源并管理任务和资源</p></li>
@@ -247,7 +252,7 @@
 </ul>
 </div>
 <div class="section" id="id5">
-<h4><span class="section-number">3.1.2.2. </span>环境配置<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.2.2. </span>环境配置<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>编辑flink-conf.yml文件</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>vim /export/server/flink/conf/flink-conf.yaml
@@ -276,7 +281,7 @@ scp -r flink-1.10.0/ node3:<span class="nv">$PWD</span>
 </ul>
 </div>
 <div class="section" id="id6">
-<h4><span class="section-number">3.1.2.3. </span>基本使用<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.2.3. </span>基本使用<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>启动集群</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/export/server/flink/bin/start-cluster.sh
@@ -292,10 +297,10 @@ scp -r flink-1.10.0/ node3:<span class="nv">$PWD</span>
 </div>
 </div>
 <div class="section" id="standaloneha">
-<h3><span class="section-number">3.1.3. </span>StandAloneHA高可用模式<a class="headerlink" href="#standaloneha" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">4.1.3. </span>StandAloneHA高可用模式<a class="headerlink" href="#standaloneha" title="永久链接至标题">¶</a></h3>
 <p><img alt="standaLONEha" src="../_images/StandAloneHAMode.png" /></p>
 <div class="section" id="id7">
-<h4><span class="section-number">3.1.3.1. </span>配置<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.3.1. </span>配置<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>机器规划</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">服务器</span><span class="p">:</span> <span class="n">node1</span><span class="p">(</span><span class="n">Master</span> <span class="o">+</span> <span class="n">Slave</span><span class="p">):</span> <span class="n">JobManager</span> <span class="o">+</span> <span class="n">TaskManager</span>
@@ -347,7 +352,7 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 </ul>
 </div>
 <div class="section" id="id8">
-<h4><span class="section-number">3.1.3.2. </span>基本使用<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.3.2. </span>基本使用<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
 <ul>
 <li><p>1.启动Zookeeper</p></li>
 <li><p>2.启动HDFS</p></li>
@@ -369,12 +374,12 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 </div>
 </div>
 <div class="section" id="flink-on-yarn">
-<h3><span class="section-number">3.1.4. </span>Flink On Yarn模式<a class="headerlink" href="#flink-on-yarn" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">4.1.4. </span>Flink On Yarn模式<a class="headerlink" href="#flink-on-yarn" title="永久链接至标题">¶</a></h3>
 <blockquote>
 <div><p>企业中主流实用的模式</p>
 </div></blockquote>
 <div class="section" id="id9">
-<h4><span class="section-number">3.1.4.1. </span>原理<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.4.1. </span>原理<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
 <p><img alt="FlinkOnYarn模式" src="../_images/FlinkOnYarn.png" /></p>
 <p><img alt="FlinkOnYarn" src="../_images/FlinkOnYarnMode.png" /></p>
 <ul>
@@ -390,9 +395,9 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 </ul>
 </div>
 <div class="section" id="id10">
-<h4><span class="section-number">3.1.4.2. </span>两种模式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
+<h4><span class="section-number">4.1.4.2. </span>两种模式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
 <div class="section" id="session">
-<h5><span class="section-number">3.1.4.2.1. </span>Session会话模式<a class="headerlink" href="#session" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">4.1.4.2.1. </span>Session会话模式<a class="headerlink" href="#session" title="永久链接至标题">¶</a></h5>
 <p><img alt="Session模式" src="../_images/sessionMode.png" /></p>
 <ul class="simple">
 <li><p>特点：需要事先申请资源，启动JobManager和TaskManger</p></li>
@@ -401,7 +406,7 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 <li><p>应用场景：适合作业递交比较频繁的场景，<strong>小作业比较多的场景</strong></p></li>
 </ul>
 <div class="section" id="id11">
-<h6><span class="section-number">3.1.4.2.1.1. </span>基本使用<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h6>
+<h6><span class="section-number">4.1.4.2.1.1. </span>基本使用<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h6>
 <ul class="simple">
 <li><p>命令行：</p></li>
 </ul>
@@ -436,7 +441,7 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 </div>
 </div>
 <div class="section" id="job">
-<h5><span class="section-number">3.1.4.2.2. </span>Job分离模式<a class="headerlink" href="#job" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">4.1.4.2.2. </span>Job分离模式<a class="headerlink" href="#job" title="永久链接至标题">¶</a></h5>
 <p><img alt="Job分离模式" src="../_images/JobSeprated.png" /></p>
 <ul class="simple">
 <li><p>特点：每次递交作业都需要申请一次资源</p></li>
@@ -456,14 +461,14 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 </div></blockquote>
 </div>
 <div class="section" id="id12">
-<h5><span class="section-number">3.1.4.2.3. </span>两种模式的区别<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h5>
+<h5><span class="section-number">4.1.4.2.3. </span>两种模式的区别<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h5>
 <p><img alt="区别" src="../_images/diffs.png" /></p>
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="id13">
-<h2><span class="section-number">3.2. </span>Flink运行时组件<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.2. </span>Flink运行时组件<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h2>
 <p><img alt="组件" src="../_images/FlinkWorks.png" /></p>
 <ul class="simple">
 <li><p>Flink运行时架构主要包括四个不同的组件，它们会在运行流处理应用程序时协同工作：</p>
@@ -511,7 +516,7 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 </ul>
 </div>
 <div class="section" id="executiongraph">
-<h2><span class="section-number">3.3. </span>ExecutionGraph<a class="headerlink" href="#executiongraph" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">4.3. </span>ExecutionGraph<a class="headerlink" href="#executiongraph" title="永久链接至标题">¶</a></h2>
 <p><img alt="执行图" src="../_images/howToRun.png" /></p>
 <ul class="simple">
 <li><p>原理介绍</p>
@@ -535,6 +540,48 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
 </ul>
 </div>
 </div>
+<div class="section" id="flink-cep">
+<h1><span class="section-number">5. </span>Flink CEP<a class="headerlink" href="#flink-cep" title="永久链接至标题">¶</a></h1>
+<p><strong>CEP</strong>：复杂事件分析。在无界的数据流上，定义模式匹配规则，实时获取匹配到的规则数据。一个复杂的事件可以由多个模式匹配规则组成。</p>
+<ul class="simple">
+<li><p>优点：</p>
+<ul>
+<li><p>高吞吐</p></li>
+<li><p>API友好</p>
+<ul>
+<li><p>Pattern（定义规则）</p></li>
+<li><p>CEP（查询数据）</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li><p>无法动态更新规则</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p>特点：查询是静态的，数据是动态的</p>
+</div></blockquote>
+<div class="section" id="api">
+<h2><span class="section-number">5.1. </span>API<a class="headerlink" href="#api" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>量词</p>
+<ul>
+<li><p>Times</p></li>
+<li><p>oneOrMore</p></li>
+</ul>
+</li>
+<li><p>模式</p>
+<ul>
+<li><p>单模式</p></li>
+<li><p>组合模式</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 
            </div>
@@ -544,10 +591,10 @@ scp -r /export/server/flink/conf/masters node3:/export/server/flink/conf/
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html" class="btn btn-neutral float-right" title="4. Hadoop搭建总体步骤" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html" class="btn btn-neutral float-right" title="6. Hadoop搭建总体步骤" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-left" title="2. Bigdata Summary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-left" title="3. Bigdata Summary" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

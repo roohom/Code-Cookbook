@@ -364,3 +364,39 @@ flink run -m yarn-cluster -ytm 1024 -yjm 1024 -ys 1 ../examples/batch/WordCount.
   - JobGraph：将部分可以合并的Subtask合并成一个Task
   - ExecutionGraph：为Task赋予并行度
   - 物理执行图：将Task赋予并行度后的执行流程，落实到具体的TaskManager上，将具体的Task落实到具体的Slot内进行运行。
+
+
+
+
+
+# Flink CEP
+
+**CEP**：复杂事件分析。在无界的数据流上，定义模式匹配规则，实时获取匹配到的规则数据。一个复杂的事件可以由多个模式匹配规则组成。
+
+- 优点：
+  - 高吞吐
+  - API友好
+    - Pattern（定义规则）
+    - CEP（查询数据）
+- 缺点
+  - 无法动态更新规则
+
+> 特点：查询是静态的，数据是动态的
+
+
+
+## API
+
+- 量词
+  - Times
+  - oneOrMore
+- 模式
+  - 单模式
+  - 组合模式
+
+
+
+
+
+
+

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>7. Redis &mdash; Code-Cookbook 0.1 文档</title>
+  <title>9. Redis &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="8. Zookeeper" href="Zookeeper.html" />
-    <link rel="prev" title="6. Kafka" href="Kafka.html" /> 
+    <link rel="next" title="10. Zookeeper" href="Zookeeper.html" />
+    <link rel="prev" title="8. Kafka" href="Kafka.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,41 +88,43 @@
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">2. Bigdata Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">3. Flink基础配置与基础原理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">4. Hadoop搭建总体步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html">5. Hbase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kafka.html">6. Kafka</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">7. Redis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">7.1. 介绍</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">7.2. 应用场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">7.3. 特点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#windowsredis">7.4. Windows上使用Redis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">7.5. 数据类型和语法</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#string">7.5.1. String</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hash">7.5.2. Hash</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#list">7.5.3. List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set">7.5.4. Set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#zset">7.5.5. Zset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">7.5.6. 通用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">3. Bigdata Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">4. Flink基础配置与基础原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html#flink-cep">5. Flink CEP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">6. Hadoop搭建总体步骤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">7. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">8. Kafka</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9. Redis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.1. 介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.2. 应用场景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.3. 特点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windowsredis">9.4. Windows上使用Redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.5. 数据类型和语法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#string">9.5.1. String</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hash">9.5.2. Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list">9.5.3. List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set">9.5.4. Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zset">9.5.5. Zset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">9.5.6. 通用命令</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">7.6. 持久化</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#rdb">7.6.1. RDB</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#aof">7.6.2. AOF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">9.6. 持久化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rdb">9.6.1. RDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aof">9.6.2. AOF</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">7.7. 集群搭建</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">7.7.1. 模式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">7.7.2. 主从复制</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sentinel">7.7.3. 哨兵模式Sentinel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">7.7.4. 集群模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">9.7. 集群搭建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">9.7.1. 模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">9.7.2. 主从复制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sentinel">9.7.3. 哨兵模式Sentinel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">9.7.4. 集群模式</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">8. Zookeeper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">9. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">10. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">11. 常用软件梳理</a></li>
 </ul>
 </li>
 </ul>
@@ -185,7 +187,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">7. </span>Redis</li>
+      <li><span class="section-number">9. </span>Redis</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -205,9 +207,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="redis">
-<h1><span class="section-number">7. </span>Redis<a class="headerlink" href="#redis" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">9. </span>Redis<a class="headerlink" href="#redis" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
-<h2><span class="section-number">7.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>本质：分布式的<strong>基于内存</strong>的NoSQL<strong>数据库</strong></p>
 <ul>
@@ -275,7 +277,7 @@
 </ul>
 </div>
 <div class="section" id="id2">
-<h2><span class="section-number">7.2. </span>应用场景<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.2. </span>应用场景<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>传统的web开发</p>
 <ul>
@@ -304,7 +306,7 @@
 </ul>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">7.3. </span>特点<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.3. </span>特点<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>分布式</p></li>
 <li><p>基于内存</p></li>
@@ -319,7 +321,7 @@
 </ul>
 </div>
 <div class="section" id="windowsredis">
-<h2><span class="section-number">7.4. </span>Windows上使用Redis<a class="headerlink" href="#windowsredis" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.4. </span>Windows上使用Redis<a class="headerlink" href="#windowsredis" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>架构</p>
 <ul>
@@ -376,12 +378,12 @@
 </ul>
 </div>
 <div class="section" id="id4">
-<h2><span class="section-number">7.5. </span>数据类型和语法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.5. </span>数据类型和语法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <div class="section" id="string">
-<h3><span class="section-number">7.5.1. </span>String<a class="headerlink" href="#string" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.5.1. </span>String<a class="headerlink" href="#string" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="hash">
-<h3><span class="section-number">7.5.2. </span>Hash<a class="headerlink" href="#hash" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.5.2. </span>Hash<a class="headerlink" href="#hash" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>语法</p>
 <ul>
@@ -420,7 +422,7 @@
 </ul>
 </div>
 <div class="section" id="list">
-<h3><span class="section-number">7.5.3. </span>List<a class="headerlink" href="#list" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.5.3. </span>List<a class="headerlink" href="#list" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>应用：有序可重复的集合的数据</p>
 <ul class="simple">
@@ -482,7 +484,7 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </div>
 <div class="section" id="set">
-<h3><span class="section-number">7.5.4. </span>Set<a class="headerlink" href="#set" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.5.4. </span>Set<a class="headerlink" href="#set" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>应用：无序不可重复的集合，用于去重统计等等</p>
 <ul class="simple">
@@ -520,7 +522,7 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </div>
 <div class="section" id="zset">
-<h3><span class="section-number">7.5.5. </span>Zset<a class="headerlink" href="#zset" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.5.5. </span>Zset<a class="headerlink" href="#zset" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>应用：有序不可重复的集合，一般用于排序取TopN</p></li>
 <li><p>使用</p>
@@ -564,7 +566,7 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </div>
 <div class="section" id="id5">
-<h3><span class="section-number">7.5.6. </span>通用命令<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.5.6. </span>通用命令<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">*</span></code> ：列举当前数据库中的所有KV</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">del</span></code>：用于删除当前数据库中的某个KV</p>
@@ -595,7 +597,7 @@ move s2 <span class="m">0</span>
 </div>
 </div>
 <div class="section" id="id6">
-<h2><span class="section-number">7.6. </span>持久化<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.6. </span>持久化<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>Redis如何实现将内存中的数据写入磁盘</p>
 <ul>
@@ -605,7 +607,7 @@ move s2 <span class="m">0</span>
 </li>
 </ul>
 <div class="section" id="rdb">
-<h3><span class="section-number">7.6.1. </span>RDB<a class="headerlink" href="#rdb" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.6.1. </span>RDB<a class="headerlink" href="#rdb" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>功能：在规定时间内，内存中产生了一定次数的更新(增删改)，就会将内存中的数据做一次全量快照</p></li>
 <li><p>实现：</p>
@@ -669,7 +671,7 @@ move s2 <span class="m">0</span>
 </ul>
 </div>
 <div class="section" id="aof">
-<h3><span class="section-number">7.6.2. </span>AOF<a class="headerlink" href="#aof" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.6.2. </span>AOF<a class="headerlink" href="#aof" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>设计：</p>
 <ul class="simple">
@@ -717,9 +719,9 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </div>
 </div>
 <div class="section" id="id7">
-<h2><span class="section-number">7.7. </span>集群搭建<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">9.7. </span>集群搭建<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id8">
-<h3><span class="section-number">7.7.1. </span>模式<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.7.1. </span>模式<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>单节点</p>
 <ul>
@@ -741,7 +743,7 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </ul>
 </div>
 <div class="section" id="id9">
-<h3><span class="section-number">7.7.2. </span>主从复制<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.7.2. </span>主从复制<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -806,7 +808,7 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </ul>
 </div>
 <div class="section" id="sentinel">
-<h3><span class="section-number">7.7.3. </span>哨兵模式Sentinel<a class="headerlink" href="#sentinel" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.7.3. </span>哨兵模式Sentinel<a class="headerlink" href="#sentinel" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -903,7 +905,7 @@ jedis = mymaster.getResource();
 </ul>
 </div>
 <div class="section" id="id10">
-<h3><span class="section-number">7.7.4. </span>集群模式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">9.7.4. </span>集群模式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -1054,10 +1056,10 @@ src/redis-cli -c -h node1 -p <span class="m">7001</span>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="8. Zookeeper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="10. Zookeeper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Kafka.html" class="btn btn-neutral float-left" title="6. Kafka" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Kafka.html" class="btn btn-neutral float-left" title="8. Kafka" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
