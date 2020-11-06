@@ -599,7 +599,7 @@
     port 7003
     ```
   
-  - 启动三个redis实例
+  - **启动三个redis实例**
   
     ```shell
     cd /export/redis-3.2.8/cluster/7001
@@ -661,6 +661,73 @@
 - CRC16【K】 &  16383  =  0 ~ 16383
     - 对K进行计算
   - 根据不同的槽位值，写入不同的Redis的Master中
+
+
+
+### 可能遇到的问题
+
+- 1、redis-cluster 启动或者Jedis客户端连接遇到**CLUSTERDOWN Hash slot not served**问题
+
+  - 解决办法：
+
+    ~~~shell
+    cd ${REDIS_HOME}/src
+    redis-trib.rb check node01:7001
+    redis-trib.rb check node01:7002
+    redis-trib.rb check node01:7003
+    ~~~
+
+    > node01为机器实际IP地址
+
+  - 上述运行之后会提示错误
+
+    - 再对每一台机器修复问题
+
+      ~~~shell
+      cd ${REDIS_HOME}/src
+      redis-trib.rb fix node01:7001
+      redis-trib.rb fix node01:7002
+      redis-trib.rb fix node01:7003
+      ~~~
+
+  - 或者重新创建集群
+
+    ~~~SHELL
+    cd ${REDIS_HOME}/src/
+    ./redis-trib.rb create --replicas 0 192.168.88.221:7001 192.168.88.221:7002 192.168.88.221:7003
+    ~~~
+
+- 2、JedisClusterException: CLUSTERDOWN Hash slot not served
+
+  - （1）报错JedisClusterException: CLUSTERDOWN Hash slot not served
+
+    - 解决：进入redis的src目录下使用命令redis-trib.rb check 127.0.0.1:7001检测，再使用redis-cli --cluster fix 192.168.88.221:7001修复，可是又报一个ruby的loadError
+
+  - （2）报ruby的loadError是因为缺少redis库
+
+    - 解决：使用命令gem install redis安装redis库
+
+  - （3）搞定以上之后再去创建集群
+
+    - 解决：
+
+      ~~~shell
+      # 进入redis的src目录下使用命令：
+      ./redis-trib.rb create --replicas 0 192.168.88.221:7001 192.168.88.221:7002 192.168.88.221:7003）
+      # 敲个yes发现还是不行，slot槽被占用
+      ~~~
+
+    - 错误提示： slot插槽被占用了（这是搭建redis集群前，以前redis的旧数据和配置信息没有清理干净。）
+    - 解决方法： 使用redis-cli 登录到每个节点执行 flushall 和 cluster reset 命令就可以了。
+      - 登陆客户端命令： redis-cli
+      - 清除所有缓冲区命令： flushall
+      - 重置redis集群命令： cluster reset 完成之后再次创建集群即可
+
+    - 参考：
+      - https://blog.csdn.net/qq_39244264/article/details/80281702
+      - https://blog.csdn.net/weixin_44422604/article/details/106955119
+
+
 
 
 
