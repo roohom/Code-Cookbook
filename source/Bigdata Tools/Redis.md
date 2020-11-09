@@ -613,10 +613,13 @@
   - 安装ruby环境
   
     - 安装依赖
-      ```
-  yum install openssl-devel  zlib-devel  -y
-      ```
-
+      
+  ~~~shell
+      yum install openssl-devel  zlib-devel  -y
+~~~
+      
+      
+      
     - 将ruby安装包上传到/export目录中
       ```
       cd /export/
@@ -635,6 +638,21 @@
   ./redis-trib.rb create --replicas 0 192.168.88.221:7001 192.168.88.221:7002 192.168.88.221:7003
   ```
 
+  ~~~
+  执行./redis-cli --cluster create ip:端口
+  报Node 192.168.248.12:7001 is not empty.
+  	 Either the node already knows other nodes (check with CLUSTER NODES)
+  	 	 or contains some key in database 0.错误
+  
+  解决办法：
+  	1，先kill redis创建的集群节点进程
+  	2，删除每个redis节点的appendonly.aof文件，dump.rdb文件，nodes.conf文件
+  		并且执行./redis-cli  使用 flushdb命令，清空每个redis里面的数据。
+  	3，重启每个redis节点，再执行集群操作即可
+  ~~~
+  
+  
+  
 - 启动客户端测试
   ```shell
   cd /export/redis-3.2.8/
@@ -642,6 +660,11 @@
   
   -c：表示是一个集群模式
   ```
+
+- 常用操作
+
+    - `cluster nodes`：列举出当前集群的所有节点，以及节点的相关信息
+    - `cluster info` ：查看集群的信息
 
 - Jedis代码中的连接
   ```java
@@ -655,16 +678,50 @@
   jedisCluster = new JedisCluster(sets, jedisPoolConfig);
   ```
 
-- 分区的规则
+#### 动态添加和删除节点
 
-  - 通过槽位计算，将不同的KV存储在不同的Redis的Master中
-- CRC16【K】 &  16383  =  0 ~ 16383
+> 参考文章,[传送门](https://www.cnblogs.com/maybesuch/p/10309403.html) 或者[Redis Cluster日常操作命令梳理](https://www.cnblogs.com/kevingrace/p/7910692.html)
+
+## Redis的数据分区
+
+### [虚拟槽分区](https://blog.csdn.net/Coxhuang/article/details/104645989/)
+
+> 虚拟槽分区巧妙地使用了哈希空间，使用分散度良好的哈希函数把所有数据映射到一个固定范围的整数集合中，整数定义为槽（slot）。这个范围一般远远大于节点数，
+>
+> Redis Cluster采用虚拟槽分区，比如 Redis Cluster 槽范围是 0 ~ 16383。Redis 集群包含了 16384 个哈希槽，每个 Key 经过计算后会落在一个具体的槽位上，而每个槽位落到哪个节点上,根据自己的节点配置。
+
+> 假设,当前集群有 5 个节点，每个节点平均大约负责 3276 个槽。由于采用高质量的哈希算法，每个槽所映射的数据通常比较均匀，将数据平均划分到 5 个节点进行数据分区。Redis Cluster 就是采用虚拟槽分区。
+>
+> 节点1： 包含 0 到 3276 号哈希槽。
+>
+> 节点2：包含 3277 到 6553 号哈希槽。
+>
+> 节点3：包含 6554 到 9830 号哈希槽。
+>
+> 节点4：包含 9831 到 13107 号哈希槽。
+>
+> 节点5：包含 13108 到 16383 号哈希槽。
+>
+> 注意一个思想,槽位是落在节点上的,且我们可以任意配置那些槽位落在哪个节点上
+>
+> 这种结构很容易添加或者删除节点。如果增加一个节点 6，就需要从节点 1 ~ 5 获得部分槽分配到节点 6 上。如果想移除节点 1，需要将节点 1 中的槽移到节点 2 ~ 5 上，然后将没有任何槽的节点 1 从集群中移除即可。
+>
+> 由于从一个节点将 哈希槽 移动到另一个节点并不会 停止服务，所以无论 添加删除或者改变某个节点的哈希槽的数量都不会造成集群不可用的状态.
+
+
+
+### 分区的规则
+
+- 通过槽位计算，将不同的KV存储在不同的Redis的Master中
+- Redis Cluster 采用虚拟槽分区(Redis Cluster是Redis自带的集群)，所有的键根据哈希函数映射到 0~16383 整数槽内，计算公式：`slot = CRC16（key）& 16383`。每个节点负责维护一部分槽以及槽所映射的键值数据。
+
+- `CRC16【K】 &  16383  =  0 ~ 16383`
     - 对K进行计算
   - 根据不同的槽位值，写入不同的Redis的Master中
 
 
 
-### 可能遇到的问题
+## 可能遇到的问题
 
 - 1、redis-cluster 启动或者Jedis客户端连接遇到**CLUSTERDOWN Hash slot not served**问题
 
