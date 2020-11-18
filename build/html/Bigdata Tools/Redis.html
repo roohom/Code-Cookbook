@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>9. Redis &mdash; Code-Cookbook 0.1 文档</title>
+  <title>10. Redis &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="10. Zookeeper" href="Zookeeper.html" />
-    <link rel="prev" title="8. Kafka" href="Kafka.html" /> 
+    <link rel="next" title="11. Spark" href="Spark.html" />
+    <link rel="prev" title="9. Kylin" href="Kylin.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,36 +95,44 @@
 <li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">6. Hadoop搭建总体步骤</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html">7. Hbase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kafka.html">8. Kafka</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">9. Redis</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">9.1. 介绍</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">9.2. 应用场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">9.3. 特点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#windowsredis">9.4. Windows上使用Redis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">9.5. 数据类型和语法</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#string">9.5.1. String</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hash">9.5.2. Hash</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#list">9.5.3. List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#set">9.5.4. Set</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#zset">9.5.5. Zset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">9.5.6. 通用命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html">9. Kylin</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">10. Redis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">10.1. 介绍</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">10.2. 应用场景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">10.3. 特点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#windowsredis">10.4. Windows上使用Redis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">10.5. 数据类型和语法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#string">10.5.1. String</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hash">10.5.2. Hash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#list">10.5.3. List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set">10.5.4. Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zset">10.5.5. Zset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">10.5.6. 通用命令</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">9.6. 持久化</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#rdb">9.6.1. RDB</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#aof">9.6.2. AOF</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">10.6. 持久化</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#rdb">10.6.1. RDB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#aof">10.6.2. AOF</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">9.7. 集群搭建</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">9.7.1. 模式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">9.7.2. 主从复制</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sentinel">9.7.3. 哨兵模式Sentinel</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">9.7.4. 集群模式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">10.7. 集群搭建</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">10.7.1. 模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">10.7.2. 主从复制</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sentinel">10.7.3. 哨兵模式Sentinel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">10.7.4. 集群模式</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">10.8. Redis的数据分区</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">10.8.1. 虚拟槽分区</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">10.8.2. 分区的规则</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">10. Zookeeper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">11. 常用软件梳理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">10.9. 可能遇到的问题</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html">11. Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">12. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">13. 常用软件梳理</a></li>
 </ul>
 </li>
 </ul>
@@ -187,7 +195,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">9. </span>Redis</li>
+      <li><span class="section-number">10. </span>Redis</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -207,9 +215,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="redis">
-<h1><span class="section-number">9. </span>Redis<a class="headerlink" href="#redis" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">10. </span>Redis<a class="headerlink" href="#redis" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
-<h2><span class="section-number">9.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>本质：分布式的<strong>基于内存</strong>的NoSQL<strong>数据库</strong></p>
 <ul>
@@ -277,7 +285,7 @@
 </ul>
 </div>
 <div class="section" id="id2">
-<h2><span class="section-number">9.2. </span>应用场景<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.2. </span>应用场景<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>传统的web开发</p>
 <ul>
@@ -306,7 +314,7 @@
 </ul>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">9.3. </span>特点<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.3. </span>特点<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>分布式</p></li>
 <li><p>基于内存</p></li>
@@ -321,7 +329,7 @@
 </ul>
 </div>
 <div class="section" id="windowsredis">
-<h2><span class="section-number">9.4. </span>Windows上使用Redis<a class="headerlink" href="#windowsredis" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.4. </span>Windows上使用Redis<a class="headerlink" href="#windowsredis" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>架构</p>
 <ul>
@@ -378,12 +386,12 @@
 </ul>
 </div>
 <div class="section" id="id4">
-<h2><span class="section-number">9.5. </span>数据类型和语法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.5. </span>数据类型和语法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <div class="section" id="string">
-<h3><span class="section-number">9.5.1. </span>String<a class="headerlink" href="#string" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.5.1. </span>String<a class="headerlink" href="#string" title="永久链接至标题">¶</a></h3>
 </div>
 <div class="section" id="hash">
-<h3><span class="section-number">9.5.2. </span>Hash<a class="headerlink" href="#hash" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.5.2. </span>Hash<a class="headerlink" href="#hash" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>语法</p>
 <ul>
@@ -422,7 +430,7 @@
 </ul>
 </div>
 <div class="section" id="list">
-<h3><span class="section-number">9.5.3. </span>List<a class="headerlink" href="#list" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.5.3. </span>List<a class="headerlink" href="#list" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>应用：有序可重复的集合的数据</p>
 <ul class="simple">
@@ -484,7 +492,7 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </div>
 <div class="section" id="set">
-<h3><span class="section-number">9.5.4. </span>Set<a class="headerlink" href="#set" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.5.4. </span>Set<a class="headerlink" href="#set" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>应用：无序不可重复的集合，用于去重统计等等</p>
 <ul class="simple">
@@ -522,7 +530,7 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </div>
 <div class="section" id="zset">
-<h3><span class="section-number">9.5.5. </span>Zset<a class="headerlink" href="#zset" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.5.5. </span>Zset<a class="headerlink" href="#zset" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>应用：有序不可重复的集合，一般用于排序取TopN</p></li>
 <li><p>使用</p>
@@ -566,7 +574,7 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </div>
 <div class="section" id="id5">
-<h3><span class="section-number">9.5.6. </span>通用命令<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.5.6. </span>通用命令<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">*</span></code> ：列举当前数据库中的所有KV</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">del</span></code>：用于删除当前数据库中的某个KV</p>
@@ -597,7 +605,7 @@ move s2 <span class="m">0</span>
 </div>
 </div>
 <div class="section" id="id6">
-<h2><span class="section-number">9.6. </span>持久化<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.6. </span>持久化<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>Redis如何实现将内存中的数据写入磁盘</p>
 <ul>
@@ -607,7 +615,7 @@ move s2 <span class="m">0</span>
 </li>
 </ul>
 <div class="section" id="rdb">
-<h3><span class="section-number">9.6.1. </span>RDB<a class="headerlink" href="#rdb" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.6.1. </span>RDB<a class="headerlink" href="#rdb" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>功能：在规定时间内，内存中产生了一定次数的更新(增删改)，就会将内存中的数据做一次全量快照</p></li>
 <li><p>实现：</p>
@@ -671,7 +679,7 @@ move s2 <span class="m">0</span>
 </ul>
 </div>
 <div class="section" id="aof">
-<h3><span class="section-number">9.6.2. </span>AOF<a class="headerlink" href="#aof" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.6.2. </span>AOF<a class="headerlink" href="#aof" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>设计：</p>
 <ul class="simple">
@@ -719,9 +727,9 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </div>
 </div>
 <div class="section" id="id7">
-<h2><span class="section-number">9.7. </span>集群搭建<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">10.7. </span>集群搭建<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id8">
-<h3><span class="section-number">9.7.1. </span>模式<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.7.1. </span>模式<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>单节点</p>
 <ul>
@@ -743,7 +751,7 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </ul>
 </div>
 <div class="section" id="id9">
-<h3><span class="section-number">9.7.2. </span>主从复制<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.7.2. </span>主从复制<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -808,7 +816,7 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </ul>
 </div>
 <div class="section" id="sentinel">
-<h3><span class="section-number">9.7.3. </span>哨兵模式Sentinel<a class="headerlink" href="#sentinel" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.7.3. </span>哨兵模式Sentinel<a class="headerlink" href="#sentinel" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -905,7 +913,7 @@ jedis = mymaster.getResource();
 </ul>
 </div>
 <div class="section" id="id10">
-<h3><span class="section-number">9.7.4. </span>集群模式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">10.7.4. </span>集群模式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -969,7 +977,7 @@ port <span class="m">7003</span>
 </pre></div>
 </div>
 </li>
-<li><p>启动三个redis实例</p>
+<li><p><strong>启动三个redis实例</strong></p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/redis-3.2.8/cluster/7001
 redis-server redis.conf
 <span class="nb">cd</span> /export/redis-3.2.8/cluster/7002
@@ -982,43 +990,59 @@ redis-server redis.conf
 <li><p>安装ruby环境</p>
 <ul>
 <li><p>安装依赖</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">openssl</span><span class="o">-</span><span class="n">devel</span>  <span class="n">zlib</span><span class="o">-</span><span class="n">devel</span>  <span class="o">-</span><span class="n">y</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
-</ul>
-<p>yum install openssl-devel  zlib-devel  -y
-```</p>
-<ul>
 <li><p>将ruby安装包上传到/export目录中</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span>
-<span class="n">tar</span> <span class="o">-</span><span class="n">zxvf</span> <span class="n">ruby</span><span class="o">-</span><span class="mf">2.5</span><span class="o">.</span><span class="mf">3.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
-<span class="n">cd</span> <span class="n">ruby</span><span class="o">-</span><span class="mf">2.5</span><span class="o">.</span><span class="mi">3</span>
-<span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="n">prefix</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">ruby</span>
-<span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">install</span>
-<span class="n">echo</span> <span class="s2">&quot;export PATH=$PATH:/usr/local/ruby/bin&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">profile</span>
-<span class="n">source</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">profile</span>
-<span class="n">gem</span> <span class="n">install</span> <span class="n">redis</span>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/
+tar -zxvf ruby-2.5.3.tar.gz
+<span class="nb">cd</span> ruby-2.5.3
+./configure --prefix<span class="o">=</span>/usr/local/ruby
+make <span class="o">&amp;&amp;</span> make install
+<span class="nb">echo</span> <span class="s2">&quot;export PATH=</span><span class="nv">$PATH</span><span class="s2">:/usr/local/ruby/bin&quot;</span> &gt;&gt; /etc/profile
+<span class="nb">source</span> /etc/profile
+gem install redis
 </pre></div>
 </div>
-</li>
-</ul>
 </li>
 <li><p>创建redis集群</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/redis-3.2.8/src/
-./redis-trib.rb create --replicas <span class="m">0</span> <span class="m">192</span>.168.88.221:7001 <span class="m">192</span>.168.88.221:7002 <span class="m">192</span>.168.88.221:7003
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="mf">3.2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">src</span><span class="o">/</span>
+  <span class="o">./</span><span class="n">redis</span><span class="o">-</span><span class="n">trib</span><span class="o">.</span><span class="n">rb</span> <span class="n">create</span> <span class="o">--</span><span class="n">replicas</span> <span class="mi">0</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">88.221</span><span class="p">:</span><span class="mi">7001</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">88.221</span><span class="p">:</span><span class="mi">7002</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">88.221</span><span class="p">:</span><span class="mi">7003</span>
+</pre></div>
+</div>
+<ul>
+<li><p>可能遇到的问题</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>执行./redis-cli --cluster create ip:端口
+报Node 192.168.248.12:7001 is not empty.
+  	 Either the node already knows other nodes (check with CLUSTER NODES)
+  	 	 or contains some key in database 0.错误
+
+解决办法：
+  	1，先kill redis创建的集群节点进程
+  	2，删除每个redis节点的appendonly.aof文件，dump.rdb文件，nodes.conf文件
+  		并且执行./redis-cli  使用 flushdb命令，清空每个redis里面的数据。
+  	3，重启每个redis节点，再执行集群操作即可
 </pre></div>
 </div>
 </li>
+</ul>
+</li>
 <li><p>启动客户端测试</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/redis-3.2.8/
-src/redis-cli -c -h node1 -p <span class="m">7001</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd /export/redis-3.2.8/
+src/redis-cli -c -h node1 -p 7001
 
 -c：表示是一个集群模式
 </pre></div>
 </div>
+</li>
+<li><p>常用操作</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cluster</span> <span class="pre">nodes</span></code>：列举出当前集群的所有节点，以及节点的相关信息</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cluster</span> <span class="pre">info</span></code> ：查看集群的信息</p></li>
+</ul>
 </li>
 <li><p>Jedis代码中的连接</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">JedisCluster</span> <span class="n">jedisCluster</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
@@ -1032,19 +1056,127 @@ src/redis-cli -c -h node1 -p <span class="m">7001</span>
 </pre></div>
 </div>
 </li>
-<li><p>分区的规则</p>
-<ul class="simple">
-<li><p>通过槽位计算，将不同的KV存储在不同的Redis的Master中</p></li>
 </ul>
 </li>
-<li><p>CRC16【K】 &amp;  16383  =  0 ~ 16383</p>
+</ul>
+<div class="section" id="id11">
+<h4><span class="section-number">10.7.4.1. </span>动态添加和删除节点<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
+<blockquote>
+<div><p>参考文章,<a class="reference external" href="https://www.cnblogs.com/maybesuch/p/10309403.html">传送门</a> 或者<a class="reference external" href="https://www.cnblogs.com/kevingrace/p/7910692.html">Redis Cluster日常操作命令梳理</a></p>
+</div></blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h2><span class="section-number">10.8. </span>Redis的数据分区<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id13">
+<h3><span class="section-number">10.8.1. </span><a class="reference external" href="https://blog.csdn.net/Coxhuang/article/details/104645989/">虚拟槽分区</a><a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>虚拟槽分区巧妙地使用了哈希空间，使用分散度良好的哈希函数把所有数据映射到一个固定范围的整数集合中，整数定义为槽（slot）。这个范围一般远远大于节点数，</p>
+<p>Redis Cluster采用虚拟槽分区，比如 Redis Cluster 槽范围是 0 ~ 16383。Redis 集群包含了 16384 个哈希槽，每个 Key 经过计算后会落在一个具体的槽位上，而每个槽位落到哪个节点上,根据自己的节点配置。</p>
+</div></blockquote>
+<blockquote>
+<div><p>假设,当前集群有 5 个节点，每个节点平均大约负责 3276 个槽。由于采用高质量的哈希算法，每个槽所映射的数据通常比较均匀，将数据平均划分到 5 个节点进行数据分区。Redis Cluster 就是采用虚拟槽分区。</p>
+<p>节点1： 包含 0 到 3276 号哈希槽。</p>
+<p>节点2：包含 3277 到 6553 号哈希槽。</p>
+<p>节点3：包含 6554 到 9830 号哈希槽。</p>
+<p>节点4：包含 9831 到 13107 号哈希槽。</p>
+<p>节点5：包含 13108 到 16383 号哈希槽。</p>
+<p>注意一个思想,槽位是落在节点上的,且我们可以任意配置那些槽位落在哪个节点上</p>
+<p>这种结构很容易添加或者删除节点。如果增加一个节点 6，就需要从节点 1 ~ 5 获得部分槽分配到节点 6 上。如果想移除节点 1，需要将节点 1 中的槽移到节点 2 ~ 5 上，然后将没有任何槽的节点 1 从集群中移除即可。</p>
+<p>由于从一个节点将 哈希槽 移动到另一个节点并不会 停止服务，所以无论 添加删除或者改变某个节点的哈希槽的数量都不会造成集群不可用的状态.</p>
+</div></blockquote>
+</div>
+<div class="section" id="id14">
+<h3><span class="section-number">10.8.2. </span>分区的规则<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
+<li><p>通过槽位计算，将不同的KV存储在不同的Redis的Master中</p></li>
+<li><p>Redis Cluster 采用虚拟槽分区(Redis Cluster是Redis自带的集群)，所有的键根据哈希函数映射到 0~16383 整数槽内，计算公式：<code class="docutils literal notranslate"><span class="pre">slot</span> <span class="pre">=</span> <span class="pre">CRC16（key）&amp;</span> <span class="pre">16383</span></code>。每个节点负责维护一部分槽以及槽所映射的键值数据。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CRC16【K】</span> <span class="pre">&amp;</span>&#160; <span class="pre">16383</span>&#160; <span class="pre">=</span>&#160; <span class="pre">0</span> <span class="pre">~</span> <span class="pre">16383</span></code></p>
+<ul>
 <li><p>对K进行计算</p></li>
 <li><p>根据不同的槽位值，写入不同的Redis的Master中</p></li>
 </ul>
 </li>
 </ul>
 </div>
+</div>
+<div class="section" id="id15">
+<h2><span class="section-number">10.9. </span>可能遇到的问题<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>1、redis-cluster 启动或者Jedis客户端连接遇到<strong>CLUSTERDOWN Hash slot not served</strong>问题</p>
+<ul>
+<li><p>解决办法：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="si">${</span><span class="nv">REDIS_HOME</span><span class="si">}</span>/src
+redis-trib.rb check node01:7001
+redis-trib.rb check node01:7002
+redis-trib.rb check node01:7003
+</pre></div>
+</div>
+<blockquote>
+<div><p>node01为机器实际IP地址</p>
+</div></blockquote>
+</li>
+<li><p>上述运行之后会提示错误</p>
+<ul>
+<li><p>再对每一台机器修复问题</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="si">${</span><span class="nv">REDIS_HOME</span><span class="si">}</span>/src
+redis-trib.rb fix node01:7001
+redis-trib.rb fix node01:7002
+redis-trib.rb fix node01:7003
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>或者重新创建集群</p>
+<div class="highlight-SHELL notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="si">${</span><span class="nv">REDIS_HOME</span><span class="si">}</span>/src/
+./redis-trib.rb create --replicas <span class="m">0</span> <span class="m">192</span>.168.88.221:7001 <span class="m">192</span>.168.88.221:7002 <span class="m">192</span>.168.88.221:7003
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>2、JedisClusterException: CLUSTERDOWN Hash slot not served</p>
+<ul>
+<li><p>（1）报错JedisClusterException: CLUSTERDOWN Hash slot not served</p>
+<ul class="simple">
+<li><p>解决：进入redis的src目录下使用命令redis-trib.rb check 127.0.0.1:7001检测，再使用redis-cli –cluster fix 192.168.88.221:7001修复，可是又报一个ruby的loadError</p></li>
+</ul>
+</li>
+<li><p>（2）报ruby的loadError是因为缺少redis库</p>
+<ul class="simple">
+<li><p>解决：使用命令gem install redis安装redis库</p></li>
+</ul>
+</li>
+<li><p>（3）搞定以上之后再去创建集群</p>
+<ul>
+<li><p>解决：</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 进入redis的src目录下使用命令：</span>
+./redis-trib.rb create --replicas <span class="m">0</span> <span class="m">192</span>.168.88.221:7001 <span class="m">192</span>.168.88.221:7002 <span class="m">192</span>.168.88.221:7003）
+<span class="c1"># 敲个yes发现还是不行，slot槽被占用</span>
+</pre></div>
+</div>
+</li>
+<li><p>错误提示： slot插槽被占用了（这是搭建redis集群前，以前redis的旧数据和配置信息没有清理干净。）</p></li>
+<li><p>解决方法： 使用redis-cli 登录到每个节点执行 flushall 和 cluster reset 命令就可以了。</p>
+<ul class="simple">
+<li><p>登陆客户端命令： redis-cli</p></li>
+<li><p>清除所有缓冲区命令： flushall</p></li>
+<li><p>重置redis集群命令： cluster reset 完成之后再次创建集群即可</p></li>
+</ul>
+</li>
+<li><p>参考：</p>
+<ul class="simple">
+<li><p>https://blog.csdn.net/qq_39244264/article/details/80281702</p></li>
+<li><p>https://blog.csdn.net/weixin_44422604/article/details/106955119</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -1056,10 +1188,10 @@ src/redis-cli -c -h node1 -p <span class="m">7001</span>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="10. Zookeeper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Spark.html" class="btn btn-neutral float-right" title="11. Spark" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Kafka.html" class="btn btn-neutral float-left" title="8. Kafka" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Kylin.html" class="btn btn-neutral float-left" title="9. Kylin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

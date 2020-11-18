@@ -1,0 +1,35 @@
+# Spark
+
+> `Apache Spark is a unified analytics engine for large-scale data processing.`
+
+> 起源于加州大学伯克利分校，来源于一篇论文弹性[分布式数据集(`RDD`)]()
+>
+> 1、分析引擎：类似MapReduce框架，分析2海量数据
+>
+> 2、统一分析引擎：针对任意数据分析需求，都可以分析数据
+>
+> 3、大规模数据分析引擎：处理数据可以海量数据
+
+## Introduction
+
+- RDD是Spark框架的核心概念，属于分布式集合，将数据划分到不同的partition中
+
+- Spark与MapReduce框架的比较
+
+  ![image-20201118104414877](Spark.assets/image-20201118104414877.png)
+
+- Spark框架仅仅是一个分析数据的框架
+  - 数据来源：支持任何数据源，能够从任意存储引擎读写数据
+  - 应用程序运行：本地模式、集群模式(Standalone、Hadoop YARN、容器)
+
+- Spark应用程序运行模式：本地和集群、云端
+
+  - [Spark框架将数据封装在RDD集合中，每个集合RDD由多个分区Partition组成，每个分区Partition数据被一个Task处理，每个Task任务启动一个线程Thread，每个Task运行需要一核CPU]()
+
+## Quick Start
+
+> Spark 2.4.x本地模式使用Spark-Shell运行Word Count程序
+>
+> 集群环境 CentOS 7.7
+>
+> - node1

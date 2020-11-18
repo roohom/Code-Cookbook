@@ -338,11 +338,11 @@ age int
 <ul>
 <li><p>MySQL建表</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="n">sqoopTest</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">`tb_url`</span> <span class="p">(</span>
-  <span class="ss">`id`</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
-  <span class="ss">`url`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
-  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="ss">`id`</span><span class="p">)</span>
-<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`tb_url`</span> <span class="p">(</span>
+  <span class="n">`id`</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="n">`url`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">`id`</span><span class="p">)</span>
+<span class="p">)</span> <span class="k">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="k">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
@@ -469,12 +469,12 @@ load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/dat
 <li><p>使用模板：</p>
 <ul>
 <li><p>MySQL中测试数据</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="ss">`tb_lastmode`</span> <span class="p">(</span>
-  <span class="ss">`id`</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="kp">AUTO_INCREMENT</span><span class="p">,</span>
-  <span class="ss">`word`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
-  <span class="ss">`lastmode`</span> <span class="kt">timestamp</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span>  <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
-  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="ss">`id`</span><span class="p">)</span>
-<span class="p">)</span> <span class="kp">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="kp">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`tb_lastmode`</span> <span class="p">(</span>
+  <span class="n">`id`</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="n">`word`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+  <span class="n">`lastmode`</span> <span class="kt">timestamp</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span>  <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">`id`</span><span class="p">)</span>
+<span class="p">)</span> <span class="k">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="k">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
 
 <span class="k">insert</span> <span class="k">into</span> <span class="n">tb_lastmode</span> <span class="k">values</span><span class="p">(</span><span class="no">null</span><span class="p">,</span><span class="s1">&#39;hadoop&#39;</span><span class="p">,</span><span class="no">null</span><span class="p">);</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">tb_lastmode</span> <span class="k">values</span><span class="p">(</span><span class="no">null</span><span class="p">,</span><span class="s1">&#39;spark&#39;</span><span class="p">,</span><span class="no">null</span><span class="p">);</span>

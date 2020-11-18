@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>11. 常用软件梳理 &mdash; Code-Cookbook 0.1 文档</title>
+  <title>13. 常用软件梳理 &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="Blogs" href="../Blogs/index.html" />
-    <link rel="prev" title="10. Zookeeper" href="Zookeeper.html" /> 
+    <link rel="prev" title="12. Zookeeper" href="Zookeeper.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,17 +95,19 @@
 <li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">6. Hadoop搭建总体步骤</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html">7. Hbase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kafka.html">8. Kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">10. Zookeeper</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">11. 常用软件梳理</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">11.1. 软件及开放的端口</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#zookeeper">11.2. Zookeeper基本使用</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hadoop">11.3. Hadoop基本使用</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hive">11.4. Hive的基本使用</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#beeline">11.4.1. beeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html">9. Kylin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">10. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html">11. Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">12. Zookeeper</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">13. 常用软件梳理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">13.1. 软件及开放的端口</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#zookeeper">13.2. Zookeeper基本使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hadoop">13.3. Hadoop基本使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hive">13.4. Hive的基本使用</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#beeline">13.4.1. beeline</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#hbase">11.5. HBASE基本使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hbase">13.5. HBASE基本使用</a></li>
 </ul>
 </li>
 </ul>
@@ -170,7 +172,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">11. </span>常用软件梳理</li>
+      <li><span class="section-number">13. </span>常用软件梳理</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -190,9 +192,9 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1><span class="section-number">11. </span>常用软件梳理<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<h1><span class="section-number">13. </span>常用软件梳理<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id2">
-<h2><span class="section-number">11.1. </span>软件及开放的端口<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">13.1. </span>软件及开放的端口<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p>Zookeeper：</p>
 <ul>
@@ -241,7 +243,7 @@
 </ul>
 </div>
 <div class="section" id="zookeeper">
-<h2><span class="section-number">11.2. </span>Zookeeper基本使用<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">13.2. </span>Zookeeper基本使用<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>启动服务端</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/servers/zookeeper-3.4.6/
@@ -308,7 +310,7 @@ rmr /itcast/heima
 </ul>
 </div>
 <div class="section" id="hadoop">
-<h2><span class="section-number">11.3. </span>Hadoop基本使用<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">13.3. </span>Hadoop基本使用<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>配置环境变量</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#HADOOP_HOME</span>
@@ -416,7 +418,7 @@ stop-yarn.sh
 </ul>
 </div>
 <div class="section" id="hive">
-<h2><span class="section-number">11.4. </span>Hive的基本使用<a class="headerlink" href="#hive" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">13.4. </span>Hive的基本使用<a class="headerlink" href="#hive" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>启动HDFS和YARN</p>
 <ul>
@@ -446,7 +448,7 @@ stop-yarn.sh
 </li>
 </ul>
 <div class="section" id="beeline">
-<h3><span class="section-number">11.4.1. </span>beeline<a class="headerlink" href="#beeline" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">13.4.1. </span>beeline<a class="headerlink" href="#beeline" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>使用</p>
 <ul>
@@ -567,7 +569,7 @@ hive --hiveconf <span class="nv">tn</span><span class="o">=</span><span class="n
 </div>
 <hr class="docutils" />
 <div class="section" id="hbase">
-<h2><span class="section-number">11.5. </span>HBASE基本使用<a class="headerlink" href="#hbase" title="永久链接至标题">¶</a></h2>
+<h2><span class="section-number">13.5. </span>HBASE基本使用<a class="headerlink" href="#hbase" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>配置环境变量</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#HBASE_HOME</span>
@@ -619,7 +621,7 @@ hive --hiveconf <span class="nv">tn</span><span class="o">=</span><span class="n
         <a href="../Blogs/index.html" class="btn btn-neutral float-right" title="Blogs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Zookeeper.html" class="btn btn-neutral float-left" title="10. Zookeeper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Zookeeper.html" class="btn btn-neutral float-left" title="12. Zookeeper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

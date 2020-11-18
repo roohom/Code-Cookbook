@@ -95,9 +95,11 @@
 <li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">6. Hadoop搭建总体步骤</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html">7. Hbase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kafka.html">8. Kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">10. Zookeeper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">11. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html">9. Kylin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">10. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html">11. Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">12. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">13. 常用软件梳理</a></li>
 </ul>
 </li>
 </ul>
@@ -230,10 +232,10 @@
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html#hbasemapreduce">7.11. Hbase与MapReduce的集成</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html#bulkload">7.12. BulkLoad</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html#hivehbase">7.13. Hive与HBASE集成</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id25">7.14. HBASE热点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id26">7.14. HBASE热点</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html#rowkey">7.15. 预分区与Rowkey设计</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html#lsm">7.16. LSM模型与列族属性</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id30">7.17. 常用列族属性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html#id31">7.17. 常用列族属性</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Kafka.html">8. Kafka</a><ul>
@@ -247,30 +249,46 @@
 <li class="toctree-l2"><a class="reference internal" href="Kafka.html#id26">8.8. Kafka常用操作指南</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Redis.html">9. Redis</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html#id1">9.1. 介绍</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html#id2">9.2. 应用场景</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html#id3">9.3. 特点</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html#windowsredis">9.4. Windows上使用Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html#id4">9.5. 数据类型和语法</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html#id6">9.6. 持久化</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html#id7">9.7. 集群搭建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Kylin.html">9. Kylin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html#id1">9.1. 概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html#id2">9.2. 启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html#id3">9.3. 使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html#id4">9.4. 工作原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html#id8">9.5. 碎片管理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html#cuboid">9.6. Cuboid剪枝优化</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Zookeeper.html">10. Zookeeper</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id1">10.1. 辅助选举</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#zk">10.2. ZK选举</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id2">10.3. 节点类型</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id3">10.4. 监听机制</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id4">10.5. 基本使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Redis.html">10. Redis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id1">10.1. 介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id2">10.2. 应用场景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id3">10.3. 特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#windowsredis">10.4. Windows上使用Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id4">10.5. 数据类型和语法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id6">10.6. 持久化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id7">10.7. 集群搭建</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id12">10.8. Redis的数据分区</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html#id15">10.9. 可能遇到的问题</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">11. 常用软件梳理</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#id2">11.1. 软件及开放的端口</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#zookeeper">11.2. Zookeeper基本使用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hadoop">11.3. Hadoop基本使用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hive">11.4. Hive的基本使用</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hbase">11.5. HBASE基本使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Spark.html">11. Spark</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html#introduction">11.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html#quick-start">11.2. Quick Start</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Zookeeper.html">12. Zookeeper</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id1">12.1. 辅助选举</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#zk">12.2. ZK选举</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id2">12.3. 节点类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id3">12.4. 监听机制</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html#id4">12.5. 基本使用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">13. 常用软件梳理</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#id2">13.1. 软件及开放的端口</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#zookeeper">13.2. Zookeeper基本使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hadoop">13.3. Hadoop基本使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hive">13.4. Hive的基本使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html#hbase">13.5. HBASE基本使用</a></li>
 </ul>
 </li>
 </ul>

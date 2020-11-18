@@ -244,9 +244,9 @@
 <li><p>例如第20题要对所有学生的总成绩进行排名，正确写法应该是这样的：</p>
 <div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
        <span class="nf">sum</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
-       <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="o">@</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>   <span class="k">as</span> <span class="n">rk</span>
+       <span class="nv">@i</span> <span class="o">:=</span> <span class="nv">@i</span> <span class="o">+</span> <span class="mi">1</span>   <span class="k">as</span> <span class="n">rk</span>
 <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span><span class="p">,</span>
-     <span class="p">(</span><span class="k">select</span> <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span>
+     <span class="p">(</span><span class="k">select</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span>
 <span class="k">order</span> <span class="k">by</span> <span class="n">total</span> <span class="k">desc</span><span class="p">;</span>
 </pre></div>
@@ -256,15 +256,15 @@
 <p>测试SQL代码①:</p>
 <div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
        <span class="nf">sum</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
-       <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="o">@</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>   <span class="k">as</span> <span class="n">rk</span>
+       <span class="nv">@i</span> <span class="o">:=</span> <span class="nv">@i</span> <span class="o">+</span> <span class="mi">1</span>   <span class="k">as</span> <span class="n">rk</span>
 <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span><span class="p">,</span>
-     <span class="p">(</span><span class="k">select</span> <span class="o">@</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span>
+     <span class="p">(</span><span class="k">select</span> <span class="nv">@i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span>
 <span class="k">order</span> <span class="k">by</span> <span class="n">total</span> <span class="k">desc</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>测试SQL代码②:</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">@</span><span class="n">i</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="nv">@i</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>第一次执行①再执行②得到的<code class="docutils literal notranslate"><span class="pre">&#64;i</span></code>值为6，第二次重复①和②得到的<code class="docutils literal notranslate"><span class="pre">&#64;i</span></code>值为12，依次递增,这就说明，你所定义的用户变量是用来暂存值的，此变量直到连接断开才被释放，<code class="docutils literal notranslate"><span class="pre">:=</span></code>是赋值，而<code class="docutils literal notranslate"><span class="pre">:</span></code>只是取其值而已。</p>
@@ -288,11 +288,11 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">MONTH(DATE)</span></code> 得到指定日期是该年的第多少月（DATE为完整日期）</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">DAY(DATE)</span></code>得到指定日期是该月的第多少天（DATE为完整日期）</p></li>
 <li><p>获取周一和周日</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>select subdate(curdate(),date_format(curdate(),&#39;%w&#39;)-1)//获取当前日期在本周的周一
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="nf">subdate</span><span class="p">(</span><span class="nf">curdate</span><span class="p">(),</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">curdate</span><span class="p">(),</span><span class="s1">&#39;%w&#39;</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="n">获取当前日期在本周的周一</span>
 
-select subdate(curdate(),date_format(curdate(),&#39;%w&#39;)-7)//获取当前日期在本周的周日
+<span class="k">select</span> <span class="nf">subdate</span><span class="p">(</span><span class="nf">curdate</span><span class="p">(),</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">curdate</span><span class="p">(),</span><span class="s1">&#39;%w&#39;</span><span class="p">)</span><span class="o">-</span><span class="mi">7</span><span class="p">)</span><span class="o">//</span><span class="n">获取当前日期在本周的周日</span>
 
-注意:%w 是以数字的形式来表示周中的天数（ 0 = Sunday, 1=Monday, . . ., 6=Saturday），0为周日，6为周六
+<span class="n">注意</span><span class="o">:%</span><span class="n">w</span> <span class="n">是以数字的形式来表示周中的天数（</span> <span class="mi">0</span> <span class="o">=</span> <span class="n">Sunday</span><span class="p">,</span> <span class="mi">1</span><span class="o">=</span><span class="n">Monday</span><span class="p">,</span> <span class="p">.</span> <span class="p">.</span> <span class="p">.,</span> <span class="mi">6</span><span class="o">=</span><span class="n">Saturday），0为周日，6为周六</span>
 </pre></div>
 </div>
 </li>
@@ -309,103 +309,103 @@ select subdate(curdate(),date_format(curdate(),&#39;%w&#39;)-7)//获取当前日
 </div>
 <div class="section" id="id5">
 <h2><span class="section-number">2.3. </span>题设条件<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>--建表
---学生表
-CREATE TABLE `Student`(
-	`s_id` VARCHAR(20),
-	`s_name` VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,
-	`s_birth` VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,
-	`s_sex` VARCHAR(10) NOT NULL DEFAULT &#39;&#39;,
-	PRIMARY KEY(`s_id`)
-);
---课程表
-CREATE TABLE `Course`(
-	`c_id`  VARCHAR(20),
-	`c_name` VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,
-	`t_id` VARCHAR(20) NOT NULL,
-	PRIMARY KEY(`c_id`)
-);
---教师表
-CREATE TABLE `Teacher`(
-	`t_id` VARCHAR(20),
-	`t_name` VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,
-	PRIMARY KEY(`t_id`)
-);
---成绩表
-CREATE TABLE `Score`(
-	`s_id` VARCHAR(20),
-	`c_id`  VARCHAR(20),
-	`s_score` INT(3),
-	PRIMARY KEY(`s_id`,`c_id`)
-);
---插入学生表测试数据
-insert into Student values(&#39;01&#39; , &#39;赵雷&#39; , &#39;1990-01-01&#39; , &#39;男&#39;);
-insert into Student values(&#39;02&#39; , &#39;钱电&#39; , &#39;1990-12-21&#39; , &#39;男&#39;);
-insert into Student values(&#39;03&#39; , &#39;孙风&#39; , &#39;1990-05-20&#39; , &#39;男&#39;);
-insert into Student values(&#39;04&#39; , &#39;李云&#39; , &#39;1990-08-06&#39; , &#39;男&#39;);
-insert into Student values(&#39;05&#39; , &#39;周梅&#39; , &#39;1991-12-01&#39; , &#39;女&#39;);
-insert into Student values(&#39;06&#39; , &#39;吴兰&#39; , &#39;1992-03-01&#39; , &#39;女&#39;);
-insert into Student values(&#39;07&#39; , &#39;郑竹&#39; , &#39;1989-07-01&#39; , &#39;女&#39;);
-insert into Student values(&#39;08&#39; , &#39;王菊&#39; , &#39;1990-01-20&#39; , &#39;女&#39;);
---课程表测试数据
-insert into Course values(&#39;01&#39; , &#39;语文&#39; , &#39;02&#39;);
-insert into Course values(&#39;02&#39; , &#39;数学&#39; , &#39;01&#39;);
-insert into Course values(&#39;03&#39; , &#39;英语&#39; , &#39;03&#39;);
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">建表</span>
+<span class="o">--</span><span class="n">学生表</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`Student`</span><span class="p">(</span>
+	<span class="n">`s_id`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+	<span class="n">`s_name`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+	<span class="n">`s_birth`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+	<span class="n">`s_sex`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+	<span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">(</span><span class="n">`s_id`</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="o">--</span><span class="n">课程表</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`Course`</span><span class="p">(</span>
+	<span class="n">`c_id`</span>  <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+	<span class="n">`c_name`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+	<span class="n">`t_id`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
+	<span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">(</span><span class="n">`c_id`</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="o">--</span><span class="n">教师表</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`Teacher`</span><span class="p">(</span>
+	<span class="n">`t_id`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+	<span class="n">`t_name`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+	<span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">(</span><span class="n">`t_id`</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="o">--</span><span class="n">成绩表</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`Score`</span><span class="p">(</span>
+	<span class="n">`s_id`</span> <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+	<span class="n">`c_id`</span>  <span class="kt">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+	<span class="n">`s_score`</span> <span class="kt">INT</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+	<span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">(</span><span class="n">`s_id`</span><span class="p">,</span><span class="n">`c_id`</span><span class="p">)</span>
+<span class="p">);</span>
+<span class="o">--</span><span class="n">插入学生表测试数据</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="s1">&#39;赵雷&#39;</span> <span class="p">,</span> <span class="s1">&#39;1990-01-01&#39;</span> <span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="s1">&#39;钱电&#39;</span> <span class="p">,</span> <span class="s1">&#39;1990-12-21&#39;</span> <span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="s1">&#39;孙风&#39;</span> <span class="p">,</span> <span class="s1">&#39;1990-05-20&#39;</span> <span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;04&#39;</span> <span class="p">,</span> <span class="s1">&#39;李云&#39;</span> <span class="p">,</span> <span class="s1">&#39;1990-08-06&#39;</span> <span class="p">,</span> <span class="s1">&#39;男&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;05&#39;</span> <span class="p">,</span> <span class="s1">&#39;周梅&#39;</span> <span class="p">,</span> <span class="s1">&#39;1991-12-01&#39;</span> <span class="p">,</span> <span class="s1">&#39;女&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;06&#39;</span> <span class="p">,</span> <span class="s1">&#39;吴兰&#39;</span> <span class="p">,</span> <span class="s1">&#39;1992-03-01&#39;</span> <span class="p">,</span> <span class="s1">&#39;女&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;07&#39;</span> <span class="p">,</span> <span class="s1">&#39;郑竹&#39;</span> <span class="p">,</span> <span class="s1">&#39;1989-07-01&#39;</span> <span class="p">,</span> <span class="s1">&#39;女&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Student</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;08&#39;</span> <span class="p">,</span> <span class="s1">&#39;王菊&#39;</span> <span class="p">,</span> <span class="s1">&#39;1990-01-20&#39;</span> <span class="p">,</span> <span class="s1">&#39;女&#39;</span><span class="p">);</span>
+<span class="o">--</span><span class="n">课程表测试数据</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Course</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="s1">&#39;语文&#39;</span> <span class="p">,</span> <span class="s1">&#39;02&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Course</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="s1">&#39;数学&#39;</span> <span class="p">,</span> <span class="s1">&#39;01&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Course</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="s1">&#39;英语&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span><span class="p">);</span>
 
---教师表测试数据
-insert into Teacher values(&#39;01&#39; , &#39;张三&#39;);
-insert into Teacher values(&#39;02&#39; , &#39;李四&#39;);
-insert into Teacher values(&#39;03&#39; , &#39;王五&#39;);
+<span class="o">--</span><span class="n">教师表测试数据</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Teacher</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="s1">&#39;张三&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Teacher</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="s1">&#39;李四&#39;</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Teacher</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="s1">&#39;王五&#39;</span><span class="p">);</span>
 
---成绩表测试数据
-insert into Score values(&#39;01&#39; , &#39;01&#39; , 80);
-insert into Score values(&#39;01&#39; , &#39;02&#39; , 90);
-insert into Score values(&#39;01&#39; , &#39;03&#39; , 99);
-insert into Score values(&#39;02&#39; , &#39;01&#39; , 70);
-insert into Score values(&#39;02&#39; , &#39;02&#39; , 60);
-insert into Score values(&#39;02&#39; , &#39;03&#39; , 80);
-insert into Score values(&#39;03&#39; , &#39;01&#39; , 80);
-insert into Score values(&#39;03&#39; , &#39;02&#39; , 80);
-insert into Score values(&#39;03&#39; , &#39;03&#39; , 80);
-insert into Score values(&#39;04&#39; , &#39;01&#39; , 50);
-insert into Score values(&#39;04&#39; , &#39;02&#39; , 30);
-insert into Score values(&#39;04&#39; , &#39;03&#39; , 20);
-insert into Score values(&#39;05&#39; , &#39;01&#39; , 76);
-insert into Score values(&#39;05&#39; , &#39;02&#39; , 87);
-insert into Score values(&#39;06&#39; , &#39;01&#39; , 31);
-insert into Score values(&#39;06&#39; , &#39;03&#39; , 34);
-insert into Score values(&#39;07&#39; , &#39;02&#39; , 89);
-insert into Score values(&#39;07&#39; , &#39;03&#39; , 98);
+<span class="o">--</span><span class="n">成绩表测试数据</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="mi">90</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="mi">99</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="mi">70</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="mi">60</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="mi">80</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;04&#39;</span> <span class="p">,</span> <span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;04&#39;</span> <span class="p">,</span> <span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;04&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;05&#39;</span> <span class="p">,</span> <span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="mi">76</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;05&#39;</span> <span class="p">,</span> <span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="mi">87</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;06&#39;</span> <span class="p">,</span> <span class="s1">&#39;01&#39;</span> <span class="p">,</span> <span class="mi">31</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;06&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="mi">34</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;07&#39;</span> <span class="p">,</span> <span class="s1">&#39;02&#39;</span> <span class="p">,</span> <span class="mi">89</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;07&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="mi">98</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id6">
 <h2><span class="section-number">2.4. </span>题目(1~50)<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 <p>1、查询”01”课程比”02”课程成绩高的学生的信息及课程分数</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>-- 1、查询&quot;01&quot;课程比&quot;02&quot;课程成绩高的学生的信息及课程分数
--- 方式一:
-select s.s_id, s.s_name, s.s_birth, s.s_sex, p.s_score
-from student as s,
-     (
-         select a.s_id, a.s_score
-         from (select s_id, c_id, s_score
-               from score
-               where c_id = 01
-               group by c_id, s_id) as a,
-              (select s_id, c_id, s_score
-               from score
-               where c_id = 02
-               group by c_id, s_id) as b
-         where a.s_score &gt; b.s_score
-           and a.s_id = b.s_id) as p
-where s.s_id = p.s_id;
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 1、查询&quot;01&quot;课程比&quot;02&quot;课程成绩高的学生的信息及课程分数</span>
+<span class="c1">-- 方式一:</span>
+<span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">s_name</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">s_sex</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">s_score</span>
+<span class="k">from</span> <span class="n">student</span> <span class="k">as</span> <span class="n">s</span><span class="p">,</span>
+     <span class="p">(</span>
+         <span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span>
+         <span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="n">s_id</span><span class="p">,</span> <span class="n">c_id</span><span class="p">,</span> <span class="n">s_score</span>
+               <span class="k">from</span> <span class="n">score</span>
+               <span class="k">where</span> <span class="n">c_id</span> <span class="o">=</span> <span class="mi">01</span>
+               <span class="k">group</span> <span class="k">by</span> <span class="n">c_id</span><span class="p">,</span> <span class="n">s_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span><span class="p">,</span>
+              <span class="p">(</span><span class="k">select</span> <span class="n">s_id</span><span class="p">,</span> <span class="n">c_id</span><span class="p">,</span> <span class="n">s_score</span>
+               <span class="k">from</span> <span class="n">score</span>
+               <span class="k">where</span> <span class="n">c_id</span> <span class="o">=</span> <span class="mi">02</span>
+               <span class="k">group</span> <span class="k">by</span> <span class="n">c_id</span><span class="p">,</span> <span class="n">s_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">b</span>
+         <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">s_score</span>
+           <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">s_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span>
+<span class="k">where</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_id</span><span class="p">;</span>
 
-方式二:
-select s3.*,s.s_score,s2.s_score
-from score as s
-left join score s2 on s.s_id = s2.s_id
-left join Student S3 on s.s_id = S3.s_id
-where s2.s_score &gt; s.s_score and s.c_id = &#39;02&#39; and  s2.c_id=&#39;01&#39;;
+<span class="n">方式二</span><span class="o">:</span>
+<span class="k">select</span> <span class="n">s3</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">,</span><span class="n">s2</span><span class="p">.</span><span class="n">s_score</span>
+<span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
+<span class="k">left</span> <span class="k">join</span> <span class="n">score</span> <span class="n">s2</span> <span class="k">on</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">s_id</span>
+<span class="k">left</span> <span class="k">join</span> <span class="n">Student</span> <span class="n">S3</span> <span class="k">on</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">S3</span><span class="p">.</span><span class="n">s_id</span>
+<span class="k">where</span> <span class="n">s2</span><span class="p">.</span><span class="n">s_score</span> <span class="o">&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="k">and</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;02&#39;</span> <span class="k">and</span>  <span class="n">s2</span><span class="p">.</span><span class="n">c_id</span><span class="o">=</span><span class="s1">&#39;01&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>2、查询”01”课程比”02”课程成绩低的学生的信息及课程分数</p>
@@ -460,20 +460,20 @@ where s2.s_score &gt; s.s_score and s.c_id = &#39;02&#39; and  s2.c_id=&#39;01&#
 </pre></div>
 </div>
 <p>5、查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>-- 5、查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩
-select a.s_id as 学生编号,
-       s_name as 学生姓名,
-       class as 课程总数,
-       totalScore as 总成绩
-from (select s_id,
-             s_name
-      from student) as a,
-     (select s_id,
-             count(c_id)  as class,
-             sum(s_score) as totalScore
-      from score
-      group by s_id) as b
-where a.s_id = b.s_id;
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 5、查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span> <span class="k">as</span> <span class="n">学生编号</span><span class="p">,</span>
+       <span class="n">s_name</span> <span class="k">as</span> <span class="n">学生姓名</span><span class="p">,</span>
+       <span class="n">class</span> <span class="k">as</span> <span class="n">课程总数</span><span class="p">,</span>
+       <span class="n">totalScore</span> <span class="k">as</span> <span class="n">总成绩</span>
+<span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="n">s_id</span><span class="p">,</span>
+             <span class="n">s_name</span>
+      <span class="k">from</span> <span class="n">student</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span><span class="p">,</span>
+     <span class="p">(</span><span class="k">select</span> <span class="n">s_id</span><span class="p">,</span>
+             <span class="nf">count</span><span class="p">(</span><span class="n">c_id</span><span class="p">)</span>  <span class="k">as</span> <span class="n">class</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="n">totalScore</span>
+      <span class="k">from</span> <span class="n">score</span>
+      <span class="k">group</span> <span class="k">by</span> <span class="n">s_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">b</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">s_id</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>6、查询”李”姓老师的数量</p>
@@ -637,18 +637,18 @@ where a.s_id = b.s_id;
 </pre></div>
 </div>
 <p>15、查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>-- 15、查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩
-# 所学的课程不及格的数量达到了2及以上
-# 以不及格的条件来筛选查询出来学号、平均成绩
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 15、查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩</span>
+<span class="c1"># 所学的课程不及格的数量达到了2及以上</span>
+<span class="c1"># 以不及格的条件来筛选查询出来学号、平均成绩</span>
 
-select p.s_id, s.s_name, p.平均成绩
-from (select a.s_id, sum(a.s_score) / count(a.c_id) as &#39;平均成绩&#39;
-      from score as a
-      where a.s_score &lt; 60
-      group by s_id
-      having count(a.s_id) &gt;= 2) as p,
-     student as s
-where s.s_id = p.s_id;
+<span class="k">select</span> <span class="n">p</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">s_name</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">平均成绩</span>
+<span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="o">/</span> <span class="nf">count</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;平均成绩&#39;</span>
+      <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span>
+      <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="o">&lt;</span> <span class="mi">60</span>
+      <span class="k">group</span> <span class="k">by</span> <span class="n">s_id</span>
+      <span class="k">having</span> <span class="nf">count</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">,</span>
+     <span class="n">student</span> <span class="k">as</span> <span class="n">s</span>
+<span class="k">where</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_id</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>16、检索”01”课程分数小于60，按分数降序排列的学生信息</p>
@@ -663,61 +663,61 @@ where s.s_id = p.s_id;
 </pre></div>
 </div>
 <p>17、按平均成绩从高到低显示所有学生的所有课程的成绩以及平均成绩</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>-- 17、按平均成绩从高到低显示所有学生的所有课程的成绩以及平均成绩
-# 按平均成绩排序的学号和对应的平均成绩
-select a.s_id, avg(a.s_score) as `avg`
-from score as a
-group by a.s_id
-order by avg desc;
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 17、按平均成绩从高到低显示所有学生的所有课程的成绩以及平均成绩</span>
+<span class="c1"># 按平均成绩排序的学号和对应的平均成绩</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="n">`avg`</span>
+<span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span>
+<span class="k">order</span> <span class="k">by</span> <span class="k">avg</span> <span class="k">desc</span><span class="p">;</span>
 
--- 以score表的原生样式展示，看看就好
-select q.s_id, c.c_name, q.s_score, p.avg
-from score as q,
-     (select a.s_id, avg(a.s_score) as avg
-      from score as a
-      group by a.s_id
-      order by avg desc) as p,
-     course as c
-where q.s_id = p.s_id
-  and q.c_id = c.c_id
-order by p.avg desc;
+<span class="c1">-- 以score表的原生样式展示，看看就好</span>
+<span class="k">select</span> <span class="n">q</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span><span class="p">,</span> <span class="n">q</span><span class="p">.</span><span class="n">s_score</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="k">avg</span>
+<span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">q</span><span class="p">,</span>
+     <span class="p">(</span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="k">avg</span>
+      <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span>
+      <span class="k">group</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span>
+      <span class="k">order</span> <span class="k">by</span> <span class="k">avg</span> <span class="k">desc</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">,</span>
+     <span class="n">course</span> <span class="k">as</span> <span class="n">c</span>
+<span class="k">where</span> <span class="n">q</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_id</span>
+  <span class="k">and</span> <span class="n">q</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">c_id</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">p</span><span class="p">.</span><span class="k">avg</span> <span class="k">desc</span><span class="p">;</span>
 
--- 更为人性化的显示
-select d.s_id,
-       (select s_score from score as a where a.s_id = d.s_id and a.c_id = &#39;01&#39;) as &#39;语文&#39;,
-       (select s_score from score as a where a.s_id = d.s_id and a.c_id = &#39;02&#39;) as &#39;数学&#39;,
-       (select s_score from score as a where a.s_id = d.s_id and a.c_id = &#39;03&#39;) as &#39;英语&#39;,
-       avg(s_score)                                                             as &#39;平均分&#39;
-from score as d
-group by d.s_id
-order by 平均分 desc;
+<span class="c1">-- 更为人性化的显示</span>
+<span class="k">select</span> <span class="n">d</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
+       <span class="p">(</span><span class="k">select</span> <span class="n">s_score</span> <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span> <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">s_id</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;01&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span>
+       <span class="p">(</span><span class="k">select</span> <span class="n">s_score</span> <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span> <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">s_id</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;02&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span>
+       <span class="p">(</span><span class="k">select</span> <span class="n">s_score</span> <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span> <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">s_id</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;03&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;英语&#39;</span><span class="p">,</span>
+       <span class="k">avg</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span>                                                             <span class="k">as</span> <span class="s1">&#39;平均分&#39;</span>
+<span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">d</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">d</span><span class="p">.</span><span class="n">s_id</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">平均分</span> <span class="k">desc</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>18.查询各科成绩最高分、最低分和平均分：以如下形式显示：课程ID，课程name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率
 – 及格为&gt;=60，中等为：70-80，优良为：80-90，优秀为：&gt;=90</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>-- 18.查询各科成绩最高分、最低分和平均分：以如下形式显示：课程ID，课程name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率
--- 及格为&gt;=60，中等为：70-80，优良为：80-90，优秀为：&gt;=90
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 18.查询各科成绩最高分、最低分和平均分：以如下形式显示：课程ID，课程name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率</span>
+<span class="c1">-- 及格为&gt;=60，中等为：70-80，优良为：80-90，优秀为：&gt;=90</span>
 
-select a.c_id                                                                                      as 课程ID,
-       b.c_name                                                                                    as 课程name,
-       max(s_score)                                                                                as 最高分,
-       min(s_score)                                                                                as 最低分,
-       round(avg(s_score), 2)                                                                      as 平均分,
-       round(sum(case when s_score &gt;= 60 then 1 else 0 end) / count(s_score) * 100, 2)             as 及格率,
-       round(sum(case when s_score between 70 and 80 then 1 else 0 end) / count(s_score) * 100, 2) as 中等率,
-       round(sum(case when s_score between 80 and 90 then 1 else 0 end) / count(s_score) * 100, 2) as 优良率,
-       round(sum(case when s_score &gt;= 90 then 1 else 0 end) / count(s_score) * 100, 2)             as 优秀率
-from score as a,
-     course as b
-where a.c_id = b.c_id
-group by a.c_id;
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span>                                                                                      <span class="k">as</span> <span class="n">课程ID</span><span class="p">,</span>
+       <span class="n">b</span><span class="p">.</span><span class="n">c_name</span>                                                                                    <span class="k">as</span> <span class="n">课程name</span><span class="p">,</span>
+       <span class="nf">max</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span>                                                                                <span class="k">as</span> <span class="n">最高分</span><span class="p">,</span>
+       <span class="nf">min</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span>                                                                                <span class="k">as</span> <span class="n">最低分</span><span class="p">,</span>
+       <span class="nf">round</span><span class="p">(</span><span class="k">avg</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>                                                                      <span class="k">as</span> <span class="n">平均分</span><span class="p">,</span>
+       <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="o">/</span> <span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>             <span class="k">as</span> <span class="n">及格率</span><span class="p">,</span>
+       <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="k">between</span> <span class="mi">70</span> <span class="k">and</span> <span class="mi">80</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="o">/</span> <span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">中等率</span><span class="p">,</span>
+       <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="k">between</span> <span class="mi">80</span> <span class="k">and</span> <span class="mi">90</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="o">/</span> <span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">优良率</span><span class="p">,</span>
+       <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;=</span> <span class="mi">90</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="o">/</span> <span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>             <span class="k">as</span> <span class="n">优秀率</span>
+<span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span><span class="p">,</span>
+     <span class="n">course</span> <span class="k">as</span> <span class="n">b</span>
+<span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">c_id</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>19、按各科成绩进行排序，并显示排名</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 19、按各科成绩进行排序，并显示排名</span>
 <span class="c1">-- 使用rank函数</span>
 <span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span> <span class="p">,</span>
-       <span class="nf">dense_rank</span><span class="p">()</span> <span class="nf">over</span> <span class="p">(</span><span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">desc</span> <span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;排名&#39;</span>
+       <span class="k">dense_rank</span><span class="p">()</span> <span class="k">over</span> <span class="p">(</span><span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">desc</span> <span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;排名&#39;</span>
 <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">s_id</span><span class="p">,</span><span class="n">c_id</span><span class="p">,</span><span class="n">s_score</span>
 <span class="k">order</span> <span class="k">by</span> <span class="n">s_score</span> <span class="k">desc</span> <span class="p">;</span>
@@ -726,53 +726,53 @@ group by a.c_id;
 <span class="k">select</span> <span class="n">p</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
        <span class="n">p</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span>
        <span class="c1">-- 查询到一条就自增1</span>
-       <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="o">@</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>                                             <span class="k">as</span> <span class="ss">`dense_rank`</span><span class="p">,</span>
+       <span class="nv">@i</span> <span class="o">:=</span> <span class="nv">@i</span> <span class="o">+</span> <span class="mi">1</span>                                             <span class="k">as</span> <span class="n">`dense_rank`</span><span class="p">,</span>
        <span class="c1">-- 当查询到和前一天一样时，不自增，否则和i一样</span>
-       <span class="o">@</span><span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="o">@</span><span class="n">score</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_score</span> <span class="k">then</span> <span class="o">@</span><span class="n">k</span> <span class="k">else</span> <span class="o">@</span><span class="n">i</span> <span class="n">end</span><span class="p">)</span> <span class="k">as</span> <span class="ss">`rank`</span><span class="p">,</span>
-       <span class="o">@</span><span class="n">score</span> <span class="p">:</span><span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_score</span>
+       <span class="nv">@k</span> <span class="o">:=</span> <span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="nv">@score</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_score</span> <span class="k">then</span> <span class="nv">@k</span> <span class="k">else</span> <span class="nv">@i</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`rank`</span><span class="p">,</span>
+       <span class="nv">@score</span> <span class="o">:=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_score</span>
 <span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="o">*</span>
       <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
       <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="n">s_score</span>
       <span class="k">order</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="k">desc</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">,</span>
      <span class="c1">-- 对变量值进行初始化</span>
-     <span class="p">(</span><span class="k">select</span> <span class="o">@</span><span class="n">k</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">@</span><span class="n">score</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">q</span><span class="p">;</span>
+     <span class="p">(</span><span class="k">select</span> <span class="nv">@k</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span><span class="nv">@i</span> <span class="o">:=</span><span class="mi">0</span><span class="p">,</span> <span class="nv">@score</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">q</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>20、查询学生的总成绩并进行排名</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>-- 20、查询学生的总成绩并进行排名
--- 使用rank函数
-select a.s_id                                            as 学号,
-       sum(a.s_score)                                    as 总成绩,
-       dense_rank() over (order by sum(a.s_score) desc ) as 名次
-from score as a
-group by a.s_id;
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 20、查询学生的总成绩并进行排名</span>
+<span class="c1">-- 使用rank函数</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span>                                            <span class="k">as</span> <span class="n">学号</span><span class="p">,</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span>                                    <span class="k">as</span> <span class="n">总成绩</span><span class="p">,</span>
+       <span class="k">dense_rank</span><span class="p">()</span> <span class="k">over</span> <span class="p">(</span><span class="k">order</span> <span class="k">by</span> <span class="nf">sum</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">desc</span> <span class="p">)</span> <span class="k">as</span> <span class="n">名次</span>
+<span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">;</span>
 
--- 不使用rank函数
-select s.s_id,
-       sum(s.s_score) as total,
-       @i := @i + 1   as rk
-from score as s,
-     (select @i := 0) as t
-group by s.s_id
-order by total desc;
+<span class="c1">-- 不使用rank函数</span>
+<span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span><span class="p">,</span>
+       <span class="nv">@i</span> <span class="o">:=</span> <span class="nv">@i</span> <span class="o">+</span> <span class="mi">1</span>   <span class="k">as</span> <span class="n">rk</span>
+<span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span><span class="p">,</span>
+     <span class="p">(</span><span class="k">select</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">total</span> <span class="k">desc</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>21、查询不同老师所教不同课程平均分从高到低显示</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 21、查询不同老师所教不同课程平均分从高到低显示</span>
 
 <span class="c1"># 先查出不同课程的平局分</span>
-<span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="nf">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="ss">`avg`</span>
+<span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="k">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`avg`</span>
 <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">;</span>
 
-<span class="k">select</span> <span class="n">t</span><span class="p">.</span><span class="n">t_name</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span><span class="p">,</span>  <span class="n">a</span><span class="p">.</span><span class="n">avg</span>
+<span class="k">select</span> <span class="n">t</span><span class="p">.</span><span class="n">t_name</span><span class="p">,</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span><span class="p">,</span>  <span class="n">a</span><span class="p">.</span><span class="k">avg</span>
 <span class="k">from</span> <span class="n">teacher</span> <span class="k">as</span> <span class="n">t</span><span class="p">,</span>
      <span class="n">course</span> <span class="k">as</span> <span class="n">c</span><span class="p">,</span>
-     <span class="p">(</span><span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="nf">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="ss">`avg`</span>
+     <span class="p">(</span><span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="nf">round</span><span class="p">(</span><span class="k">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`avg`</span>
       <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
       <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span>
 <span class="k">where</span> <span class="n">c</span><span class="p">.</span><span class="n">t_id</span> <span class="o">=</span> <span class="n">t</span><span class="p">.</span><span class="n">t_id</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">c_id</span>
-<span class="k">order</span> <span class="k">by</span> <span class="n">avg</span> <span class="k">desc</span> <span class="p">;</span>
+<span class="k">order</span> <span class="k">by</span> <span class="k">avg</span> <span class="k">desc</span> <span class="p">;</span>
 </pre></div>
 </div>
 <p>22、查询所有课程的成绩第2名到第3名的学生信息及该课程成绩</p>
@@ -813,14 +813,14 @@ IF(expr1,expr2,expr3)，如果expr1的值为true，则返回expr2的值，如果
                 <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span>
                 <span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">,</span>
                 <span class="c1"># 如果之前查询到的课程和本次查询到的一致，就把i加一，表示名次递增，否则将i置为1，表示名次重头开始计</span>
-                <span class="k">if</span><span class="p">(</span><span class="o">@</span><span class="n">ci</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="o">@</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">rk</span><span class="p">,</span>
-                <span class="o">@</span><span class="n">ci</span> <span class="p">:</span><span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span>
+                <span class="k">if</span><span class="p">(</span><span class="nv">@ci</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="nv">@i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">rk</span><span class="p">,</span>
+                <span class="nv">@ci</span> <span class="o">:=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span>
          <span class="k">from</span> <span class="p">(</span><span class="c1"># 按课程分类查询分数</span>
                   <span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span>
                   <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
                   <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span>
                   <span class="k">order</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="k">desc</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span>
-                  <span class="k">join</span> <span class="p">(</span><span class="k">select</span> <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">@</span><span class="n">ci</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">crk</span>
+                  <span class="k">join</span> <span class="p">(</span><span class="k">select</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">@ci</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">b</span><span class="p">)</span> <span class="k">as</span> <span class="n">crk</span>
          <span class="k">left</span> <span class="k">join</span> <span class="n">student</span> <span class="k">as</span> <span class="n">q</span> <span class="k">on</span> <span class="n">q</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">crk</span><span class="p">.</span><span class="n">s_id</span>
          <span class="k">left</span> <span class="k">join</span> <span class="n">course</span> <span class="k">as</span> <span class="n">c</span> <span class="k">on</span> <span class="n">crk</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">c_id</span>
 <span class="k">where</span> <span class="n">crk</span><span class="p">.</span><span class="n">rk</span> <span class="o">=</span> <span class="mi">2</span>
@@ -831,10 +831,10 @@ IF(expr1,expr2,expr3)，如果expr1的值为true，则返回expr2的值，如果
 <span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
              <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span>
              <span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">,</span>
-             <span class="k">if</span><span class="p">(</span><span class="o">@</span><span class="n">ci</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="o">@</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">rk</span><span class="p">,</span>
-             <span class="o">@</span><span class="n">ci</span> <span class="p">:</span><span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span>
+             <span class="k">if</span><span class="p">(</span><span class="nv">@ci</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="nv">@i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">rk</span><span class="p">,</span>
+             <span class="nv">@ci</span> <span class="o">:=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span>
       <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">a</span>
-               <span class="k">join</span> <span class="p">(</span><span class="k">SELECT</span> <span class="o">@</span><span class="n">i</span> <span class="p">:</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">@</span><span class="n">ci</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span>
+               <span class="k">join</span> <span class="p">(</span><span class="k">SELECT</span> <span class="nv">@i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">@ci</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">t</span>
       <span class="k">where</span> <span class="p">(</span><span class="k">select</span> <span class="nf">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">b</span> <span class="k">where</span> <span class="n">b</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="n">s_score</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span>
       <span class="k">order</span> <span class="k">by</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">desc</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span>
          <span class="k">left</span> <span class="k">join</span> <span class="n">student</span> <span class="k">as</span> <span class="n">s</span> <span class="k">on</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">s_id</span>
@@ -843,77 +843,77 @@ IF(expr1,expr2,expr3)，如果expr1的值为true，则返回expr2的值，如果
 </pre></div>
 </div>
 <p>23、统计各科成绩各分数段人数：课程编号,课程名称,[100-85],[85-70],[70-60],[0-60]及所占百分比</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>-- 23、统计各科成绩各分数段人数：课程编号,课程名称,[100-85],[85-70],[70-60],[0-60]及所占百分比
-select *
-from (select a.c_id,
-             c.c_name,
-             sum(case when a.s_score between 85 and 100 then 1 else 0 end) as `[100-85]`,
-             round(sum(case when a.s_score between 85 and 100 then 1 else 0 end)/count(s_score),2) as `[100-85]百分比`,
-             sum(case when a.s_score between 70 and 84 then 1 else 0 end)  as `[85-70]`,
-             round(100*sum(case when a.s_score between 70 and 84 then 1 else 0 end)/count(s_score),2) as `[85-70]百分比`,
-             sum(case when a.s_score between 60 and 69 then 1 else 0 end)  as `[70-60]`,
-             round(100*sum(case when a.s_score between 60 and 69 then 1 else 0 end)/count(s_score),2) as `[70-60]百分比`,
-             sum(case when a.s_score between 0 and 59 then 1 else 0 end)   as `[0-60]`,
-             round(100*sum(case when a.s_score between 0 and 59 then 1 else 0 end)/count(s_score),2) as `[0-60]百分比`
-      from ((select *
-             from score as s
-             where c_id = &#39;01&#39;) as a
-               left join course as c on a.c_id = c.c_id)
-      union all
-      select a.c_id,
-             c.c_name,
-             sum(case when a.s_score between 85 and 100 then 1 else 0 end) as `[100-85]`,
-             round(sum(case when a.s_score between 85 and 100 then 1 else 0 end)/count(s_score),2) as `[100-85]百分比`,
-             sum(case when a.s_score between 70 and 84 then 1 else 0 end)  as `[85-70]`,
-             round(100*sum(case when a.s_score between 70 and 84 then 1 else 0 end)/count(s_score),2) as `[85-70]百分比`,
-             sum(case when a.s_score between 60 and 69 then 1 else 0 end)  as `[70-60]`,
-             round(100*sum(case when a.s_score between 60 and 69 then 1 else 0 end)/count(s_score),2) as `[70-60]百分比`,
-             sum(case when a.s_score between 0 and 59 then 1 else 0 end)   as `[0-60]`,
-             round(100*sum(case when a.s_score between 0 and 59 then 1 else 0 end)/count(s_score),2) as `[0-60]百分比`
-      from ((select *
-             from score as s
-             where c_id = &#39;02&#39;) as a
-               left join course as c on a.c_id = c.c_id)
-      union all
-      select a.c_id,
-             c.c_name,
-             sum(case when a.s_score between 85 and 100 then 1 else 0 end) as `[100-85]`,
-             round(sum(case when a.s_score between 85 and 100 then 1 else 0 end)/count(s_score),2) as `[100-85]百分比`,
-             sum(case when a.s_score between 70 and 84 then 1 else 0 end)  as `[85-70]`,
-             round(100*sum(case when a.s_score between 70 and 84 then 1 else 0 end)/count(s_score),2) as `[85-70]百分比`,
-             sum(case when a.s_score between 60 and 69 then 1 else 0 end)  as `[70-60]`,
-             round(100*sum(case when a.s_score between 60 and 69 then 1 else 0 end)/count(s_score),2) as `[70-60]百分比`,
-             sum(case when a.s_score between 0 and 59 then 1 else 0 end)   as `[0-60]`,
-             round(100*sum(case when a.s_score between 0 and 59 then 1 else 0 end)/count(s_score),2) as `[0-60]百分比`
-      from ((select *
-             from score as s
-             where c_id = &#39;03&#39;) as a
-               left join course as c on a.c_id = c.c_id)) as n;
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 23、统计各科成绩各分数段人数：课程编号,课程名称,[100-85],[85-70],[70-60],[0-60]及所占百分比</span>
+<span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span>
+             <span class="n">c</span><span class="p">.</span><span class="n">c_name</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">85</span> <span class="k">and</span> <span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[100-85]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">85</span> <span class="k">and</span> <span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[100-85]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">70</span> <span class="k">and</span> <span class="mi">84</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>  <span class="k">as</span> <span class="n">`[85-70]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">70</span> <span class="k">and</span> <span class="mi">84</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[85-70]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">60</span> <span class="k">and</span> <span class="mi">69</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>  <span class="k">as</span> <span class="n">`[70-60]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">60</span> <span class="k">and</span> <span class="mi">69</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[70-60]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">0</span> <span class="k">and</span> <span class="mi">59</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>   <span class="k">as</span> <span class="n">`[0-60]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">0</span> <span class="k">and</span> <span class="mi">59</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[0-60]百分比`</span>
+      <span class="k">from</span> <span class="p">((</span><span class="k">select</span> <span class="o">*</span>
+             <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
+             <span class="k">where</span> <span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;01&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span>
+               <span class="k">left</span> <span class="k">join</span> <span class="n">course</span> <span class="k">as</span> <span class="n">c</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">c_id</span><span class="p">)</span>
+      <span class="k">union</span> <span class="k">all</span>
+      <span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span>
+             <span class="n">c</span><span class="p">.</span><span class="n">c_name</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">85</span> <span class="k">and</span> <span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[100-85]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">85</span> <span class="k">and</span> <span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[100-85]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">70</span> <span class="k">and</span> <span class="mi">84</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>  <span class="k">as</span> <span class="n">`[85-70]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">70</span> <span class="k">and</span> <span class="mi">84</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[85-70]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">60</span> <span class="k">and</span> <span class="mi">69</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>  <span class="k">as</span> <span class="n">`[70-60]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">60</span> <span class="k">and</span> <span class="mi">69</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[70-60]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">0</span> <span class="k">and</span> <span class="mi">59</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>   <span class="k">as</span> <span class="n">`[0-60]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">0</span> <span class="k">and</span> <span class="mi">59</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[0-60]百分比`</span>
+      <span class="k">from</span> <span class="p">((</span><span class="k">select</span> <span class="o">*</span>
+             <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
+             <span class="k">where</span> <span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;02&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span>
+               <span class="k">left</span> <span class="k">join</span> <span class="n">course</span> <span class="k">as</span> <span class="n">c</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">c_id</span><span class="p">)</span>
+      <span class="k">union</span> <span class="k">all</span>
+      <span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span>
+             <span class="n">c</span><span class="p">.</span><span class="n">c_name</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">85</span> <span class="k">and</span> <span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[100-85]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">85</span> <span class="k">and</span> <span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[100-85]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">70</span> <span class="k">and</span> <span class="mi">84</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>  <span class="k">as</span> <span class="n">`[85-70]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">70</span> <span class="k">and</span> <span class="mi">84</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[85-70]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">60</span> <span class="k">and</span> <span class="mi">69</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>  <span class="k">as</span> <span class="n">`[70-60]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">60</span> <span class="k">and</span> <span class="mi">69</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[70-60]百分比`</span><span class="p">,</span>
+             <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">0</span> <span class="k">and</span> <span class="mi">59</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>   <span class="k">as</span> <span class="n">`[0-60]`</span><span class="p">,</span>
+             <span class="nf">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">between</span> <span class="mi">0</span> <span class="k">and</span> <span class="mi">59</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">`[0-60]百分比`</span>
+      <span class="k">from</span> <span class="p">((</span><span class="k">select</span> <span class="o">*</span>
+             <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
+             <span class="k">where</span> <span class="n">c_id</span> <span class="o">=</span> <span class="s1">&#39;03&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span>
+               <span class="k">left</span> <span class="k">join</span> <span class="n">course</span> <span class="k">as</span> <span class="n">c</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">c_id</span><span class="p">))</span> <span class="k">as</span> <span class="n">n</span><span class="p">;</span>
 
 
--- 参考答案:
-select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`60-70`,d.百分比,e.`0-60`,e.百分比 from score a
-				left join (select c_id,SUM(case when s_score &gt;85 and s_score &lt;=100 then 1 else 0 end) as `85-100`,
-											ROUND(100*(SUM(case when s_score &gt;85 and s_score &lt;=100 then 1 else 0 end)/count(*)),2) as 百分比
-								from score GROUP BY c_id)b on a.c_id=b.c_id
-				left join (select c_id,SUM(case when s_score &gt;70 and s_score &lt;=85 then 1 else 0 end) as `70-85`,
-											ROUND(100*(SUM(case when s_score &gt;70 and s_score &lt;=85 then 1 else 0 end)/count(*)),2) as 百分比
-								from score GROUP BY c_id)c on a.c_id=c.c_id
-				left join (select c_id,SUM(case when s_score &gt;60 and s_score &lt;=70 then 1 else 0 end) as `60-70`,
-											ROUND(100*(SUM(case when s_score &gt;60 and s_score &lt;=70 then 1 else 0 end)/count(*)),2) as 百分比
-								from score GROUP BY c_id)d on a.c_id=d.c_id
-				left join (select c_id,SUM(case when s_score &gt;=0 and s_score &lt;=60 then 1 else 0 end) as `0-60`,
-											ROUND(100*(SUM(case when s_score &gt;=0 and s_score &lt;=60 then 1 else 0 end)/count(*)),2) as 百分比
-								from score GROUP BY c_id)e on a.c_id=e.c_id
-				left join course f on a.c_id = f.c_id
+<span class="c1">-- 参考答案:</span>
+<span class="k">select</span> <span class="k">distinct</span> <span class="n">f</span><span class="p">.</span><span class="n">c_name</span><span class="p">,</span><span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">`85-100`</span><span class="p">,</span><span class="n">b</span><span class="p">.</span><span class="n">百分比</span><span class="p">,</span><span class="n">c</span><span class="p">.</span><span class="n">`70-85`</span><span class="p">,</span><span class="n">c</span><span class="p">.</span><span class="n">百分比</span><span class="p">,</span><span class="n">d</span><span class="p">.</span><span class="n">`60-70`</span><span class="p">,</span><span class="n">d</span><span class="p">.</span><span class="n">百分比</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">`0-60`</span><span class="p">,</span><span class="n">e</span><span class="p">.</span><span class="n">百分比</span> <span class="k">from</span> <span class="n">score</span> <span class="n">a</span>
+				<span class="k">left</span> <span class="k">join</span> <span class="p">(</span><span class="k">select</span> <span class="n">c_id</span><span class="p">,</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;</span><span class="mi">85</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`85-100`</span><span class="p">,</span>
+											<span class="nf">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;</span><span class="mi">85</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">100</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">百分比</span>
+								<span class="k">from</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">c_id</span><span class="p">)</span><span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="o">=</span><span class="n">b</span><span class="p">.</span><span class="n">c_id</span>
+				<span class="k">left</span> <span class="k">join</span> <span class="p">(</span><span class="k">select</span> <span class="n">c_id</span><span class="p">,</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;</span><span class="mi">70</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">85</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`70-85`</span><span class="p">,</span>
+											<span class="nf">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;</span><span class="mi">70</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">85</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">百分比</span>
+								<span class="k">from</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">c_id</span><span class="p">)</span><span class="n">c</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="o">=</span><span class="n">c</span><span class="p">.</span><span class="n">c_id</span>
+				<span class="k">left</span> <span class="k">join</span> <span class="p">(</span><span class="k">select</span> <span class="n">c_id</span><span class="p">,</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;</span><span class="mi">60</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">70</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`60-70`</span><span class="p">,</span>
+											<span class="nf">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;</span><span class="mi">60</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">70</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">百分比</span>
+								<span class="k">from</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">c_id</span><span class="p">)</span><span class="n">d</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="o">=</span><span class="n">d</span><span class="p">.</span><span class="n">c_id</span>
+				<span class="k">left</span> <span class="k">join</span> <span class="p">(</span><span class="k">select</span> <span class="n">c_id</span><span class="p">,</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">60</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="n">`0-60`</span><span class="p">,</span>
+											<span class="nf">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="nf">SUM</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s_score</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="k">and</span> <span class="n">s_score</span> <span class="o">&lt;=</span><span class="mi">60</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span><span class="o">/</span><span class="nf">count</span><span class="p">(</span><span class="o">*</span><span class="p">)),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">百分比</span>
+								<span class="k">from</span> <span class="n">score</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">c_id</span><span class="p">)</span><span class="n">e</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span><span class="o">=</span><span class="n">e</span><span class="p">.</span><span class="n">c_id</span>
+				<span class="k">left</span> <span class="k">join</span> <span class="n">course</span> <span class="n">f</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">c_id</span>
 </pre></div>
 </div>
 <p>24、查询学生平均成绩及其名次</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 24、查询学生平均成绩及其名次</span>
 
 <span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span> <span class="k">as</span> <span class="s1">&#39;学号&#39;</span><span class="p">,</span>
-       <span class="nf">round</span><span class="p">(</span><span class="nf">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;平均成绩&#39;</span><span class="p">,</span>
-       <span class="nf">dense_rank</span><span class="p">()</span> <span class="nf">over</span> <span class="p">(</span><span class="k">order</span> <span class="k">by</span> <span class="nf">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">desc</span> <span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;名次&#39;</span>
+       <span class="nf">round</span><span class="p">(</span><span class="k">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;平均成绩&#39;</span><span class="p">,</span>
+       <span class="k">dense_rank</span><span class="p">()</span> <span class="k">over</span> <span class="p">(</span><span class="k">order</span> <span class="k">by</span> <span class="k">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">desc</span> <span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;名次&#39;</span>
 <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span>
 </pre></div>
@@ -1015,7 +1015,7 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 </div>
 <p>32、查询每门课程的平均成绩，结果按平均成绩降序排列，平均成绩相同时，按课程编号升序排列</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 32、查询每门课程的平均成绩，结果按平均成绩降序排列，平均成绩相同时，按课程编号升序排列</span>
-<span class="k">select</span> <span class="n">sc</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="nf">avg</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_score</span>
+<span class="k">select</span> <span class="n">sc</span><span class="p">.</span><span class="n">c_id</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">sc</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="k">as</span> <span class="n">avg_score</span>
 <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">sc</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">sc</span><span class="p">.</span><span class="n">c_id</span>
 <span class="k">order</span> <span class="k">by</span> <span class="n">avg_score</span> <span class="k">desc</span><span class="p">,</span> <span class="n">sc</span><span class="p">.</span><span class="n">c_id</span> <span class="k">asc</span> <span class="p">;</span>
@@ -1023,11 +1023,11 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 </div>
 <p>33、查询平均成绩大于等于85的所有学生的学号、姓名和平均成绩</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 33、查询平均成绩大于等于85的所有学生的学号、姓名和平均成绩</span>
-<span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span><span class="n">s2</span><span class="p">.</span><span class="n">s_name</span><span class="p">,</span><span class="nf">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span>
+<span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span><span class="n">s2</span><span class="p">.</span><span class="n">s_name</span><span class="p">,</span><span class="k">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span>
 <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
          <span class="k">left</span> <span class="k">join</span> <span class="n">student</span> <span class="n">s2</span> <span class="k">on</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">s_id</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span>
-<span class="k">having</span> <span class="nf">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">85</span><span class="p">;</span>
+<span class="k">having</span> <span class="k">avg</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_score</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">85</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>34、查询课程名称为”数学”，且分数低于60的学生姓名和分数</p>
@@ -1047,10 +1047,10 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 <span class="c1">-- 参考了答案</span>
 <span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
        <span class="n">a</span><span class="p">.</span><span class="n">s_name</span><span class="p">,</span>
-       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;语文&#39;</span> <span class="k">then</span> <span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="n">end</span><span class="p">)</span>    <span class="k">as</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span>
-       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;数学&#39;</span> <span class="k">then</span> <span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="n">end</span><span class="p">)</span>    <span class="k">as</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span>
-       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;英语&#39;</span> <span class="k">then</span> <span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="n">end</span><span class="p">)</span>    <span class="k">as</span> <span class="s1">&#39;英语&#39;</span><span class="p">,</span>
-       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="n">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;总分&#39;</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;语文&#39;</span> <span class="k">then</span> <span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>    <span class="k">as</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;数学&#39;</span> <span class="k">then</span> <span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>    <span class="k">as</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;英语&#39;</span> <span class="k">then</span> <span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span>    <span class="k">as</span> <span class="s1">&#39;英语&#39;</span><span class="p">,</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;总分&#39;</span>
 <span class="k">from</span> <span class="n">student</span> <span class="k">as</span> <span class="n">a</span>
          <span class="k">left</span> <span class="k">join</span> <span class="n">Score</span> <span class="n">s</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">s_id</span> <span class="o">=</span> <span class="n">S</span><span class="p">.</span><span class="n">s_id</span>
          <span class="k">left</span> <span class="k">join</span> <span class="n">Course</span> <span class="n">c</span> <span class="k">on</span> <span class="n">s</span><span class="p">.</span><span class="n">c_id</span> <span class="o">=</span> <span class="n">C</span><span class="p">.</span><span class="n">c_id</span>
@@ -1065,9 +1065,9 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 <span class="k">where</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">;</span>
 
 <span class="k">select</span> <span class="n">b</span><span class="p">.</span><span class="n">s_name</span><span class="p">,</span>
-       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;语文&#39;</span> <span class="k">then</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="n">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span>
-       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;数学&#39;</span> <span class="k">then</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="n">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span>
-       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;英语&#39;</span> <span class="k">then</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="n">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;英语&#39;</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;语文&#39;</span> <span class="k">then</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;语文&#39;</span><span class="p">,</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;数学&#39;</span> <span class="k">then</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;数学&#39;</span><span class="p">,</span>
+       <span class="nf">sum</span><span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="n">c</span><span class="p">.</span><span class="n">c_name</span> <span class="o">=</span> <span class="s1">&#39;英语&#39;</span> <span class="k">then</span> <span class="n">a</span><span class="p">.</span><span class="n">s_score</span> <span class="k">end</span><span class="p">)</span> <span class="k">as</span> <span class="s1">&#39;英语&#39;</span>
 <span class="k">from</span> <span class="p">(</span><span class="k">select</span> <span class="o">*</span>
       <span class="k">from</span> <span class="n">score</span> <span class="k">as</span> <span class="n">s</span>
       <span class="k">where</span> <span class="n">s</span><span class="p">.</span><span class="n">s_score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">)</span> <span class="k">as</span> <span class="n">a</span>
@@ -1227,16 +1227,16 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 <span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">,</span>
        <span class="k">case</span>
            <span class="k">when</span> <span class="nf">str_to_date</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%m-%d&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nf">str_to_date</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%m-%d&#39;</span><span class="p">)</span> <span class="k">then</span>
-                   <span class="nf">truncate</span><span class="p">(</span><span class="nf">datediff</span><span class="p">(</span><span class="nf">str_to_date</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">),</span> <span class="nf">str_to_date</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">))</span> <span class="o">/</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+                   <span class="k">truncate</span><span class="p">(</span><span class="nf">datediff</span><span class="p">(</span><span class="nf">str_to_date</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">),</span> <span class="nf">str_to_date</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">))</span> <span class="o">/</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
            <span class="k">else</span>
-               <span class="nf">truncate</span><span class="p">(</span><span class="nf">datediff</span><span class="p">(</span><span class="nf">str_to_date</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">),</span> <span class="nf">str_to_date</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">))</span> <span class="o">/</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="n">end</span>
+               <span class="k">truncate</span><span class="p">(</span><span class="nf">datediff</span><span class="p">(</span><span class="nf">str_to_date</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">),</span> <span class="nf">str_to_date</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">))</span> <span class="o">/</span> <span class="mi">365</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">end</span>
 <span class="k">from</span> <span class="n">student</span> <span class="k">as</span> <span class="n">s</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">s</span><span class="p">.</span><span class="n">s_id</span><span class="p">;</span>
 
 <span class="c1">-- 方法二:</span>
 <span class="k">select</span> <span class="n">s_birth</span><span class="p">,</span>
        <span class="p">(</span><span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="nf">NOW</span><span class="p">(),</span> <span class="s1">&#39;%Y&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%Y&#39;</span><span class="p">)</span> <span class="o">-</span>
-        <span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="nf">NOW</span><span class="p">(),</span> <span class="s1">&#39;%m%d&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%m%d&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="n">end</span><span class="p">))</span> <span class="k">as</span> <span class="n">age</span>
+        <span class="p">(</span><span class="k">case</span> <span class="k">when</span> <span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="nf">NOW</span><span class="p">(),</span> <span class="s1">&#39;%m%d&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="n">s_birth</span><span class="p">,</span> <span class="s1">&#39;%m%d&#39;</span><span class="p">)</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">end</span><span class="p">))</span> <span class="k">as</span> <span class="n">age</span>
 <span class="k">from</span> <span class="n">student</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1256,7 +1256,7 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 <span class="c1">-- 方法二:</span>
 <span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="o">*</span>
 <span class="k">from</span> <span class="n">student</span> <span class="k">as</span> <span class="n">s</span>
-<span class="k">where</span> <span class="nf">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span><span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span> <span class="o">=</span> <span class="nf">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">));</span>
+<span class="k">where</span> <span class="k">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span><span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span> <span class="o">=</span> <span class="k">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>48、查询下周过生日的学生</p>
@@ -1272,7 +1272,7 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 <span class="c1">-- 方法二:</span>
 <span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="o">*</span>
 <span class="k">from</span> <span class="n">student</span> <span class="k">as</span> <span class="n">s</span>
-<span class="k">where</span> <span class="nf">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span><span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span> <span class="o">=</span> <span class="nf">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="k">where</span> <span class="k">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">,</span><span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span> <span class="o">=</span> <span class="k">week</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>49、查询本月过生日的学生</p>
@@ -1286,7 +1286,7 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 <span class="c1">-- 方法二:</span>
 <span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="o">*</span>
 <span class="k">from</span> <span class="n">student</span> <span class="k">as</span> <span class="n">s</span>
-<span class="k">where</span> <span class="nf">month</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">)</span> <span class="o">=</span> <span class="nf">month</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">));</span>
+<span class="k">where</span> <span class="k">month</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">)</span> <span class="o">=</span> <span class="k">month</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>50、查询下月过生日的学生</p>
@@ -1299,7 +1299,7 @@ select distinct f.c_name,a.c_id,b.`85-100`,b.百分比,c.`70-85`,c.百分比,d.`
 <span class="c1">-- 方法二:</span>
 <span class="k">select</span> <span class="n">s</span><span class="p">.</span><span class="o">*</span>
 <span class="k">from</span> <span class="n">student</span> <span class="k">as</span> <span class="n">s</span>
-<span class="k">where</span> <span class="nf">month</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">)</span> <span class="o">=</span> <span class="nf">month</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">where</span> <span class="k">month</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">)</span> <span class="o">=</span> <span class="k">month</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>

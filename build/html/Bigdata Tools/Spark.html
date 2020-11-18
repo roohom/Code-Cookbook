@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6. Hadoop搭建总体步骤 &mdash; Code-Cookbook 0.1 文档</title>
+  <title>11. Spark &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="7. Hbase" href="Hbase.html" />
-    <link rel="prev" title="4. Flink基础配置与基础原理" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" /> 
+    <link rel="next" title="12. Zookeeper" href="Zookeeper.html" />
+    <link rel="prev" title="10. Redis" href="Redis.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,17 +92,16 @@
 <li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">3. Bigdata Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">4. Flink基础配置与基础原理</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html#flink-cep">5. Flink CEP</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6. Hadoop搭建总体步骤</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#linux">6.1. Linux集群环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">6.2. 节点规划</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">6.3. Hadoop分布式上安装</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">6. Hadoop搭建总体步骤</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Hbase.html">7. Hbase</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kafka.html">8. Kafka</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Kylin.html">9. Kylin</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Redis.html">10. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Spark.html">11. Spark</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">11. Spark</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">11.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start">11.2. Quick Start</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">12. Zookeeper</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">13. 常用软件梳理</a></li>
 </ul>
@@ -167,13 +166,13 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">6. </span>Hadoop搭建总体步骤</li>
+      <li><span class="section-number">11. </span>Spark</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/Bigdata Tools/Hadoop搭建总体步骤.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/Bigdata Tools/Spark.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -186,153 +185,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="hadoop">
-<h1><span class="section-number">6. </span>Hadoop搭建总体步骤<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h1>
-<div class="section" id="linux">
-<h2><span class="section-number">6.1. </span>Linux集群环境<a class="headerlink" href="#linux" title="永久链接至标题">¶</a></h2>
+  <div class="section" id="spark">
+<h1><span class="section-number">11. </span>Spark<a class="headerlink" href="#spark" title="永久链接至标题">¶</a></h1>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Apache</span> <span class="pre">Spark</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">unified</span> <span class="pre">analytics</span> <span class="pre">engine</span> <span class="pre">for</span> <span class="pre">large-scale</span> <span class="pre">data</span> <span class="pre">processing.</span></code></p>
+</div></blockquote>
+<blockquote>
+<div><p>起源于加州大学伯克利分校，来源于一篇论文弹性<a class="reference external" href="#">分布式数据集(<code class="docutils literal notranslate"><span class="pre">RDD</span></code>)</a></p>
+<p>1、分析引擎：类似MapReduce框架，分析2海量数据</p>
+<p>2、统一分析引擎：针对任意数据分析需求，都可以分析数据</p>
+<p>3、大规模数据分析引擎：处理数据可以海量数据</p>
+</div></blockquote>
+<div class="section" id="introduction">
+<h2><span class="section-number">11.1. </span>Introduction<a class="headerlink" href="#introduction" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>RDD是Spark框架的核心概念，属于分布式集合，将数据划分到不同的partition中</p></li>
+<li><p>Spark与MapReduce框架的比较</p>
+<p><img alt="image-20201118104414877" src="../_images/image-20201118104414877.png" /></p>
+</li>
+<li><p>Spark框架仅仅是一个分析数据的框架</p>
 <ul class="simple">
-<li><p>三台机器</p></li>
-<li><p>配置</p>
-<ul>
-<li><p>机器名映射</p></li>
-<li><p>防火墙和selinux</p></li>
-<li><p>免秘钥登录</p></li>
-<li><p>时钟同步</p></li>
-<li><p>JDK</p></li>
-<li><p>MySQL</p>
-<ul>
-<li><p>Java：存储业务数据、用户信息、商业信息、订单信息</p></li>
-<li><p>大数据：用于存储关键性数据</p>
-<ul>
-<li><p>软件元数据</p></li>
-<li><p>分析的结果</p></li>
+<li><p>数据来源：支持任何数据源，能够从任意存储引擎读写数据</p></li>
+<li><p>应用程序运行：本地模式、集群模式(Standalone、Hadoop YARN、容器)</p></li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="id1">
-<h2><span class="section-number">6.2. </span>节点规划<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<p>设计每个进程启动在哪些机器上</p>
-<ul>
-<li><p>整个Hadoop启动的进程</p>
+<li><p>Spark应用程序运行模式：本地和集群、云端</p>
 <ul class="simple">
-<li><p>HDFS：NameNode，DataNnode</p></li>
-<li><p>YARN：ResourceManager，NodeManager</p></li>
+<li><p><a class="reference external" href="#">Spark框架将数据封装在RDD集合中，每个集合RDD由多个分区Partition组成，每个分区Partition数据被一个Task处理，每个Task任务启动一个线程Thread，每个Task运行需要一核CPU</a></p></li>
 </ul>
 </li>
-<li><p>整个Hadoop启动的进程</p>
+</ul>
+</div>
+<div class="section" id="quick-start">
+<h2><span class="section-number">11.2. </span>Quick Start<a class="headerlink" href="#quick-start" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>Spark 2.4.x本地模式使用Spark-Shell运行Word Count程序</p>
+<p>集群环境 CentOS 7.7</p>
 <ul class="simple">
-<li><p>HDFS：NameNode ，DataNode</p></li>
-<li><p>YARN：ResourceManager，NodeManager</p></li>
+<li><p>node1</p></li>
 </ul>
-</li>
-<li><p>节点规划</p>
-<p>|      机器       | node1 | node2 | node3 |
-| :————-: | :—: | :—: | :—: |
-|    NameNode     |   *   |       |       |
-|    DataNode     |   *   |   *   |   *   |
-| ResourceManager |       |       |   *   |
-|   NodeManager   |   *   |   *   |   *   |</p>
-</li>
-<li><p>启动和关闭hdfs（未配置环境变量的情况下要去sbin目录下）</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-dfs.sh
-stop-dfs.sh
-</pre></div>
-</div>
-</li>
-<li><p>启动和关闭yarn</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-yarn.sh
-stop-yarn.sh
-</pre></div>
-</div>
-</li>
-</ul>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">6.3. </span>Hadoop分布式上安装<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<ul>
-<li><p>解压安装</p></li>
-<li><p>修改配置</p>
-<ul class="simple">
-<li><p>*-env.sh：用于配置环境变量</p>
-<ul>
-<li><p>hadoop-env.sh</p></li>
-<li><p>mapred-env.sh</p></li>
-<li><p>yarn-env.sh</p></li>
-</ul>
-</li>
-<li><p>*-site.xml</p>
-<ul>
-<li><p>core-site.xml</p></li>
-<li><p>hdfs-site.xml</p>
-<ul>
-<li><p>dfs.replication：配置每个文件块的副本数</p></li>
-</ul>
-</li>
-<li><p>mapred-site.xml</p></li>
-<li><p>yarn-site.xml</p></li>
-</ul>
-</li>
-<li><p>slaves：用于配置从节点[DataNode、NodeManager]地址</p>
-<ul>
-<li><p>计算节点都与存储节点在同一台机器（DataNode也是NodeManager）</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>启动服务</p>
-<ul>
-<li><p>第一次启动服务吗，需要格式化</p>
-<ul>
-<li><p>只能在NameNode所在的机器格式化</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</li>
-</ul>
-<p>hdfs namenode -format</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</li>
-<li><p>core-site.xml和hdfs-site.xml配置编写错误，修正后需要重新格式化</p></li>
-<li><p>启动</p>
-<ul>
-<li><p>启动hdfs</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-dfs.sh 只能在NN所在的机器启动
-</pre></div>
-</div>
-</li>
-<li><p>启动yarn</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-yarn.sh 只能在RM所在的机器启动
-</pre></div>
-</div>
-</li>
-</ul>
-</li>
-<li><p>端口：</p>
-<ul class="simple">
-<li><p>HDFS：NameNode启动开放</p>
-<ul>
-<li><p>8020：RPC协议，用于客户端请求服务端，节点之间的远程调用</p></li>
-<li><p>50070：http协议，用于访问网页</p></li>
-</ul>
-</li>
-<li><p>YARN：ResourceManager启动开放</p>
-<ul>
-<li><p>8032：RPC协议，用于客户端请求服务端，节点之间的远程调用</p></li>
-<li><p>8088：http协议，用于访问网页</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</div></blockquote>
 </div>
 </div>
 
@@ -344,10 +236,10 @@ stop-yarn.sh
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Hbase.html" class="btn btn-neutral float-right" title="7. Hbase" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="12. Zookeeper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html" class="btn btn-neutral float-left" title="4. Flink基础配置与基础原理" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Redis.html" class="btn btn-neutral float-left" title="10. Redis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -185,9 +185,9 @@
 <div class="section" id="join">
 <h2><span class="section-number">4.1. </span>几个测试说明各种join的区别:<a class="headerlink" href="#join" title="永久链接至标题">¶</a></h2>
 <p>测试条件，先建两张表，第一张为course，即学科表，第二张score，即成绩表</p>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="nf">course</span> <span class="p">(</span>
-    <span class="n">cid</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="no">null</span> <span class="kp">auto_increment</span><span class="p">,</span>
-    <span class="n">name</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">course</span> <span class="p">(</span>
+    <span class="n">cid</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="no">null</span> <span class="k">auto_increment</span><span class="p">,</span>
+    <span class="k">name</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 <span class="p">);</span>
 
 <span class="k">insert</span> <span class="k">into</span> <span class="n">course</span> <span class="k">values</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;语文&#39;</span><span class="p">);</span>
@@ -196,18 +196,18 @@
 <span class="k">insert</span> <span class="k">into</span> <span class="n">course</span> <span class="k">values</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;电竞&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="nf">score</span> <span class="p">(</span>
-    <span class="n">sid</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="no">null</span>  <span class="kp">auto_increment</span><span class="p">,</span>
+<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">score</span> <span class="p">(</span>
+    <span class="n">sid</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="no">null</span>  <span class="k">auto_increment</span><span class="p">,</span>
     <span class="n">sname</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 <span class="p">);</span>
 
-<span class="k">insert</span> <span class="k">into</span> <span class="nf">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
 <span class="k">values</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;79&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="nf">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
 <span class="k">values</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;64&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="nf">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
 <span class="k">values</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;99&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="nf">score</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
 <span class="k">values</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;59&#39;</span><span class="p">);</span>
 </pre></div>
 </div>

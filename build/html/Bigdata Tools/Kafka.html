@@ -37,7 +37,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="9. Redis" href="Redis.html" />
+    <link rel="next" title="9. Kylin" href="Kylin.html" />
     <link rel="prev" title="7. Hbase" href="Hbase.html" /> 
 </head>
 
@@ -142,14 +142,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#id26">8.8. Kafka常用操作指南</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id27">8.8.1. 如何启动</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#topic">8.8.2. 集群管理：管理Topic</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id28">8.8.3. 生产和消费</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kafkatopic">8.8.3. <strong>Kafka如何完全删除一个topic？</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">8.8.4. 生产和消费</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">10. Zookeeper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">11. 常用软件梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html">9. Kylin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">10. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html">11. Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">12. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">13. 常用软件梳理</a></li>
 </ul>
 </li>
 </ul>
@@ -1209,8 +1212,50 @@ bin/kafka-server-start.sh config/server.properties &gt;&gt;/dev/null <span class
 </li>
 </ul>
 </div>
+<div class="section" id="kafkatopic">
+<h3><span class="section-number">8.8.3. </span><strong>Kafka如何完全删除一个topic？</strong><a class="headerlink" href="#kafkatopic" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>彻底删除Kafka中的topic</p>
+</div></blockquote>
+<p>1、删除kafka存储目录（server.properties文件log.dirs配置，默认为”/tmp/kafka-logs”）相关topic目录</p>
+<p>2、Kafka 删除topic的命令是：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> ./bin/kafka-topics  --delete --zookeeper 【zookeeper server】  --topic 【topic name】
+
+ 如果kafaka启动时加载的配置文件中server.properties没有配置delete.topic.enable=true，那么此时的删除并不是真正的删除，而是把topic标记为：marked for deletion
+
+ 你可以通过命令：./bin/kafka-topics --zookeeper 【zookeeper server】 --list 来查看所有topic
+
+
+
+
+ 此时你若想真正删除它，可以如下操作：
+
+ （1）登录zookeeper客户端：命令：./bin/zookeeper-client
+
+ （2）找到topic所在的目录：ls /brokers/topics
+
+ （3）找到要删除的topic，执行命令：rmr /brokers/topics/【topic name】即可，此时topic被彻底删除。
+
+
+
+
+另外被标记为marked for deletion的topic你可以在zookeeper客户端中通过命令获得：ls /admin/delete_topics/【topic name】，
+
+如果你删除了此处的topic，那么marked for deletion 标记消失
+
+zookeeper 的config中也有有关topic的信息： ls /config/topics/【topic name】暂时不知道有什么用
+</pre></div>
+</div>
+<p>总结：</p>
+<p>彻底删除topic：</p>
+<p>1、删除kafka存储目录（server.properties文件log.dirs配置，默认为”/tmp/kafka-logs”）相关topic目录</p>
+<p>2、如果配置了delete.topic.enable=true直接通过命令删除，如果命令删除不掉，直接通过zookeeper-client 删除掉broker下的topic即可。</p>
+<ul class="simple">
+<li><p>如果操作之后仍然不成功，需要去删除zookeeper中Admin节点下的delete_topics下的数据</p></li>
+</ul>
+</div>
 <div class="section" id="id28">
-<h3><span class="section-number">8.8.3. </span>生产和消费<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+<h3><span class="section-number">8.8.4. </span>生产和消费<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>生产者</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/kafka-console-producer.sh --topic topic_name --broker-list node1:9092,node2:9092,node3:9092
@@ -1238,7 +1283,7 @@ bin/kafka-server-start.sh config/server.properties &gt;&gt;/dev/null <span class
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Redis.html" class="btn btn-neutral float-right" title="9. Redis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Kylin.html" class="btn btn-neutral float-right" title="9. Kylin" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Hbase.html" class="btn btn-neutral float-left" title="7. Hbase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

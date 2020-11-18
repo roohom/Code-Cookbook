@@ -761,13 +761,13 @@ tb_emp_part1 partition(department = 10);
 </div>
 </li>
 <li><p>使用insert select语句间接的把数据从临时表导入到分桶表。</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>--启用桶表
-set hive.enforce.bucketing=true;
---限制对桶表进行load操作
-set hive.strict.checks.bucketing = true;
---insert select
-insert into table test_buck select id, name from temp_buck;
---分桶成功
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">启用桶表</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="n">enforce</span><span class="p">.</span><span class="n">bucketing</span><span class="o">=</span><span class="no">true</span><span class="p">;</span>
+<span class="o">--</span><span class="n">限制对桶表进行load操作</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="n">strict</span><span class="p">.</span><span class="n">checks</span><span class="p">.</span><span class="n">bucketing</span> <span class="o">=</span> <span class="no">true</span><span class="p">;</span>
+<span class="o">--</span><span class="k">insert</span> <span class="k">select</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="k">table</span> <span class="n">test_buck</span> <span class="k">select</span> <span class="n">id</span><span class="p">,</span> <span class="k">name</span> <span class="k">from</span> <span class="n">temp_buck</span><span class="p">;</span>
+<span class="o">--</span><span class="n">分桶成功</span>
 </pre></div>
 </div>
 </li>
@@ -805,17 +805,17 @@ insert into table test_buck select id, name from temp_buck;
 <div><p>注意：<strong>严禁产生笛卡尔积</strong>，大数据环境中的数据量巨大，而笛卡尔积会产生更大的数据量。</p>
 </div></blockquote>
 <p>注意规避一下几种写法：</p>
-<div class="highlight-MYSQL notranslate"><div class="highlight"><pre><span></span># 产生笛卡尔积
-select a.*, b.*
-from a,b; 
+<div class="highlight-MYSQL notranslate"><div class="highlight"><pre><span></span><span class="c1"># 产生笛卡尔积</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span>
+<span class="k">from</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span> 
 
-# 为指定join条件，产生笛卡尔积
-select a.*, b.*
-from a join b;
+<span class="c1"># 为指定join条件，产生笛卡尔积</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span>
+<span class="k">from</span> <span class="n">a</span> <span class="k">join</span> <span class="n">b</span><span class="p">;</span>
 
-# 不规范的join写法，使用where会在全部的数据中过滤从而得到指定条件的数据，因此是在笛卡尔积产生的条件下按照条件过滤得到想要的数据
-select a.*, b.* 
-from a join b where 条件;
+<span class="c1"># 不规范的join写法，使用where会在全部的数据中过滤从而得到指定条件的数据，因此是在笛卡尔积产生的条件下按照条件过滤得到想要的数据</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span> 
+<span class="k">from</span> <span class="n">a</span> <span class="k">join</span> <span class="n">b</span> <span class="k">where</span> <span class="n">条件</span><span class="p">;</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -867,16 +867,16 @@ from a join b where 条件;
 <h2><span class="section-number">5.9. </span>复杂数据类型<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
 <div class="section" id="array">
 <h3><span class="section-number">5.9.1. </span>array类型<a class="headerlink" href="#array" title="永久链接至标题">¶</a></h3>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>row format delimited fields terminated by &#39;\t&#39; --指定文件中列的分隔符
-COLLECTION ITEMS TERMINATED BY &#39;,&#39;; --指定数组中每个元素的分隔符
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">row</span> <span class="k">format</span> <span class="n">delimited</span> <span class="k">fields</span> <span class="k">terminated</span> <span class="k">by</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">--</span><span class="n">指定文件中列的分隔符</span>
+<span class="n">COLLECTION</span> <span class="n">ITEMS</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;,&#39;</span><span class="p">;</span> <span class="o">--</span><span class="n">指定数组中每个元素的分隔符</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="map">
 <h3><span class="section-number">5.9.2. </span>Map类型<a class="headerlink" href="#map" title="永久链接至标题">¶</a></h3>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>row format delimited fields terminated by &#39;,&#39; --指定文件中列的分隔符
-COLLECTION ITEMS TERMINATED BY &#39;-&#39; --指定每个KeyValue之间的分隔符
-MAP KEYS TERMINATED BY &#39;:&#39;; --指定KEY和Value之间的分隔符
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">row</span> <span class="k">format</span> <span class="n">delimited</span> <span class="k">fields</span> <span class="k">terminated</span> <span class="k">by</span> <span class="s1">&#39;,&#39;</span> <span class="o">--</span><span class="n">指定文件中列的分隔符</span>
+<span class="n">COLLECTION</span> <span class="n">ITEMS</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;-&#39;</span> <span class="o">--</span><span class="n">指定每个KeyValue之间的分隔符</span>
+<span class="n">MAP</span> <span class="k">KEYS</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;:&#39;</span><span class="p">;</span> <span class="o">--</span><span class="n">指定KEY和Value之间的分隔符</span>
 </pre></div>
 </div>
 </div>
@@ -887,17 +887,17 @@ MAP KEYS TERMINATED BY &#39;:&#39;; --指定KEY和Value之间的分隔符
 <h3><span class="section-number">5.10.1. </span>内置函数<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
 <ul>
 <li><p>列举：</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>show functions；
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">show</span> <span class="n">functions；</span>
 </pre></div>
 </div>
 </li>
 <li><p>查看用法：</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">desc</span> <span class="n">function</span> <span class="n">func_name</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">desc</span> <span class="k">function</span> <span class="n">func_name</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
 <li><p>查看函数和示例：</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">desc</span> <span class="n">function</span> <span class="n">extended</span> <span class="n">func_name</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">desc</span> <span class="k">function</span> <span class="k">extended</span> <span class="n">func_name</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
@@ -937,20 +937,20 @@ MAP KEYS TERMINATED BY &#39;:&#39;; --指定KEY和Value之间的分隔符
 <li><p>本地编写类，打成jar包</p></li>
 <li><p>上传至Linux环境</p></li>
 <li><p>进入Hive(beeline)</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">add</span> <span class="n">jar</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">datas</span><span class="o">/</span><span class="n">udf</span><span class="p">.</span><span class="n">jar</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">add</span> <span class="n">jar</span> <span class="o">/</span><span class="k">export</span><span class="o">/</span><span class="n">datas</span><span class="o">/</span><span class="n">udf</span><span class="p">.</span><span class="n">jar</span>
 </pre></div>
 </div>
 </li>
 </ul>
 </li>
 <li><p>在Hive中创建一个函数</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="n">temporary</span> <span class="n">function</span> <span class="n">transDate</span> <span class="k">as</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">temporary</span> <span class="k">function</span> <span class="n">transDate</span> <span class="k">as</span>
 <span class="s1">&#39;bigdata.itcast.cn.hive.udf.UserUDF&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
 <li><p>使用自己开发的函数</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="nf">transDate</span><span class="p">(</span><span class="s2">&quot;21/Sep/2019:13:30:00&quot;</span><span class="p">);</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">transDate</span><span class="p">(</span><span class="s2">&quot;21/Sep/2019:13:30:00&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </li>
@@ -977,7 +977,7 @@ MAP KEYS TERMINATED BY &#39;:&#39;; --指定KEY和Value之间的分隔符
 <ul>
 <li><p>关键字：view</p></li>
 <li><p>语法：</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="n">view</span> <span class="o">|</span> <span class="k">table</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">view</span> <span class="o">|</span> <span class="k">table</span>
 </pre></div>
 </div>
 </li>
@@ -989,26 +989,26 @@ MAP KEYS TERMINATED BY &#39;:&#39;; --指定KEY和Value之间的分隔符
 <li><p>使用：</p>
 <ul>
 <li><p>语法：</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>select …… from tabelA lateral view UDTF(xxx) 视图名 as a,b,c
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">……</span> <span class="k">from</span> <span class="n">tabelA</span> <span class="k">lateral</span> <span class="k">view</span> <span class="n">UDTF</span><span class="p">(</span><span class="n">xxx</span><span class="p">)</span> <span class="n">视图名</span> <span class="k">as</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span>
 </pre></div>
 </div>
 </li>
 <li><p>数据：</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>http://facebook.com/path/p1.php?query=1
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="o">://</span><span class="n">facebook</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="k">path</span><span class="o">/</span><span class="n">p1</span><span class="p">.</span><span class="n">php</span><span class="nv">?</span><span class="k">query</span><span class="o">=</span><span class="mi">1</span>
 
-域名 路径 参数
-facebook.com /path/p1.php query=1
+<span class="n">域名</span> <span class="n">路径</span> <span class="n">参数</span>
+<span class="n">facebook</span><span class="p">.</span><span class="n">com</span> <span class="o">/</span><span class="k">path</span><span class="o">/</span><span class="n">p1</span><span class="p">.</span><span class="n">php</span> <span class="k">query</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
 </li>
 <li><p>示例：</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span>
     <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
-    <span class="n">b</span><span class="p">.</span><span class="n">host</span><span class="p">,</span>
-    <span class="n">b</span><span class="p">.</span><span class="n">path</span>
+    <span class="n">b</span><span class="p">.</span><span class="k">host</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">.</span><span class="k">path</span>
 <span class="k">from</span>
     <span class="n">tb_url</span> <span class="n">a</span>
-    <span class="n">lateral</span> <span class="n">view</span> <span class="nf">parse_url_tuple</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;HOST&#39;</span><span class="p">,</span><span class="s2">&quot;PATH&quot;</span><span class="p">)</span> <span class="n">b</span> <span class="k">as</span> <span class="n">host</span><span class="p">,</span><span class="n">path</span><span class="p">;</span>
+    <span class="k">lateral</span> <span class="k">view</span> <span class="n">parse_url_tuple</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;HOST&#39;</span><span class="p">,</span><span class="s2">&quot;PATH&quot;</span><span class="p">)</span> <span class="n">b</span> <span class="k">as</span> <span class="k">host</span><span class="p">,</span><span class="k">path</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
