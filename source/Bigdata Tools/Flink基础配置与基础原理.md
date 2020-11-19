@@ -195,7 +195,7 @@
 
 ### Flink On Yarn模式
 
-> 企业中主流实用的模式
+> 企业中主流使用的模式
 
 #### 原理
 
@@ -221,9 +221,7 @@
 
 ##### Session会话模式
 
-
-
-![Session模式](./Flink.assets/sessionMode.png)
+![Session模式](./Flink.assets/FlinkYarnSession.svg)
 
 
 
@@ -275,7 +273,7 @@ yarn application -kill application_1603091655912_0002
 
 ##### Job分离模式
 
-![Job分离模式](./Flink.assets/JobSeprated.png)
+![Job分离模式](./Flink.assets/JobSeprated.svg)
 
 - 特点：每次递交作业都需要申请一次资源
 
