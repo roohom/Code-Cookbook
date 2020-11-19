@@ -297,7 +297,9 @@ ln -s /export/server/spark-2.4.5-bin-cdh5.16.2-2.11 /export/server/spark
 
   - 查看WEB-UI：http://node1:8080 可以看到从节点上线加入集群
 
-### 提交程序运行
+### 提交程序运行Spark Submit
+
+#### 示例
 
 `--master spark://node1.itcast.cn:7077`表示Standalone地址
 
@@ -310,6 +312,45 @@ ${SPARK_HOME}/bin/spark-submit \
 ${SPARK_HOME}/examples/jars/spark-examples_2.11-2.4.5.jar \
 10
 ~~~
+
+#### 提交参数
+
+##### 基本参数
+
+~~~shell
+# 表示运行的模式 本地模式local 集群模式
+--master MASTER_URL
+#本地模式local[2]     Standalone集群 spark://domain1.port, spark://domain2:port
+
+# Driver Program运行的地方 也表示集群的部署模式默认为client 生产环境通常使用cluster
+--deploy-mode DEPLOY_MODE
+
+# 表示要运行的Application的类名称
+--class CLASS_NAME
+
+# 应用运行的全名 
+--name  A NAME OF YOUR APPLICATION
+
+# 要运行的jar包名称 通常在本地文件系统中 多个jar包用逗号隔开
+--jar JARS
+
+# 参数配置
+--conf PROP=VALUE
+
+~~~
+
+
+
+##### Driver Program参数
+
+~~~shell
+# 指定Driver Program JVM内存大小 默认为1G
+--driver-memory MEM
+~~~
+
+
+
+
 
 #### WEB-UI监控
 
@@ -329,3 +370,191 @@ ${SPARK_HOME}/examples/jars/spark-examples_2.11-2.4.5.jar \
   - Stage：Job 的组成单位，一个 Job 会切分成多个 Stage，Stage 彼此之间相互依赖顺序执行，
     而每个 Stage 是多个 Task 的集合，类似 map 和 reduce stage。 
 
+
+
+## Spark On Yarn
+
+> 无论是MapReduce、Flink、Spark应用程序，往往运行在Yarn上
+>
+> - 统一资源管理，节约运维成本
+> - 充分使用集群
+
+### 搭建步骤
+
+#### 修改spark-env.sh文件
+
+##### 添加
+
+~~~shell
+vim /export/server/spark/conf/spark-env.sh
+## 添加内容
+HADOOP_CONF_DIR=/export/server/hadoop/etc/hadoop
+YARN_CONF_DIR=/export/server/hadoop/etc/hadoop
+~~~
+
+##### 分发同步
+
+~~~shell
+cd /export/server/spark/conf
+scp -r spark-env.sh root@node2:$PWD
+scp -r spark-env.sh root@node3:$PWD
+~~~
+
+#### 修改Yarn-site.xml文件
+
+##### 添加
+
+~~~xml
+## 在node1上修改
+vim /export/server/hadoop/etc/hadoop/yarn-site.xml
+## 添加内容
+<property>
+ <name>yarn.log-aggregation-enable</name>
+ <value>true</value>
+</property>
+<property>
+ <name>yarn.log-aggregation.retain-seconds</name>
+ <value>604800</value>
+</property>
+<property>
+ <name>yarn.log.server.url</name>
+ <value>http://node1:19888/jobhistory/logs</value>
+</property>
+~~~
+
+##### 分发同步
+
+~~~shell
+cd /export/server/hadoop/etc/hadoop
+scp -r yarn-site.xml root@node2:$PWD
+scp -r yarn-site.xml root@node3:$PWD
+~~~
+
+#### 修改spark-default.conf
+
+##### 添加
+
+~~~shell
+## 在node1上修改
+vim /export/server/spark/conf/spark-defaults.conf
+## 添加内容
+spark.yarn.historyServer.address node1.itcast.cn:18080
+~~~
+
+##### 分发同步
+
+~~~shell
+cd /export/server/spark/conf
+scp -r spark-defaults.conf root@node2:$PWD
+scp -r spark-defaults.conf root@node3:$PWD
+~~~
+
+#### 配置依赖JARS
+
+> 当Spark Application应用提交运行在YARN上时，默认情况下，每次提交应用都需要将依赖
+> Spark相关jar包上传到YARN 集群中，为了节省提交时间和存储空间，将Spark相关jar包上传到
+> HDFS目录中，设置属性告知Spark Application应用。
+
+##### 添加
+
+~~~shell
+## 启动HDFS，在node1上操作
+hadoop-daemon.sh start namenode
+hadoop-daemons.sh start datanode
+## hdfs上创建存储spark相关jar包目录
+hdfs dfs -mkdir -p /spark/apps/jars/
+## 上传$SPARK_HOME/jars所有jar包
+hdfs dfs -put /export/server/spark/jars/* /spark/apps/jars/
+~~~
+
+- spark-defatult.conf文件增加Spark相关JAR包存储的HDFS目录
+
+  ~~~shell
+  ## 在node1上操作
+  vim /export/server/spark/conf/spark-defaults.conf
+  ## 添加内容
+  spark.yarn.jars hdfs://node1:8020/spark/apps/jars/*
+  ~~~
+
+##### 分发同步
+
+~~~shell
+## 在node1上操作
+cd /export/server/spark/conf
+scp -r spark-defaults.conf root@node2:$PWD
+scp -r spark-defaults.conf root@node3:$PWD
+~~~
+
+#### Yarn资源检查
+
+##### 设置资源不检查
+
+~~~xml
+## 编辑yarn-site.xml文件，在node1.itcast.cn上操作
+vim /export/server/hadoop/etc/hadoop/yarn-site.xml
+## 添加内容
+<property>
+ <name>yarn.nodemanager.pmem-check-enabled</name>
+ <value>false</value>
+</property>
+<property>
+ <name>yarn.nodemanager.vmem-check-enabled</name>
+ <value>false</value>
+</property>
+~~~
+
+##### 分发同步
+
+~~~shell
+cd /export/server/hadoop/etc/hadoop
+scp -r yarn-site.xml root@node2:$PWD
+scp -r yarn-site.xml root@node3:$PWD
+~~~
+
+### 启动服务
+
+启动HDFS、YARN、MRHistoryServer和Spark HistoryServer
+
+~~~shell
+## 启动HDFS和YARN服务，在node1.itcast.cn执行命令
+hadoop-daemon.sh start namenode
+hadoop-daemons.sh start datanode
+yarn-daemon.sh start resourcemanager
+yarn-daemons.sh start nodemanager
+## 启动MRHistoryServer服务，在node1.itcast.cn执行命令
+mr-jobhistory-daemon.sh start historyserver
+## 启动Spark HistoryServer服务，，在node1.itcast.cn执行命令
+/export/server/spark/sbin/start-history-server.sh
+~~~
+
+
+
+## Deploy Mode
+
+> Client模式和Cluster模式两种模式
+>
+> 本质的区别是：Driver Program运行在哪里
+>
+> - Client模式Driver Program运行在客户端
+> - Cluster模式Driver Program运行在一台Worker节点上
+
+
+
+#### Client模式
+
+![image-20201119104819164](Spark.assets/image-20201119104819164.png)
+
+#### Cluster模式
+
+![image-20201119104833479](Spark.assets/image-20201119104833479.png)
+
+
+
+>对比：
+>
+>- cluster模式：生产环境使用
+>  - Driver程序运行在YARN集群中Worker节点上
+>  - 应用程序的结果不在客户端显示
+>- client模式：开发测试使用
+>  - Driver程序运行在Client的SparkSubmit进程中
+>  - 应用程序的结果会在客户端显示
