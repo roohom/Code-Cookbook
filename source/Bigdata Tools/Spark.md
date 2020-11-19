@@ -202,9 +202,9 @@ cd /export/server/spark/conf
 mv slaves.template slaves
 vim slaves
 ## 内容如下：
-node1.itcast.cn
-node2.itcast.cn
-node3.itcast.cn
+node1
+node2
+node3
 ~~~
 
 #### Step3：修改Spark-env.sh
@@ -212,14 +212,14 @@ node3.itcast.cn
 - 配置Master、Workers、HistoryServer
 
   ~~~properties
-  SPARK_MASTER_HOST=node1.itcast.cn
+  SPARK_MASTER_HOST=node1
   SPARK_MASTER_PORT=7077
   SPARK_MASTER_WEBUI_PORT=8080
   SPARK_WORKER_CORES=1
   SPARK_WORKER_MEMORY=1g
   SPARK_WORKER_PORT=7078
   SPARK_WORKER_WEBUI_PORT=8081
-  SPARK_HISTORY_OPTS="-Dspark.history.fs.logDirectory=hdfs://node1.itcast.cn:8020/spark/eventLogs/  -Dspark.history.fs.cleaner.enabled=true"
+  SPARK_HISTORY_OPTS="-Dspark.history.fs.logDirectory=hdfs://node1:8020/spark/eventLogs/  -Dspark.history.fs.cleaner.enabled=true"
   ~~~
 
   
@@ -248,7 +248,7 @@ hdfs dfs -mkdir -p /spark/eventLogs/
   vim spark-defaults.conf
   ## 添加内容如下：
   spark.eventLog.enabled true
-  spark.eventLog.dir hdfs://node1.itcast.cn:8020/spark/eventLogs/
+  spark.eventLog.dir hdfs://node1:8020/spark/eventLogs/
   spark.eventLog.compress true
   ~~~
 
@@ -273,7 +273,7 @@ hdfs dfs -mkdir -p /spark/eventLogs/
 cd /export/server/
 scp -r spark-2.4.5-bin-cdh5.16.2-2.11 root@node2:$PWD
 scp -r spark-2.4.5-bin-cdh5.16.2-2.11 root@ node3:$PWD
-## 远程连接到node2.itcast.cn和node3.itcast.cn机器，创建软连接
+## 远程连接到node2和node3机器，创建软连接
 ln -s /export/server/spark-2.4.5-bin-cdh5.16.2-2.11 /export/server/spark
 ~~~
 
@@ -301,13 +301,13 @@ ln -s /export/server/spark-2.4.5-bin-cdh5.16.2-2.11 /export/server/spark
 
 #### 示例
 
-`--master spark://node1.itcast.cn:7077`表示Standalone地址
+`--master spark://node1:7077`表示Standalone地址
 
 ~~~shell
 SPARK_HOME=/export/server/spark
 
 ${SPARK_HOME}/bin/spark-submit \
---master spark://node1.itcast.cn:7077 \
+--master spark://node1:7077 \
 --class org.apache.spark.examples.SparkPi \
 ${SPARK_HOME}/examples/jars/spark-examples_2.11-2.4.5.jar \
 10
@@ -357,7 +357,7 @@ ${SPARK_HOME}/examples/jars/spark-examples_2.11-2.4.5.jar \
 - Spark 提供了多个监控界面，当运行Spark任务后可以直接在网页对各种信息进行监控查看。运行spark-shell交互式命令在Standalone集群上，命令如下：
 
   ~~~shell
-  /export/server/spark/bin/spark-shell --master spark://node1.itcast.cn:7077
+  /export/server/spark/bin/spark-shell --master spark://node1:7077
   ~~~
 
 - Spark Application程序运行时三个核心概念：Job、Stage、Task
@@ -438,7 +438,7 @@ scp -r yarn-site.xml root@node3:$PWD
 ## 在node1上修改
 vim /export/server/spark/conf/spark-defaults.conf
 ## 添加内容
-spark.yarn.historyServer.address node1.itcast.cn:18080
+spark.yarn.historyServer.address node1:18080
 ~~~
 
 ##### 分发同步
@@ -490,7 +490,7 @@ scp -r spark-defaults.conf root@node3:$PWD
 ##### 设置资源不检查
 
 ~~~xml
-## 编辑yarn-site.xml文件，在node1.itcast.cn上操作
+## 编辑yarn-site.xml文件，在node1上操作
 vim /export/server/hadoop/etc/hadoop/yarn-site.xml
 ## 添加内容
 <property>
@@ -516,14 +516,14 @@ scp -r yarn-site.xml root@node3:$PWD
 启动HDFS、YARN、MRHistoryServer和Spark HistoryServer
 
 ~~~shell
-## 启动HDFS和YARN服务，在node1.itcast.cn执行命令
+## 启动HDFS和YARN服务，在node1执行命令
 hadoop-daemon.sh start namenode
 hadoop-daemons.sh start datanode
 yarn-daemon.sh start resourcemanager
 yarn-daemons.sh start nodemanager
-## 启动MRHistoryServer服务，在node1.itcast.cn执行命令
+## 启动MRHistoryServer服务，在node1执行命令
 mr-jobhistory-daemon.sh start historyserver
-## 启动Spark HistoryServer服务，，在node1.itcast.cn执行命令
+## 启动Spark HistoryServer服务，，在node1执行命令
 /export/server/spark/sbin/start-history-server.sh
 ~~~
 
