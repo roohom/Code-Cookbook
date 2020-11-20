@@ -2,11 +2,11 @@
 
 ## 概述
 
-官网:http://flume.apache.org/
+> 官网:http://flume.apache.org/
 
-Flume 是 Cloudera 提供的一个高可用的，高可靠的，分布式的海量日志采集、聚合和传输的工具。基于流式架构，容错性强，也很灵活简单。
-Flume可以采集文件，socket数据包、文件、文件夹、kafka等各种形式源数据，又可以将采集到的数据(下沉sink)输出到HDFS、hbase、hive、kafka等众多外部存储系统中，一般的采集需求，通过对flume的简单配置即可实现
-Flume针对特殊场景也具备良好的自定义扩展能力，因此，flume可以适用于大部分的日常数据采集场景。
+> Flume 是 Cloudera 提供的一个高可用的，高可靠的，分布式的海量日志采集、聚合和传输的工具。基于流式架构，容错性强，也很灵活简单。
+> Flume可以采集文件，socket数据包、文件、文件夹、kafka等各种形式源数据，又可以将采集到的数据(下沉sink)输出到HDFS、hbase、hive、kafka等众多外部存储系统中，一般的采集需求，通过对flume的简单配置即可实现
+> Flume针对特殊场景也具备良好的自定义扩展能力，因此，flume可以适用于大部分的日常数据采集场景。
 
 - Flume是一个海量数据采集的软件。
 - Flume是一款来自于apache  java语言软件。
@@ -126,6 +126,62 @@ source监控某个文件或数据流，数据源产生新的数据，拿到该�
     ```
      Event: { headers:{} body: 6E 69 68 61 6F 0D                 }
     ```
+
+
+
+### Flume事务
+
+![FlumeTransaction](Apache Flume.assets/FlumeTransaction.svg)
+
+#### 数据传输的三大步骤
+
+- Source从数据源读取数据
+- Source将数据**推送**进入Channel
+- Sink从Channel中**拉取**数据
+
+
+
+#### Flume如何实现传输数据的完整性、可靠性？
+
+- 数据为什么会丢失（没有事务机制的情况下）？
+  - Channel是被动的，Source将数据主动推送给Channel，而Sink主动从Channel拉取数据（Take）
+  - 一般Channel使用MemoryChannel，这样速度更快（FileChannel更安全但是速度慢），但是由于是基于内存，agent宕机的情况下可能导致内存中的数据丢失
+  - Source端。
+
+#### Flume的事务机制
+
+##### Put事务
+
+> 顺利的情况下：
+>
+> Source采集数据调用duPut方法将一批数据（Event）封装在putList中，这批数据成功放入putList中之后，就会调用doCommit方法，将所有的Event放入到Channel中，成功放入就会清空putList。
+>
+> 问题：
+>
+> 第一种：
+>
+> - 如果Sink取出数据的速度过慢，而source放入数据过快，就会造成Channel中数据积压，这个时候putList中的数据就会放不进去，可是已经doCommit了，putList数据丢失了
+> - 解决：调用doRollback方法：
+>   - 将putList清空，抛出ChannelException
+>   - 这个时候Source就会catch到doRollback的异常，Source就会将之前的一批数据重新采集，采集完成之后重新进行事务流程
+>
+> 第二种：
+>
+> - 如果Source采集数据使用的是tailDir source，由于某种情况下，监听分源目录被删除了，也会出现问题
+> - 解决：调用doRollback来进行事务回滚
+
+##### Take事务
+
+>顺利的情况下：
+>
+>doTake方法会将Channel中的数据剪切到takeList中，然后等到takeList满后会调用doCommit方法将数据写入目的地，调用doCommit时会进行将数据写入目的地之后再清空takeList
+>
+>问题：
+>
+>- 如果出现网络原因导致数据写入到目的地时传输失败了，这个时候如果不进行回滚而置之不理就会导致数据丢失
+>
+>- 解决：调用doRollback方法来进行回滚，takeList中存有备份数据，takeList中的数据就会原封不动地返还给Channel
+>- 新的问题：如果在往目的地Sink数据的时候，刚好Sink“一半”的时候目的机宕机了，在回滚的时候takeList还是将全部数据原封不动返还给Channel，当目的机重新启动上线的时候，再进行Sink操作，这个时候数据就会重复了。**所以从某种程度上来说，使用Flume采集数据不会丢失数据反而会使得数据重复。**
 
 ## Flume 安装
 
