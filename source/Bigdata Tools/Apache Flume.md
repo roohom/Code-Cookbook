@@ -131,7 +131,7 @@ source监控某个文件或数据流，数据源产生新的数据，拿到该�
 
 ### Flume事务
 
-![FlumeTransaction](Apache Flume.assets/FlumeTransaction.svg)
+![FlumeTransaction](./Apache Flume.assets/FlumeTransaction.svg)
 
 #### 数据传输的三大步骤
 

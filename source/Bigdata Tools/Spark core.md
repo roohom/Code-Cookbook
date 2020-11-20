@@ -29,7 +29,7 @@ Internally, each RDD is characterized by five main properties:
    an HDFS file)
 ~~~
 
-![RDD特性](Spark core.assets/RDD特性.svg)
+![RDD特性](./Spark core.assets/RDD特性.svg)
 
 
 
@@ -99,7 +99,7 @@ RDD数据结构内部有五个特性
 >
 > *Transformation操作只是建立计算关系，而Action 操作才是实际的执行者*
 
-![RDDFunctions](Spark core.assets/RDDFunctions.svg)
+![RDDFunctions](./Spark core.assets/RDDFunctions.svg)
 
 
 
@@ -126,5 +126,5 @@ RDD数据结构内部有五个特性
 
 #### 一些重要函数
 
-![RDDOperations](Spark core.assets/RDDOperations.svg)
+![RDDOperations](./Spark core.assets/RDDOperations.svg)
 
