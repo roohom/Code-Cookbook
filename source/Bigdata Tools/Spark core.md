@@ -29,7 +29,7 @@ Internally, each RDD is characterized by five main properties:
    an HDFS file)
 ~~~
 
-![RDD特性](./SparkCore.assets/RDD特性.svg)
+![RDD特性](./SparkCore.assets/RDDTrait.svg)
 
 
 
