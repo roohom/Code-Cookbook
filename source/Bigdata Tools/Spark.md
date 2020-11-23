@@ -544,9 +544,69 @@ mr-jobhistory-daemon.sh start historyserver
 
 ![image-20201119104819164](Spark.assets/image-20201119104819164.png)
 
+![image-20201123223436451](Spark.assets/image-20201123223436451.png)
+
+
+
+- 具体流程
+
+  - Driver在任务提交的本地机器上运行，Driver启动后会和ResourceManager通讯申请启动ApplicationMaster
+  - 随后ResourceManager分配Container，在合适的NodeManager上启动ApplicationMaster，此时的ApplicationMaster的功能相当于一个ExecutorLaucher，只负责向ResourceManager申请Executor内存
+  - ResourceManager接到ApplicationMaster的资源申请后会分配Container，然后ApplicationMaster在资源分配指定的NodeManager上启动Executor进程
+  - Executor进程启动后会向Driver反向注册，Executor全部注册完成后，Driver开始执行main函数
+  - 之后执行到Action算子时，触发一个Job，并根据宽依赖开始划分Stage，每个Stage生成对应的TaskSet，之后将Task分发到各个Executor上执行。
+
+- 以运行词频统计WordCount程序为例，提交命令如下
+
+  ~~~shell
+  /export/server/spark/bin/spark-submit \
+  --master yarn \
+  --deploy-mode client \ 
+  --driver-memory 512m \ 
+  --executor-memory 512m \ 
+  --executor-cores 1 \
+  --num-executors 2 \ 
+  --queue default \ 
+  --class me.iroohom.spark.submit.SparkSubmit \ 
+  hdfs://node1:8020/spark/apps/spark-chapter01_2.11-1.0.0.jar \
+  /datas/wordcount.data /datas/swcy-client
+  ~~~
+
+  
+
+
+
 #### Cluster模式
 
 ![image-20201119104833479](Spark.assets/image-20201119104833479.png)
+
+![image-20201123223713066](Spark.assets/image-20201123223713066.png)
+
+- 具体流程
+
+  - 任务提交后会和ResourceManager通讯申请启动ApplicationMaster
+  - 随后ResourceManager分配Container，在合适的NodeManager上启动ApplicationMaster，此时的ApplicationMaster就是Driver
+  - Driver启动后向ResourceManager申请Executor内存，ResourceManager接到ApplicationMaster的资源申请后会分配Container,然后在合适的NodeManager上启动Executor进程
+  - Executor进程启动后会向Driver反向注册
+  - Executor全部注册完成后Driver开始执行main函数，之后执行到Action算子时，触发一个job，并根据宽依赖开始划分stage，每个stage生成对应的taskSet，之后将task分发到各个Executor上执行
+
+- 以运行词频统计WordCount程序为例，提交命令如下：
+
+  ~~~shell
+  /export/server/spark/bin/spark-submit \ 
+  --master yarn \
+  --deploy-mode cluster \
+  --driver-memory 512m \ 
+  --executor-memory 512m \ 
+  --executor-cores 1 \ 
+  --num-executors 2 \ 
+  --queue default \ 
+  --class me.iroohom.spark.submit.SparkSubmit \ 
+  hdfs://node1:8020/spark/apps/spark-chapter01_2.11-1.0.0.jar \ 
+  /datas/wordcount.data /datas/swcy-cluster
+  ~~~
+
+  
 
 
 
