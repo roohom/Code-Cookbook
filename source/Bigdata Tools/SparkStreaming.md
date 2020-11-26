@@ -1,5 +1,7 @@
 # Spark Streaming
 
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
 > Spark中针对流式数据处理的方案有：
 >
 > - Spark Streaming
@@ -20,12 +22,12 @@ Spark Streaming是Spark生态系统当中一个重要的框架，它建立在Spa
 对于Spark Streaming来说，将流式数据按照时间间隔BatchInterval划分为很多部分，每一部分
 Batch（批次），针对每批次数据Batch当做RDD进行快速分析和处理
 
-它的核心是DStream，DStream类似于RDD，它实质上一系列的RDD的集合，DStream可以按照秒、分等时间间隔将数据流进行批量的划分。首先从接收到流数据之后，将其划分为多个batch，然后提交给Spark集群进行计算，最后将结果批量输出到HDFS或者数据库以及前端页面展示等等
+它的核心是DStream[^1]，DStream类似于RDD，它实质上一系列的RDD的集合，DStream可以按照秒、分等时间间隔将数据流进行批量的划分。首先从接收到流数据之后，将其划分为多个batch，然后提交给Spark集群进行计算，最后将结果批量输出到HDFS或者数据库以及前端页面展示等等
 $$
 DStream = Seq[RDD]
 $$
 
-[^1]: DStream(Discretized Stream，离散化数据流，连续不断的数据流)
+[^1]:  DStream(Discretized Stream，离散化数据流，连续不断的数据流)
 
 
 
@@ -41,7 +43,7 @@ $$
     定义从哪个数据源接收流式数据，封装到DStream中
 
 2. Define the streaming computations by applying transformation and output operations to DStreams.
-    针对业务调用DStream中函数，进行数据处理和输出
+    针对业务调用DStream中函数，进行数据处理和输出[^2]
 
 3. Start receiving data and processing it using streamingContext.start().
 
@@ -54,7 +56,7 @@ $$
 5. The processing can be manually stopped using streamingContext.stop().
     启动流式应用，并且一直等待程序终止（人为或异常），最后停止运行
 
-[^1]:说了一大堆，就第二点最重要，第二点还不会写 :)
+[^2]:说了一大堆，就第二点最重要，第二点还不会写 :)
 
 
 
@@ -65,11 +67,14 @@ $$
 ![image-20201126161351293](SparkStreaming.assets/image-20201126161351293.png)
 
 
+
+TD = SD + PD[^3]
+
 $$
 TD = SD + PD
 $$
 
-[^2]:每批次Batch数据处理总时间TD = 批次调度延迟时间SD + 批次数据处理时间PT
+[^3]:每批次Batch数据处理总时间TD = 批次调度延迟时间SD + 批次数据处理时间PT
 
 
 
@@ -114,13 +119,13 @@ $$
 
 ### 重要参数
 
-- 批次时间间隔BatchInterval
+- 批次时间间隔BatchInterval[^4]
   - 每批次数据的时间间隔，每隔多久加载一个Job
 - Block时间间隔：BlockInterval
   - 接收器划分流式数据的时间间隔，可以调整大小哦，官方建议最小值不能小于50ms
   - 默认值为200ms，属性：spark.streaming.blockInterval，调整设置
 
-[^3]:举个栗子：BatchInterval：1s = 1000ms = 5 * BlockInterval 每批次RDD数据中，有5个Block，每个Block就是RDD一个分区数据
+[^4]:举个栗子：BatchInterval：1s = 1000ms = 5 * BlockInterval 每批次RDD数据中，有5个Block，每个Block就是RDD一个分区数据
 
 
 
@@ -134,12 +139,12 @@ $$
 
 
 
-**DStream本质上是一个：一系列时间上连续的RDD（Seq[RDD]）**
+**DStream[^5]本质上是一个：一系列时间上连续的RDD（Seq[RDD]）**
 $$
 DStream = Seq[RDD]
 $$
 
-[^4]:DStream相当于一个序列（集合），里面存储的数据类型为RDD（Streaming按照时间间隔划分流式数据）
+[^5]:DStream相当于一个序列（集合），里面存储的数据类型为RDD（Streaming按照时间间隔划分流式数据）
 
 
 
