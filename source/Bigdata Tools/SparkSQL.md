@@ -23,6 +23,24 @@ SparkSQL模块来源于Hive框架，但是其功能远大于Hive，SparkSQL用�
 
 ### 数据结构
 
+$$
+DataFrame = RDD[Row] + Schema 
+$$
+
+[^1]:RDD加上约束信息即是DataFrame，RDD数据类型安全，而DataFrame不是
+
+$$
+Dataset =  RDD[case classes] + Schema 
+$$
+
+[^2]:RDD中封装样例类，知道了内部数据结构，加上Schema约束知道了外部数据结构，就得到了Dataset
+
+$$
+DataFrame = Dataset[Row]
+$$
+
+[^3]:DataFrame是Dataset的特殊形式
+
 > DataFrame = RDD[Row] + Schema 
 
 > Dataset =  RDD[case classes] + Schema 
