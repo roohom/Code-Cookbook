@@ -36,41 +36,41 @@
 
 ![image-20201118164922445](Spark.assets/image-20201118164922445.png)
 
-### Spark Core
+- Spark Core
 
-实现了Spark的基本功能，包含RDD、任务调度、内存管理、错误恢复、与存储系统交互等模块。
+  实现了Spark的基本功能，包含RDD、任务调度、内存管理、错误恢复、与存储系统交互等模块。
 
-数据结构`RDD`
+  数据结构`RDD`
 
 
 
-### Spark SQL
+- Spark SQL
 
-用来操作结构化数据的程序包，通过Spark SQL，可以使用SQL操作数据。
+  用来操作结构化数据的程序包，通过Spark SQL，可以使用SQL操作数据。
 
-数据结构：DataSet/DataFrame = RDD + Schema
+  数据结构：DataSet/DataFrame = RDD + Schema
 
-### Spark Streaming
+- Spark Streaming
 
-Spark提供的堆实时数据进行流式计算的组件，提供了用来操作数据流的API。
+  Spark提供的堆实时数据进行流式计算的组件，提供了用来操作数据流的API。
 
-数据结构：DStream = Seq[EDD]
+  数据结构：DStream = Seq[EDD]
 
-### Spark MLlib
+- Spark MLlib
 
-提供常见的机器学习(ML)功能的程序库。包括分类、回归、聚类、协同过滤等，还提供了模型评估、数据导入等额外的支持功能。 
+  提供常见的机器学习(ML)功能的程序库。包括分类、回归、聚类、协同过滤等，还提供了模型评估、数据导入等额外的支持功能。 
 
-数据结构：RDD或者DataFrame
+  数据结构：RDD或者DataFrame
 
-### Spark GraphX
+- Spark GraphX
 
-Spark中用于图计算的API，性能良好，拥有丰富的功能和运算符，能在海量数据上自如地运行复杂的图算法。
+  Spark中用于图计算的API，性能良好，拥有丰富的功能和运算符，能在海量数据上自如地运行复杂的图算法。
 
-数据结构：RDD或者DataFrame
+  数据结构：RDD或者DataFrame
 
-### Structured Streaming
+- Structured Streaming
 
-Structured Streaming结构化流处理模块，将流式结构化数据封装到DataFrame中进行分析。
+  Structured Streaming结构化流处理模块，将流式结构化数据封装到DataFrame中进行分析。
 
 ![image-20201118165531399](Spark.assets/image-20201118165531399.png)
 
@@ -140,12 +140,36 @@ scala> wordcountsRDD.foreach(item => println(item))
 >
 > - 1、`Driver Program`：应用管理者
 >   - 类似于`Application Master`，管理整个应用中所有的Job的调度执行
->   - 运行JVM Process，运行陈旭的Main函数，必须创建SparkContext上下文对象
+>   - 运行JVM Process，运行程序的Main函数，必须创建SparkContext上下文对象
 >   - 一个SparkApplication仅有一个
 > - 2、`Executors`：
->   - 相当于一个线程池，运行JVM Process，其中有很多线程，每个线程运行一个Task任务，一个Task运行需要1 Core CPU，所有可以认为Executor中线程数就等于CPU Core核数
+>   - 相当于一个线程池，运行JVM Process，其中有很多线程，每个线程运行一个Task任务，一个Task运行需要1 Core CPU，所以可以认为Executor中线程数就等于CPU Core核数
 >   - 一个Spark Application可以有多个，可以设置个数和资源信息
 >   - 类似MapTask和ReduceTask
+
+
+
+## 使用Spark Shell
+
+本地模式运行Spark框架提供交互式命令行：spark-shell，其中本地模式LocalMode含义为：启动一个JVM Process进程，执行任务Task，使用方式如下：
+
+~~~
+--master local | local[*] | local[K] 建议 K >= 2 正整数
+~~~
+
+其中K表示启动线程数目（使用CPU核心数）
+
+- Spark中Task以Thread方式运行
+- 每个Task运行需要1 Core CPU
+
+本地模式启动spark shell：
+
+~~~shell
+## 进入Spark安装目录
+cd /export/server/spark
+## 启动spark-shell
+bin/spark-shell --master local[2]
+~~~
 
 
 
@@ -297,7 +321,9 @@ ln -s /export/server/spark-2.4.5-bin-cdh5.16.2-2.11 /export/server/spark
 
   - 查看WEB-UI：http://node1:8080 可以看到从节点上线加入集群
 
-### 提交程序运行Spark Submit
+## 提交程序运行Spark Submit
+
+> 可以在命令行使用`$SPARK_HOME/bin/spark-submit --help`来获取相关命令的帮助
 
 #### 示例
 
@@ -346,6 +372,112 @@ ${SPARK_HOME}/examples/jars/spark-examples_2.11-2.4.5.jar \
 ~~~shell
 # 指定Driver Program JVM内存大小 默认为1G
 --driver-memory MEM
+
+# 表示Driver运行CLASS PATH路径
+--driver-class-path
+
+# Spark Standalone with cluster deploy mode 默认值为1
+--driver-cores NUM
+
+# 运行在YARN in cluster mode 默认值为1
+--driver-cores NUM
+
+#运行在Standalone的部署模式下，如果Driver运行异常而失败，可以自动重启
+--supervise
+~~~
+
+
+
+### Executor 参数配置
+
+> 每个Spark Application运行时，需要启动Executor运行任务Task，需要指定Executor个数及每个Executor资源信息（内存Memory和CPU Core核数）
+
+~~~shell
+#Executor运行所需内存大小
+ --executor-memory MEM
+ 
+#Execturo运行的CPU Cores,默认的情况下，在Standalone集群上为worker节点所有可有的Cpu Cores,在YARN集群下为1
+ --executor-cores NUM
+ 
+#表示运行在Standalone集群下，所有Executor的CPU Cores,结合--executor-cores计算出Executor个数
+--total-executor-cores NUM
+
+#表示在YARN集群下，Executor的个数，默认值为2
+ --num-executors
+ 
+#表示Executor运行的队列，默认为default队列
+--queue QUEUE_NAME
+~~~
+
+
+
+### 官方案例
+
+~~~shell
+# Run application locally on 8 cores
+./bin/spark-submit \
+ --class org.apache.spark.examples.SparkPi \
+ --master local[8] \
+ /path/to/examples.jar \
+ 100
+ 
+# Run on a Spark standalone cluster in client deploy mode
+./bin/spark-submit \
+ --class org.apache.spark.examples.SparkPi \
+ --master spark://207.184.161.138:7077 \
+ --executor-memory 20G \
+ --total-executor-cores 100 \
+ /path/to/examples.jar \
+ 1000
+ 
+# Run on a Spark standalone cluster in cluster deploy mode with supervise
+./bin/spark-submit \
+ --class org.apache.spark.examples.SparkPi \
+ --master spark://207.184.161.138:7077 \
+ --deploy-mode cluster \
+ --supervise \
+ --executor-memory 20G \
+ --total-executor-cores 100 \
+ /path/to/examples.jar \
+ 1000
+ 
+# Run on a YARN cluster
+export HADOOP_CONF_DIR=XXX
+./bin/spark-submit \
+ --class org.apache.spark.examples.SparkPi \
+ --master yarn \
+ --deploy-mode cluster \ # can be client for client mode
+ --executor-memory 20G \
+ --num-executors 50 \
+ /path/to/examples.jar \
+ 1000
+ 
+# Run a Python application on a Spark standalone cluster
+./bin/spark-submit \
+ --master spark://207.184.161.138:7077 \
+ examples/src/main/python/pi.py \
+ 1000
+ 
+# Run on a Mesos cluster in cluster deploy mode with supervise
+./bin/spark-submit \
+ --class org.apache.spark.examples.SparkPi \
+--master mesos://207.184.161.138:7077 \
+ --deploy-mode cluster \
+ --supervise \
+ --executor-memory 20G \
+ --total-executor-cores 100 \
+ http://path/to/examples.jar \
+ 1000
+ 
+# Run on a Kubernetes cluster in cluster deploy mode
+./bin/spark-submit \
+ --class org.apache.spark.examples.SparkPi \
+ --master k8s://xx.yy.zz.ww:443 \
+ --deploy-mode cluster \
+ --executor-memory 20G \
+ --num-executors 50 \
+ http://path/to/examples.jar \
+ 1000
 ~~~
 
 
@@ -369,6 +501,86 @@ ${SPARK_HOME}/examples/jars/spark-examples_2.11-2.4.5.jar \
     进一步说明），会生成一个 Job。
   - Stage：Job 的组成单位，一个 Job 会切分成多个 Stage，Stage 彼此之间相互依赖顺序执行，
     而每个 Stage 是多个 Task 的集合，类似 map 和 reduce stage。 
+
+
+
+## Spark Standalone  HA
+
+### 搭建配置
+
+- 停止集群
+
+  ~~~shell
+  ## 在node1上执行命令
+  /export/server/spark/sbin/stop-master.sh
+  /export/server/spark/sbin/stop-slaves.sh
+  ~~~
+
+- 增加Zookeeper配置
+
+  - 对Spark配置文件【$SPARK_HOME/conf/spark-env.sh】文件如下修改
+
+    ~~~properties
+    SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER 
+    -Dspark.deploy.zookeeper.url=node1:2181,node2:2181,node3:2181 
+    -Dspark.deploy.zookeeper.dir=/spark-ha"
+    ~~~
+
+  - 说明
+
+    ~~~
+    spark.deploy.recoveryMode：恢复模式
+    spark.deploy.zookeeper.url：ZooKeeper的Server地址
+    spark.deploy.zookeeper.dir：保存集群元数据信息的文件、目录。包括Worker、Driver、Application信息。
+    ~~~
+
+  - 注释或删除MASTER_HOST内容：
+
+    ~~~properties
+    # SPARK_MASTER_HOST=node1
+    ~~~
+
+- 将spark-env.sh分发集群
+
+  ~~~shell
+  cd /export/server/spark/conf
+  scp -r spark-env.sh root@node2:$PWD
+  scp -r spark-env.sh root@node3:$PWD
+  ~~~
+
+- 启动集群服务
+
+  - 先启动Zookeeper集群，再分别启动2个Master服务，最后启动Worker服务
+
+    ~~~shell
+    ## 启动ZOOKEEPER服务
+    zkServer.sh start
+    ## 在node1和node2分别启动Master服务
+    /export/server/spark/sbin/start-master.sh
+    ## 查看哪个Master为Active，就在哪个Master机器上启动Workers服务
+    /export/server/spark/sbin/start-slaves.sh
+    ~~~
+
+### 测试运行
+
+Standalone HA集群运行应用时，指定ClusterManager参数属性为
+
+~~~ini
+--master spark://host1:port1,host2:port2
+~~~
+
+提交圆周率PI运行集群，命令如下：
+
+~~~shell
+SPARK_HOME=/export/server/spark
+${SPARK_HOME}/bin/spark-submit \
+--master spark://node1.itcast.cn:7077,node2.itcast.cn:7077 \
+--class org.apache.spark.examples.SparkPi \
+${SPARK_HOME}/examples/jars/spark-examples_2.11-2.4.5.jar \
+100
+~~~
+
+
 
 
 
@@ -531,6 +743,8 @@ mr-jobhistory-daemon.sh start historyserver
 
 ## Deploy Mode
 
+
+
 > Client模式和Cluster模式两种模式
 >
 > 本质的区别是：Driver Program运行在哪里
@@ -540,7 +754,7 @@ mr-jobhistory-daemon.sh start historyserver
 
 
 
-#### Client模式
+### Client模式
 
 ![image-20201119104819164](Spark.assets/image-20201119104819164.png)
 
@@ -576,7 +790,9 @@ mr-jobhistory-daemon.sh start historyserver
 
 
 
-#### Cluster模式
+### **Cluster模式**
+
+> 生产环境使用的模式
 
 ![image-20201119104833479](Spark.assets/image-20201119104833479.png)
 
