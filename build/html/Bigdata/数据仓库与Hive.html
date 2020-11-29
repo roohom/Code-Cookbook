@@ -1,0 +1,1078 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. 数据仓库 &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="6. 数据倾斜" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html" />
+    <link rel="prev" title="2. SCD" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">大数据</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">1. 大数据平台环境与数仓</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">2. SCD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">3. 拉链表</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. 数据仓库</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.1. 概念</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4.2. 功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.3. 特点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.4. 流程</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#hive">5. Hive</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">5.1. 本质</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">5.2. 功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5.3. 应用场景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">5.4. 架构</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">5.5. 常用配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">5.6. 元数据服务</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id12">5.6.1. 元数据共享</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id13">5.6.2. 元数据管理服务</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">5.7. 表的分类与结构</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id15">5.7.1. 管理表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">5.7.2. 临时表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">5.7.3. 外部表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">5.7.4. 结构</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#join">5.8. Join与排序</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id23">5.8.1. Join</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">5.8.2. 排序</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id25">5.9. 复杂数据类型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#array">5.9.1. array类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#map">5.9.2. Map类型</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">5.10. 函数</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id27">5.10.1. 内置函数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id28">5.10.2. 自定义函数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id31">5.10.3. 侧视图</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html">6. 数据倾斜</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">博客</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+</ul>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Bigdata</a> &raquo;</li>
+        
+      <li><span class="section-number">4. </span>数据仓库</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Bigdata/数据仓库与Hive.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>[TOC]</p>
+<div class="section" id="id1">
+<h1><span class="section-number">4. </span>数据仓库<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id2">
+<h2><span class="section-number">4.1. </span>概念<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>数据库与数据仓库都是事先数据存储的一种设计模型</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">4.2. </span>功能<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>更加规范和统一化的数据管理平台</p></li>
+<li><p>将企业需要的所有数据进行存储，提供给企业各个需要使用数据的部门进行应用</p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">4.3. </span>特点<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>专门用于设计存储数据的地方</p></li>
+<li><p>本身不产生数据</p></li>
+<li><p>本身不使用数据</p></li>
+<li><p>面向主题：不同的应用给定不同的主题，用到不同的数据</p>
+<ul>
+<li><p>对数据按照需求分类</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">4.4. </span>流程<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>数据生成</p>
+<ul>
+<li><p>业务数据：数据库</p></li>
+<li><p>用户行为数据：日志</p></li>
+<li><p>机器运行日志：日志</p></li>
+<li><p>爬虫数据</p></li>
+<li><p>第三方合作数据</p></li>
+</ul>
+</li>
+<li><p>数据采集：通过各种采集工具将不同类型的数据存储在数据仓库中</p>
+<ul>
+<li><p>先放入HDFS</p></li>
+</ul>
+</li>
+<li><p>ETL：数据清洗</p>
+<ul>
+<li><p>过滤、转换、补全</p></li>
+<li><p>对HDFS上的原始数据进行处理，处理好的数据放入数仓</p></li>
+</ul>
+</li>
+<li><p>数据仓库：将各种各样的数据进行统一化的存储</p>
+<ul>
+<li><p>分层：规范所有数据进入数仓以后经过哪些步骤的处理，得到最后想要的结果</p>
+<ul>
+<li><p>原始数据：ETL</p></li>
+<li><p>第一层：存储ETL之后的数据</p></li>
+<li><p>第二层：对第一层之后的数据简单处理</p></li>
+<li><p>第三层：第二层之后的数据进行处理</p></li>
+<li><p>第四层：得到需求方需要的数据</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>构建数据仓库：</p>
+<ul>
+<li><p>离线数仓：Hive</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="hive">
+<h1><span class="section-number">5. </span>Hive<a class="headerlink" href="#hive" title="永久链接至标题">¶</a></h1>
+<blockquote>
+<div><p>起源自：FaceBook</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Hive提供SQL的开发接口，用户可以直接使用SQL来操作Hadoop</p></li>
+<li><p>Hive本身只是一个翻译的角色，底层分布式存储和分布式计算都是靠Hadoop来实现的</p></li>
+<li><p>高度依赖于Hadoop</p></li>
+</ul>
+<div class="section" id="id6">
+<h2><span class="section-number">5.1. </span>本质<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>一种特殊的支持SQL开发接口的Hadoop客户端</p>
+</div>
+<div class="section" id="id7">
+<h2><span class="section-number">5.2. </span>功能<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p><strong>将文件映射成表的数据</strong>[工作中主要使用此功能构建数仓]</p>
+<ul>
+<li><p>Hive的存储：HDFS</p></li>
+</ul>
+</li>
+<li><p>功能二：将SQL语句转换为MapReduce程序，提交给yarn运行[工作中使用较少，替代品：Impala、SparkSQL</p>
+<ul>
+<li><p>MapReduce是对文件进行操作</p></li>
+<li><p>SQL是对表进行操作</p></li>
+<li><p>Hive是对表处理的，底层的MapReduce是对文件进行处理的</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2><span class="section-number">5.3. </span>应用场景<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<p>应用于构建<strong>数据仓库</strong></p>
+</div>
+<div class="section" id="id9">
+<h2><span class="section-number">5.4. </span>架构<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>客户端：用于提供与用户交互的界面，实现SQL开发</p></li>
+<li><p>服务端：</p>
+<ul>
+<li><p>负责分析SQL，读写元数据，提交程序给Hadoop</p></li>
+<li><p>连接器：负责维护与客户端的连接</p></li>
+<li><p>解析器：负责解析SQL语句构建语法树</p>
+<ul>
+<li><p>判断数据库、表是否存在</p></li>
+<li><p>语法是否正确</p></li>
+<li><p>最终得到一个逻辑计划</p></li>
+</ul>
+</li>
+<li><p>优化器：优化这个逻辑，得到物理计划</p></li>
+<li><p>执行器：执行物理计划得到结果返回给客户端</p></li>
+</ul>
+</li>
+<li><p>元数据：存储Hive中关键性信息</p>
+<ul>
+<li><p>Hive中所有数据库、所有表的信息</p></li>
+<li><p>HDFS与Hive表的映射关系</p></li>
+</ul>
+</li>
+<li><p>Hadoop：Hive所有的请求都是给Hadoop<strong>实现</strong>的</p>
+<ul>
+<li><p>Hive自己不是分布式的</p></li>
+<li><p>Hive能实现分布式存储和分布式计算</p></li>
+<li><p>底层：</p>
+<ul>
+<li><p>存储：HDFS</p></li>
+<li><p>计算：MapReduce+yarn</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h2><span class="section-number">5.5. </span>常用配置<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>本地模式</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> hive.exec.mode.local.auto<span class="o">=</span>true<span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>本地模式的三个条件：</p>
+<ul>
+<li><p>1.job的输入数据大小必须小于参数：hive.exec.mode.local.auto.inputbytes.max(默认128MB)</p></li>
+<li><p>2.job的map数必须小于参数：hive.exec.mode.local.auto.tasks.max(默认4)</p></li>
+<li><p>3.job的reduce数必须为0或者1</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h2><span class="section-number">5.6. </span>元数据服务<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>存储内容：<strong>Hive中关键性数据，数据库、表、列的信息</strong></p></li>
+<li><p>存储位置</p>
+<ul>
+<li><p>默认位置：derby数据库</p>
+<ul>
+<li><p>Hive自带的文本型数据库，轻量级的数据库</p></li>
+<li><p>一般用于嵌入式系统中的数据存储</p></li>
+<li><p>不方便管理和维护，不方便共享</p></li>
+</ul>
+</li>
+<li><p>自定义位置：MySQL</p>
+<ul>
+<li><p>官方推荐使用的存储方式</p></li>
+<li><p>工作中使用的方式(<strong>几乎所有的元数据都存放在MySQL</strong>)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>元数据的<strong>访问</strong>方式：<strong>内嵌模式</strong>、<strong>本地模式</strong>、<strong>远程模式</strong></p>
+<ul>
+<li><p>内嵌模式：元数据使用默认存储，直接访问derby</p></li>
+<li><p>本地模式：元数据使用RDBMS(关系型数据库管理系统)：MySQL，Hive</p>
+<ul>
+<li><p>RDBMS：关系型数据库管理系统</p></li>
+<li><p>NoSQL：非关系型数据库</p></li>
+</ul>
+</li>
+<li><p>远程模式：元数据存储是使用MySQL，Hive服务端访问Metastore服务来访问元数据 (metastroe相当于一个中介)</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="id12">
+<h3><span class="section-number">5.6.1. </span>元数据共享<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p><strong>问</strong>：使用Spark/Impala/presto等对Hive中的数据进行计算从而代替hive底层的MapReduce计算，如何能让Spark等工具读取到Hive中的表，以及对应的HDFS的数据呢？</p>
+<ul class="simple">
+<li><p><strong>解决</strong>：所有的数据都存储在元数据中，只要<strong>将Hive元数据共享刚给其他工具即可</strong></p></li>
+</ul>
+<blockquote>
+<div><p>默认的，Hive服务端会将Hive客户端的操作请求翻译成MapReduce API并提交给Hadoop，实现对Hive中的数据进行计算，此时Hive仅仅充当一个翻译工具，目的是将用户指定SQL语言翻译成MapReduce代码，而MapReduce运行计算是非常慢的，这样的方式效率低下，而Spark等工具效率高速度快，可以使用spark等工具代替Hive底层的MapReduce实现计算。但是这样一来，spark等工具怎么知道Hive中的表在哪里已经对应的HDFS数据在哪里呢，为了解决此问题，我们知道Hive的元数据中存储了Hive中的关键性信息，如数据库、表、列的信息，只要将Hive中的元数据共享给其他工具即可。</p>
+</div></blockquote>
+</li>
+<li><p>问：如何实现共享问题？</p>
+<ul class="simple">
+<li><p>解决：<strong>构建元数据管理服务MetaStore</strong>，让所有需要访问JHive中表和对应的HDFS数据的工具直接访问MetaStore，MetaStore来告诉他们对应的数据在哪。</p></li>
+</ul>
+<blockquote>
+<div><p>如果让spark等其他计算工具直接访问Hive的元数据，会产生一系列权限问题，Hive的元数据是采用MySQL存储的，MySQL会对客户端的访问进行权限检查，使得访问不通过。但即使没有权限检查，其他工具直接访问Hive的元数据，也不清楚不知道访问到的元数据是干嘛的，有怎样的信息，为了解决此问题，Hive专门构建了MetaStore，让其他工具直接将<strong>元数据读写请求</strong>发送至MetaStore，MetaStore会解析客户端的请求，并告诉其需要访问的的数据在哪，以及数据的具体信息。</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="id13">
+<h3><span class="section-number">5.6.2. </span>元数据管理服务<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>MetaStore：为了实现元数据共享而涉及的一种专有的元数据管理服务</p></li>
+<li><p>元数据管理服务的开启由配置决定，在hive-site.xml中：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;property&gt;</span>
+    <span class="nt">&lt;name&gt;</span>hive.metastore.uris<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;value&gt;</span>thrift://node3:9083<span class="nt">&lt;/value&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>配置了这个服务，就必须先开启MetaStore这个服务再使用Hive</p></li>
+</ul>
+<blockquote>
+<div><p>由于所有对Hive元数据的读写请求都是经过MetaStore来处理的，所以必须开启MetaStore服务才能是Hive客户端访问Hive元数据。举个栗子：早期打电话，会有电话中转，张铁妞先将电话拨到服务台，告诉接线员我要打给王大锤，于是接线员就将线路接到了王大锤家，如果MetaStore没有先开启，张铁妞就不能直接拨打王大锤家的电话。</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id14">
+<h2><span class="section-number">5.7. </span>表的分类与结构<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id15">
+<h3><span class="section-number">5.7.1. </span>管理表<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>MANAGED_TABLE</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Hive中默认创建的表的类型</p>
+<ul>
+<li><p>特点：</p>
+<ul>
+<li><p>只要不手动删除，这张表就一直存在</p></li>
+<li><p>手动删除管理表：元数据会被删除，数据也会被删除</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id16">
+<h3><span class="section-number">5.7.2. </span>临时表<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>TRMPORARY</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>特点：</p>
+<ul>
+<li><p>这张表创建的客户端一旦断开连接，临时表会自动删除</p></li>
+<li><p>一般用于存储临时数据，并且表用完以后不会再被使用</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id17">
+<h3><span class="section-number">5.7.3. </span>外部表<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>EXTERNAL_TABLE</p>
+</div></blockquote>
+<ul>
+<li><p>特点：</p>
+<ul>
+<li><p>手动删除外部表：元数据会被删除，但是数据不会被删除</p>
+<blockquote>
+<div><p>某个用户在读取该表之后将其删除，只是删除了元数据，数据仍然保留在HDFS上，多个人对同一份数据进行读取并建立了外部表，每个人使用完之后删除了自己的表，不影响最终保留在HDFS上的那份数据。</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p>应用：</p>
+<ul class="simple">
+<li><p>如果这份数据比较重要，建立外部表保证数据安全</p></li>
+<li><p>入股多个人需要使用这张表读取同一份数据，任何一个表被删除，不能影响数据</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id18">
+<h3><span class="section-number">5.7.4. </span>结构<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id19">
+<h4><span class="section-number">5.7.4.1. </span>普通结构表<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h4>
+<ul>
+<li><p>普通结构表和HDFS文件之间的映射关系</p>
+<ul>
+<li><p>Hive表的最后一级目录就是表的目录</p></li>
+<li><p>表中的数据按照原始数据文件形式存在</p>
+<blockquote>
+<div><p>当使用load data语句将文件与Hive中的表关联后，无论原先HDFS文件存储在HDFS上的哪个位置，都会被移送到/user/hive/warehouse/数据库名/表名这个目录下，并且仍然按照文件形式存储</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id20">
+<h4><span class="section-number">5.7.4.2. </span>分区结构表<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h4>
+<blockquote>
+<div><p>降低程序的负载，提高程序的效率</p>
+</div></blockquote>
+<p><strong>设计思想</strong>是<strong>优化底层MapReduce的输入，根据分区直接对数据进行过滤，避免不需要用到的数据进入程序。</strong></p>
+<blockquote>
+<div><p>将数据<strong>按照目录拆分</strong>，<strong>不同分区就是不同的目录</strong>，在这种情况下，<strong>如果过滤条件不是分区字段，那么分区优化是无效的</strong></p>
+</div></blockquote>
+<p>为什么这么说？</p>
+<ul>
+<li><p>有个场景：</p>
+<ul>
+<li><p>在表的目录下(hivelog)存储了多个日志文件，并且每个日志文件以时间命名(如：2020-08-29)，如果需要对8月29日的日志文件进行处理，则需要过滤：</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">hivelog</span> <span class="k">where</span> <span class="n">daystr</span><span class="o">=</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">29</span><span class="p">;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>这么简单的依据SQL，我们知道Hive的底层是通过MapReduce来实现的，所以在底层MapReduce读取了HDFS上hivelog这个目录，将这个目录下的所有文件作为程序的输入，过滤的目的可以达到，可是这么一来，就需要读取所有的文件，而MapReduce运行起来好费时间和资源</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p>另一个场景：</p>
+<ul>
+<li><p>同样在hivelog下存储了多个文件，不过与上个场景不同的是，每天日志文件都被上一级以时间命名的目录包裹起来，如：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">hive</span><span class="o">/</span><span class="n">warehouse</span><span class="o">/</span><span class="n">practice</span><span class="o">.</span><span class="n">db</span><span class="o">/</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">28</span><span class="o">/</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mf">28.</span><span class="n">log</span>
+<span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">hive</span><span class="o">/</span><span class="n">warehouse</span><span class="o">/</span><span class="n">practice</span><span class="o">.</span><span class="n">db</span><span class="o">/</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">29</span><span class="o">/</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mf">29.</span><span class="n">log</span>
+<span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">hive</span><span class="o">/</span><span class="n">warehouse</span><span class="o">/</span><span class="n">practice</span><span class="o">.</span><span class="n">db</span><span class="o">/</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">30</span><span class="o">/</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mf">30.</span><span class="n">log</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>这样，如果我们想要过滤读取到2020-08-29这一天的日志再次执行</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">hivelog</span> <span class="k">where</span> <span class="n">daystr</span><span class="o">=</span><span class="mi">2020</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">29</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>在底层MapReduce程序的输入是不一样的，它只读取了2020-08-29.log这个文件，文件读取量是上一种场景的三分之一</p>
+</div></blockquote>
+</li>
+</ul>
+</li>
+<li><p>应用场景：</p></li>
+<li><p>需要按照一定的时间维度进行数据处理，数据量非常大的</p></li>
+<li><p>实现方式：</p>
+<ul>
+<li><p>方式一：<strong>手动分区</strong>(静态分区)</p>
+<ul>
+<li><p>应用场景：数据本身就是<strong>已经按照分区规则分好</strong>了的</p>
+<ul class="simple">
+<li><p>例如hive的日志就是按照天日期分好的</p></li>
+</ul>
+</li>
+<li><p>这样就可以之间创建一张分区表，将对应的文件按照分区条件加载到不同对的分区中</p>
+<blockquote>
+<div><p>加载，这个时候，Hive实际在HDFS中数据表的目录下创建了N个以分区条件命名的目录</p>
+</div></blockquote>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span>load data local inpath &#39;/export/datas/emp10.txt&#39; into table
+tb_emp_part1 partition(department = 10);
+
+此时目录名就是department=10
+</pre></div>
+</div>
+</li>
+<li><p>例如</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">insert</span> <span class="n">overwrite</span> <span class="k">table</span> <span class="n">demo_static_partition</span> 
+<span class="n">partition</span><span class="p">(</span><span class="k">year</span><span class="o">=</span><span class="ss">&quot;2020&quot;</span><span class="p">,</span> <span class="k">month</span><span class="o">=</span><span class="ss">&quot;04&quot;</span><span class="p">,</span> 
+<span class="k">day</span><span class="o">=</span><span class="ss">&quot;2020-04-10&quot;</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="ss">&quot;22&quot;</span><span class="p">)</span> 
+<span class="k">select</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> 
+<span class="n">trade_year</span> <span class="k">as</span> <span class="k">year</span> <span class="p">,</span>
+<span class="n">trade_month</span> <span class="k">as</span> <span class="k">month</span><span class="p">,</span>
+<span class="n">trade_day</span> <span class="k">as</span> <span class="k">day</span><span class="p">,</span>
+<span class="n">trade_hour</span> <span class="k">as</span> <span class="n">hour</span>  
+<span class="k">from</span> <span class="n">user_demo</span> 
+<span class="k">where</span> <span class="n">trade_year</span><span class="o">=</span><span class="ss">&quot;2020&quot;</span> 
+<span class="k">and</span> <span class="n">trade_month</span><span class="o">=</span><span class="ss">&quot;04&quot;</span> 
+<span class="k">and</span> <span class="n">trade_day</span><span class="o">=</span><span class="ss">&quot;2020-04-10&quot;</span> 
+<span class="k">and</span> <span class="n">trade_hour</span><span class="o">=</span><span class="ss">&quot;22&quot;</span> 
+</pre></div>
+</div>
+</li>
+<li><p>分区表的分区过滤，直接通过元数据找到分区对应的HDFS位置作为MapReduce的输入</p></li>
+</ul>
+</li>
+<li><p>方式二：<strong>自动分区</strong>(动态分区)</p>
+<ul>
+<li><p>应用场景：<strong>数据本身没有做分区</strong>，拆分不同的文件</p>
+<ul class="simple">
+<li><p>例如：Nginx的日志每天都追加写入同一个文件中</p></li>
+</ul>
+</li>
+<li><p>实现步骤：</p>
+<ol>
+<li><p>开启自动分区</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partition</span><span class="p">.</span><span class="k">mode</span><span class="o">=</span><span class="n">nonstrict</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>创建一张分区表，将待分区的文件加载到这张普通表中</p></li>
+<li><p>再创建一张分区结构表，使用partitioned by字段指定分区的字段条件</p></li>
+<li><p>从普通表中查询将数据分区写入创建的分区结构表中</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span>insert into table 分区表 partition(分区字段) select * from 普通表;
+</pre></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">insert</span> <span class="n">overwrite</span> <span class="k">table</span> <span class="n">demo_dynamic_partition</span> 
+<span class="n">partition</span><span class="p">(</span><span class="k">year</span><span class="o">=</span><span class="k">year</span><span class="p">,</span> <span class="k">month</span><span class="o">=</span><span class="k">month</span><span class="p">,</span> 
+<span class="k">day</span><span class="o">=</span><span class="k">day</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="n">hour</span><span class="p">)</span> 
+<span class="k">select</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> 
+<span class="n">trade_year</span> <span class="k">as</span> <span class="k">year</span> <span class="p">,</span>
+<span class="n">trade_month</span> <span class="k">as</span> <span class="k">month</span><span class="p">,</span>
+<span class="n">trade_day</span> <span class="k">as</span> <span class="k">day</span><span class="p">,</span>
+<span class="n">trade_hour</span> <span class="k">as</span> <span class="n">hour</span>  
+<span class="k">from</span> <span class="n">user_demo</span> 
+</pre></div>
+</div>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>使用动态分区与静态分区的注意事项和区别</p>
+<ul>
+<li><p>区别：</p>
+<ul class="simple">
+<li><p>动态分区，在运行时根据列的取值去自动创建分区，有多少种值就多少个分区，会为每个分区分配reduce个数，当分区量过多时，reduce也会增加</p></li>
+<li><p>静态分区不管分区有没有数据都会创建该分区，而动态分区则会有结果就创建，没结果就不会创建</p></li>
+<li><p>动态分区根据字段的变化而变化，手动分区是文件已经按照字段分区规则分好，手动指定分区的值为静态值。</p></li>
+</ul>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li><p>需要开启属性配置：</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Hive默认配置值</span>
+<span class="c1">-- 开启或关闭动态分区</span>
+<span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partition</span><span class="o">=</span><span class="k">false</span><span class="p">;</span>
+<span class="c1">-- 设置为nonstrict模式，让所有分区都动态配置，否则至少需要指定一个分区值</span>
+<span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partition</span><span class="p">.</span><span class="k">mode</span><span class="o">=</span><span class="k">strict</span><span class="p">;</span>
+<span class="c1">-- 能被mapper或reducer创建的最大动态分区数，超出而报错</span>
+<span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">max</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partitions</span><span class="p">.</span><span class="n">pernode</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span>
+<span class="c1">-- 一条带有动态分区SQL语句所能创建的最大动态分区总数，超过则报错</span>
+<span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">max</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partitions</span><span class="o">=</span><span class="mi">1000</span><span class="p">;</span>
+<span class="c1">-- 全局能被创建文件数目的最大值，通过Hadoop计数器跟踪，若超过则报错</span>
+<span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">max</span><span class="p">.</span><span class="n">created</span><span class="p">.</span><span class="n">files</span><span class="o">=</span><span class="mi">100000</span><span class="p">;</span>
+
+<span class="c1">-- 根据个人需要配置</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partition</span><span class="o">=</span><span class="k">true</span><span class="p">;</span>  
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partition</span><span class="p">.</span><span class="k">mode</span><span class="o">=</span><span class="n">nonstrict</span><span class="p">;</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">max</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partitions</span><span class="p">.</span><span class="n">pernode</span><span class="o">=</span><span class="mi">1000</span><span class="p">;</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">max</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="n">partitions</span><span class="o">=</span><span class="mi">10000</span><span class="p">;</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="k">exec</span><span class="p">.</span><span class="k">max</span><span class="p">.</span><span class="n">created</span><span class="p">.</span><span class="n">files</span><span class="o">=</span><span class="mi">1000000</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>混合使用时，静态分区必须在动态分区的前面</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">insert</span> <span class="n">overwrite</span> <span class="k">table</span> <span class="n">demo_static_partition</span> 
+<span class="n">partition</span><span class="p">(</span><span class="k">year</span><span class="o">=</span><span class="ss">&quot;2020&quot;</span><span class="p">,</span> <span class="k">month</span><span class="o">=</span><span class="ss">&quot;04&quot;</span><span class="p">,</span> 
+<span class="k">day</span><span class="o">=</span><span class="k">day</span><span class="p">,</span> <span class="n">hour</span><span class="o">=</span><span class="n">hour</span><span class="p">)</span> 
+<span class="k">select</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">user_name</span><span class="p">,</span> 
+<span class="n">trade_year</span> <span class="k">as</span> <span class="k">year</span> <span class="p">,</span>
+<span class="n">trade_month</span> <span class="k">as</span> <span class="k">month</span><span class="p">,</span>
+<span class="n">trade_day</span> <span class="k">as</span> <span class="k">day</span><span class="p">,</span>
+<span class="n">trade_hour</span> <span class="k">as</span> <span class="n">hour</span>  
+<span class="k">from</span> <span class="n">user_demo</span> 
+<span class="k">where</span> <span class="n">trade_year</span><span class="o">=</span><span class="ss">&quot;2020&quot;</span> 
+<span class="k">and</span> <span class="n">trade_month</span><span class="o">=</span><span class="ss">&quot;04&quot;</span> 
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>多级分区</p>
+<ul>
+<li><p>比如一个需求：按照天分区，再按照小时分区</p></li>
+<li><p>这个文件是按照时间分区好的，因此需要执行手动分区</p></li>
+<li><p>在创建分区结构表时使用语句</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="n">partitioned</span> <span class="k">by</span><span class="p">(</span><span class="n">daystr</span> <span class="n">string</span><span class="p">,</span> <span class="n">hourstr</span> <span class="n">string</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>将HDFS上或本地的文件加载到分区结构表中，指定分区</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="n">partition</span> <span class="p">(</span><span class="n">daystr</span><span class="o">=</span><span class="s1">&#39;20150828&#39;</span><span class="p">,</span><span class="n">hourstr</span><span class="o">=</span><span class="s1">&#39;18&#39;</span><span class="p">);</span>
+<span class="n">partition</span> <span class="p">(</span><span class="n">daystr</span><span class="o">=</span><span class="s1">&#39;20150828&#39;</span><span class="p">,</span><span class="n">hourstr</span><span class="o">=</span><span class="s1">&#39;19&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>特点：</p>
+<ul class="simple">
+<li><p>分区是目录级的</p></li>
+<li><p>分区字段是逻辑存在，并不是物理存在的，实际的文件中并没有这个字段</p></li>
+<li><p>Hive分区是将数据文件按照分类存储在不同的目录中，优化输入</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id21">
+<h4><span class="section-number">5.7.4.3. </span>分桶结构表<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h4>
+<blockquote>
+<div><p>实际使用中，除了为了用来<strong>专门优化join减少比较的次数</strong>，其他一无是处。</p>
+</div></blockquote>
+<ul>
+<li><p>本质：<strong>就是底层MapReduce的分区</strong>(多个reduce下，在map端shuffle阶段为行数据打上标签用来标记被哪一个reduce处理)</p></li>
+<li><p>规则：</p>
+<ul class="simple">
+<li><p>桶的个数：底层MapReduce中Reduce的个数</p></li>
+<li><p>clustered by ：按照哪一列作为Map输出的Key，进行分区</p></li>
+<li><p>按照Key的哈希取余</p></li>
+</ul>
+</li>
+<li><p>注意：对于分桶表，不能使用load data的方式进行数据插入操作，因为load data导入的数据不会有分桶结构。</p>
+<blockquote>
+<div><p>如何避免针对桶表使用load data插入数据的误操作呢？</p>
+<p>限制对桶表进行load操作  set hive.strict.checks.bucketing  = true;</p>
+<p>也可以在CM的hive配置项中修改此配置，当针对桶表执行load data操作时会报错。</p>
+</div></blockquote>
+</li>
+<li><p>如何将数据装载进入桶表呢？</p>
+<ul>
+<li><p>先创建临时表，通过load data将txt文本导入临时表。</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">--创建临时表</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">temp_buck</span><span class="p">(</span><span class="n">id</span> <span class="nb">int</span><span class="p">,</span> <span class="n">name</span> <span class="n">string</span><span class="p">)</span>
+<span class="k">row</span> <span class="n">format</span> <span class="n">delimited</span> <span class="n">fields</span> <span class="n">terminated</span> <span class="k">by</span> <span class="s1">&#39;\t&#39;</span><span class="p">;</span>
+<span class="c1">--导入数据</span>
+<span class="k">load</span> <span class="k">data</span> <span class="k">local</span> <span class="n">inpath</span> <span class="s1">&#39;/tools/test_buck.txt&#39;</span> <span class="k">into</span> <span class="k">table</span> <span class="n">temp_buck</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>使用insert select语句间接的把数据从临时表导入到分桶表。</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">启用桶表</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="n">enforce</span><span class="p">.</span><span class="n">bucketing</span><span class="o">=</span><span class="no">true</span><span class="p">;</span>
+<span class="o">--</span><span class="n">限制对桶表进行load操作</span>
+<span class="k">set</span> <span class="n">hive</span><span class="p">.</span><span class="n">strict</span><span class="p">.</span><span class="n">checks</span><span class="p">.</span><span class="n">bucketing</span> <span class="o">=</span> <span class="no">true</span><span class="p">;</span>
+<span class="o">--</span><span class="k">insert</span> <span class="k">select</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="k">table</span> <span class="n">test_buck</span> <span class="k">select</span> <span class="n">id</span><span class="p">,</span> <span class="k">name</span> <span class="k">from</span> <span class="n">temp_buck</span><span class="p">;</span>
+<span class="o">--</span><span class="n">分桶成功</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p><strong>注意</strong>，hive使用对分桶所用的值进行hash，并用hash结果除以桶的个数做取余运算的方式来分桶，保证了每个桶中都有数据，但每个桶中的数据条数不一定相等。</p>
+<p>如果另外一个表也按照同样的规则分成了一个个小文件。两个表join的时候，就不必要扫描整个表，只需要匹配相同分桶的数据即可，从而提升效率。</p>
+<p>在数据量足够大的情况下，分桶比分区有更高的查询效率。</p>
+</div></blockquote>
+</div>
+<div class="section" id="id22">
+<h4><span class="section-number">5.7.4.4. </span>分区和分桶的区别<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
+<ol class="simple">
+<li><p>分桶和分区两者不干扰，可以把分区表进一步分桶；</p></li>
+<li><p>分桶对数据的处理比分区更加细粒度化：分区针对的是数据的存储路径；分桶针对的是数据文件；</p></li>
+<li><p>分桶是按照列的哈希函数进行分割的，相对比较平均；而分区是按照列的值来进行分割的，容易造成数据倾斜。</p></li>
+<li><p>分区表按照目录来拆分，不同分区就是不同的目录，而分桶表按照文件进行拆分，按照某一列的Hash值取余来装入不同的桶，桶的个数就是底层Reducer的个数</p></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="join">
+<h2><span class="section-number">5.8. </span>Join与排序<a class="headerlink" href="#join" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id23">
+<h3><span class="section-number">5.8.1. </span>Join<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>内连接</p></li>
+<li><p>左连接</p></li>
+<li><p>右连接</p></li>
+<li><p>全连接</p></li>
+</ul>
+<blockquote>
+<div><p>注意：<strong>严禁产生笛卡尔积</strong>，大数据环境中的数据量巨大，而笛卡尔积会产生更大的数据量。</p>
+</div></blockquote>
+<p>注意规避一下几种写法：</p>
+<div class="highlight-MYSQL notranslate"><div class="highlight"><pre><span></span><span class="c1"># 产生笛卡尔积</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span>
+<span class="k">from</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span> 
+
+<span class="c1"># 为指定join条件，产生笛卡尔积</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span>
+<span class="k">from</span> <span class="n">a</span> <span class="k">join</span> <span class="n">b</span><span class="p">;</span>
+
+<span class="c1"># 不规范的join写法，使用where会在全部的数据中过滤从而得到指定条件的数据，因此是在笛卡尔积产生的条件下按照条件过滤得到想要的数据</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span><span class="p">,</span> <span class="n">b</span><span class="p">.</span><span class="o">*</span> 
+<span class="k">from</span> <span class="n">a</span> <span class="k">join</span> <span class="n">b</span> <span class="k">where</span> <span class="n">条件</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>底层实现：</p>
+<ul>
+<li><p>reduce join：join过程发生在Reduce端</p>
+<ul>
+<li><p>特点：</p>
+<ul>
+<li><p>必须经过shuffle，通过shuffle将关联的字段分组，在reduce端进行关联</p></li>
+<li><p>适合于大表join大表</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Map join：底层发生在map端，不经过shuffle</p>
+<ul>
+<li><p>特点：</p>
+<ul>
+<li><p>将小数据放入每台机器的内存中，所有的join都发生在内存中</p></li>
+<li><p>Hive会优先调用map join，如果map join条件不能满足，会自动调用Reduce join（这由配置文件决定hive.auto.convert.join）</p></li>
+<li><p>适合小数据join大数据</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>SMB Join = Map Join + Bucket Join</p>
+<ul>
+<li><p>两张表都是桶表</p></li>
+<li><p>B表桶的个数必须等于A表的桶的个数</p></li>
+<li><p>join的字段 = 分桶的字段 = 排序的字段</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id24">
+<h3><span class="section-number">5.8.2. </span>排序<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>order by：全局有序，只能有一个reduce</p></li>
+<li><p>sort by：局部有序，每个Reduce Task内部有序(如果只有一个reduce，其效果和order by效果一样)</p></li>
+<li><p>distribute by：干预底层MapReduce的分区，指定按照哪一列作为key进行分区</p></li>
+<li><p>clustered by：当distribute by 和sort by指定的字段是同一个字段时，可以直接使用clustered by</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id25">
+<h2><span class="section-number">5.9. </span>复杂数据类型<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h2>
+<div class="section" id="array">
+<h3><span class="section-number">5.9.1. </span>array类型<a class="headerlink" href="#array" title="永久链接至标题">¶</a></h3>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">row</span> <span class="k">format</span> <span class="n">delimited</span> <span class="k">fields</span> <span class="k">terminated</span> <span class="k">by</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">--</span><span class="n">指定文件中列的分隔符</span>
+<span class="n">COLLECTION</span> <span class="n">ITEMS</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;,&#39;</span><span class="p">;</span> <span class="o">--</span><span class="n">指定数组中每个元素的分隔符</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="map">
+<h3><span class="section-number">5.9.2. </span>Map类型<a class="headerlink" href="#map" title="永久链接至标题">¶</a></h3>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">row</span> <span class="k">format</span> <span class="n">delimited</span> <span class="k">fields</span> <span class="k">terminated</span> <span class="k">by</span> <span class="s1">&#39;,&#39;</span> <span class="o">--</span><span class="n">指定文件中列的分隔符</span>
+<span class="n">COLLECTION</span> <span class="n">ITEMS</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;-&#39;</span> <span class="o">--</span><span class="n">指定每个KeyValue之间的分隔符</span>
+<span class="n">MAP</span> <span class="k">KEYS</span> <span class="k">TERMINATED</span> <span class="k">BY</span> <span class="s1">&#39;:&#39;</span><span class="p">;</span> <span class="o">--</span><span class="n">指定KEY和Value之间的分隔符</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id26">
+<h2><span class="section-number">5.10. </span>函数<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id27">
+<h3><span class="section-number">5.10.1. </span>内置函数<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h3>
+<ul>
+<li><p>列举：</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">show</span> <span class="n">functions；</span>
+</pre></div>
+</div>
+</li>
+<li><p>查看用法：</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">desc</span> <span class="k">function</span> <span class="n">func_name</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>查看函数和示例：</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">desc</span> <span class="k">function</span> <span class="k">extended</span> <span class="n">func_name</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id28">
+<h3><span class="section-number">5.10.2. </span>自定义函数<a class="headerlink" href="#id28" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id29">
+<h4><span class="section-number">5.10.2.1. </span>分类<a class="headerlink" href="#id29" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>UDF：一对一，普通</p></li>
+<li><p>UDAF：多对一，聚合</p></li>
+<li><p>UDTF：一对多</p>
+<ul>
+<li><p>比如explode</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id30">
+<h4><span class="section-number">5.10.2.2. </span>开发使用<a class="headerlink" href="#id30" title="永久链接至标题">¶</a></h4>
+<ul>
+<li><p>开发一个UDF：</p>
+<ul>
+<li><p>开发一个类继承自UDF类</p>
+<ul class="simple">
+<li><p>实现一个或者多个evaluate方法</p>
+<ul>
+<li><p>在evaluate方法中实现数据的处理逻辑</p></li>
+<li><p>将结果作为返回值返回</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>将自己写的类打成jar包，添加到Hive的环境变量中</p>
+<ul>
+<li><p>本地编写类，打成jar包</p></li>
+<li><p>上传至Linux环境</p></li>
+<li><p>进入Hive(beeline)</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">add</span> <span class="n">jar</span> <span class="o">/</span><span class="k">export</span><span class="o">/</span><span class="n">datas</span><span class="o">/</span><span class="n">udf</span><span class="p">.</span><span class="n">jar</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>在Hive中创建一个函数</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">temporary</span> <span class="k">function</span> <span class="n">transDate</span> <span class="k">as</span>
+<span class="s1">&#39;bigdata.itcast.cn.hive.udf.UserUDF&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p>使用自己开发的函数</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">transDate</span><span class="p">(</span><span class="s2">&quot;21/Sep/2019:13:30:00&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>UDTF的使用：一对多</p>
+<ul class="simple">
+<li><p>原始数据是一行一列</p></li>
+<li><p>需求结果是：多行多列</p></li>
+</ul>
+</li>
+<li><p>UDAF：多对一，聚合</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id31">
+<h3><span class="section-number">5.10.3. </span>侧视图<a class="headerlink" href="#id31" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>lateral view</p>
+</div></blockquote>
+<ul>
+<li><p>功能：专门用于搭配UDTF使用，将UDTF与其他字段进行拼接</p></li>
+<li><p>什么是视图？</p>
+<ul>
+<li><p>关键字：view</p></li>
+<li><p>语法：</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">view</span> <span class="o">|</span> <span class="k">table</span>
+</pre></div>
+</div>
+</li>
+<li><p>定义：是一种只读表</p></li>
+<li><p>使用：当做表来使用，不过不能修改</p></li>
+</ul>
+</li>
+<li><p>设计：将UDTF的结果构建成一个类似于视图的形式，与原表进行拼接</p></li>
+<li><p>使用：</p>
+<ul>
+<li><p>语法：</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">……</span> <span class="k">from</span> <span class="n">tabelA</span> <span class="k">lateral</span> <span class="k">view</span> <span class="n">UDTF</span><span class="p">(</span><span class="n">xxx</span><span class="p">)</span> <span class="n">视图名</span> <span class="k">as</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span>
+</pre></div>
+</div>
+</li>
+<li><p>数据：</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="o">://</span><span class="n">facebook</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="k">path</span><span class="o">/</span><span class="n">p1</span><span class="p">.</span><span class="n">php</span><span class="nv">?</span><span class="k">query</span><span class="o">=</span><span class="mi">1</span>
+
+<span class="n">域名</span> <span class="n">路径</span> <span class="n">参数</span>
+<span class="n">facebook</span><span class="p">.</span><span class="n">com</span> <span class="o">/</span><span class="k">path</span><span class="o">/</span><span class="n">p1</span><span class="p">.</span><span class="n">php</span> <span class="k">query</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>示例：</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">.</span><span class="k">host</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">.</span><span class="k">path</span>
+<span class="k">from</span>
+    <span class="n">tb_url</span> <span class="n">a</span>
+    <span class="k">lateral</span> <span class="k">view</span> <span class="n">parse_url_tuple</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;HOST&#39;</span><span class="p">,</span><span class="s2">&quot;PATH&quot;</span><span class="p">)</span> <span class="n">b</span> <span class="k">as</span> <span class="k">host</span><span class="p">,</span><span class="k">path</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C.html" class="btn btn-neutral float-right" title="6. 数据倾斜" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="%E6%8B%89%E9%93%BE%E8%A1%A8.html" class="btn btn-neutral float-left" title="2. SCD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 版权所有 2020, roohom
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
