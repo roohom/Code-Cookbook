@@ -1,3 +1,4 @@
 -r requirements/pip.txt
 # just referencing for a natural `pip install -r requirements.txt`
 six==1.15.0
+sphinx_markdown_tables==0.0.15
