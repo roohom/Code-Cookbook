@@ -1,4 +1,4 @@
-# Bigdata Summary
+# ZookeeperAndHadoop
 
 [TOC]
 
@@ -380,6 +380,9 @@
      * that is on a different rack. The 3rd replica is placed on a datanode
        * which is on a different node of the rack as the second replica.
          */
+    ~~~
+  ~~~
+  
   ~~~
 - 5-客户端得到要写入数据块的三台DN地址，客户端会连接第一台【离它最近的那台】，提交写入
 

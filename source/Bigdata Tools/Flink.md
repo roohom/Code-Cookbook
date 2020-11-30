@@ -1,4 +1,4 @@
-# Flink基础配置与基础原理
+# Flink
 
 ## 环境搭建
 
@@ -362,6 +362,112 @@ flink run -m yarn-cluster -ytm 1024 -yjm 1024 -ys 1 ../examples/batch/WordCount.
   - JobGraph：将部分可以合并的Subtask合并成一个Task
   - ExecutionGraph：为Task赋予并行度
   - 物理执行图：将Task赋予并行度后的执行流程，落实到具体的TaskManager上，将具体的Task落实到具体的Slot内进行运行。
+
+
+
+## State
+
+### Managed State & Raw State
+
+- 托管状态
+  - **由Flink本身去管理**，**将状态数据转换为HashTables或者RocksDB对象进行存储**，然后持久化于Checkpoint，用于异常恢复
+- 原生状态
+  - **算子自身管理数据结构**，触发Checkpoint后，**将数据转换为Bytes**，然后存储在Checkpoint上，异常恢复时，由算子自身进行反序列化Bytes获得数据
+
+两者相同点：
+
+- 都依赖于Checkpoint
+
+不同点：
+
+- 从状态管理方式的方式来说，Managed State 由 Flink Runtime 管理，自动存储，自动恢复，在内存管理上有优化；而 Raw State 需要用户自己管理，需要自己序列化，Flink 不知道 State 中存入的数据是什么结构，只有用户自己知道，需要最终序列化为可存储的数据结构。
+- 从状态数据结构来说，Managed State 支持已知的数据结构，如 Value、List、Map 等。而 Raw State只支持字节数组 ，所有状态都要转换为二进制字节数组才可以。
+- 从推荐使用场景来说，Managed State 大多数情况下均可使用，而 Raw State 是当 Managed State 不够用时，比如需要自定义 Operator 时，才会使用 Raw State。
+
+#### Keyed State & Operator State
+
+- Managed State的有KeyedState和OperatorState
+
+- Raw State的都是OperatorState
+
+
+
+
+
+## 容错机制
+
+### Checkpoint
+
+**某一时刻,Flink中所有的Operator的当前State的全局快照**,一般存在磁盘上，表示了一个Flink Job在一个特定时刻的一份全局状态快照，即包含了所有Operator的状态，可以理解为Checkpoint是把State数据定时持久化存储了
+
+> 比如KafkaConsumer算子中维护的Offset状态,当任务重新恢复的时候可以从Checkpoint中获取
+
+### 执行流程
+
+![image-20201130205411747](Flink基础配置与基础原理.assets/image-20201130205411747.png)
+
+- 0.Flink的JobManager创建CheckpointCoordinator
+
+- 1.Coordinator向所有的SourceOperator发送Barrier栅栏(理解为执行Checkpoint的信号)
+
+- 2.SourceOperator接收到Barrier之后,暂停当前的操作(暂停的时间很短,因为后续的写快照是异步的),并制作State快照, 然后将自己的快照保存到指定的介质中(如HDFS), 一切 ok之后向Coordinator汇报并将Barrier发送给下游的其他Operator
+- 3.其他的如TransformationOperator接收到Barrier,重复第2步,最后将Barrier发送给Sink
+- 4.Sink接收到Barrier之后重复第2步
+- 5.Coordinator接收到所有的Operator的执行ok的汇报结果,认为本次快照执行成功
+
+ 
+
+> 注意:
+>
+> 1.在往介质(如HDFS)中写入快照数据的时候是异步的(为了提供效率)
+>
+> 2.分布式快照执行时的数据一致性由Chandy-Lamport algorithm分布式快照算法保证! 
+
+
+
+### State状态后端/State存储介质
+
+> Checkpoint是Flink在某一时刻的所有Operator的全局快照，这些快照的存储就叫**状态后端**
+
+- MemStateBackend
+
+  - 存储在内存，不安全，不推荐使用
+
+- FsStateBackend
+
+  - 存储在文件系统上，可以是本地可以是HDFS等（如果在分布式的情况下选择存储本地，可能会使得恢复失败）
+  - 常规使用状态的作业、例如分钟级窗口聚合或 join、需要开启HA的作业
+
+- RocksDBStateBackend
+
+  > RocksDB 是一个 key/value 的内存存储系统，和其他的 key/value 一样，先将状态放到内存中，如果内存快满时，则写入到磁盘中
+
+  - 存储在外部存储系统
+  - 超大状态的作业，例如天级窗口聚合、需要开启 HA 的作业、最好是对状态读写性能要求不高的作业
+
+
+
+### Savepoint
+
+> 实际中为了对集群进行停机维护扩容等，需要将集群的状态暂时备份，共维护完成后从维护前的状态继续运行，也就是需要开发人员执行一次手动的Checkpoint，与Checkpoint不同的是（简单理解），Savepoint是手动触发的。
+
+
+
+### Savepoint和Checkpoint的对比
+
+- 1.目标：从概念上讲，Savepoints和Checkpoints的不同之处类似于传统数据库中备份和恢复日志的不同。<u>Checkpoints的作用是确保程序有潜在失败可能的情况下（如网络暂时异常）,可以正常恢复</u>。相反，<u>Savepoints的作用是让用户手动触发备份后，通过重启来恢复程序。</u>
+
+- 2.实现：Checkpoints和Savepoints在实现上有所不同。<u>Checkpoints轻量并且快速，它可以利用底层状态存储的各种特性，来实现快速备份和恢复</u>。例如，以RocksDB作为状态存储，状态将会以RocksDB的格式持久化而不是Flink原生的格式，同时利用RocksDB的特性实现了增量Checkpoints。这个特性加速了checkpointing的过程，也是Checkpointing机制中第一个更轻量的实现。相反，<u>Savepoints更注重数据的可移植性，并且支持任何对任务的修改，同时这也让Savepoints的备份和恢复成本相对更高</u>。
+
+- 3.生命周期：<u>Checkpoints本身是定时自动触发的。它们的维护、创建和删除都由Flink自身来操作，不需要任何用户的干预</u>。相反，<u>Savepoints的触发、删除和管理等操作都需要用户手动触发</u>。
+
+  
+
+## TODO: End To End Exactly-Once
+
+
+
+
 
 
 
