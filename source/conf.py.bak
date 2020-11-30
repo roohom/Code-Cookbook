@@ -39,7 +39,6 @@ extensions = [
 		'sphinx.ext.autosummary',
 		'sphinx.ext.todo',
 		'sphinx.ext.autosectionlabel',
-		
 ]
 
 
@@ -87,13 +86,16 @@ exclude_patterns = [
 from recommonmark.parser import CommonMarkParser
 source_parsers = {
     '.md': CommonMarkParser,
-    '.MD': CommonMarkParser,
 }
 source_suffix = ['.rst',
 				 '.md',
-				 '.MD'
- 
  ]
+
+#source_suffix = ['.rst',
+#				 '.md',
+#				 '.MD'
+# 
+# ]
 # -----------------------------------------------------
 
 

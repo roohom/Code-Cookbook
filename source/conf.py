@@ -86,13 +86,17 @@ exclude_patterns = [
 from recommonmark.parser import CommonMarkParser
 source_parsers = {
     '.md': CommonMarkParser,
-    '.MD': CommonMarkParser,
 }
 source_suffix = ['.rst',
 				 '.md',
-				 '.MD'
- 
+				 'MD',
  ]
+
+#source_suffix = ['.rst',
+#				 '.md',
+#				 '.MD'
+# 
+# ]
 # -----------------------------------------------------
 
 
