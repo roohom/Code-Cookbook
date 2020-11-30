@@ -89,6 +89,7 @@ source_parsers = {
 }
 source_suffix = ['.rst',
 				 '.md',
+				 'MD',
  ]
 
 #source_suffix = ['.rst',
