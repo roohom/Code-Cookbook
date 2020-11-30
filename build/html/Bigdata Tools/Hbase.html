@@ -396,16 +396,52 @@
 </div>
 <div class="section" id="id6">
 <h3><span class="section-number">6.4.2. </span>概念<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
-<p>| 概念   | MySQL                                  | HBase                                                        |
-| —— | ————————————– | ———————————————————— |
-| 数据库 | database                               | namespace                                                    |
-| 表     | table                                  | namespace:table                                              |
-| 行     | 主键：primary key                      | 行键：rowkey                                                 |
-| 列族   | 无                                     | column family：对列的分组                                    |
-| 列     | column：每一行有多列，每一行列是一致的 | column：每一行可以有多列，每一行的列可以不一样，任何一列必须属于某一个列簇，cf:colName |
-| 多版本 | 无                                     | VERSIONS，一列的值可以存储多个版本                           |
-| 时间戳 | 默认无，可以有                         | 默认有                                                       |</p>
-<ul class="simple">
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>概念</th>
+<th>MySQL</th>
+<th>HBase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据库</td>
+<td>database</td>
+<td>namespace</td>
+</tr>
+<tr>
+<td>表</td>
+<td>table</td>
+<td>namespace:table</td>
+</tr>
+<tr>
+<td>行</td>
+<td>主键：primary key</td>
+<td>行键：rowkey</td>
+</tr>
+<tr>
+<td>列族</td>
+<td>无</td>
+<td>column family：对列的分组</td>
+</tr>
+<tr>
+<td>列</td>
+<td>column：每一行有多列，每一行列是一致的</td>
+<td>column：每一行可以有多列，每一行的列可以不一样，任何一列必须属于某一个列簇，cf:colName</td>
+</tr>
+<tr>
+<td>多版本</td>
+<td>无</td>
+<td>VERSIONS，一列的值可以存储多个版本</td>
+</tr>
+<tr>
+<td>时间戳</td>
+<td>默认无，可以有</td>
+<td>默认有</td>
+</tr>
+</tbody>
+</table><ul class="simple">
 <li><p>Namespace：命名空间，就是MySQL中数据库的概念，用于区分数据存储</p>
 <ul>
 <li><p>Hbase默认会自带两个namespace：default，Hbase</p></li>
@@ -805,15 +841,15 @@ create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCA
 <h2><span class="section-number">6.8. </span>存储设计<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
 <div class="section" id="id12">
 <h3><span class="section-number">6.8.1. </span>存储概念<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
-<ul>
-<li><p>分布式存储</p>
 <ul class="simple">
+<li><p>分布式存储</p>
+<ul>
 <li><p>分布式内存：RegionServer</p></li>
 <li><p>分布式磁盘：HDFS</p></li>
 </ul>
 </li>
 <li><p>如何实现的：将HBASE中的表构建成分布式的表</p>
-<ul class="simple">
+<ul>
 <li><p>HBASE中的每张表可以对应多个分区[Region]</p>
 <ul>
 <li><p>默认创建只有一个分区（Region）</p></li>
@@ -821,17 +857,46 @@ create &#39;t1&#39;,{NAME=&gt;&#39;f1&#39;,VERSIONS=&gt;1,TTL=》2592000,BLOCKCA
 </li>
 </ul>
 </li>
-<li><p>与HDFS的区别</p>
-<p>| 概念     | HDFS             | HBase        |
-| ——– | —————- | ———— |
-| 分类     | 目录             | NameSpace    |
-| 存储类型 | 文件             | 表           |
-| 分的机制 | 分块：Block      | 分区：Region |
-| 存储节点 | DataNode         | RegionServer |
-| 规则     | 大表：128M一个块 | RowKey范围   |</p>
-</li>
+<li><p>与HDFS的区别</p></li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>概念</th>
+<th>HDFS</th>
+<th>HBase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分类</td>
+<td>目录</td>
+<td>NameSpace</td>
+</tr>
+<tr>
+<td>存储类型</td>
+<td>文件</td>
+<td>表</td>
+</tr>
+<tr>
+<td>分的机制</td>
+<td>分块：Block</td>
+<td>分区：Region</td>
+</tr>
+<tr>
+<td>存储节点</td>
+<td>DataNode</td>
+<td>RegionServer</td>
+</tr>
+<tr>
+<td>规则</td>
+<td>大表：128M一个块</td>
+<td>RowKey范围</td>
+</tr>
+</tbody>
+</table><ul class="simple">
 <li><p>Region：HBASE中表的分区，一张HBASE表可以有多个region，每个region存储在不同的RegionServer中</p>
-<ul class="simple">
+<ul>
 <li><p><strong>是HBASE做负载均衡的最小单元</strong></p></li>
 <li><p>类似于HDFS中的文件的块</p></li>
 <li><p>一个Region只会归某一个RegionServer所管理</p></li>

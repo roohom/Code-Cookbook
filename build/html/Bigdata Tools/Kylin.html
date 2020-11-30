@@ -357,13 +357,32 @@ hive --service hiveserver2 <span class="p">&amp;</span>
 </ul>
 <div class="section" id="id7">
 <h4><span class="section-number">8.4.2.1. </span>增量构建与全量构建的对比<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
-<p>| <strong>全量构建</strong>                      | <strong>增量构建</strong>                                               |
-| ——————————— | ———————————————————- |
-| 每次更新时都需要更新整个数据集    | 每次只对需要更新的时间范围进行更新，因此离线计算量相对较小 |
-| 查询时不需要合并不同Segment的结果 | 查询时需要合并不同Segment的结果，因此查询性能会受影响      |
-| 不需要后续的Segment合并           | 累计一定量的Segment之后，需要进行合并                      |
-| 适合小数据量或全表更新的Cube      | 适合大数据量的Cube                                         |</p>
-</div>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th><strong>全量构建</strong></th>
+<th><strong>增量构建</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每次更新时都需要更新整个数据集</td>
+<td>每次只对需要更新的时间范围进行更新，因此离线计算量相对较小</td>
+</tr>
+<tr>
+<td>查询时不需要合并不同Segment的结果</td>
+<td>查询时需要合并不同Segment的结果，因此查询性能会受影响</td>
+</tr>
+<tr>
+<td>不需要后续的Segment合并</td>
+<td>累计一定量的Segment之后，需要进行合并</td>
+</tr>
+<tr>
+<td>适合小数据量或全表更新的Cube</td>
+<td>适合大数据量的Cube</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 </div>
 <div class="section" id="id8">

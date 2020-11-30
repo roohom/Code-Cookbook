@@ -220,27 +220,57 @@
 <div class="section" id="id1">
 <h2><span class="section-number">5.2. </span>节点规划<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <p>设计每个进程启动在哪些机器上</p>
-<ul>
-<li><p>整个Hadoop启动的进程</p>
 <ul class="simple">
+<li><p>整个Hadoop启动的进程</p>
+<ul>
 <li><p>HDFS：NameNode，DataNnode</p></li>
 <li><p>YARN：ResourceManager，NodeManager</p></li>
 </ul>
 </li>
 <li><p>整个Hadoop启动的进程</p>
-<ul class="simple">
+<ul>
 <li><p>HDFS：NameNode ，DataNode</p></li>
 <li><p>YARN：ResourceManager，NodeManager</p></li>
 </ul>
 </li>
-<li><p>节点规划</p>
-<p>|      机器       | node1 | node2 | node3 |
-| :————-: | :—: | :—: | :—: |
-|    NameNode     |   *   |       |       |
-|    DataNode     |   *   |   *   |   *   |
-| ResourceManager |       |       |   *   |
-|   NodeManager   |   *   |   *   |   *   |</p>
-</li>
+<li><p>节点规划</p></li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="center">机器</th>
+<th align="center">node1</th>
+<th align="center">node2</th>
+<th align="center">node3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">NameNode</td>
+<td align="center">*</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">DataNode</td>
+<td align="center">*</td>
+<td align="center">*</td>
+<td align="center">*</td>
+</tr>
+<tr>
+<td align="center">ResourceManager</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">*</td>
+</tr>
+<tr>
+<td align="center">NodeManager</td>
+<td align="center">*</td>
+<td align="center">*</td>
+<td align="center">*</td>
+</tr>
+</tbody>
+</table><ul>
 <li><p>启动和关闭hdfs（未配置环境变量的情况下要去sbin目录下）</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-dfs.sh
 stop-dfs.sh

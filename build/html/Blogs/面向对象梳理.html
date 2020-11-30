@@ -1172,15 +1172,54 @@ class 类{
 <blockquote>
 <div><p><strong>访问修饰符号的访问范围</strong></p>
 </div></blockquote>
-<p>| 修饰符号 (从小到大排列) | 本类    | 同一个包下的类(非子类) | 同一个包下的子类 | 不同包下的类（非子类） | 不同包下的子类 |
-| ———————– | ——- | ———————- | —————- | ———————- | ————– |
-| private                 | <strong>YES</strong> | NO                     | NO               | NO                     | NO             |
-| 默认                    | <strong>YES</strong> | <strong>YES</strong>                | <strong>YES</strong>          | NO                     | NO             |
-| protected               | <strong>YES</strong> | NO                     | <strong>YES</strong>          | NO                     | <strong>YES</strong>        |
-| public                  | <strong>YES</strong> | <strong>YES</strong>                | <strong>YES</strong>          | <strong>YES</strong>                | <strong>YES</strong>        |</p>
 </li>
 </ul>
-</div>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>修饰符号 (从小到大排列)</th>
+<th>本类</th>
+<th>同一个包下的类(非子类)</th>
+<th>同一个包下的子类</th>
+<th>不同包下的类（非子类）</th>
+<th>不同包下的子类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private</td>
+<td><strong>YES</strong></td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>默认</td>
+<td><strong>YES</strong></td>
+<td><strong>YES</strong></td>
+<td><strong>YES</strong></td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>protected</td>
+<td><strong>YES</strong></td>
+<td>NO</td>
+<td><strong>YES</strong></td>
+<td>NO</td>
+<td><strong>YES</strong></td>
+</tr>
+<tr>
+<td>public</td>
+<td><strong>YES</strong></td>
+<td><strong>YES</strong></td>
+<td><strong>YES</strong></td>
+<td><strong>YES</strong></td>
+<td><strong>YES</strong></td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <div class="section" id="api">
 <h2><span class="section-number">19.3. </span>常用API<a class="headerlink" href="#api" title="永久链接至标题">¶</a></h2>

@@ -16,13 +16,16 @@
 
 
 # -- Project information -----------------------------------------------------
-
+master_doc = 'index'
 project = 'Code-Cookbook'
-copyright = '2020, roohom'
+copyright = '2020-{}, roohom'.format(
+    timezone.now().year
+)
 author = 'roohom'
 
 # The full version, including alpha/beta/rc tags
 release = '0.1'
+
 
 
 # -- General configuration ---------------------------------------------------
@@ -37,7 +40,6 @@ extensions = [
 		'sphinx.ext.todo',
 		'sphinx.ext.autosectionlabel',
 		'sphinx_markdown_tables',
-		'six'
 ]
 
 
@@ -93,6 +95,18 @@ source_suffix = ['.rst',
  
  ]
 # -----------------------------------------------------
+
+
+notfound_context = {
+    'title': 'Page Not Found',
+    'body': '''
+<h1>Page Not Found</h1>
+
+<p>Sorry, we couldn't find that page.</p>
+
+<p>Try using the search box or go to the homepage.</p>
+''',
+}
 
 
 
