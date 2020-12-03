@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2. Sqoop &mdash; Code-Cookbook 0.1 文档</title>
+  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="SQL" href="../SQL/index.html" />
-    <link rel="prev" title="1. Apache Avro" href="Apache%20Avro.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="Apache%20Avro.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -93,25 +93,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
 </ul>
 <p class="caption"><span class="caption-text">大数据辅助工具</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Auxiliary tools</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Apache%20Avro.html">1. Apache Avro</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Sqoop</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">2.1. 简单使用</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#hive">2.1.1. 导入Hive</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">2.1.2. 导出</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">2.2. 增量导入</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">2.2.1. 应用场景</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">2.2.2. 增量导出</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#sqoop-job">2.3. Sqoop Job</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Auxiliary tools</a></li>
 </ul>
 <p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul>
@@ -164,7 +147,7 @@
         
           <li><a href="index.html">Auxiliary tools</a> &raquo;</li>
         
-      <li><span class="section-number">2. </span>Sqoop</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -183,92 +166,69 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="sqoop">
-<h1><span class="section-number">2. </span>Sqoop<a class="headerlink" href="#sqoop" title="永久链接至标题">¶</a></h1>
-<div class="section" id="id1">
-<h2><span class="section-number">2.1. </span>简单使用<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+  <p># Sqoop</p>
+<p>## 简单使用</p>
 <ul>
 <li><p>本质：底层利用MapReduce来实现将数据从A转移至B</p>
-<blockquote>
-<div><p>注意：sqoop不支持分桶表，如果需要从sqoop导入数据到分桶表，可以通过中间临时表进行过度。ODS也可以不做分桶，从DWD明细层开始分桶。</p>
-</div></blockquote>
+<p>&gt; 注意：sqoop不支持分桶表，如果需要从sqoop导入数据到分桶表，可以通过中间临时表进行过度。ODS也可以不做分桶，从DWD明细层开始分桶。</p>
 </li>
 </ul>
 <p>基本使用</p>
 <ul>
 <li><p>语法</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import
-</pre></div>
-</div>
+<p>~~~shell
+sqoop import
+~~~</p>
 </li>
 <li><p>输入 (从MySQL输入)</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#指定读取的MySQL的表的地址</span>
---connect jdbc:mysql://hostname:3306/dbname
-<span class="c1">#指定MySQL用户名和密码</span>
---username root
---password <span class="m">123456</span>
-<span class="c1">#指定读取的表</span>
---table  tbname
-</pre></div>
-</div>
+<p>~~~shell
+#指定读取的MySQL的表的地址
+–connect <a class="reference external" href="jdbc:mysql://hostname:3306/dbname">jdbc:mysql://hostname:3306/dbname</a>
+#指定MySQL用户名和密码
+–username root
+–password 123456
+#指定读取的表
+–table  tbname
+~~~</p>
 </li>
 <li><p>输出 (输出到HDFS)</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#指定写入HDFS什么位置,如果不指定，默认输出路径在HDFS当前用户的家目录下/user/root</span>
---target-dir
-</pre></div>
-</div>
+<p>~~~shell
+#指定写入HDFS什么位置,如果不指定，默认输出路径在HDFS当前用户的家目录下/user/root
+–target-dir
+~~~</p>
 </li>
 <li><p>候选参数：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>-m / --mapper：指定mapTask的个数
---delete-target-dir：用于提前删除输出目录
---fields-terminated-by：指定输出【HDFS】的列的分隔符
---where ：限定导入哪些行
---columns：限定导入哪些列
--e / --query ：指定对SQL语句的结果进行导入必须使用where加上 <span class="nv">$CONDITIONS</span>
-</pre></div>
-</div>
+<p>~~~shell
+-m / –mapper：指定mapTask的个数
+–delete-target-dir：用于提前删除输出目录
+–fields-terminated-by：指定输出【HDFS】的列的分隔符
+–where ：限定导入哪些行
+–columns：限定导入哪些列
+-e / –query ：指定对SQL语句的结果进行导入必须使用where加上 $CONDITIONS
+~~~</p>
 </li>
 <li><p>示例：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span>  <span class="se">\</span>
-<span class="c1"># --table tb_tohdfs \</span>
--e <span class="s1">&#39;select id,name from tb_tohdfs where id &lt; 2 and $CONDITIONS&#39;</span> <span class="se">\</span>
---delete-target-dir <span class="se">\</span>
---target-dir /sqoop/import/test01 <span class="se">\</span>
---fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p>~~~shell
+sqoop import –connect <a class="reference external" href="jdbc:mysql://hadoop01:3306/sqoopTest">jdbc:mysql://hadoop01:3306/sqoopTest</a> –username root –password 123456  # –table tb_tohdfs -e ‘select id,name from tb_tohdfs where id &lt; 2 and $CONDITIONS’ –delete-target-dir –target-dir /sqoop/import/test01 –fields-terminated-by ‘t’ -m 1
+~~~</p>
 </li>
 </ul>
-<div class="section" id="hive">
-<h3><span class="section-number">2.1.1. </span>导入Hive<a class="headerlink" href="#hive" title="永久链接至标题">¶</a></h3>
+<p>### 导入Hive</p>
 <ul>
 <li><p>在Hive中创建表</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>use default<span class="p">;</span>
-create table fromsqoop<span class="o">(</span>
+<p>~~~shell
+use default;
+create table fromsqoop(
 id int,
 name string,
 age int
-<span class="o">)</span><span class="p">;</span>
-</pre></div>
-</div>
+);
+~~~</p>
 </li>
 <li><p>方式一：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_tohdfs <span class="se">\</span>
---delete-target-dir <span class="se">\</span>
---hive-import <span class="se">\</span>
---hive-database default <span class="se">\</span>
---hive-table fromsqoop <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p>~~~shell
+sqoop import –connect <a class="reference external" href="jdbc:mysql://hadoop01:3306/sqoopTest">jdbc:mysql://hadoop01:3306/sqoopTest</a> –username root –password 123456 –table tb_tohdfs –delete-target-dir –hive-import –hive-database default –hive-table fromsqoop -m 1
+~~~</p>
 <ul>
 <li><p>原理：</p>
 <ul class="simple">
@@ -278,29 +238,22 @@ age int
 </ul>
 </li>
 <li><p>候选参数：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>--create-hive-table：如果hive表不存在，自动创建
---hive-database：指定导入哪个数据库
---hive-table：指定导入哪张表
---hive-import：申明导入Hive 表
---hive-overwrite：覆盖表中所有内容
---hive-partition-key：指定导入Hive分区的Key
---hive-partition-value：指定导入Hive分区的value
-</pre></div>
-</div>
+<p>~~~shell
+–create-hive-table：如果hive表不存在，自动创建
+–hive-database：指定导入哪个数据库
+–hive-table：指定导入哪张表
+–hive-import：申明导入Hive 表
+–hive-overwrite：覆盖表中所有内容
+–hive-partition-key：指定导入Hive分区的Key
+–hive-partition-value：指定导入Hive分区的value
+~~~</p>
 </li>
 </ul>
 </li>
 <li><p>方式二：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_tohdfs <span class="se">\</span>
---hcatalog-database default <span class="se">\</span>
---hcatalog-table fromsqoop <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p>~~~shell
+sqoop import –connect <a class="reference external" href="jdbc:mysql://hadoop01:3306/sqoopTest">jdbc:mysql://hadoop01:3306/sqoopTest</a> –username root –password 123456 –table tb_tohdfs –hcatalog-database default –hcatalog-table fromsqoop -m 1
+~~~</p>
 <ul class="simple">
 <li><p>原理：直接访问元数据来实现数据的放置</p></li>
 <li><p>–hcatalog-databas：指定数据库的名称</p></li>
@@ -308,85 +261,72 @@ age int
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h3><span class="section-number">2.1.2. </span>导出<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>### 导出</p>
 <ul>
 <li><p>语法：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop <span class="nb">export</span>
-</pre></div>
-</div>
+<p>~~~shell
+sqoop export
+~~~</p>
 </li>
 <li><p>输入：从HDFS输入sqoop</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#不论导出HDFS还是Hive，基本原理都是导出HDFS数据，指定的导出HDFS上哪里的数据</span>
---export-dir    hdfsPath
-</pre></div>
-</div>
+<p>~~~shell
+#不论导出HDFS还是Hive，基本原理都是导出HDFS数据，指定的导出HDFS上哪里的数据
+–export-dir    hdfsPath
+~~~</p>
 </li>
 <li><p>输出：从sqoop输出到MySQL</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#指定写入的MySQL的表的地址</span>
---connect jdbc:mysql://hostname:3306/dbname
-<span class="c1">#指定MySQL用户名和密码</span>
---username root
---password <span class="m">123456</span>
-<span class="c1">#指定写入的表</span>
---table  tbname
-</pre></div>
-</div>
+<p>~~~shell
+#指定写入的MySQL的表的地址
+–connect <a class="reference external" href="jdbc:mysql://hostname:3306/dbname">jdbc:mysql://hostname:3306/dbname</a>
+#指定MySQL用户名和密码
+–username root
+–password 123456
+#指定写入的表
+–table  tbname
+~~~</p>
 </li>
 <li><p>测试：</p>
 <ul>
 <li><p>MySQL建表</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="n">sqoopTest</span><span class="p">;</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`tb_url`</span> <span class="p">(</span>
-  <span class="n">`id`</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
-  <span class="n">`url`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
-  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">`id`</span><span class="p">)</span>
-<span class="p">)</span> <span class="k">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="k">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
-</pre></div>
-</div>
+<p>~~~mysql
+use sqoopTest;
+CREATE TABLE <cite>tb_url</cite> (</p>
+<blockquote>
+<div><p><cite>id</cite> int(11) NOT NULL,
+<cite>url</cite> varchar(200) NOT NULL,
+PRIMARY KEY (<cite>id</cite>)</p>
+</div></blockquote>
+<p>) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+~~~</p>
 </li>
 <li><p>在Hive中建表</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#在第二台机器上写</span>
+<p>~~~shell
+#在第二台机器上写
 vim /export/datas/lateral.txt
-<span class="m">1</span>	http://facebook.com/path/p1.php?query<span class="o">=</span><span class="m">1</span>
-<span class="m">2</span>	http://www.baidu.com/news/index.jsp?uuid<span class="o">=</span>frank
-<span class="m">3</span>	http://www.jd.com/index?source<span class="o">=</span>baidu
-
-use default<span class="p">;</span>
-create table tb_url<span class="o">(</span>
+1   <a class="reference external" href="http://facebook.com/path/p1.php?query=1">http://facebook.com/path/p1.php?query=1</a>
+2   <a class="reference external" href="http://www.baidu.com/news/index.jsp?uuid=frank">http://www.baidu.com/news/index.jsp?uuid=frank</a>
+3   <a class="reference external" href="http://www.jd.com/index?source=baidu">http://www.jd.com/index?source=baidu</a></p>
+<p>use default;
+create table tb_url(
 id int,
 url string
-<span class="o">)</span> row format delimited fields terminated by <span class="s1">&#39;\t&#39;</span><span class="p">;</span>
-
-load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/datas/lateral.txt&#39;</span> into table tb_url<span class="p">;</span>
-</pre></div>
-</div>
+) row format delimited fields terminated by ‘t’;</p>
+<p>load data local inpath ‘/export/datas/lateral.txt’ into table tb_url;
+~~~</p>
 </li>
 <li><p>导出：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop <span class="nb">export</span> <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_url <span class="se">\</span>
---export-dir /user/hive/warehouse/tb_url <span class="se">\</span>
---input-fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p>~~~shell
+sqoop export –connect <a class="reference external" href="jdbc:mysql://hadoop01:3306/sqoopTest">jdbc:mysql://hadoop01:3306/sqoopTest</a> –username root –password 123456 –table tb_url –export-dir /user/hive/warehouse/tb_url –input-fields-terminated-by ‘t’ -m 1
+~~~</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--input-fields-terminated-by</span></code>：必须指定HDFS文件的 分隔符</p></li>
+<li><p><cite>–input-fields-terminated-by</cite>：必须指定HDFS文件的 分隔符</p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id3">
-<h2><span class="section-number">2.2. </span>增量导入<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id4">
-<h3><span class="section-number">2.2.1. </span>应用场景<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>## 增量导入</p>
+<p>### 应用场景</p>
 <ul>
 <li><p>功能：Sqoop将数据采集到的Hive、HDFS</p>
 <ul class="simple">
@@ -402,122 +342,106 @@ load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/dat
 </ul>
 </li>
 <li><p>增量的实现：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Incremental import arguments:
-   --check-column &lt;column&gt;        Source column to check <span class="k">for</span> incremental
-                                  change
-   --incremental &lt;import-type&gt;    Define an incremental import of <span class="nb">type</span>
-                                  <span class="s1">&#39;append&#39;</span> or <span class="s1">&#39;lastmodified&#39;</span>
-   --last-value &lt;value&gt;           Last imported value in the incremental
-                                  check column
-</pre></div>
-</div>
+<p>~~~shell
+Incremental import arguments:</p>
+<blockquote>
+<div><dl class="option-list">
+<dt><kbd><span class="option">--check-column <var>&lt;column&gt;</var></span></kbd></dt>
+<dd><p>Source column to check for incremental
+change</p>
+</dd>
+<dt><kbd><span class="option">--incremental <var>&lt;import-type&gt;</var></span></kbd></dt>
+<dd><p>Define an incremental import of type
+‘append’ or ‘lastmodified’</p>
+</dd>
+<dt><kbd><span class="option">--last-value <var>&lt;value&gt;</var></span></kbd></dt>
+<dd><p>Last imported value in the incremental
+check column</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>~~~</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--check-column</span></code>：用于检查数据的列，用于区分新老数据</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--incremental</span></code>：使用哪一种方案来实现</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">append</span></code>：方案一，用自增的一列数值来实现增量</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lastmodified</span></code>：方案二，用时间列来实现增量</p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--last-value</span></code>：上次采集的最后一个值</p></li>
+<li><p><cite>–check-column</cite>：用于检查数据的列，用于区分新老数据</p></li>
+<li><p><cite>–incremental</cite>：使用哪一种方案来实现
+- <cite>append</cite>：方案一，用自增的一列数值来实现增量
+- <cite>lastmodified</cite>：方案二，用时间列来实现增量</p></li>
+<li><p><cite>–last-value</cite>：上次采集的最后一个值</p></li>
 </ul>
 </li>
 </ul>
-<div class="section" id="append">
-<h4><span class="section-number">2.2.1.1. </span>方式一：Append<a class="headerlink" href="#append" title="永久链接至标题">¶</a></h4>
+<p>#### 方式一：Append</p>
 <ul>
 <li><p>问题：Append只能基于自增的列，将新增的数据增量导入，如果数据被更新，append不能实现</p></li>
 <li><p>实现：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_tohdfs <span class="se">\</span>
---delete-target-dir <span class="se">\</span>
---target-dir /sqoop/import/test02 <span class="se">\</span>
---fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
---check-column id <span class="se">\</span>
---incremental append <span class="se">\</span>
---last-value <span class="m">4</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p>~~~shell
+sqoop import –connect <a class="reference external" href="jdbc:mysql://hadoop01:3306/sqoopTest">jdbc:mysql://hadoop01:3306/sqoopTest</a> –username root –password 123456 –table tb_tohdfs –delete-target-dir –target-dir /sqoop/import/test02 –fields-terminated-by ‘t’ –check-column id –incremental append –last-value 4 -m 1
+~~~</p>
 </li>
 <li><p>次日新增了数据四条</p></li>
 <li><p>增量导入</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_tohdfs <span class="se">\</span>
---target-dir /sqoop/import/test02 <span class="se">\</span>
---fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
---incremental append <span class="se">\</span>
---check-column id <span class="se">\</span>
---last-value <span class="m">4</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p>~~~shell
+sqoop import –connect <a class="reference external" href="jdbc:mysql://hadoop01:3306/sqoopTest">jdbc:mysql://hadoop01:3306/sqoopTest</a> –username root –password 123456 –table tb_tohdfs –target-dir /sqoop/import/test02 –fields-terminated-by ‘t’ –incremental append –check-column id –last-value 4 -m 1
+~~~</p>
 </li>
 </ul>
-</div>
-<div class="section" id="lastmodified">
-<h4><span class="section-number">2.2.1.2. </span>方式二：lastmodified<a class="headerlink" href="#lastmodified" title="永久链接至标题">¶</a></h4>
+<p>#### 方式二：lastmodified</p>
 <ul>
 <li><p>应用场景：适合于采集更新的数据和新增的数据</p></li>
 <li><p>要求：必须有时间列</p></li>
 <li><p>使用模板：</p>
 <ul>
 <li><p>MySQL中测试数据</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">`tb_lastmode`</span> <span class="p">(</span>
-  <span class="n">`id`</span> <span class="kt">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">AUTO_INCREMENT</span><span class="p">,</span>
-  <span class="n">`word`</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="k">NOT</span> <span class="no">NULL</span><span class="p">,</span>
-  <span class="n">`lastmode`</span> <span class="kt">timestamp</span> <span class="k">NOT</span> <span class="no">NULL</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span>  <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
-  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">`id`</span><span class="p">)</span>
-<span class="p">)</span> <span class="k">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="k">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
-
-<span class="k">insert</span> <span class="k">into</span> <span class="n">tb_lastmode</span> <span class="k">values</span><span class="p">(</span><span class="no">null</span><span class="p">,</span><span class="s1">&#39;hadoop&#39;</span><span class="p">,</span><span class="no">null</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">tb_lastmode</span> <span class="k">values</span><span class="p">(</span><span class="no">null</span><span class="p">,</span><span class="s1">&#39;spark&#39;</span><span class="p">,</span><span class="no">null</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">tb_lastmode</span> <span class="k">values</span><span class="p">(</span><span class="no">null</span><span class="p">,</span><span class="s1">&#39;hbase&#39;</span><span class="p">,</span><span class="no">null</span><span class="p">);</span>
-</pre></div>
-</div>
+<p>~~~mysql
+CREATE TABLE <cite>tb_lastmode</cite> (</p>
+<blockquote>
+<div><p><cite>id</cite> int(11) NOT NULL AUTO_INCREMENT,
+<cite>word</cite> varchar(200) NOT NULL,
+<cite>lastmode</cite> timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
+PRIMARY KEY (<cite>id</cite>)</p>
+</div></blockquote>
+<p>) ENGINE=InnoDB DEFAULT CHARSET=utf8;</p>
+<p>insert into tb_lastmode values(null,’hadoop’,null);
+insert into tb_lastmode values(null,’spark’,null);
+insert into tb_lastmode values(null,’hbase’,null);
+~~~</p>
 </li>
 <li><p>第一次导入HDFS</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_lastmode <span class="se">\</span>
---target-dir /sqoop/import/test03 <span class="se">\</span>
---fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
---incremental lastmodified <span class="se">\</span>
---check-column lastmode <span class="se">\</span>
---last-value <span class="s1">&#39;2020-01-01 00:00:00&#39;</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">import</span> <span class="pre">\</span>
+<span class="pre">--connect</span> <span class="pre">jdbc:mysql://hadoop01:3306/sqoopTest</span> <span class="pre">\</span>
+<span class="pre">--username</span> <span class="pre">root</span> <span class="pre">\</span>
+<span class="pre">--password</span> <span class="pre">123456</span> <span class="pre">\</span>
+<span class="pre">--table</span> <span class="pre">tb_lastmode</span> <span class="pre">\</span>
+<span class="pre">--target-dir</span> <span class="pre">/sqoop/import/test03</span> <span class="pre">\</span>
+<span class="pre">--fields-terminated-by</span> <span class="pre">'\t'</span> <span class="pre">\</span>
+<span class="pre">--incremental</span> <span class="pre">lastmodified</span> <span class="pre">\</span>
+<span class="pre">--check-column</span> <span class="pre">lastmode</span> <span class="pre">\</span>
+<span class="pre">--last-value</span> <span class="pre">'2020-01-01</span> <span class="pre">00:00:00'</span> <span class="pre">\</span>
+<span class="pre">-m</span> <span class="pre">1</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>第二天：数据发生了变化</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">insert</span> <span class="n">into</span> <span class="n">tb_lastmode</span> <span class="n">values</span><span class="p">(</span><span class="n">null</span><span class="p">,</span><span class="s1">&#39;hive&#39;</span><span class="p">,</span><span class="n">null</span><span class="p">);</span>
-<span class="n">update</span> <span class="n">tb_lastmode</span> <span class="nb">set</span> <span class="n">word</span> <span class="o">=</span> <span class="s1">&#39;sqoop&#39;</span> <span class="n">where</span> <span class="nb">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">insert</span> <span class="pre">into</span> <span class="pre">tb_lastmode</span> <span class="pre">values(null,'hive',null);</span>
+<span class="pre">update</span> <span class="pre">tb_lastmode</span> <span class="pre">set</span> <span class="pre">word</span> <span class="pre">=</span> <span class="pre">'sqoop'</span> <span class="pre">where</span> <span class="pre">id</span> <span class="pre">=</span> <span class="pre">1;</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>第二次采集</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_lastmode <span class="se">\</span>
---target-dir /sqoop/import/test03 <span class="se">\</span>
---fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
---merge-key id <span class="se">\</span>
---incremental lastmodified <span class="se">\</span>
---check-column lastmode <span class="se">\</span>
---last-value <span class="s1">&#39;2020-09-05 11:50:31&#39;</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">import</span> <span class="pre">\</span>
+<span class="pre">--connect</span> <span class="pre">jdbc:mysql://hadoop01:3306/sqoopTest</span> <span class="pre">\</span>
+<span class="pre">--username</span> <span class="pre">root</span> <span class="pre">\</span>
+<span class="pre">--password</span> <span class="pre">123456</span> <span class="pre">\</span>
+<span class="pre">--table</span> <span class="pre">tb_lastmode</span> <span class="pre">\</span>
+<span class="pre">--target-dir</span> <span class="pre">/sqoop/import/test03</span> <span class="pre">\</span>
+<span class="pre">--fields-terminated-by</span> <span class="pre">'\t'</span> <span class="pre">\</span>
+<span class="pre">--merge-key</span> <span class="pre">id</span> <span class="pre">\</span>
+<span class="pre">--incremental</span> <span class="pre">lastmodified</span> <span class="pre">\</span>
+<span class="pre">--check-column</span> <span class="pre">lastmode</span> <span class="pre">\</span>
+<span class="pre">--last-value</span> <span class="pre">'2020-09-05</span> <span class="pre">11:50:31'</span> <span class="pre">\</span>
+<span class="pre">-m</span> <span class="pre">1</span>
+<span class="pre">`</span></code></p>
 <ul class="simple">
 <li><p>–merge-key：按照哪个字段进行合并</p></li>
 </ul>
@@ -525,139 +449,129 @@ load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/dat
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id5">
-<h3><span class="section-number">2.2.2. </span>增量导出<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
-<div class="section" id="updateonly">
-<h4><span class="section-number">2.2.2.1. </span>方式一：updateonly<a class="headerlink" href="#updateonly" title="永久链接至标题">¶</a></h4>
+<p>### 增量导出</p>
+<p>#### 方式一：updateonly</p>
 <ul>
 <li><p><strong>这种方式只会导出更新的数据，新增的数据不会被导出</strong></p></li>
 <li><p>使用模板：</p>
 <ul>
 <li><p>原始数据：</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>1       http://www.Facebook.com/path/p1.php?query=1
-2       http://www.baidu.com/news/index.jsp?uuid=frank
-3       http://www.jd.com/index?source=baidu
-</pre></div>
-</div>
+<p>~~~txt
+1       <a class="reference external" href="http://www.Facebook.com/path/p1.php?query=1">http://www.Facebook.com/path/p1.php?query=1</a>
+2       <a class="reference external" href="http://www.baidu.com/news/index.jsp?uuid=frank">http://www.baidu.com/news/index.jsp?uuid=frank</a>
+3       <a class="reference external" href="http://www.jd.com/index?source=baidu">http://www.jd.com/index?source=baidu</a>
+~~~</p>
 </li>
 <li><p>导入表：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/datas/lateral.txt&#39;</span> into table tb_url<span class="p">;</span>
-</pre></div>
-</div>
+<p>~~~shell
+load data local inpath ‘/export/datas/lateral.txt’ into table tb_url;
+~~~</p>
 </li>
 <li><p>更改数据</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>1       http://www.dumain.com/path/p1.php?query=1
-2       http://www.baidu.com/news/index.jsp?uuid=frank
-3       http://www.jd.com/index?source=baidu
-4       http://www.domain.com
-</pre></div>
-</div>
+<p>~~~txt
+1       <a class="reference external" href="http://www.dumain.com/path/p1.php?query=1">http://www.dumain.com/path/p1.php?query=1</a>
+2       <a class="reference external" href="http://www.baidu.com/news/index.jsp?uuid=frank">http://www.baidu.com/news/index.jsp?uuid=frank</a>
+3       <a class="reference external" href="http://www.jd.com/index?source=baidu">http://www.jd.com/index?source=baidu</a>
+4       <a class="reference external" href="http://www.domain.com">http://www.domain.com</a>
+~~~</p>
 </li>
 <li><p>覆盖表中的数据</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/datas/lateral.txt&#39;</span> overwrite into table tb_url<span class="p">;</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">load</span> <span class="pre">data</span> <span class="pre">local</span> <span class="pre">inpath</span> <span class="pre">'/export/datas/lateral.txt'</span> <span class="pre">overwrite</span> <span class="pre">into</span> <span class="pre">table</span> <span class="pre">tb_url;</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>增量导出</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop <span class="nb">export</span> <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_url <span class="se">\</span>
---export-dir /user/hive/warehouse/tb_url <span class="se">\</span>
---input-fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
---update-key id <span class="se">\</span>
---update-mode updateonly <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">export</span> <span class="pre">\</span>
+<span class="pre">--connect</span> <span class="pre">jdbc:mysql://hadoop01:3306/sqoopTest</span> <span class="pre">\</span>
+<span class="pre">--username</span> <span class="pre">root</span> <span class="pre">\</span>
+<span class="pre">--password</span> <span class="pre">123456</span> <span class="pre">\</span>
+<span class="pre">--table</span> <span class="pre">tb_url</span> <span class="pre">\</span>
+<span class="pre">--export-dir</span> <span class="pre">/user/hive/warehouse/tb_url</span> <span class="pre">\</span>
+<span class="pre">--input-fields-terminated-by</span> <span class="pre">'\t'</span> <span class="pre">\</span>
+<span class="pre">--update-key</span> <span class="pre">id</span> <span class="pre">\</span>
+<span class="pre">--update-mode</span> <span class="pre">updateonly</span> <span class="pre">\</span>
+<span class="pre">-m</span> <span class="pre">1</span>
+<span class="pre">`</span></code></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">--update-key</span></code>：以哪一列的值作为判断</p></li>
+<li><p><cite>–update-key</cite>：以哪一列的值作为判断</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--update-mode</span></code>：增量导出模式</p></li>
+<li><p><cite>–update-mode</cite>：增量导出模式</p></li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="allowinsert">
-<h4><span class="section-number">2.2.2.2. </span>方式二：allowinsert<a class="headerlink" href="#allowinsert" title="永久链接至标题">¶</a></h4>
+<p>#### 方式二：allowinsert</p>
 <ul>
 <li><p><strong>这种方式会增量导出更新的数据和增加的数据</strong></p></li>
 <li><p>使用模板</p>
 <ul>
 <li><p>修改lateral.txt</p>
-<div class="highlight-txt notranslate"><div class="highlight"><pre><span></span>1       http://bigdata.domain.com/path/p1.php?query=1
-2       http://www.baidu.com/news/index.jsp?uuid=frank
-3       http://www.jd.com/index?source=baidu
-4       http://www.domain.com
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`txt</span>
+<span class="pre">1</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">http://bigdata.domain.com/path/p1.php?query=1</span>
+<span class="pre">2</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">http://www.baidu.com/news/index.jsp?uuid=frank</span>
+<span class="pre">3</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">http://www.jd.com/index?source=baidu</span>
+<span class="pre">4</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">http://www.domain.com</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>覆盖表中数据</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">load</span> <span class="n">data</span> <span class="n">local</span> <span class="n">inpath</span> <span class="s1">&#39;/export/datas/lateral.txt&#39;</span> <span class="n">overwrite</span> <span class="n">into</span> <span class="n">table</span> <span class="n">tb_url</span><span class="p">;</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">load</span> <span class="pre">data</span> <span class="pre">local</span> <span class="pre">inpath</span> <span class="pre">'/export/datas/lateral.txt'</span> <span class="pre">overwrite</span> <span class="pre">into</span> <span class="pre">table</span> <span class="pre">tb_url;</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>增量导出</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sqoop</span> <span class="n">export</span> \
-<span class="o">--</span><span class="n">connect</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">mysql</span><span class="p">:</span><span class="o">//</span><span class="n">hadoop01</span><span class="p">:</span><span class="mi">3306</span><span class="o">/</span><span class="n">sqoopTest</span> \
-<span class="o">--</span><span class="n">username</span> <span class="n">root</span> \
-<span class="o">--</span><span class="n">password</span> <span class="mi">123456</span> \
-<span class="o">--</span><span class="n">table</span> <span class="n">tb_url</span> \
-<span class="o">--</span><span class="n">export</span><span class="o">-</span><span class="nb">dir</span> <span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">hive</span><span class="o">/</span><span class="n">warehouse</span><span class="o">/</span><span class="n">tb_url</span> \
-<span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">fields</span><span class="o">-</span><span class="n">terminated</span><span class="o">-</span><span class="n">by</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span> \
-<span class="o">--</span><span class="n">update</span><span class="o">-</span><span class="n">key</span> <span class="nb">id</span> \
-<span class="o">--</span><span class="n">update</span><span class="o">-</span><span class="n">mode</span> <span class="n">allowinsert</span> \
-<span class="o">-</span><span class="n">m</span> <span class="mi">1</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">sqoop</span> <span class="pre">export</span> <span class="pre">\</span>
+<span class="pre">--connect</span> <span class="pre">jdbc:mysql://hadoop01:3306/sqoopTest</span> <span class="pre">\</span>
+<span class="pre">--username</span> <span class="pre">root</span> <span class="pre">\</span>
+<span class="pre">--password</span> <span class="pre">123456</span> <span class="pre">\</span>
+<span class="pre">--table</span> <span class="pre">tb_url</span> <span class="pre">\</span>
+<span class="pre">--export-dir</span> <span class="pre">/user/hive/warehouse/tb_url</span> <span class="pre">\</span>
+<span class="pre">--input-fields-terminated-by</span> <span class="pre">'\t'</span> <span class="pre">\</span>
+<span class="pre">--update-key</span> <span class="pre">id</span> <span class="pre">\</span>
+<span class="pre">--update-mode</span> <span class="pre">allowinsert</span> <span class="pre">\</span>
+<span class="pre">-m</span> <span class="pre">1</span>
+<span class="pre">`</span></code></p>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="sqoop-job">
-<h2><span class="section-number">2.3. </span>Sqoop Job<a class="headerlink" href="#sqoop-job" title="永久链接至标题">¶</a></h2>
+<p>## Sqoop Job</p>
 <ul>
 <li><ul>
 <li><p>创建一个sqoop job</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop job --create job01 <span class="se">\</span>
--- import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password <span class="m">123456</span> <span class="se">\</span>
---table tb_tohdfs <span class="se">\</span>
---target-dir /sqoop/import/test04 <span class="se">\</span>
---fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
---incremental append <span class="se">\</span>
---check-column id <span class="se">\</span>
---last-value <span class="m">8</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">job</span> <span class="pre">--create</span> <span class="pre">job01</span> <span class="pre">\</span>
+<span class="pre">--</span> <span class="pre">import</span> <span class="pre">\</span>
+<span class="pre">--connect</span> <span class="pre">jdbc:mysql://hadoop01:3306/sqoopTest</span> <span class="pre">\</span>
+<span class="pre">--username</span> <span class="pre">root</span> <span class="pre">\</span>
+<span class="pre">--password</span> <span class="pre">123456</span> <span class="pre">\</span>
+<span class="pre">--table</span> <span class="pre">tb_tohdfs</span> <span class="pre">\</span>
+<span class="pre">--target-dir</span> <span class="pre">/sqoop/import/test04</span> <span class="pre">\</span>
+<span class="pre">--fields-terminated-by</span> <span class="pre">'\t'</span> <span class="pre">\</span>
+<span class="pre">--incremental</span> <span class="pre">append</span> <span class="pre">\</span>
+<span class="pre">--check-column</span> <span class="pre">id</span> <span class="pre">\</span>
+<span class="pre">--last-value</span> <span class="pre">8</span> <span class="pre">\</span>
+<span class="pre">-m</span> <span class="pre">1</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>查看所有的job</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop job --list
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">job</span> <span class="pre">--list</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>查看某个job的信息</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop job --show job01
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">job</span> <span class="pre">--show</span> <span class="pre">job01</span>
+<span class="pre">`</span></code></p>
 <ul class="simple">
 <li><p>注意：会让你输入Mysql的密码：123456</p></li>
 </ul>
 </li>
 <li><p>执行一个Sqoop的Job</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop job --exec job01
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">job</span> <span class="pre">--exec</span> <span class="pre">job01</span>
+<span class="pre">`</span></code></p>
 <ul class="simple">
 <li><p>注意：会让你输入Mysql的密码：123456</p></li>
 </ul>
@@ -673,28 +587,28 @@ load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/dat
 </ul>
 </li>
 <li><p>方案二：将MySQL密码存储在一个文件中，在程序中指定这个文件的位置</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sqoop job --create job01 <span class="se">\</span>
--- import <span class="se">\</span>
---connect jdbc:mysql://hadoop01:3306/sqoopTest <span class="se">\</span>
---username root <span class="se">\</span>
---password-file   /export/datas/sqooppasswd.txt <span class="se">\</span>
---table tb_tohdfs <span class="se">\</span>
---target-dir /sqoop/import/test04 <span class="se">\</span>
---fields-terminated-by <span class="s1">&#39;\t&#39;</span> <span class="se">\</span>
---incremental append <span class="se">\</span>
---check-column id <span class="se">\</span>
---last-value <span class="m">8</span> <span class="se">\</span>
--m <span class="m">1</span>
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sqoop</span> <span class="pre">job</span> <span class="pre">--create</span> <span class="pre">job01</span> <span class="pre">\</span>
+<span class="pre">--</span> <span class="pre">import</span> <span class="pre">\</span>
+<span class="pre">--connect</span> <span class="pre">jdbc:mysql://hadoop01:3306/sqoopTest</span> <span class="pre">\</span>
+<span class="pre">--username</span> <span class="pre">root</span> <span class="pre">\</span>
+<span class="pre">--password-file</span>&#160;&#160; <span class="pre">/export/datas/sqooppasswd.txt</span> <span class="pre">\</span>
+<span class="pre">--table</span> <span class="pre">tb_tohdfs</span> <span class="pre">\</span>
+<span class="pre">--target-dir</span> <span class="pre">/sqoop/import/test04</span> <span class="pre">\</span>
+<span class="pre">--fields-terminated-by</span> <span class="pre">'\t'</span> <span class="pre">\</span>
+<span class="pre">--incremental</span> <span class="pre">append</span> <span class="pre">\</span>
+<span class="pre">--check-column</span> <span class="pre">id</span> <span class="pre">\</span>
+<span class="pre">--last-value</span> <span class="pre">8</span> <span class="pre">\</span>
+<span class="pre">-m</span> <span class="pre">1</span>
+<span class="pre">`</span></code></p>
 <ul>
 <li><p>–password-file：将密码存在文件中，这个文件默认HDFS地址，/export/datas/sqooppasswd.txt</p></li>
 <li><p>注意：这个文件必须只有一行，就是密码，必须手动将第二行删掉</p>
 <ul>
 <li><p>创建</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">123456</span>
-</pre></div>
-</div>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+123456</p>
+<p><a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
 </li>
 <li><p>删掉第二行换行</p></li>
 </ul>
@@ -704,8 +618,6 @@ load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/dat
 </ul>
 </li>
 </ul>
-</div>
-</div>
 
 
            </div>
@@ -718,7 +630,7 @@ load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/dat
         <a href="../SQL/index.html" class="btn btn-neutral float-right" title="SQL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Apache%20Avro.html" class="btn btn-neutral float-left" title="1. Apache Avro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="Apache%20Avro.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -728,7 +640,7 @@ load data <span class="nb">local</span> inpath <span class="s1">&#39;/export/dat
   <div role="contentinfo">
     <p>
         
-        &copy; 版权所有 2020, roohom
+        &copy; 版权所有 2020-2020, roohom
 
     </p>
   </div>

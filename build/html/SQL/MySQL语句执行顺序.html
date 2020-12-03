@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. MySQL语句执行顺序 &mdash; Code-Cookbook 0.1 文档</title>
+  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="4. SQL JOINS" href="SQL%20JOINS.html" />
-    <link rel="prev" title="2. MySQL 50题记录" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="SQL%20JOINS.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -97,14 +97,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
 <p class="caption"><span class="caption-text">SQL相关</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">SQL</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="JDBC.html">1. JDBC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">2. MySQL 50题记录</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">3. MySQL语句执行顺序</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SQL%20JOINS.html">4. SQL JOINS</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">SQL</a></li>
 </ul>
 
             
@@ -153,7 +147,7 @@
         
           <li><a href="index.html">SQL</a> &raquo;</li>
         
-      <li><span class="section-number">3. </span>MySQL语句执行顺序</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,33 +166,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="mysql">
-<h1><span class="section-number">3. </span>MySQL语句执行顺序<a class="headerlink" href="#mysql" title="永久链接至标题">¶</a></h1>
+  <p># MySQL语句执行顺序</p>
 <p>简单的MySQL语句</p>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="mi">1</span> <span class="k">from</span> <span class="mi">2</span> <span class="k">where</span> <span class="mi">3</span> <span class="k">group</span> <span class="k">by</span> <span class="mi">4</span> <span class="k">having</span> <span class="mi">5</span> <span class="k">order</span> <span class="k">by</span> <span class="mi">6</span> <span class="k">limit</span> <span class="mi">7</span>
-</pre></div>
-</div>
+<p>~~~MySQL
+select 1 from 2 where 3 group by 4 having 5 order by 6 limit 7
+~~~</p>
 <p>完整语法及编写顺序:</p>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> 
-<span class="k">DISTINCT</span> <span class="o">&lt;</span><span class="n">select_list</span><span class="o">&gt;</span>
-<span class="k">FROM</span> <span class="o">&lt;</span><span class="n">left_table</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">join_type</span><span class="o">&gt;</span> <span class="k">JOIN</span> <span class="o">&lt;</span><span class="n">right_table</span><span class="o">&gt;</span>
-<span class="k">ON</span> <span class="o">&lt;</span><span class="n">join_condition</span><span class="o">&gt;</span>
-<span class="k">WHERE</span> <span class="o">&lt;</span><span class="n">where_condition</span><span class="o">&gt;</span>
-<span class="k">GROUP</span> <span class="k">BY</span> <span class="o">&lt;</span><span class="n">group_by_list</span><span class="o">&gt;</span>
-<span class="k">HAVING</span> <span class="o">&lt;</span><span class="n">having_condition</span><span class="o">&gt;</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="o">&lt;</span><span class="n">order_by_condition</span><span class="o">&gt;</span>
-<span class="k">LIMIT</span> <span class="o">&lt;</span><span class="n">limit_number</span><span class="o">&gt;</span>
-</pre></div>
-</div>
+<p>~~~MySQL
+SELECT
+DISTINCT &lt;select_list&gt;
+FROM &lt;left_table&gt;
+&lt;join_type&gt; JOIN &lt;right_table&gt;
+ON &lt;join_condition&gt;
+WHERE &lt;where_condition&gt;
+GROUP BY &lt;group_by_list&gt;
+HAVING &lt;having_condition&gt;
+ORDER BY &lt;order_by_condition&gt;
+LIMIT &lt;limit_number&gt;
+~~~</p>
 <p>执行顺序</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">from</span> <span class="n">→</span> <span class="k">on</span> <span class="n">→</span> <span class="k">join</span> <span class="n">→</span> <span class="k">where</span> <span class="n">→</span> <span class="k">group</span> <span class="k">by</span> <span class="n">→</span> <span class="k">having</span> <span class="n">→</span> <span class="k">select</span> <span class="n">→</span> <span class="k">order</span> <span class="k">by</span> <span class="n">→</span> <span class="k">limit</span>
-</pre></div>
-</div>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="mi">8</span> <span class="k">distinct</span> <span class="mi">9</span> <span class="k">from</span> <span class="mi">1</span> <span class="k">join</span> <span class="mi">3</span> <span class="k">on</span> <span class="mi">2</span> <span class="k">where</span> <span class="mi">4</span> <span class="k">group</span> <span class="k">by</span> <span class="mi">5</span> <span class="k">with</span> <span class="mi">6</span> <span class="k">having</span> <span class="mi">7</span>  <span class="k">order</span> <span class="k">by</span> <span class="mi">10</span> <span class="k">limit</span> <span class="mi">11</span>
-</pre></div>
-</div>
-</div>
+<p>~~~mysql
+from → on → join → where → group by → having → select → order by → limit
+~~~</p>
+<p>~~~mysql
+select 8 distinct 9 from 1 join 3 on 2 where 4 group by 5 with 6 having 7  order by 10 limit 11
+~~~</p>
 
 
            </div>
@@ -208,10 +200,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="SQL%20JOINS.html" class="btn btn-neutral float-right" title="4. SQL JOINS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="SQL%20JOINS.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-left" title="2. MySQL 50题记录" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -221,7 +213,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; 版权所有 2020, roohom
+        &copy; 版权所有 2020-2020, roohom
 
     </p>
   </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>14. Structured Streaming &mdash; Code-Cookbook 0.1 文档</title>
+  <title>1. } &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="15. Zookeeper" href="Zookeeper.html" />
-    <link rel="prev" title="13. Spark Streaming" href="SparkStreaming.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="Zookeeper.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="SparkStreaming.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,59 +87,8 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">3. Bigdata Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">4. Flink基础配置与基础原理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">5. Hadoop搭建总体步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html">6. Hbase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kafka.html">7. Kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kylin.html">8. Kylin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Spark.html">10. Spark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkCore.html">11. Spark Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkSQL.html">12. Spark SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkStreaming.html">13. Spark Streaming</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">14. Structured Streaming</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#spark-streaming">14.1. Spark Streaming的不足</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">14.2. Structured Streaming 和其他系统的显著区别</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">14.3. 核心思想</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">14.4. 输入源</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#streaming-queries">14.5. Streaming Queries</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">14.5.1. 输出模式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">14.5.2. 触发间隔</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">14.5.3. 检查点</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sinks">14.5.4. 输出Sinks</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">14.5.5. 容错语义</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#kafka">14.6. 集成Kafka</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#kafka-source">14.6.1. Kafka  Source</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sink-kafka">14.6.2. Sink Kafka</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">14.6.3. Kafka配置</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">14.7. 事件时间窗口分析</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id12">14.7.1. 案例：词频统计</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id13">14.7.2. 窗口的生成</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id14">14.7.3. 延迟数据</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#watermark">14.7.4. Watermark</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#streaming-deduplication">14.8. Streaming Deduplication</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id17">14.8.1. 用武之地</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id18">14.8.2. 使用</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id19">14.8.3. 代码示例</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id20">14.9. 附录</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id21">14.9.1. 幂等性</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">15. Zookeeper</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">16. 常用软件梳理</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. }</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">2. }</a></li>
 </ul>
 </li>
 </ul>
@@ -202,7 +151,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">14. </span>Structured Streaming</li>
+      <li><span class="section-number">1. </span>}</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -221,285 +170,231 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="structured-streaming">
-<h1><span class="section-number">14. </span>Structured Streaming<a class="headerlink" href="#structured-streaming" title="永久链接至标题">¶</a></h1>
-<blockquote>
-<div><p>Structured Streaming是一个基于Spark SQL引擎的可扩展、容错的流处理引擎</p>
-</div></blockquote>
-<blockquote>
-<div><p>Spark Streaming是Apache Spark早期基于RDD开发的流式系统，用户使用DStream API来编写代码，支持高吞吐和良好的容错。其背后的<u>主要模型是Micro Batch（微批处理），也就是将数据流切成等时间间隔（BatchInterval）的小批量任务来执行</u>。<u>一个流的数据源从逻辑上来说就是一个不断增长的动态表格，随着时间的推移，新数据被持续不断地添加到表格的末尾，用户可以使用Dataset/DataFrame或者 SQL 来对这个动态数据源进行实时查询</u>。</p>
-</div></blockquote>
-<div class="section" id="spark-streaming">
-<h2><span class="section-number">14.1. </span>Spark Streaming的不足<a class="headerlink" href="#spark-streaming" title="永久链接至标题">¶</a></h2>
+  <p># Structured Streaming</p>
+<p>&gt; Structured Streaming是一个基于Spark SQL引擎的可扩展、容错的流处理引擎</p>
+<p>&gt; Spark Streaming是Apache Spark早期基于RDD开发的流式系统，用户使用DStream API来编写代码，支持高吞吐和良好的容错。其背后的&lt;u&gt;主要模型是Micro Batch（微批处理），也就是将数据流切成等时间间隔（BatchInterval）的小批量任务来执行&lt;/u&gt;。&lt;u&gt;一个流的数据源从逻辑上来说就是一个不断增长的动态表格，随着时间的推移，新数据被持续不断地添加到表格的末尾，用户可以使用Dataset/DataFrame或者 SQL 来对这个动态数据源进行实时查询&lt;/u&gt;。</p>
+<p>## Spark Streaming的不足</p>
 <ul class="simple">
-<li><p>使用 Processing Time 而不是 Event Time</p>
-<ul>
-<li><p>Spark Streaming是基于DStream模型的micro-batch模式，简单来说就是将一个微小时间段（比如说 1s）的流数据当前批数据来处理。如果要统计某个时间段的一些数据统计，毫无疑问应该使用 Event Time，但是因为 <strong>Spark Streaming 的数据切割是基于Processing Time，这样就导致使用 Event Time 特别的困难。</strong></p></li>
+<li><p>使用 Processing Time 而不是 Event Time
+- Spark Streaming是基于DStream模型的micro-batch模式，简单来说就是将一个微小时间段（比如说 1s）的流数据当前批数据来处理。如果要统计某个时间段的一些数据统计，毫无疑问应该使用 Event Time，但是因为 <strong>Spark Streaming 的数据切割是基于Processing Time，这样就导致使用 Event Time 特别的困难。</strong></p></li>
+<li><p>Complex, low-level api
+- DStream（Spark Streaming 的数据模型）提供的API类似RDD的API，非常的low level；
+- 当编写Spark Streaming程序的时候，本质上就是要去构造RDD的DAG执行图，然后通过Spark Engine运行。这样导致一个问题是，DAG 可能会因为开发者的水平参差不齐而导致执行效率上的天壤之别</p></li>
+<li><p>reason about end-to-end application
+- DStream 只能保证自己的一致性语义是 exactly-once 的，而 input 接入 Spark Streaming 和 Spark Straming 输出到外部存储的语义往往需要用户自己来保证；</p></li>
+<li><p>批流代码不统一
+- Streaming尽管是对RDD的封装，但是要将DStream代码完全转换成RDD还是有一点工作量的，更何况现在Spark的批处理都用DataSet/DataFrameAPI</p></li>
 </ul>
-</li>
-<li><p>Complex, low-level api</p>
-<ul>
-<li><p>DStream（Spark Streaming 的数据模型）提供的API类似RDD的API，非常的low level；</p></li>
-<li><p>当编写Spark Streaming程序的时候，本质上就是要去构造RDD的DAG执行图，然后通过Spark Engine运行。这样导致一个问题是，DAG 可能会因为开发者的水平参差不齐而导致执行效率上的天壤之别</p></li>
-</ul>
-</li>
-<li><p>reason about end-to-end application</p>
-<ul>
-<li><p>DStream 只能保证自己的一致性语义是 exactly-once 的，而 input 接入 Spark Streaming 和 Spark Straming 输出到外部存储的语义往往需要用户自己来保证；</p></li>
-</ul>
-</li>
-<li><p>批流代码不统一</p>
-<ul>
-<li><p>Streaming尽管是对RDD的封装，但是要将DStream代码完全转换成RDD还是有一点工作量的，更何况现在Spark的批处理都用DataSet/DataFrameAPI</p></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="id1">
-<h2><span class="section-number">14.2. </span>Structured Streaming 和其他系统的显著区别<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>## Structured Streaming 和其他系统的显著区别</p>
 <ul class="simple">
-<li><p>Incremental query model（增量查询模型）</p>
-<ul>
-<li><p>Structured Streaming 将会在新增的流式数据上不断执行增量查询，同时代码的写法和批处理 API（基于Dataframe和Dataset API）完全一样，而且这些API非常的简单</p></li>
-</ul>
-</li>
-<li><p>Support for end-to-end application（支持端到端应用）</p>
-<ul>
-<li><p>Structured Streaming 和内置的 connector 使的 end-to-end 程序写起来非常的简单，而且 “correct by default”。数据源和sink满足 “exactly-once” 语义，这样我们就可以在此基础上更好地和外部系统集成</p></li>
-</ul>
-</li>
+<li><p>Incremental query model（增量查询模型）
+- Structured Streaming 将会在新增的流式数据上不断执行增量查询，同时代码的写法和批处理 API（基于Dataframe和Dataset API）完全一样，而且这些API非常的简单</p></li>
+<li><p>Support for end-to-end application（支持端到端应用）
+- Structured Streaming 和内置的 connector 使的 end-to-end 程序写起来非常的简单，而且 “correct by default”。数据源和sink满足 “exactly-once” 语义，这样我们就可以在此基础上更好地和外部系统集成</p></li>
 <li><p>Spark SQL 执行引擎做了非常多的优化工作，比如执行计划优化、codegen、内存管理等。这也是Structured Streaming取得高性能和高吞吐的一个原因</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">14.3. </span>核心思想<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<blockquote>
-<div><p>Structured Streaming最核心的思想就是<strong>将实时到达的数据看作是一个不断追加的unbound table无界表，到达流的每个数据项就像是表中的一个新行被附加到无边界的表中，用静态结构化数据的批处理查询方式进行流计算</strong>。</p>
-</div></blockquote>
-<p><img alt="image-20201129195924333" src="../_images/image-20201129195924333.png" /></p>
-</div>
-<div class="section" id="id3">
-<h2><span class="section-number">14.4. </span>输入源<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>## 核心思想</p>
+<p>&gt; Structured Streaming最核心的思想就是**将实时到达的数据看作是一个不断追加的unbound table无界表，到达流的每个数据项就像是表中的一个新行被附加到无边界的表中，用静态结构化数据的批处理查询方式进行流计算**。</p>
+<p>![image-20201129195924333](StructuredStreaming.assets/image-20201129195924333.png)</p>
+<p>## 输入源</p>
 <ul class="simple">
-<li><p>File Source</p>
-<ul>
-<li><p>text、csv、json、orc、parquet</p></li>
-</ul>
-</li>
+<li><p>File Source
+- text、csv、json、orc、parquet</p></li>
 <li><p>Socket Source</p></li>
-<li><p>Rate Source</p>
-<ul>
-<li><p>以每秒指定的行数生成数据，每个输出行包含2个字段：timestamp和value。其中timestamp是一个Timestamp含有信息分配的时间类型，并且value是Long（包含消息的计数从0开始作为第一行）类型。此源用于测试和基准测试</p></li>
-</ul>
-</li>
+<li><p>Rate Source
+- 以每秒指定的行数生成数据，每个输出行包含2个字段：timestamp和value。其中timestamp是一个Timestamp含有信息分配的时间类型，并且value是Long（包含消息的计数从0开始作为第一行）类型。此源用于测试和基准测试</p></li>
 <li><p>Kafka Source</p></li>
 </ul>
-</div>
-<div class="section" id="streaming-queries">
-<h2><span class="section-number">14.5. </span>Streaming Queries<a class="headerlink" href="#streaming-queries" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id4">
-<h3><span class="section-number">14.5.1. </span>输出模式<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>## Streaming Queries</p>
+<p>### 输出模式</p>
 <ul class="simple">
-<li><p>Append Mode：追加模式，默认模式</p>
-<ul>
-<li><p>其中只有自从上一次触发以来，添加到 Result Table 的新行将会是outputted to the sink。只有添加到Result Table的行将永远不会改变那些查询才支持这一点。这种模式保证每行只能输出一次（假设 fault-tolerant sink ）。例如，只有select, where, map, flatMap, filter, join等查询支持 Append mode 。<strong>只输出那些将来永远不可能再更新的数据，然后数据从内存移除 。没有聚合的时候，append和update一致；有聚合的时候，一定要有水印，才能使用</strong></p></li>
+<li><p>Append Mode：追加模式，默认模式
+- 其中只有自从上一次触发以来，添加到 Result Table 的新行将会是outputted to the sink。只有添加到Result Table的行将永远不会改变那些查询才支持这一点。这种模式保证每行只能输出一次（假设 fault-tolerant sink ）。例如，只有select, where, map, flatMap, filter, join等查询支持 Append mode 。<strong>只输出那些将来永远不可能再更新的数据，然后数据从内存移除 。没有聚合的时候，append和update一致；有聚合的时候，一定要有水印，才能使用</strong></p></li>
+<li><p>Complete Mode：完全模式
+- 每次触发后，整个Result Table将被输出到sink，aggregation  queries（聚合查询）支持。全部输出，必须有聚合</p></li>
+<li><p>Update Mode：更新模式
+- 只有 Result Table rows 自上次触发后更新将被输出到 sink。与Complete模式不同，因为该模式只输出自上次触发器以来已经改变的行。如果查询不包含聚合，那么等同于Append模式。只输出更新数据(更新和新增)</p></li>
 </ul>
-</li>
-<li><p>Complete Mode：完全模式</p>
-<ul>
-<li><p>每次触发后，整个Result Table将被输出到sink，aggregation  queries（聚合查询）支持。全部输出，必须有聚合</p></li>
-</ul>
-</li>
-<li><p>Update Mode：更新模式</p>
-<ul>
-<li><p>只有 Result Table rows 自上次触发后更新将被输出到 sink。与Complete模式不同，因为该模式只输出自上次触发器以来已经改变的行。如果查询不包含聚合，那么等同于Append模式。只输出更新数据(更新和新增)</p></li>
-</ul>
-</li>
-</ul>
-<div class="section" id="id5">
-<h4><span class="section-number">14.5.1.1. </span>不同的模式支持不同的输出模式<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
-<p><img alt="image-20201129201624561" src="../_images/image-20201129201624561.png" /></p>
-</div>
-</div>
-<div class="section" id="id6">
-<h3><span class="section-number">14.5.2. </span>触发间隔<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>#### 不同的模式支持不同的输出模式</p>
+<p>![image-20201129201624561](StructuredStreaming.assets/image-20201129201624561.png)</p>
+<p>### 触发间隔</p>
 <p>触发器Trigger决定了多久执行一次查询并输出结果，当不设置时，默认只要有新数据，就立即执行查询Query，再进行输出</p>
-<p><img alt="image-20201129201609267" src="../_images/image-20201129201609267.png" /></p>
-</div>
-<div class="section" id="id7">
-<h3><span class="section-number">14.5.3. </span>检查点<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>![image-20201129201609267](StructuredStreaming.assets/image-20201129201609267.png)</p>
+<p>### 检查点</p>
 <p>在Structured Streaming中使用Checkpoint 检查点进行故障恢复。如果实时应用发生故障或关机，可以恢复之前的查询的进度和状态，并从停止的地方继续执行，使用Checkpoint和预写日志WAL完成。使用检查点位置配置查询，那么查询将所有进度信息（即每个触发器中处理的偏移范围）和运行聚合（例如词频统计wordcount）保存到检查点位置。此检查点位置必须是HDFS兼容文件系统中的路径，两种方式设置Checkpoint Location位置：</p>
 <ul class="simple">
-<li><p>方式一：DataStreamWriter设置</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">streamDF.writeStream.option(&quot;checkpointLocation&quot;,</span> <span class="pre">&quot;xxx&quot;)</span></code></p></li>
-</ul>
-</li>
-<li><p>方式二：SparkConf设置</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">sparkConf.set(&quot;spark.sql.streaming.checkpointLocation&quot;,</span> <span class="pre">&quot;xxx&quot;)</span></code></p></li>
-</ul>
-</li>
+<li><p>方式一：DataStreamWriter设置
+- <cite>streamDF.writeStream.option(“checkpointLocation”, “xxx”)</cite></p></li>
+<li><p>方式二：SparkConf设置
+- <cite>sparkConf.set(“spark.sql.streaming.checkpointLocation”, “xxx”)</cite></p></li>
 </ul>
 <p>检查点内容：</p>
 <ul class="simple">
 <li><p>偏移量目录【offsets】</p></li>
 <li><p>提交记录目录【commits】</p></li>
 <li><p>元数据文件【metadata】</p></li>
-<li><p>数据源目录【sources】</p>
-<ul>
-<li><p>sources 目录为数据源(Source)时各个批次读取详情</p></li>
-</ul>
-</li>
-<li><p>数据接收端目录【sinks】</p>
-<ul>
-<li><p>sinks 目录为数据接收端(Sink)时批次的写出详情</p></li>
-</ul>
-</li>
+<li><p>数据源目录【sources】
+- sources 目录为数据源(Source)时各个批次读取详情</p></li>
+<li><p>数据接收端目录【sinks】
+- sinks 目录为数据接收端(Sink)时批次的写出详情</p></li>
 <li><p>记录状态目录【state】</p></li>
 </ul>
-</div>
-<div class="section" id="sinks">
-<h3><span class="section-number">14.5.4. </span>输出Sinks<a class="headerlink" href="#sinks" title="永久链接至标题">¶</a></h3>
-<blockquote>
-<div><p>Structured Streaming 非常显式地提出了**输入(Source)、执行(StreamExecution)、输出(Sink)**的3个组件，并且在每个组件显式地做到fault-tolerant（容错），由此得到整个streaming程序的 <code class="docutils literal notranslate"><span class="pre">end-to-end</span> <span class="pre">exactly-once</span> <span class="pre">guarantees</span></code></p>
-</div></blockquote>
+<p>### 输出Sinks</p>
+<p>&gt; Structured Streaming 非常显式地提出了**输入(Source)、执行(StreamExecution)、输出(Sink)**的3个组件，并且在每个组件显式地做到fault-tolerant（容错），由此得到整个streaming程序的 <cite>end-to-end exactly-once guarantees</cite></p>
 <p>目前Structured Streaming内置</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>FileSink</p></li>
 <li><p>Console Sink</p></li>
 <li><p>Foreach Sink（ForeachBatch Sink）</p></li>
 <li><p>Memory Sink及Kafka Sink</p></li>
 </ol>
-<p><img alt="image-20201129202252970" src="../_images/image-20201129202252970.png" /></p>
-<div class="section" id="id8">
-<h4><span class="section-number">14.5.4.1. </span>文件接收器<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<p>![image-20201129202252970](StructuredStreaming.assets/image-20201129202252970.png)</p>
+<p>#### 文件接收器</p>
 <p>将输出存储到目录文件中，支持文件格式：parquet、orc、json、csv等</p>
-<blockquote>
-<div><p>注意:</p>
-<ul class="simple">
-<li><p>支持OutputMode为：Append追加模式</p></li>
-<li><p>必须指定输出目录参数【path】，必选参数，其中格式有parquet、orc、json、csv等等</p></li>
-<li><p>容灾恢复支持精确一次性语义exactly-once</p></li>
-<li><p>此外支持写入分区表，实际项目中常常按时间划分</p></li>
-</ul>
-</div></blockquote>
-</div>
-<div class="section" id="memory-sink">
-<h4><span class="section-number">14.5.4.2. </span>Memory Sink<a class="headerlink" href="#memory-sink" title="永久链接至标题">¶</a></h4>
+<p>&gt; 注意:
+&gt;
+&gt; - 支持OutputMode为：Append追加模式
+&gt; - 必须指定输出目录参数【path】，必选参数，其中格式有parquet、orc、json、csv等等
+&gt; - 容灾恢复支持精确一次性语义exactly-once
+&gt; - 此外支持写入分区表，实际项目中常常按时间划分</p>
+<p>#### Memory Sink</p>
 <p>此种接收器作为调试使用，输出作为内存表存储在内存中， 支持Append和Complete输出模式。这应该用于低数据量的调试目的，因为整个输出被收集并存储在驱动程序的内存中，因此，请谨慎使用</p>
-</div>
-<div class="section" id="foreach-sink">
-<h4><span class="section-number">14.5.4.3. </span>Foreach Sink<a class="headerlink" href="#foreach-sink" title="永久链接至标题">¶</a></h4>
-<p>Structured Streaming提供接口foreach和foreachBatch，允许用户在流式查询的输出上应用任意操作和编写逻辑，比如输出到MySQL表、Redis数据库等外部存系统。其中<strong>foreach允许每行自定义写入逻辑，foreachBatch允许在每个微批量的输出上进行任意操作和自定义逻辑，建议使用foreachBatch操作</strong>。
+<p>#### Foreach Sink</p>
+<p>Structured Streaming提供接口foreach和foreachBatch，允许用户在流式查询的输出上应用任意操作和编写逻辑，比如输出到MySQL表、Redis数据库等外部存系统。其中**foreach允许每行自定义写入逻辑，foreachBatch允许在每个微批量的输出上进行任意操作和自定义逻辑，建议使用foreachBatch操作**。
 foreach表达自定义编写器逻辑具体来说，需要编写类class继承ForeachWriter，其中包含三个方法来表达数据写入逻辑：打开，处理和关闭</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">streamingDatasetOfString</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nc">ForeachWriter</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span> 
-        <span class="k">def</span> <span class="n">open</span><span class="o">(</span><span class="n">partitionId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">version</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span> <span class="c1">// Open connection }</span>
-        <span class="k">def</span> <span class="n">process</span><span class="o">(</span><span class="n">record</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="c1">// Write string to connection }</span>
-        <span class="k">def</span> <span class="n">close</span><span class="o">(</span><span class="n">errorOrNull</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="c1">// Close the connection } </span>
-   <span class="o">}</span> 
-<span class="o">).</span><span class="n">start</span><span class="o">()</span>
-</pre></div>
-</div>
+<p>~~~scala
+streamingDatasetOfString.writeStream.foreach(</p>
+<blockquote>
+<div><blockquote>
+<div><dl class="simple">
+<dt>new ForeachWriter[String] {</dt><dd><p>def open(partitionId: Long, version: Long): Boolean = { // Open connection }
+def process(record: String): Unit = { // Write string to connection }
+def close(errorOrNull: Throwable): Unit = { // Close the connection }</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>).start()
+~~~</p>
 <p>举个代码栗子:</p>
 <p>如果要实现将词频统计结果写入MySQL：编写MySQLForeachWriter，继承ForeachWriter，其中DataFrame中数据类型为Row</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="cm">/** * 创建类继承ForeachWriter，将数据写入到MySQL表中，泛型为：Row，针对DataFrame操作，每条数据类型就是Row */</span> 
-<span class="k">class</span> <span class="nc">MySQLForeachWriter</span> <span class="k">extends</span> <span class="nc">ForeachWriter</span><span class="o">[</span><span class="kt">Row</span><span class="o">]{</span> 
-    <span class="c1">// 定义变量 </span>
-    <span class="k">var</span> <span class="n">conn</span><span class="k">:</span> <span class="kt">Connection</span> <span class="o">=</span> <span class="k">_</span> <span class="k">var</span> <span class="n">pstmt</span><span class="k">:</span> <span class="kt">PreparedStatement</span> <span class="o">=</span> <span class="k">_</span> <span class="k">val</span> <span class="n">insertSQL</span> <span class="o">=</span> <span class="s">&quot;REPLACE INTO `tb_word_count` (`id`, `word`, `count`) VALUES (NULL, ?, ?)&quot;</span> 
-    <span class="c1">// open connection </span>
-    <span class="k">override</span> <span class="k">def</span> <span class="n">open</span><span class="o">(</span><span class="n">partitionId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">version</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span> 
-        <span class="c1">// a. 加载驱动类 </span>
-        <span class="nc">Class</span><span class="o">.</span><span class="n">forName</span><span class="o">(</span><span class="s">&quot;com.mysql.cj.jdbc.Driver&quot;</span><span class="o">)</span> 
-        <span class="c1">// b. 获取连接 </span>
-        <span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="n">getConnection</span><span class="o">(</span> <span class="s">&quot;jdbc:mysql://node1:3306/db_sparkserverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&quot;</span><span class="o">,</span>
-                                           <span class="s">&quot;root&quot;</span><span class="o">,</span>
-                                           <span class="s">&quot;123456&quot;</span> <span class="o">)</span>
-<span class="c1">// c. 获取PreparedStatement </span>
-        <span class="n">pstmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">prepareStatement</span><span class="o">(</span><span class="n">insertSQL</span><span class="o">)</span> 
-        <span class="c1">//println(s&quot;p-${partitionId}: ${conn}&quot;) </span>
-        <span class="c1">// 返回，表示获取连接成功 </span>
-        <span class="kc">true</span> <span class="o">}</span> 
-    <span class="c1">// write data to connection </span>
-    <span class="k">override</span> <span class="k">def</span> <span class="n">process</span><span class="o">(</span><span class="n">row</span><span class="k">:</span> <span class="kt">Row</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> 
-        <span class="c1">// 设置参数 </span>
-        <span class="n">pstmt</span><span class="o">.</span><span class="n">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">row</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">&quot;value&quot;</span><span class="o">))</span> 
-        <span class="n">pstmt</span><span class="o">.</span><span class="n">setLong</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">row</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">Long</span><span class="o">](</span><span class="s">&quot;count&quot;</span><span class="o">))</span> 
-        <span class="c1">// 执行插入 </span>
-        <span class="n">pstmt</span><span class="o">.</span><span class="n">executeUpdate</span><span class="o">()</span>
-    <span class="o">}</span> 
-    <span class="c1">// close the connection </span>
-    <span class="k">override</span> <span class="k">def</span> <span class="n">close</span><span class="o">(</span><span class="n">errorOrNull</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> 
-        <span class="k">if</span><span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">pstmt</span><span class="o">)</span> <span class="n">pstmt</span><span class="o">.</span><span class="n">close</span><span class="o">()</span> 
-        <span class="k">if</span><span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">conn</span><span class="o">)</span> <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="o">()</span> 
-    <span class="o">}</span> 
-<span class="o">}</span>
-</pre></div>
-</div>
+<p>~~~scala
+/** * 创建类继承ForeachWriter，将数据写入到MySQL表中，泛型为：Row，针对DataFrame操作，每条数据类型就是Row <a href="#id1"><span class="problematic" id="id2">*</span></a>/
+class MySQLForeachWriter extends ForeachWriter[Row]{</p>
+<blockquote>
+<div><p>// 定义变量
+var conn: Connection = _ var pstmt: PreparedStatement = _ val insertSQL = “REPLACE INTO <cite>tb_word_count</cite> (<cite>id</cite>, <cite>word</cite>, <cite>count</cite>) VALUES (NULL, ?, ?)”
+// open connection
+override def open(partitionId: Long, version: Long): Boolean = {</p>
+<blockquote>
+<div><p>// a. 加载驱动类
+Class.forName(“com.mysql.cj.jdbc.Driver”)
+// b. 获取连接
+conn = DriverManager.getConnection( “<a class="reference external" href="jdbc:mysql://node1:3306/db_sparkserverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true">jdbc:mysql://node1:3306/db_sparkserverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true</a>”,</p>
+<blockquote>
+<div><p>“root”,
+“123456” )</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<dl>
+<dt>// c. 获取PreparedStatement</dt><dd><blockquote>
+<div><p>pstmt = conn.prepareStatement(insertSQL)
+//println(s”p-${partitionId}: ${conn}”)
+// 返回，表示获取连接成功
+true }</p>
+</div></blockquote>
+<p>// write data to connection
+override def process(row: Row): Unit = {</p>
+<blockquote>
+<div><p>// 设置参数
+pstmt.setString(1, row.getAs[String](“value”))
+pstmt.setLong(2, row.getAs[Long](“count”))
+// 执行插入
+pstmt.executeUpdate()</p>
+</div></blockquote>
+<p>}
+// close the connection
+override def close(errorOrNull: Throwable): Unit = {</p>
+<blockquote>
+<div><p>if(null != pstmt) pstmt.close()
+if(null != conn) conn.close()</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<div class="section" id="id3">
+<h1><span class="section-number">1. </span>}<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h1>
 <p>调用方法:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// 设置Streaming应用输出及启动 </span>
-<span class="k">val</span> <span class="n">query</span><span class="k">:</span> <span class="kt">StreamingQuery</span> <span class="o">=</span> <span class="n">resultStreamDF</span><span class="o">.</span><span class="n">writeStream</span> 
-<span class="c1">// 对流式应用输出来说，设置输出模式，Update表示有数据更新才输出，没数据更新不输出 </span>
-	<span class="o">.</span><span class="n">outputMode</span><span class="o">(</span><span class="nc">OutputMode</span><span class="o">.</span><span class="nc">Update</span><span class="o">())</span> 
-	<span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="k">new</span> <span class="nc">MySQLForeachWriter</span><span class="o">())</span> 
-	<span class="o">.</span><span class="n">start</span><span class="o">()</span> <span class="c1">// 启动start流式应用</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="foreachbatch-sink">
-<h4><span class="section-number">14.5.4.4. </span>ForeachBatch Sink<a class="headerlink" href="#foreachbatch-sink" title="永久链接至标题">¶</a></h4>
+<p>~~~scala
+// 设置Streaming应用输出及启动
+val query: StreamingQuery = resultStreamDF.writeStream
+// 对流式应用输出来说，设置输出模式，Update表示有数据更新才输出，没数据更新不输出</p>
+<blockquote>
+<div><p>.outputMode(OutputMode.Update())
+.foreach(new MySQLForeachWriter())
+.start() // 启动start流式应用</p>
+</div></blockquote>
+<p>~~~</p>
+<p>#### ForeachBatch Sink</p>
 <p>方法foreachBatch允许指定在流式查询的每个微批次的输出数据上执行的函数，需要两个参数：微批次的输出数据DataFrame或Dataset、微批次的唯一ID</p>
 <p>注意:</p>
 <ul>
 <li><p>第一、重用现有的批处理数据源，可以在每个微批次的输出上使用批处理数据输出Output</p></li>
 <li><p>第二、写入多个位置，如果要将流式查询的输出写入多个位置，则可以简单地多次写入输出 DataFrame/Dataset 。但是，每次写入尝试都会导致重新计算输出数据（包括可能重新读取输入数据）。要避免重新计算，您应该缓存cache输出 DataFrame/Dataset，将其写入多个位置，然后 uncache</p>
-<p><img alt="image-20201129203659863" src="../_images/image-20201129203659863.png" /></p>
+<p>![image-20201129203659863](StructuredStreaming.assets/image-20201129203659863.png)</p>
 </li>
 <li><p>第三、应用其他DataFrame操作，流式DataFrame中不支持许多DataFrame和Dataset操作，使用foreachBatch可以在每个微批输出上应用其中一些操作，但是，必须自己解释执行该操作的端到端语义</p></li>
 <li><p>第四、默认情况下，foreachBatch仅提供至少一次写保证。 但是，可以使用提供给该函数的batchId作为重复数据删除输出并获得一次性保证的方法</p></li>
 <li><p>第五、foreachBatch不适用于连续处理模式，因为它从根本上依赖于流式查询的微批量执行。 如果以连续模式写入数据，请改用foreach</p></li>
 </ul>
 <p>举个栗子:使用foreachBatch写入MySQL</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">query</span> <span class="o">=</span> <span class="n">resultStreamDF</span>
-      <span class="o">.</span><span class="n">writeStream</span>
-      <span class="o">.</span><span class="n">outputMode</span><span class="o">(</span><span class="nc">OutputMode</span><span class="o">.</span><span class="nc">Update</span><span class="o">())</span>
-      <span class="o">.</span><span class="n">queryName</span><span class="o">(</span><span class="s">&quot;query-wordcount&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">trigger</span><span class="o">(</span><span class="nc">Trigger</span><span class="o">.</span><span class="nc">ProcessingTime</span><span class="o">(</span><span class="s">&quot;5 seconds&quot;</span><span class="o">))</span>
-
-      <span class="cm">/**</span>
-<span class="cm">       * VITAL: 使用foreach 函数将数据保存到MySQL</span>
-<span class="cm">       */</span>
-      <span class="c1">//def foreachBatch(function: VoidFunction2[Dataset[T], java.lang.Long]): DataStreamWriter[T]</span>
-      <span class="o">.</span><span class="n">foreachBatch</span> <span class="o">{</span> <span class="o">(</span><span class="n">batchDF</span><span class="k">:</span> <span class="kt">DataFrame</span><span class="o">,</span> <span class="n">batchId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span> <span class="o">=&gt;</span>
-        <span class="n">println</span><span class="o">(</span><span class="s">s&quot;BatchID: </span><span class="si">${</span><span class="n">batchId</span><span class="si">}</span><span class="s">&quot;</span><span class="o">)</span>
-        <span class="k">if</span> <span class="o">(!</span><span class="n">batchDF</span><span class="o">.</span><span class="n">isEmpty</span><span class="o">)</span> <span class="o">{</span>
-          <span class="n">batchDF</span>
-            <span class="c1">//降低分区数目</span>
-            <span class="o">.</span><span class="n">coalesce</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">write</span>
-            <span class="o">.</span><span class="n">mode</span><span class="o">(</span><span class="nc">SaveMode</span><span class="o">.</span><span class="nc">Overwrite</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;jdbc&quot;</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;driver&quot;</span><span class="o">,</span> <span class="s">&quot;com.mysql.cj.jdbc.Driver&quot;</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;url&quot;</span><span class="o">,</span> <span class="s">&quot;jdbc:mysql://node1:3306/?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&quot;</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;user&quot;</span><span class="o">,</span> <span class="s">&quot;root&quot;</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="s">&quot;123456&quot;</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;dbtable&quot;</span><span class="o">,</span> <span class="s">&quot;db_spark.tb_word_count2&quot;</span><span class="o">)</span>
-            <span class="o">.</span><span class="n">save</span><span class="o">()</span>
-        <span class="o">}</span>
-      <span class="o">}</span>
-      <span class="c1">// 设置检查点目录</span>
-      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;checkpointLocation&quot;</span><span class="o">,</span> <span class="s">&quot;datas/structured/ckpt-wordcount002&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">start</span><span class="o">()</span> <span class="c1">// 启动流式查询</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="id9">
-<h3><span class="section-number">14.5.5. </span>容错语义<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<p>~~~scala
+val query = resultStreamDF</p>
 <blockquote>
-<div><p>Structured Streaming的核心设计理念和目标之一：支持一次且仅一次Extracly-Once的语义</p>
+<div><p>.writeStream
+.outputMode(OutputMode.Update())
+.queryName(“query-wordcount”)
+.trigger(Trigger.ProcessingTime(“5 seconds”))</p>
+<dl>
+<dt>/**</dt><dd><ul class="simple">
+<li><p>VITAL: 使用foreach 函数将数据保存到MySQL</p></li>
+</ul>
+<p><a href="#id4"><span class="problematic" id="id5">*</span></a>/</p>
+</dd>
+</dl>
+<p>//def foreachBatch(function: VoidFunction2[Dataset[T], java.lang.Long]): DataStreamWriter[T]
+.foreachBatch { (batchDF: DataFrame, batchId: Long) =&gt;</p>
+<blockquote>
+<div><p>println(s”BatchID: ${batchId}”)
+if (!batchDF.isEmpty) {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>batchDF</dt><dd><p>//降低分区数目
+.coalesce(1)
+.write
+.mode(SaveMode.Overwrite)
+.format(“jdbc”)
+.option(“driver”, “com.mysql.cj.jdbc.Driver”)
+.option(“url”, “<a class="reference external" href="jdbc:mysql://node1:3306/?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true">jdbc:mysql://node1:3306/?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true</a>”)
+.option(“user”, “root”)
+.option(“password”, “123456”)
+.option(“dbtable”, “db_spark.tb_word_count2”)
+.save()</p>
+</dd>
+</dl>
 </div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>}
+// 设置检查点目录
+.option(“checkpointLocation”, “datas/structured/ckpt-wordcount002”)
+.start() // 启动流式查询</p>
+</div></blockquote>
+<p>~~~</p>
+<p>### 容错语义</p>
+<p>&gt; Structured Streaming的核心设计理念和目标之一：支持一次且仅一次Extracly-Once的语义</p>
 <p>任意流式系统处理流式数据三个步骤:</p>
 <ul class="simple">
 <li><p>1、Receiving the data：接收数据源端的数据</p></li>
@@ -518,41 +413,35 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>Spark基于checkpoint和wal来持久化保存每个trigger interval内处理的offset的范围</p></li>
 <li><p>ink被设计成可以支持在多次计算处理时保持幂等性，就是说，用同样的一批数据，无论多少次去更新sink，都会保持一致和相同的状态</p></li>
 </ul>
-<p>综合利用<strong>基于offset的source</strong>，<strong>基于checkpoint和wal的execution engine</strong>，以及<strong>基于幂等性的sink</strong>，可以支持完整的一次且仅一次的语义。</p>
-</div>
-</div>
-<div class="section" id="kafka">
-<h2><span class="section-number">14.6. </span>集成Kafka<a class="headerlink" href="#kafka" title="永久链接至标题">¶</a></h2>
-<p><a class="reference external" href="http://spark.apache.org/docs/2.4.5/structured-streaming-kafka-integration.html">StructuredStreaming集成Kafka</a></p>
-<blockquote>
-<div><p>目前仅支持Kafka 0.10.+版本及以上，底层使用Kafka New Consumer API拉取数据，如果Kafka版本为0.8.0版本，<a class="reference external" href="https://github.com/jerryshao/spark-kafka-0-8-sql">StructuredStreaming集成Kafka参考文档</a></p>
-</div></blockquote>
-<div class="section" id="kafka-source">
-<h3><span class="section-number">14.6.1. </span>Kafka  Source<a class="headerlink" href="#kafka-source" title="永久链接至标题">¶</a></h3>
+<p>综合利用**基于offset的source**，<strong>基于checkpoint和wal的execution engine</strong>，以及**基于幂等性的sink**，可以支持完整的一次且仅一次的语义。</p>
+<p>## 集成Kafka</p>
+<p>[StructuredStreaming集成Kafka](<a class="reference external" href="http://spark.apache.org/docs/2.4.5/structured-streaming-kafka-integration.html">http://spark.apache.org/docs/2.4.5/structured-streaming-kafka-integration.html</a>)</p>
+<p>&gt; 目前仅支持Kafka 0.10.+版本及以上，底层使用Kafka New Consumer API拉取数据，如果Kafka版本为0.8.0版本，[StructuredStreaming集成Kafka参考文档](<a class="reference external" href="https://github.com/jerryshao/spark-kafka-0-8-sql">https://github.com/jerryshao/spark-kafka-0-8-sql</a>)</p>
+<p>### Kafka  Source</p>
 <p>Structured Streaming消费Kafka数据，采用的是poll方式拉取数据，与Spark Streaming中New Consumer API集成方式一致。从Kafka Topics中读取消息，需要指定数据源（kafka）、Kafka集群的连接地址（kafka.bootstrap.servers）、消费的topic（subscribe或subscribePattern）， 指定topic 的时候，可以使用正则来指定，也可以指定一个 topic 的集合</p>
 <p>消费kafka Topic数据的三种方式</p>
 <ul class="simple">
 <li><p>消费一个Topic数据</p></li>
 </ul>
-<p><img alt="image-20201129205449544" src="../_images/image-20201129205449544.png" /></p>
+<p>![image-20201129205449544](StructuredStreaming.assets/image-20201129205449544.png)</p>
 <ul class="simple">
 <li><p>消费多个Topic数据</p></li>
 </ul>
-<p><img alt="image-20201129205456216" src="../_images/image-20201129205456216.png" /></p>
+<p>![image-20201129205456216](StructuredStreaming.assets/image-20201129205456216.png)</p>
 <ul class="simple">
 <li><p>消费通配符匹配Topic数据</p></li>
 </ul>
-<p><img alt="image-20201129205501341" src="../_images/image-20201129205501341.png" /></p>
+<p>![image-20201129205501341](StructuredStreaming.assets/image-20201129205501341.png)</p>
 <p>在实际开发时，往往需要获取每条数据的消息，存储在value字段中，<strong>由于是binary类型，需要转换为字符串String类型</strong>；此外了方便数据操作，通常将获取的key和value的DataFrame转换为Dataset强类型:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">inputStreamDF</span><span class="k">:</span> <span class="kt">Dataset</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">kafkaStreamDF</span>
-      <span class="c1">//Selects a set of SQL expressions. This is a variant of `select` that accepts SQL expressions.</span>
-      <span class="o">.</span><span class="n">selectExpr</span><span class="o">(</span><span class="s">&quot;CAST(VALUE AS STRING)&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="sink-kafka">
-<h3><span class="section-number">14.6.2. </span>Sink Kafka<a class="headerlink" href="#sink-kafka" title="永久链接至标题">¶</a></h3>
+<p>~~~scala
+val inputStreamDF: Dataset[String] = kafkaStreamDF</p>
+<blockquote>
+<div><p>//Selects a set of SQL expressions. This is a variant of <cite>select</cite> that accepts SQL expressions.
+.selectExpr(“CAST(VALUE AS STRING)”)
+.as[String]</p>
+</div></blockquote>
+<p>~~~</p>
+<p>### Sink Kafka</p>
 <p>往Kafka里面写数据类似读取数据，可以在DataFrame上调用writeStream来写入Kafka，设置参数指定value，其中key是可选的，如果不指定就是null。如果key为null，有时候可能导致分区数据不均匀。</p>
 <p>DataFrame写入Kafka时Schema需要的字段：</p>
 <ul class="simple">
@@ -560,40 +449,38 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>value(String or binary)</p></li>
 <li><p>topic(String)</p></li>
 </ul>
-</div>
-<div class="section" id="id10">
-<h3><span class="section-number">14.6.3. </span>Kafka配置<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
-<p><a class="reference external" href="http://kafka.apache.org/20/documentation.html#producerconfigs">生产者配置(Producer Configs)</a></p>
-<p><a class="reference external" href="http://kafka.apache.org/20/documentation.html#newconsumerconfigs">消费者配置(Consumer Configs)</a></p>
+<p>### Kafka配置</p>
+<p>[生产者配置(Producer Configs)](<a class="reference external" href="http://kafka.apache.org/20/documentation.html#producerconfigs">http://kafka.apache.org/20/documentation.html#producerconfigs</a>)</p>
+<p>[消费者配置(Consumer Configs)](<a class="reference external" href="http://kafka.apache.org/20/documentation.html#newconsumerconfigs">http://kafka.apache.org/20/documentation.html#newconsumerconfigs</a>)</p>
 <p>注意以下Kafka参数属性可以不设置，如果设置的话，Kafka source或者sink可能会抛出错误：</p>
 <ul>
 <li><p>group.id：Kafka source将会自动为每次查询创建唯一的分组ID；</p></li>
 <li><p>auto.offset.reset：在将source选项startingOffsets设置为指定从哪里开始。结构化流管理内部消费的偏移量，而不是依赖Kafka消费者来完成。这将确保在topic/partitons动态订阅时不会遗漏任何数据。注意，只有在启动新的流式查询时才会应用startingOffsets，并且恢复操作始终会从查询停止的位置启动；</p></li>
 <li><p>key.deserializer/value.deserializer：Keys/Values总是被反序列化为ByteArrayDeserializer的字节数组，使用DataFrame操作显式反序列化keys/values</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// 构建SparkConf对象</span>
-    <span class="k">val</span> <span class="n">sparkConf</span><span class="k">:</span> <span class="kt">SparkConf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">()</span>
-      <span class="o">.</span><span class="n">setAppName</span><span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="n">getSimpleName</span><span class="o">.</span><span class="n">stripSuffix</span><span class="o">(</span><span class="s">&quot;$&quot;</span><span class="o">))</span>
-      <span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;spark.debug.maxToStringFields&quot;</span><span class="o">,</span> <span class="s">&quot;2000&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;spark.sql.debug.maxToStringFields&quot;</span><span class="o">,</span> <span class="s">&quot;2000&quot;</span><span class="o">)</span>
-      <span class="c1">// VITAL: 设置使用Kryo 序列化方式 当不能java序列化的时候，需要设置Kyro序列化</span>
-      <span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;spark.serializer&quot;</span><span class="o">,</span> <span class="s">&quot;org.apache.spark.serializer.KryoSerializer&quot;</span><span class="o">)</span>
-      <span class="c1">// VITAL: 注册序列化的数据类型</span>
-      <span class="o">.</span><span class="n">registerKryoClasses</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">ImmutableBytesWritable</span><span class="o">],</span> <span class="n">classOf</span><span class="o">[</span><span class="kt">Result</span><span class="o">]))</span>
-</pre></div>
-</div>
+<p>~~~scala
+// 构建SparkConf对象</p>
+<blockquote>
+<div><dl class="simple">
+<dt>val sparkConf: SparkConf = new SparkConf()</dt><dd><p>.setAppName(clazz.getSimpleName.stripSuffix(“$”))
+.set(“spark.debug.maxToStringFields”, “2000”)
+.set(“spark.sql.debug.maxToStringFields”, “2000”)
+// VITAL: 设置使用Kryo 序列化方式 当不能java序列化的时候，需要设置Kyro序列化
+.set(“spark.serializer”, “org.apache.spark.serializer.KryoSerializer”)
+// VITAL: 注册序列化的数据类型
+.registerKryoClasses(Array(classOf[ImmutableBytesWritable], classOf[Result]))</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>~~~</p>
 </li>
 <li><p>key.serializer/value.serializer：keys/values总是使用ByteArraySerializer或StringSerializer进行序列化，使用DataFrame操作将keysvalues/显示序列化为字符串或字节数组</p></li>
 <li><p>enable.auto.commit：Kafka source不提交任何offset</p></li>
 <li><p>interceptor.classes：Kafka source总是以字节数组的形式读取key和value。使用ConsumerInterceptor是不安全的，因为它可能会打断查询</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="id11">
-<h2><span class="section-number">14.7. </span>事件时间窗口分析<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
-<blockquote>
-<div><p>在SparkStreaming中窗口统计分析：Window Operation（设置窗口大小WindowInterval和滑动大小SlideInterval），按照Streaming 流式应用接收数据的时间进行窗口设计的，其实是不符合实际应用场景的。</p>
-<p>在结构化流Structured Streaming中窗口数据统计时间是基于数据本身事件时间EventTime字段统计，更加合理性，<a class="reference external" href="http://spark.apache.org/docs/2.4.5/structured-streaming-programming-guide.html#window-operations-on-event-time">官方文档</a></p>
-</div></blockquote>
+<p>## 事件时间窗口分析</p>
+<p>&gt; 在SparkStreaming中窗口统计分析：Window Operation（设置窗口大小WindowInterval和滑动大小SlideInterval），按照Streaming 流式应用接收数据的时间进行窗口设计的，其实是不符合实际应用场景的。
+&gt;
+&gt; 在结构化流Structured Streaming中窗口数据统计时间是基于数据本身事件时间EventTime字段统计，更加合理性，[官方文档](<a class="reference external" href="http://spark.apache.org/docs/2.4.5/structured-streaming-programming-guide.html#window-operations-on-event-time">http://spark.apache.org/docs/2.4.5/structured-streaming-programming-guide.html#window-operations-on-event-time</a>)</p>
 <p>三种时间:</p>
 <ul class="simple">
 <li><p>摄入时间</p></li>
@@ -601,108 +488,84 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>事件时间</p></li>
 </ul>
 <p>parkStreaming框架仅仅支持处理时间ProcessTime，StructuredStreaming支持事件时间和处理时间，Flink框架支持三种时间数据操作</p>
-<div class="section" id="id12">
-<h3><span class="section-number">14.7.1. </span>案例：词频统计<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
-<p><img alt="image-20201129211454864" src="../_images/image-20201129211454864.png" /></p>
+<p>### 案例：词频统计</p>
+<p>![image-20201129211454864](StructuredStreaming.assets/image-20201129211454864.png)</p>
 <p>单词在10分钟窗口【12:00-12:10、12:05-12:15、12:10-12:20】等之间接收的单词中计数。注意，【12:00-12:10】表示处理数据的事件时间为12:00之后但12:10之前的数据。思考一下，12:07的一条数据，应该增加对应于两个窗口12:00-12:10和12:05-12:15的计数</p>
-</div>
-<div class="section" id="id13">
-<h3><span class="section-number">14.7.2. </span>窗口的生成<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">catalyst</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="nc">TimeWindowing</span>
-<span class="c1">// 窗口个数</span>
-<span class="cm">/* 最大的窗口数 = 向上取整(窗口长度/滑动步长) */</span>
-<span class="n">maxNumOverlapping</span> <span class="o">&lt;-</span> <span class="n">ceil</span><span class="o">(</span><span class="n">windowDuration</span> <span class="o">/</span> <span class="n">slideDuration</span><span class="o">)</span>
-<span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">maxNumOverlapping</span><span class="o">)</span>
-        <span class="cm">/**</span>
-<span class="cm">        timestamp是event-time 传进的时间戳</span>
-<span class="cm">        startTime是window窗口参数，默认是0 second 从时间的0s</span>
-<span class="cm">        含义：event-time从1970年...有多少个滑动步长，如果说浮点数会向上取整</span>
-<span class="cm">        */</span>
-    <span class="n">windowId</span> <span class="o">&lt;-</span> <span class="n">ceil</span><span class="o">((</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">)</span> <span class="o">/</span> <span class="n">slideDuration</span><span class="o">)</span>
-        <span class="cm">/**</span>
-<span class="cm">        windowId * slideDuration 向上取能整除滑动步长的时间</span>
-<span class="cm">        (i - maxNumOverlapping) * slideDuration 每一个窗口开始时间相差一个步长</span>
-<span class="cm">        */</span>
-    <span class="n">windowStart</span> <span class="o">&lt;-</span> <span class="n">windowId</span> <span class="o">*</span> <span class="n">slideDuration</span> <span class="o">+</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">maxNumOverlapping</span><span class="o">)</span> <span class="o">*</span> <span class="n">slideDuration</span> <span class="o">+</span> <span class="n">startTime</span>
-    <span class="n">windowEnd</span> <span class="o">&lt;-</span> <span class="n">windowStart</span> <span class="o">+</span> <span class="n">windowDuration</span>
-    <span class="k">return</span> <span class="n">windowStart</span><span class="o">,</span> <span class="n">windowEnd</span>
-</pre></div>
-</div>
+<p>### 窗口的生成</p>
+<p>~~~scala
+org.apache.spark.sql.catalyst.analysis.TimeWindowing
+// 窗口个数
+/* 最大的窗口数 = 向上取整(窗口长度/滑动步长) <a href="#id6"><span class="problematic" id="id7">*</span></a>/
+maxNumOverlapping &lt;- ceil(windowDuration / slideDuration)
+for (i &lt;- 0 until maxNumOverlapping)</p>
+<blockquote>
+<div><blockquote>
+<div><p>/**
+timestamp是event-time 传进的时间戳
+startTime是window窗口参数，默认是0 second 从时间的0s
+含义：event-time从1970年…有多少个滑动步长，如果说浮点数会向上取整
+<a href="#id8"><span class="problematic" id="id9">*</span></a>/</p>
+</div></blockquote>
+<dl class="simple">
+<dt>windowId &lt;- ceil((timestamp - startTime) / slideDuration)</dt><dd><p>/**
+windowId * slideDuration 向上取能整除滑动步长的时间
+(i - maxNumOverlapping) * slideDuration 每一个窗口开始时间相差一个步长
+<a href="#id10"><span class="problematic" id="id11">*</span></a>/</p>
+</dd>
+</dl>
+<p>windowStart &lt;- windowId * slideDuration + (i - maxNumOverlapping) * slideDuration + startTime
+windowEnd &lt;- windowStart + windowDuration
+return windowStart, windowEnd</p>
+</div></blockquote>
+<p>~~~</p>
 <ul>
 <li><p>将【(event-time向上取 能整除 滑动步长的时间) - (最大窗口数×滑动步长)】作为”初始窗口”的开始时间，然后按照窗口滑动宽度逐渐向时间轴前方推进，直到某个窗口不再包含该event-time 为止，最终以”初始窗口”与”结束窗口”之间的若干个窗口作为最终生成的 event-time 的时间窗口</p></li>
 <li><p>每个窗口的起始时间start与结束时间end都是前闭后开（左闭右开）的区间，因此初始窗口和结束窗口都不会包含 event-time，最终不会被使用。假设数据为【2019-08-14 10:50:00, dog】，按照上述规则计算窗口示意图如下：</p>
-<p><img alt="image-20201129211907912" src="../_images/image-20201129211907912.png" />
+<p>![image-20201129211907912](StructuredStreaming.assets/image-20201129211907912.png)
 得到窗口如下:</p>
 </li>
 </ul>
-<p><img alt="image-20201129211930077" src="../_images/image-20201129211930077.png" /></p>
-</div>
-<div class="section" id="id14">
-<h3><span class="section-number">14.7.3. </span>延迟数据<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+<p>![image-20201129211930077](StructuredStreaming.assets/image-20201129211930077.png)</p>
+<p>### 延迟数据</p>
 <p>Structured Streaming可以保证一条旧的数据进入到流上时，依然可以基于这些“迟到”的数据重新计算并更新计算结果</p>
-<p><img alt="image-20201129212230997" src="../_images/image-20201129212230997.png" /></p>
-<blockquote>
-<div><p>上图中在12:04（即事件时间）生成的单词可能在12:11被应用程序接收，此时，应用程序应使用时间12:04而不是12:11更新窗口12:00-12:10的旧计数</p>
-</div></blockquote>
-</div>
-<div class="section" id="watermark">
-<h3><span class="section-number">14.7.4. </span>Watermark<a class="headerlink" href="#watermark" title="永久链接至标题">¶</a></h3>
-<blockquote>
-<div><p>lets the engine automatically track the current event time in the data and attempt to clean up old state accordingly.</p>
-</div></blockquote>
+<p>![image-20201129212230997](StructuredStreaming.assets/image-20201129212230997.png)</p>
+<p>&gt; 上图中在12:04（即事件时间）生成的单词可能在12:11被应用程序接收，此时，应用程序应使用时间12:04而不是12:11更新窗口12:00-12:10的旧计数</p>
+<p>### Watermark</p>
+<p>&gt; lets the engine automatically track the current event time in the data and attempt to clean up old state accordingly.</p>
 <p>Spark 2.1引入的watermarking允许用户指定延迟数据的阈值，也允许引擎清除掉旧的状态。即根据watermark机制来设置和判断消息的有效性，如可以获取消息本身的时间戳，然后根据该时间戳来判断消息的到达是否延迟（乱序）以及延迟的时间是否在容忍的范围内（延迟的数据是否处理）。</p>
-<div class="section" id="id15">
-<h4><span class="section-number">14.7.4.1. </span>设置水位线<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
+<p>#### 设置水位线</p>
 <p>通过指定event-time列（上一批次数据中EventTime最大值）和预估事件的延迟时间上限（Threshold）来定义一个查询的水位线watermark。</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">Watermark</span> <span class="o">=</span> <span class="nc">MaxEventTime</span> <span class="o">-</span> <span class="nc">Threshod</span>
-</pre></div>
-</div>
-<blockquote>
-<div><p>注意:</p>
-<ul class="simple">
-<li><p>执行第一批次数据时，Watermarker为0，所以此批次中所有数据都参与计算</p></li>
-<li><p>Watermarker值只能逐渐增加，不能减少</p></li>
-<li><p>Watermark机制主要解决处理聚合延迟数据和减少内存中维护的聚合状态</p></li>
-<li><p>设置Watermark以后，输出模式OutputMode只能是Append和Update</p></li>
-</ul>
-</div></blockquote>
-<p><img alt="image-20201129212648884" src="../_images/image-20201129212648884.png" /></p>
-</div>
-<div class="section" id="id16">
-<h4><span class="section-number">14.7.4.2. </span>官方案例<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+<p>~~~scala
+Watermark = MaxEventTime - Threshod
+~~~</p>
+<p>&gt; 注意:
+&gt;
+&gt; - 执行第一批次数据时，Watermarker为0，所以此批次中所有数据都参与计算
+&gt; - Watermarker值只能逐渐增加，不能减少
+&gt; - Watermark机制主要解决处理聚合延迟数据和减少内存中维护的聚合状态
+&gt; - 设置Watermark以后，输出模式OutputMode只能是Append和Update</p>
+<p>![image-20201129212648884](StructuredStreaming.assets/image-20201129212648884.png)</p>
+<p>#### 官方案例</p>
 <p>词频统计WordCount，设置阈值Threshold为10分钟，每5分钟触发执行一次</p>
-<p><img alt="image-20201129212716573" src="../_images/image-20201129212716573.png" /></p>
+<p>![image-20201129212716573](StructuredStreaming.assets/image-20201129212716573.png)</p>
 <ul class="simple">
-<li><p>延迟到达但没有超过watermark：(12:08, dog)</p>
-<ul>
-<li><p>在12:20触发执行窗口（12:10-12:20）数据中，(12:08, dog) 数据是延迟数据，阈值Threshold设定为10分钟，此时水位线【Watermark = 12:14 - 10m = 12:04】，因为12:14是上个窗口（12:05-12:15）中接收到的最大的事件时间，代表目标系统最后时刻的状态，由于12:08在12:04之后，因此被视为“虽然迟到但尚且可以接收”的数据而被更新到了结果表中，也就是(12:00 - 12:10, dog, 2)和(12:05 - 12:11, dog, 3)</p></li>
+<li><p>延迟到达但没有超过watermark：(12:08, dog)
+- 在12:20触发执行窗口（12:10-12:20）数据中，(12:08, dog) 数据是延迟数据，阈值Threshold设定为10分钟，此时水位线【Watermark = 12:14 - 10m = 12:04】，因为12:14是上个窗口（12:05-12:15）中接收到的最大的事件时间，代表目标系统最后时刻的状态，由于12:08在12:04之后，因此被视为“虽然迟到但尚且可以接收”的数据而被更新到了结果表中，也就是(12:00 - 12:10, dog, 2)和(12:05 - 12:11, dog, 3)</p></li>
 </ul>
-</li>
-</ul>
-<p><img alt="image-20201129212801568" src="../_images/image-20201129212801568.png" /></p>
+<p>![image-20201129212801568](StructuredStreaming.assets/image-20201129212801568.png)</p>
 <ul class="simple">
-<li><p>超出watermark：(12:04, donkey)</p>
-<ul>
-<li><p>在12:25触发执行窗口（12:15-12:25）数据中，(12:04, donkey)数据是延迟数据，上个窗口中接收到最大的事件时间为12:21，此时水位线【Watermark = 12:21 - 10m = 12:11】，而(12:04, donkey)比这个值还要早，说明它”太旧了”，所以不会被更新到结果表中了</p></li>
+<li><p>超出watermark：(12:04, donkey)
+- 在12:25触发执行窗口（12:15-12:25）数据中，(12:04, donkey)数据是延迟数据，上个窗口中接收到最大的事件时间为12:21，此时水位线【Watermark = 12:21 - 10m = 12:11】，而(12:04, donkey)比这个值还要早，说明它”太旧了”，所以不会被更新到结果表中了</p></li>
 </ul>
-</li>
-</ul>
-<p><img alt="image-20201129212826224" src="../_images/image-20201129212826224.png" /></p>
+<p>![image-20201129212826224](StructuredStreaming.assets/image-20201129212826224.png)</p>
 <p>设置水位线Watermark以后，不同输出模式OutputMode，结果输出不一样：</p>
 <ul class="simple">
 <li><p>Update模式：总是倾向于“尽可能早”的将处理结果更新到sink，当出现迟到数据时，早期的某个计算结果将会被更新</p></li>
 <li><p>Append模式：推迟计算结果的输出到一个相对较晚的时刻，确保结果是稳定的，不会再被更新，比如：12:00 - 12:10窗口的处理结果会等到watermark更新到12：11之后才会写入到sink</p></li>
 </ul>
-<blockquote>
-<div><p>如果用于接收处理结果的sink不支持更新操作，则只能选择Append模式</p>
-</div></blockquote>
-</div>
-</div>
-</div>
-<div class="section" id="streaming-deduplication">
-<h2><span class="section-number">14.8. </span>Streaming Deduplication<a class="headerlink" href="#streaming-deduplication" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id17">
-<h3><span class="section-number">14.8.1. </span>用武之地<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+<p>&gt; 如果用于接收处理结果的sink不支持更新操作，则只能选择Append模式</p>
+<p>## Streaming Deduplication</p>
+<p>#### 用武之地</p>
 <p>在实时流式应用中，最典型的应用场景：网站UV统计</p>
 <ul class="simple">
 <li><p>业务需求一：实时统计网站UV，比如每日网站UV</p></li>
@@ -713,74 +576,71 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>无 Watermark：对重复记录到达的时间没有限制。查询会保留所有的过去记录作为状态用于去重</p></li>
 <li><p>有 Watermark：对重复记录到达的时间有限制。查询会根据水印删除旧的状态数据</p></li>
 </ul>
-</div>
-<div class="section" id="id18">
-<h3><span class="section-number">14.8.2. </span>使用<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
-<p><img alt="image-20201129213338113" src="../_images/image-20201129213338113.png" /></p>
-</div>
-<div class="section" id="id19">
-<h3><span class="section-number">14.8.3. </span>代码示例<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
-<span class="cm"> * StructuredStreaming对流数据按照某些字段进行去重操作，比如实现UV类似统计分析</span>
-<span class="cm"> * TODO:待测试</span>
-<span class="cm"> */</span>
-<span class="k">object</span> <span class="nc">StructuredDeduplication</span> <span class="o">{</span>
-  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="k">val</span> <span class="n">spark</span><span class="k">:</span> <span class="kt">SparkSession</span> <span class="o">=</span> <span class="nc">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">()</span>
-      <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="n">getClass</span><span class="o">.</span><span class="n">getSimpleName</span><span class="o">.</span><span class="n">stripSuffix</span><span class="o">(</span><span class="s">&quot;$&quot;</span><span class="o">))</span>
-      <span class="o">.</span><span class="n">master</span><span class="o">(</span><span class="s">&quot;local[2]&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">config</span><span class="o">(</span><span class="s">&quot;spark.sql.shuffle.partitions&quot;</span><span class="o">,</span> <span class="s">&quot;2&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
-    <span class="k">import</span> <span class="nn">spark.implicits._</span>
-    <span class="k">import</span> <span class="nn">org.apache.spark.sql.functions._</span>
-
-    <span class="k">val</span> <span class="n">inputTable</span><span class="k">:</span> <span class="kt">DataFrame</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span>
-      <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;socket&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;host&quot;</span><span class="o">,</span> <span class="s">&quot;node1&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="mi">9999</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">load</span><span class="o">()</span>
-
-    <span class="k">val</span> <span class="n">resultTableDF</span><span class="k">:</span> <span class="kt">DataFrame</span> <span class="o">=</span> <span class="n">inputTable</span>
-      <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
-      <span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">line</span> <span class="o">=&gt;</span> <span class="n">line</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">line</span><span class="o">.</span><span class="n">trim</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">select</span><span class="o">(</span>
-        <span class="n">get_json_object</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="o">,</span> <span class="s">&quot;$.eventTime&quot;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&quot;eventTime&quot;</span><span class="o">),</span>
-        <span class="n">get_json_object</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="o">,</span> <span class="s">&quot;$.eventType&quot;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&quot;eventType&quot;</span><span class="o">),</span>
-        <span class="n">get_json_object</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="o">,</span> <span class="s">&quot;$.userID&quot;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&quot;userID&quot;</span><span class="o">)</span>
-      <span class="o">)</span>
-      <span class="c1">//按照userID和eventType进行去重</span>
-      <span class="o">.</span><span class="n">dropDuplicates</span><span class="o">(</span><span class="s">&quot;userID&quot;</span><span class="o">,</span> <span class="s">&quot;eventType&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">groupBy</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;userID&quot;</span><span class="o">,</span> <span class="n">$</span><span class="s">&quot;eventType&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">count</span><span class="o">()</span>
-
-
-    <span class="k">val</span> <span class="n">query</span> <span class="o">=</span> <span class="n">resultTableDF</span>
-      <span class="o">.</span><span class="n">writeStream</span>
-      <span class="o">.</span><span class="n">outputMode</span><span class="o">(</span><span class="nc">OutputMode</span><span class="o">.</span><span class="nc">Complete</span><span class="o">())</span>
-      <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;console&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;numRows&quot;</span><span class="o">,</span> <span class="s">&quot;100&quot;</span><span class="o">)</span>
-      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;truncate&quot;</span><span class="o">,</span> <span class="s">&quot;false&quot;</span><span class="o">)</span>
-      <span class="c1">//VITAL:流式应用需要启动</span>
-      <span class="o">.</span><span class="n">start</span><span class="o">()</span>
-
-    <span class="n">query</span><span class="o">.</span><span class="n">awaitTermination</span><span class="o">()</span>
-    <span class="n">query</span><span class="o">.</span><span class="n">stop</span><span class="o">()</span>
-
-  <span class="o">}</span>
-<span class="o">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="id20">
-<h2><span class="section-number">14.9. </span>附录<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id21">
-<h3><span class="section-number">14.9.1. </span>幂等性<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+<p>#### 使用</p>
+<p>![image-20201129213338113](StructuredStreaming.assets/image-20201129213338113.png)</p>
+<p>#### 代码示例</p>
+<p>~~~scala
+/**</p>
 <blockquote>
-<div><p>在HTTP/1.1中对幂等性的定义：一次和多次请求某一个资源对于资源本身应该具有同样的结果（网络超时等问题除外）。也就是说，其任意多次执行对资源本身所产生的影响均与一次执行的影响相同。幂等性是系统服务对外一种承诺（而不是实现），承诺只要调用接口成功，外部多次调用对系统的影响是一致的。声明为幂等的服务会认为外部调用失败是常态，并且失败之后必然会有重试</p>
+<div><ul class="simple">
+<li><p>StructuredStreaming对流数据按照某些字段进行去重操作，比如实现UV类似统计分析</p></li>
+<li><p>TODO:待测试</p></li>
+</ul>
+<p><a href="#id12"><span class="problematic" id="id13">*</span></a>/</p>
 </div></blockquote>
+<dl>
+<dt>object StructuredDeduplication {</dt><dd><dl>
+<dt>def main(args: Array[String]): Unit = {</dt><dd><dl class="simple">
+<dt>val spark: SparkSession = SparkSession.builder()</dt><dd><p>.appName(this.getClass.getSimpleName.stripSuffix(“$”))
+.master(“local[2]”)
+.config(“spark.sql.shuffle.partitions”, “2”)
+.getOrCreate()</p>
+</dd>
+</dl>
+<p>import spark.implicits._
+import org.apache.spark.sql.functions._</p>
+<dl>
+<dt>val inputTable: DataFrame = spark.readStream</dt><dd><p>.format(“socket”)
+.option(“host”, “node1”)
+.option(“port”, 9999)
+.load()</p>
+</dd>
+<dt>val resultTableDF: DataFrame = inputTable</dt><dd><p>.as[String]
+.filter(line =&gt; line != null &amp;&amp; line.trim.length &gt; 0)
+.select(</p>
+<blockquote>
+<div><p>get_json_object($”value”, “$.eventTime”).as(“eventTime”),
+get_json_object($”value”, “$.eventType”).as(“eventType”),
+get_json_object($”value”, “$.userID”).as(“userID”)</p>
+</div></blockquote>
+<p>)
+//按照userID和eventType进行去重
+.dropDuplicates(“userID”, “eventType”)
+.groupBy($”userID”, $”eventType”)
+.count()</p>
+</dd>
+<dt>val query = resultTableDF</dt><dd><p>.writeStream
+.outputMode(OutputMode.Complete())
+.format(“console”)
+.option(“numRows”, “100”)
+.option(“truncate”, “false”)
+//VITAL:流式应用需要启动
+.start()</p>
+</dd>
+</dl>
+<p>query.awaitTermination()
+query.stop()</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
 </div>
-</div>
+<div class="section" id="id14">
+<h1><span class="section-number">2. </span>}<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h1>
+<p>## 附录</p>
+<p>### 幂等性</p>
+<p>&gt; 在HTTP/1.1中对幂等性的定义：一次和多次请求某一个资源对于资源本身应该具有同样的结果（网络超时等问题除外）。也就是说，其任意多次执行对资源本身所产生的影响均与一次执行的影响相同。幂等性是系统服务对外一种承诺（而不是实现），承诺只要调用接口成功，外部多次调用对系统的影响是一致的。声明为幂等的服务会认为外部调用失败是常态，并且失败之后必然会有重试</p>
 </div>
 
 
@@ -791,10 +651,10 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="15. Zookeeper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="SparkStreaming.html" class="btn btn-neutral float-left" title="13. Spark Streaming" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="SparkStreaming.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -804,7 +664,7 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
   <div role="contentinfo">
     <p>
         
-        &copy; 版权所有 2020, roohom
+        &copy; 版权所有 2020-2020, roohom
 
     </p>
   </div>

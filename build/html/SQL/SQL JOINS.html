@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>4. SQL JOINS &mdash; Code-Cookbook 0.1 文档</title>
+  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,7 +37,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="prev" title="3. MySQL语句执行顺序" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,17 +96,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
 <p class="caption"><span class="caption-text">SQL相关</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">SQL</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="JDBC.html">1. JDBC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">2. MySQL 50题记录</a></li>
-<li class="toctree-l2"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">3. MySQL语句执行顺序</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">4. SQL JOINS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#join">4.1. 几个测试说明各种join的区别:</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">SQL</a></li>
 </ul>
 
             
@@ -155,7 +146,7 @@
         
           <li><a href="index.html">SQL</a> &raquo;</li>
         
-      <li><span class="section-number">4. </span>SQL JOINS</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -174,75 +165,85 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="sql-joins">
-<h1><span class="section-number">4. </span>SQL JOINS<a class="headerlink" href="#sql-joins" title="永久链接至标题">¶</a></h1>
+  <p># SQL JOINS</p>
 <ul class="simple">
 <li><p><strong>INNER JOIN</strong> (JOIN)：如果表中有至少一个匹配，则返回行</p></li>
-<li><p><strong>LEFT JOIN</strong>(LEFT OUTER JOIN)：即使右表中没有匹配，也从左表返回所有的行</p></li>
-<li><p><strong>RIGHT JOIN</strong>(RIGHT OUTER JOIN)：即使左表中没有匹配，也从右表返回所有的行</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">**</span></a>LEFT JOIN**(LEFT OUTER JOIN)：即使右表中没有匹配，也从左表返回所有的行</p></li>
+<li><p><a href="#id3"><span class="problematic" id="id4">**</span></a>RIGHT JOIN**(RIGHT OUTER JOIN)：即使左表中没有匹配，也从右表返回所有的行</p></li>
 </ul>
-<p><img alt="sqljoin" src="../_images/sql-joins.png" /></p>
-<div class="section" id="join">
-<h2><span class="section-number">4.1. </span>几个测试说明各种join的区别:<a class="headerlink" href="#join" title="永久链接至标题">¶</a></h2>
+<p>![sqljoin](././sql-joins.png)</p>
+<p>## 几个测试说明各种join的区别:</p>
 <p>测试条件，先建两张表，第一张为course，即学科表，第二张score，即成绩表</p>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">course</span> <span class="p">(</span>
-    <span class="n">cid</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="no">null</span> <span class="k">auto_increment</span><span class="p">,</span>
-    <span class="k">name</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="k">insert</span> <span class="k">into</span> <span class="n">course</span> <span class="k">values</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;语文&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">course</span> <span class="k">values</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;数学&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">course</span> <span class="k">values</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;英语&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">course</span> <span class="k">values</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;电竞&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">create</span> <span class="k">table</span> <span class="k">if</span> <span class="k">not</span> <span class="k">exists</span> <span class="n">score</span> <span class="p">(</span>
-    <span class="n">sid</span> <span class="kt">int</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">primary</span> <span class="k">key</span> <span class="k">not</span> <span class="no">null</span>  <span class="k">auto_increment</span><span class="p">,</span>
-    <span class="n">sname</span> <span class="kt">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-<span class="p">);</span>
-
-<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
-<span class="k">values</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;79&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
-<span class="k">values</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;64&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span> <span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
-<span class="k">values</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;99&#39;</span><span class="p">);</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">score</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">sname</span><span class="p">)</span>
-<span class="k">values</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;59&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p><img alt="avatar" src="../_images/course.png" /></p>
-<p><img alt="avatar" src="../_images/score.png" /></p>
-<p><strong>左连接</strong>，即连接以左表为主，查询出以符合指定连接条件的左表全部内容，并且以指定条件关联右表内容。测试左连接<code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">JOIN</span></code>:</p>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span>
-<span class="k">from</span> <span class="n">course</span> <span class="n">c</span>
-         <span class="k">left</span> <span class="k">join</span> <span class="n">score</span> <span class="n">s</span>
-                   <span class="k">on</span> <span class="n">c</span><span class="p">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">sid</span><span class="p">;</span>
-</pre></div>
-</div>
+<p>~~~MySQL
+create table if not exists course (</p>
+<blockquote>
+<div><p>cid int(5) primary key not null auto_increment,
+name varchar(50)</p>
+</div></blockquote>
+<p>);</p>
+<p>insert into course values (1,’语文’);
+insert into course values (2,’数学’);
+insert into course values (3,’英语’);
+insert into course values (4,’电竞’);
+~~~</p>
+<p>~~~MySQL
+create table if not exists score (</p>
+<blockquote>
+<div><p>sid int(5) primary key not null  auto_increment,
+sname varchar(50)</p>
+</div></blockquote>
+<p>);</p>
+<p>insert into score (sid, sname)
+values (2,’79’);
+insert into score (sid, sname)
+values (3,’64’);
+insert into score (sid, sname)
+values (4,’99’);
+insert into score(sid, sname)
+values (5, ‘59’);
+~~~</p>
+<p>![avatar](./course.png)</p>
+<p>![avatar](././score.png)</p>
+<p><strong>左连接</strong>，即连接以左表为主，查询出以符合指定连接条件的左表全部内容，并且以指定条件关联右表内容。测试左连接`LEFT JOIN`:</p>
+<p>~~~MySQL
+select *
+from course c</p>
+<blockquote>
+<div><dl class="simple">
+<dt>left join score s</dt><dd><p>on c.cid = s.sid;</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>~~~</p>
 <p>测试结果：</p>
-<p><img alt="avatar" src="../_images/left-join.png" /></p>
-<p><strong>右连接</strong>，即以右表为主，查询出以符合指定连接条件的右表全部内容，并且以指定条件关联左表内容。测试右连接<code class="docutils literal notranslate"><span class="pre">RIGHT</span> <span class="pre">JOIN</span></code>:</p>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span>
-<span class="k">from</span> <span class="n">course</span> <span class="n">c</span>
-         <span class="k">right</span> <span class="k">join</span> <span class="n">score</span> <span class="n">s</span>
-                    <span class="k">on</span> <span class="n">c</span><span class="p">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">sid</span><span class="p">;</span>
-</pre></div>
-</div>
+<p>![avatar](./left-join.png)</p>
+<p><strong>右连接</strong>，即以右表为主，查询出以符合指定连接条件的右表全部内容，并且以指定条件关联左表内容。测试右连接`RIGHT JOIN`:</p>
+<p>~~~MySQL
+select *
+from course c</p>
+<blockquote>
+<div><dl class="simple">
+<dt>right join score s</dt><dd><p>on c.cid = s.sid;</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>~~~</p>
 <p>测试结果：</p>
-<p><img alt="avatar" src="../_images/right-join.png" /></p>
-<p><strong>内连接</strong>(即join)，以指定条件连接两表，查询出两张表的交集，测试内连接<code class="docutils literal notranslate"><span class="pre">INNER</span> <span class="pre">JOIN</span></code>：</p>
-<div class="highlight-MySQL notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span>
-<span class="k">from</span> <span class="n">course</span> <span class="n">c</span>
-         <span class="k">inner</span> <span class="k">join</span> <span class="n">score</span> <span class="n">s</span>
-                    <span class="k">on</span> <span class="n">c</span><span class="p">.</span><span class="n">cid</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">sid</span><span class="p">;</span>
-</pre></div>
-</div>
+<p>![avatar](./right-join.png)</p>
+<p><a href="#id5"><span class="problematic" id="id6">**</span></a>内连接**(即join)，以指定条件连接两表，查询出两张表的交集，测试内连接`INNER JOIN`：</p>
+<p>~~~MySQL
+select *
+from course c</p>
+<blockquote>
+<div><dl class="simple">
+<dt>inner join score s</dt><dd><p>on c.cid = s.sid;</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>~~~</p>
 <p>测试结果：</p>
-<p><img alt="avatar" src="../_images/join.png" /></p>
+<p>![avatar](./join.png)</p>
 <p>至此，区分显而易见。</p>
-</div>
-</div>
 
 
            </div>
@@ -253,7 +254,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html" class="btn btn-neutral float-left" title="3. MySQL语句执行顺序" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -263,7 +264,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; 版权所有 2020, roohom
+        &copy; 版权所有 2020-2020, roohom
 
     </p>
   </div>

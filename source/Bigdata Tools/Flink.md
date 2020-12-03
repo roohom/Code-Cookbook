@@ -365,6 +365,72 @@ flink run -m yarn-cluster -ytm 1024 -yjm 1024 -ys 1 ../examples/batch/WordCount.
 
 
 
+## 总体架构
+
+> 本部分援引自网络，如有侵权请[联系我](roohom@qq.com)删除
+
+### 核心组件
+
+按照上面的介绍，Flink 核心架构的第二层是 Runtime 层， 该层采用标准的 Master - Slave 结构， 其中，Master 部分又包含了三个核心组件：Dispatcher、ResourceManager 和 JobManager，而 Slave 则主要是 TaskManager 进程。它们的功能分别如下：
+
+- **JobManagers** (也称为 *masters*) ：JobManagers 接收由 Dispatcher 传递过来的执行程序，该执行程序包含了作业图 (JobGraph)，逻辑数据流图 (logical dataflow graph) 及其所有的 classes 文件以及第三方类库 (libraries) 等等 。紧接着 JobManagers 会将 JobGraph 转换为执行图 (ExecutionGraph)，然后向 ResourceManager 申请资源来执行该任务，一旦申请到资源，就将执行图分发给对应的 TaskManagers 。因此每个作业 (Job) 至少有一个 JobManager；高可用部署下可以有多个 JobManagers，其中一个作为 *leader*，其余的则处于 *standby* 状态。
+- **TaskManagers** (也称为 *workers*) : TaskManagers 负责实际的子任务 (subtasks) 的执行，每个 TaskManagers 都拥有一定数量的 slots。Slot 是一组固定大小的资源的合集 (如计算能力，存储空间)。TaskManagers 启动后，会将其所拥有的 slots 注册到 ResourceManager 上，由 ResourceManager 进行统一管理。
+- **Dispatcher**：负责接收客户端提交的执行程序，并传递给 JobManager 。除此之外，它还提供了一个 WEB UI 界面，用于监控作业的执行情况。
+- **ResourceManager** ：负责管理 slots 并协调集群资源。ResourceManager 接收来自 JobManager 的资源请求，并将存在空闲 slots 的 TaskManagers 分配给 JobManager 执行任务。Flink 基于不同的部署平台，如 YARN , Mesos，K8s 等提供了不同的资源管理器，当 TaskManagers 没有足够的 slots 来执行任务时，它会向第三方平台发起会话来请求额外的资源。
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-application-submission.png"/> </div>
+
+
+### Task & SubTask
+
+上面我们提到：TaskManagers 实际执行的是 SubTask，而不是 Task，这里解释一下两者的区别：
+
+在执行分布式计算时，Flink 将可以链接的操作 (operators) 链接到一起(Operator Chains)，这就是 Task。之所以这样做， 是为了减少线程间切换和缓冲而导致的开销，在降低延迟的同时可以提高整体的吞吐量。 但不是所有的 operator 都可以被链接，如下 keyBy 等操作会导致网络 shuffle 和重分区，因此其就不能被链接，只能被单独作为一个 Task。  简单来说，**一个 Task 就是一个可以链接的最小的操作链 (Operator Chains)** 。如下图，source 和 map 算子被链接到一块，因此整个作业就只有三个 Task：
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-task-subtask.png"/> </div>
+
+
+解释完 Task ，我们在解释一下什么是 SubTask，其准确的翻译是： *A subtask is one parallel slice of a task*，即**一个 Task 可以按照其并行度拆分为多个 SubTask**。如上图，source & map 具有两个并行度，KeyBy 具有两个并行度，Sink 具有一个并行度，因此整个虽然只有 3 个 Task，但是却有 5 个 SubTask。Jobmanager 负责定义和拆分这些 SubTask，并将其交给 Taskmanagers 来执行，每个 SubTask 都是一个单独的线程。
+
+### 资源管理
+
+理解了 SubTasks ，我们再来看看其与 Slots 的对应情况。一种可能的分配情况如下：
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-tasks-slots.png"/> </div>
+
+
+
+
+这时每个 SubTask 线程运行在一个独立的 TaskSlot， 它们共享所属的 TaskManager 进程的TCP 连接（通过多路复用技术）和心跳信息 (heartbeat messages)，从而可以降低整体的性能开销。此时看似是最好的情况，但是每个操作需要的资源都是不尽相同的，这里假设该作业 keyBy 操作所需资源的数量比 Sink 多很多 ，那么此时 Sink 所在 Slot 的资源就没有得到有效的利用。
+
+基于这个原因，<u>Flink 允许多个 subtasks 共享 slots，即使它们是不同 tasks 的 subtasks，但只要它们来自同一个 Job 就可以</u>。假设上面 souce & map 和 keyBy 的并行度调整为 6，而 Slot 的数量不变，此时情况如下：
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-subtask-slots.png"/> </div>
+
+
+
+
+可以看到一个 Task Slot 中运行了多个 SubTask 子任务，此时每个子任务仍然在一个独立的线程中执行，只不过共享一组 Slot 资源而已。那么 <u>Flink 到底如何确定一个 Job 至少需要多少个 Slot 呢？</u>Flink 对于这个问题的处理很简单，**默认情况一个 Job 所需要的 Slot 的数量就等于其 Operation 操作的最高并行度**。如下， A，B，D 操作的并行度为 4，而 C，E 操作的并行度为 2，那么此时整个 Job 就需要至少四个 Slots 来完成。通过这个机制，Flink 就可以不必去关心一个 Job 到底会被拆分为多少个 Tasks 和 SubTasks。
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-task-parallelism.png"/> </div>
+
+
+
+
+
+
+### 组件通讯
+
+Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多种角色的 actor 的容器，它提供调度，配置，日志记录等多种服务，并包含一个可以启动所有 actor 的线程池，如果 actor 是本地的，则消息通过共享内存进行共享，但如果 actor 是远程的，则通过 RPC 的调用来传递消息。
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-process.png"/> </div>
+
+
+
+
+
+
+
 ## State
 
 ### Managed State & Raw State
@@ -463,13 +529,126 @@ flink run -m yarn-cluster -ytm 1024 -yjm 1024 -ys 1 ../examples/batch/WordCount.
 
   
 
-## TODO: End To End Exactly-Once
+## End To End Exactly-Once
+
+> 整合Kafka
+
+**Exactly Once是指所有的记录仅影响内部状态一次**
+
+而
+
+**End to End Exactly Once是指所有的记录仅影响<u>内部和外部</u>状态一次**
 
 
 
+### 版本说明
+
+- Flink 1.4版本之前，支持Exactly Once语义，仅限于应用内部。
+
+- Flink 1.4版本之后，通过两阶段提交(TwoPhaseCommitSinkFunction)支持End-To-End Exactly Once，而且要求Kafka 0.11+。
+
+- 利用TwoPhaseCommitSinkFunction是通用的管理方案，只要实现对应的接口，而且Sink的存储支持变乱提交，即可实现端到端的一次性语义。
+
+> 在 Flink 中的Two-Phase-Commit-2PC两阶段提交的实现方法被封装到了 TwoPhaseCommitSinkFunction 这个抽象类中，只需要实现其中的beginTransaction、preCommit、commit、abort 四个方法就可以实现“精确一次”的处理语义，如FlinkKafkaProducer就实现了该类并实现了这些方法
+
+### 具体流程
+
+#### 开始
+
+![start](Flink.assets/start.png)
+
+数据源是Kafka，内部是窗口聚合，数据经过处理之后外部输出写入Kafka
+
+#### 预提交 内部状态
+
+##### Checkpointing
+
+Checkpoint开始的时候，即进入“预提交阶段”，Flink的JobManager会将Barrier注入数据流，barrier在Operator之间进行传递，所到之处的Operator将状态快照写入State Backend
+
+![preCommitCheckpointStart](Flink.assets/preCommitCheckpointStart.png)
+
+数据源保存了消费Kafka的偏移量(offset)，之后将checkpoint barrier传递给下一个operator。
+
+这种方式仅适用于operator具有<u>内部</u>状态。所谓内部状态，是指Flink state backend保存和管理的 。例如，第二个operator中window聚合算出来的sum值。当一个进程有它的内部状态的时候，<u>除了在checkpoint之前需要将数据变更写入到state backend，不需要在预提交阶段执行任何其他操作</u>。Flink负责在checkpoint成功的情况下正确提交这些写入，或者在出现故障时中止这些写入
+
+![preCommitInternalState](Flink.assets/preCommitInternalState.png)
 
 
 
+##### 预提交外部状态
+
+> 外部数据源也必须具有事务机制，才能保证两阶段提交协议的集成，而Kakfa满足这一点，在该示例中的数据需要写入Kafka，因此数据输出端（Data Sink）有外部状态。在这种情况下，在预提交阶段，除了将其状态写入state backend之外，数据输出端还必须预先提交其外部事务。
+
+![preCommitExternalState](Flink.assets/preCommitExternalState.png)
+
+当Checkpoint Barrier在所有的Operator之间传递完成之后，并且所有的Operator快照都已制作完成时，预提交阶段即完成，所有的状态快照都属于Checkpoint的一部分，Checkpoint是整个应用程序状态的快照，包含预先提交的外部状态，当程序发生故障或者突然宕机时，Flink可以将所有状态依据最近的一个成功的Checkpoint恢复到上次快照的时间点
+
+##### 提交阶段
+
+![Commit](Flink.assets/Commit.png)
+
+进入提交阶段，Job Manager通知所有的Operator Checkpoint已经制作完成了，这些Operator只要负责等待就行，不必进行其他的操作，Data Sink端开始进行外部事务的提交
+
+##### 总结
+
+1.一旦所有operator完成预提交，就提交一个commit。
+
+2.如果只要有一个预提交失败，则所有其他提交都将中止，我们将回滚到上一个成功完成的checkpoint。
+
+3.在预提交成功之后，提交的commit需要保证最终成功 – operator和外部系统都需要保障这点。如果commit失败（例如，由于间歇性网络问题），整个Flink应用程序将失败，应用程序将根据用户的重启策略重新启动，还会尝试再提交。这个过程至关重要，因为如果commit最终没有成功，将会导致数据丢失。
+
+4.完整的实现两阶段提交协议可能有点复杂，这就是为什么Flink将它的通用逻辑提取到抽象类TwoPhaseCommitSinkFunction中的原因。
+
+
+
+## 并行度
+
+> 一个Flink程序由多个Operator来执行，一个Operator又由多个Task（线程）来执行， 一个Operator的并行Task(线程)数目就被称为该Operator(任务)的并行度(Parallelism)
+
+### 并行度的设置方式
+
+- Operator Level（算子级别）
+
+  - 一个算子、数据源和sink的并行度可以通过调用 setParallelism()方法来指定
+
+- Execution Environment Level（Env级别）
+
+  - 执行环境(任务)的默认并行度可以通过调用setParallelism()方法指定。为了以并行度3来执行所有的算子、数据源和data sink，可以通过设置执行环境全部并行度的方式设置并行度
+
+    ~~~java
+    StreamExecutionEnviroment env = StreamExecutionEnviroment.getExecutionEnviroment();
+    env.setParallelism(3);
+    ~~~
+
+- Client Level(客户端级别,推荐使用)
+
+  - 在客户端程序提交到Flink时在命令行或者参数设置
+
+  - 对于Cli客户端可以是用参数`-p`来设置并行度
+
+    ~~~shell
+    ./bin/flink run -p 10 WordCount-java.jar
+    ~~~
+
+- System Level（系统默认级别,尽量不使用）
+
+  - 在系统级可以通过设置flink-conf.yaml文件中的parallelism.default属性来指定所有执行环境的默认并行度
+
+### 设置并行度的级别
+
+算子级别 > env级别 > Client级别 > 系统默认级别
+
+> 越靠前具体的代码并行度的优先级越高
+
+> 注意：
+>
+> 1.并行度的优先级：算子级别 > env级别 > Client级别 > 系统默认级别 (越靠前具体的代码并行度的优先级越高)
+>
+> 2.如果source不可以被并行执行，即使指定了并行度为多个，也不会生效
+>
+> 3.在实际生产中，我们推荐在算子级别显示指定各自的并行度，方便进行显示和精确的资源控制。
+>
+> 4.slot是静态的概念，是指taskmanager具有的并发执行能力; parallelism是动态的概念，是指程序运行时实际使用的并发能力
 
 
 

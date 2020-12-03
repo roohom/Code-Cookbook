@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>6. 数据倾斜 &mdash; Code-Cookbook 0.1 文档</title>
+  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="Bigdata Tools" href="../Bigdata%20Tools/index.html" />
-    <link rel="prev" title="4. 数据仓库" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,16 +84,8 @@
             
             
               <p class="caption"><span class="caption-text">大数据</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0%E7%8E%AF%E5%A2%83%E4%B8%8E%E6%95%B0%E4%BB%93.html">1. 大数据平台环境与数仓</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html">2. SCD</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%8B%89%E9%93%BE%E8%A1%A8.html#id2">3. 拉链表</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html">4. 数据仓库</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html#hive">5. Hive</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">6. 数据倾斜</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Bigdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
 </ul>
 <p class="caption"><span class="caption-text">博客</span></p>
@@ -155,7 +147,7 @@
         
           <li><a href="index.html">Bigdata</a> &raquo;</li>
         
-      <li><span class="section-number">6. </span>数据倾斜</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -174,25 +166,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="id1">
-<h1><span class="section-number">6. </span>数据倾斜<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<blockquote>
-<div><p>数据分配不均衡</p>
-</div></blockquote>
+  <p># 数据倾斜</p>
+<p>&gt; 数据分配不均衡</p>
 <ul>
 <li><p>根本原因：</p>
-<ul class="simple">
+<ul>
 <li><p>一：数据本身就是倾斜的，某种数据过多(无法干预)</p></li>
-<li><p>二：分配规则：</p>
-<ul>
-<li><p>MapReduce/Hive：默认分区的规则Key哈希取余之后得到Reduce个数</p></li>
-<li><p>情况：</p>
-<ul>
+<li><p>二：分配规则：
+- MapReduce/Hive：默认分区的规则Key哈希取余之后得到Reduce个数
+- 情况：</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>两个reduce，所有的哈希取余都为0</p></li>
 <li><p>一个reduce处理完所有数据</p></li>
 </ul>
-</li>
-</ul>
+</div></blockquote>
 </li>
 </ul>
 </li>
@@ -201,23 +189,17 @@
 <li><p>MapReduce：设计java代码</p>
 <ul class="simple">
 <li><p>方案一：给key添加随机数</p></li>
-<li><p>方案二：通过MapReduce的分区规则，随机分区</p>
-<ul>
-<li><p>再使用一个MapReduce来处理上一步的结果，做最终的聚合</p></li>
-</ul>
-</li>
+<li><p>方案二：通过MapReduce的分区规则，随机分区
+- 再使用一个MapReduce来处理上一步的结果，做最终的聚合</p></li>
 <li><p>方案三：开启MapReduce中的Combiner</p></li>
 </ul>
 </li>
 <li><p>Hive/SQL：</p>
-<blockquote>
-<div><p>SQL调优的本质就是把不需要参加join的数据过滤掉</p>
-</div></blockquote>
+<p>&gt; SQL调优的本质就是把不需要参加join的数据过滤掉</p>
 </li>
 </ul>
 </li>
 </ul>
-</div>
 
 
            </div>
@@ -230,7 +212,7 @@
         <a href="../Bigdata%20Tools/index.html" class="btn btn-neutral float-right" title="Bigdata Tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html" class="btn btn-neutral float-left" title="4. 数据仓库" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E4%B8%8EHive.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -240,7 +222,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; 版权所有 2020, roohom
+        &copy; 版权所有 2020-2020, roohom
 
     </p>
   </div>

@@ -239,7 +239,12 @@
     - Kafka的元数据：所有kafka节点信息、Topic的信息、分区的信息
   - Kafka也是分布式主从架构
     - Kafka所有节点的进程都叫Kafka，任何一个Kafka节点都可以接受请求
-    - 主：Kafka Controler：管理
+    - 主：Kafka Controler：管理（**如何管理？**）
+      - 早期版本对于分区和副本的管理依靠zookeeper的watcher和队列
+      - 新版本只有[Kafka Controller](https://www.cnblogs.com/huxi2b/p/6980045.html)
+        - 副本leader故障，帮助选举出新的副本leader
+        - ISR列表变化，通知集群所有broker更新其元数据
+        - 集群增加某个分区时，管理分区的重新分配
     - 从：Broker
 
 ## 自定义分区规则
@@ -447,8 +452,39 @@ public class UserPartition implements Partitioner {
     - 重点是：**顺序写**
     - 顺序写磁盘的速度大于随机写内存的速度
     - 避免大量的物理寻址
+    
   - Page Cache：页缓存
+  
   - Zero Copy：零拷贝
+  
+    - **传统IO流程是怎么样的？**
+      - 比如读取文件再使用socket发送出去一共要经过4次拷贝
+      - 流程：
+        - 1、第一次：将磁盘文件，读取到操作系统内核缓冲区；
+        - 2、第二次：将内核缓冲区的数据，copy到application应用程序的buffer；
+        - 3、第三步：将application应用程序buffer中的数据，copy到socket网络发送缓冲区(属于操作系统内核的缓冲区)
+        - 4、第四次：将socket buffer的数据，copy到网卡，由网卡进行网络传输
+  
+    ![traditionalCopy](Kafka.assets/traditionalCopy-1606737417398.svg)
+  
+    - **<u>Kafka的零拷贝是怎么样的？</u>**
+      - 上图中第二第三次的拷贝显得尤为繁琐，不需要
+      - 磁盘数据通过 DMA 拷贝到内核态 Buffer 后，直接通过 DMA 拷贝到 NIC Buffer(socket buffer)，无需 CPU 拷贝。这也是零拷贝这一说法的来源。除了减少数据拷贝外，因为整个读文件 - 网络发送由一个 sendfile 调用完成，整个过程只有两次上下文切换，因此大大提高了性能
+      - Customer从broker读取数据，采用sendfile，将磁盘文件读到OS内核缓冲区后，直接转到socket buffer进行网络发送
+  
+    ![traditionalCopy](Kafka.assets/traditionalCopy-1606737824163.svg)
+  
+    > 总的来说Kafka快的原因：
+    > 1、partition顺序读写，充分利用磁盘特性，这是基础；
+    > 2、Producer生产的数据持久化到broker，采用mmap文件映射，实现顺序的快速写入；
+    > 3、Customer从broker读取数据，采用sendfile，将磁盘文件读到OS内核缓冲区后，直接转到socket buffer进行网络发送。
+    >
+    > mmap 和 sendfile总结
+    >
+    > 1、都是Linux内核提供、实现零拷贝的API；
+    > 2、sendfile 是将读到内核空间的数据，转到socket buffer，进行网络发送；
+    > 3、mmap将磁盘文件映射到内存，支持读和写，对内存的操作会反映在磁盘文件上。
+  
 
 
 
@@ -511,7 +547,7 @@ public class UserPartition implements Partitioner {
 
 - 生产：生产=> Kafka
 
-- ack确认机制：生产者给Kafka发送数据
+- **ack确认机制**：生产者给Kafka发送数据
 
   - 0：不管Kafka有没有收到，不断发送下一条
 
@@ -729,6 +765,7 @@ public class UserPartition implements Partitioner {
  
 
 
+
      此时你若想真正删除它，可以如下操作：
     
      （1）登录zookeeper客户端：命令：./bin/zookeeper-client
@@ -738,6 +775,7 @@ public class UserPartition implements Partitioner {
      （3）找到要删除的topic，执行命令：rmr /brokers/topics/【topic name】即可，此时topic被彻底删除。
 
  
+
 
 
     另外被标记为marked for deletion的topic你可以在zookeeper客户端中通过命令获得：ls /admin/delete_topics/【topic name】，

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>16. 常用软件梳理 &mdash; Code-Cookbook 0.1 文档</title>
+  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -38,7 +38,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="Blogs" href="../Blogs/index.html" />
-    <link rel="prev" title="15. Zookeeper" href="Zookeeper.html" /> 
+    <link rel="prev" title="&lt;no title&gt;" href="ZookeeperAndHadoop.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,37 +84,9 @@
             
             
               <p class="caption"><span class="caption-text">大数据</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">3. Bigdata Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">4. Flink基础配置与基础原理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">5. Hadoop搭建总体步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html">6. Hbase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kafka.html">7. Kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kylin.html">8. Kylin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Spark.html">10. Spark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkCore.html">11. Spark Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkSQL.html">12. Spark SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkStreaming.html">13. Spark Streaming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="StructuredStreaming.html">14. Structured Streaming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">15. Zookeeper</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">16. 常用软件梳理</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">16.1. 软件及开放的端口</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#zookeeper">16.2. Zookeeper基本使用</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hadoop">16.3. Hadoop基本使用</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#hive">16.4. Hive的基本使用</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#beeline">16.4.1. beeline</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#hbase">16.5. HBASE基本使用</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Bigdata Tools</a></li>
 </ul>
 <p class="caption"><span class="caption-text">博客</span></p>
 <ul>
@@ -175,7 +147,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">16. </span>常用软件梳理</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -194,207 +166,178 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="id1">
-<h1><span class="section-number">16. </span>常用软件梳理<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<div class="section" id="id2">
-<h2><span class="section-number">16.1. </span>软件及开放的端口<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<ul class="simple">
-<li><p>Zookeeper：</p>
+  <p># 常用软件梳理</p>
+<p>## 软件及开放的端口</p>
 <ul>
-<li><p>2181：服务端端口</p></li>
-</ul>
-</li>
-<li><p>Hadoop：</p>
-<ul>
-<li><p>HDFS：NameNodde</p>
-<ul>
+<li><p>Zookeeper：
+- 2181：服务端端口</p></li>
+<li><p>Hadoop：
+- HDFS：NameNodde</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>8020：RPC协议端口</p></li>
 <li><p>50070：Web-Http端口</p></li>
 </ul>
-</li>
-<li><p>YARN：ResourceManager</p>
-<ul>
-<li><p>8032：RPC协议端口</p></li>
-<li><p>8088：Web-Http端口</p></li>
+</div></blockquote>
+<ul class="simple">
+<li><p>YARN：ResourceManager
+- 8032：RPC协议端口
+- 8088：Web-Http端口</p></li>
+<li><p>MapReduce：JobHistoryServer
+- 10020：RPC协议端口
+- 19888：Web-Http端口</p></li>
 </ul>
 </li>
-<li><p>MapReduce：JobHistoryServer</p>
-<ul>
-<li><p>10020：RPC协议端口</p></li>
-<li><p>19888：Web-Http端口</p></li>
+<li><p>Hive：
+- 9083：MetaStore
+- 10000：HiveServer2</p></li>
+<li><p>Hue：
+- 8888：Hue Web</p></li>
+<li><p>HBASE：
+- 16010端口：web端口
+- CDH版本：60010</p></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>Hive：</p>
-<ul>
-<li><p>9083：MetaStore</p></li>
-<li><p>10000：HiveServer2</p></li>
-</ul>
-</li>
-<li><p>Hue：</p>
-<ul>
-<li><p>8888：Hue Web</p></li>
-</ul>
-</li>
-<li><p>HBASE：</p>
-<ul>
-<li><p>16010端口：web端口</p></li>
-<li><p>CDH版本：60010</p></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="zookeeper">
-<h2><span class="section-number">16.2. </span>Zookeeper基本使用<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h2>
+<p>## Zookeeper基本使用</p>
 <ul>
 <li><p>启动服务端</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/servers/zookeeper-3.4.6/
+<p>~~~shell
+cd /export/servers/zookeeper-3.4.6/
 bin/zkServer.sh start
-</pre></div>
-</div>
+~~~</p>
 </li>
 <li><p>查看状态</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/zkServer.sh status
-</pre></div>
-</div>
+<p>~~~shell
+bin/zkServer.sh status
+~~~</p>
 </li>
 <li><p>关闭服务</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/zkServer.sh stop
-</pre></div>
-</div>
+<p>~~~shell
+bin/zkServer.sh stop
+~~~</p>
 </li>
 <li><p>客户端连接服务端</p>
-<div class="highlight-sehll notranslate"><div class="highlight"><pre><span></span>bin/zkCli.sh -server hostname:port
+<p>~~~sehll
+bin/zkCli.sh -server hostname:port
 # 连接多台
 bin/zkCli.sh -server node1:2181,node2:2181,node3:2181
-</pre></div>
-</div>
+~~~</p>
 </li>
 <li><p>列举：只能使用绝对路径</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ls  path <span class="o">[</span>watch<span class="o">]</span>
-
-ls  /
-</pre></div>
-</div>
+<p>~~~shell
+ls  path [watch]</p>
+<p>ls  /
+~~~</p>
 </li>
 <li><p>创建</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create <span class="o">[</span>-s<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span> path data
+<p>~~~shell
+create [-s] [-e] path data
 create /itcast hadoop
-</pre></div>
-</div>
+~~~</p>
 </li>
 <li><p>读取节点</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>get path <span class="o">[</span>watch<span class="o">]</span>
-
-get /itcast
-</pre></div>
-</div>
+<p>~~~shell
+get path [watch]</p>
+<p>get /itcast
+~~~</p>
 </li>
 <li><p>修改节点</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> path data <span class="o">[</span>version<span class="o">]</span>
-
-<span class="nb">set</span> /itcast  spark
-</pre></div>
-</div>
+<p>~~~shell
+set path data [version]</p>
+<p>set /itcast  spark
+~~~</p>
 </li>
 <li><p>删除节点</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rmr path
-
-rmr /itcast/heima
-</pre></div>
-</div>
+<p>~~~shell
+rmr path</p>
+<p>rmr /itcast/heima
+~~~</p>
 </li>
 <li><p>退出客户端</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>quit
-</pre></div>
-</div>
+<p>~~~shell
+quit
+~~~</p>
 </li>
 </ul>
-</div>
-<div class="section" id="hadoop">
-<h2><span class="section-number">16.3. </span>Hadoop基本使用<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h2>
+<p>## Hadoop基本使用</p>
 <ul>
 <li><p>配置环境变量</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#HADOOP_HOME</span>
-<span class="nb">export</span> <span class="nv">HADOOP_HOME</span><span class="o">=</span>/export/servers/hadoop-2.7.5
-<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>:<span class="nv">$PATH</span>:<span class="nv">$HADOOP_HOME</span>/bin:<span class="nv">$HADOOP_HOME</span>/sbin
-</pre></div>
-</div>
+<p>~~~shell
+#HADOOP_HOME
+export HADOOP_HOME=/export/servers/hadoop-2.7.5
+export PATH=:$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
+~~~</p>
 </li>
 <li><p>第一次启动</p>
-<blockquote>
-<div><p>第一次启动需要格式化，以后每次启动就无需再格式化</p>
-</div></blockquote>
+<p>&gt; 第一次启动需要格式化，以后每次启动就无需再格式化</p>
 <ul>
 <li><p>只需要在NameNode所在的机器格式化</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>hdfs namenode -format
-</pre></div>
-</div>
+<p>~~~shell
+hdfs namenode -format
+~~~</p>
 </li>
 </ul>
 </li>
 <li><p>启动</p>
 <ul>
 <li><p>根据节点的分配，在每台机器启动服务</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/servers/hadoop-2.7.5/
-</pre></div>
-</div>
+<p>~~~shell
+cd /export/servers/hadoop-2.7.5/
+~~~</p>
 </li>
 <li><p>启动HDFS(<strong>不推荐的方式</strong>)</p>
 <ul>
 <li><p>第一台机器：NameNode、DataNode</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/hadoop-daemon.sh start namenode
-</pre></div>
-</div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/hadoop-daemon.sh start datanode
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/hadoop-daemon.sh</span> <span class="pre">start</span> <span class="pre">namenode</span>
+<span class="pre">`</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/hadoop-daemon.sh</span> <span class="pre">start</span> <span class="pre">datanode</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>第二台机器：DataNode</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/hadoop-daemon.sh start datanode
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/hadoop-daemon.sh</span> <span class="pre">start</span> <span class="pre">datanode</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>第三台机器：DataNode</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/hadoop-daemon.sh start datanode
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/hadoop-daemon.sh</span> <span class="pre">start</span> <span class="pre">datanode</span>
+<span class="pre">`</span></code></p>
 </li>
 </ul>
 </li>
 <li><p>启动YARN</p>
 <ul>
 <li><p>第一台机器：NodeManager</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/yarn-daemon.sh start nodemanager
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/yarn-daemon.sh</span> <span class="pre">start</span> <span class="pre">nodemanager</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>第二台机器：NodeManager</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/yarn-daemon.sh start nodemanager
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/yarn-daemon.sh</span> <span class="pre">start</span> <span class="pre">nodemanager</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>第三台机器：ResourceManager、NodeManager</p>
 <ul>
 <li><p>启动resourcemanager</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/yarn-daemon.sh start resourcemanager
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/yarn-daemon.sh</span> <span class="pre">start</span> <span class="pre">resourcemanager</span>
+<span class="pre">`</span></code></p>
 </li>
 <li><p>启动NodeManager</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sbin/yarn-daemon.sh start nodemanager
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">sbin/yarn-daemon.sh</span> <span class="pre">start</span> <span class="pre">nodemanager</span>
+<span class="pre">`</span></code></p>
 </li>
 </ul>
 </li>
 <li><p>关闭</p>
 <ul>
 <li><p>将上面的每条命令中的start更换为stop</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>例如：sbin/yarn-daemon.sh stop nodemanager
-</pre></div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`shell</span>
+<span class="pre">例如：sbin/yarn-daemon.sh</span> <span class="pre">stop</span> <span class="pre">nodemanager</span>
+<span class="pre">`</span></code></p>
 </li>
 </ul>
 </li>
@@ -403,103 +346,100 @@ rmr /itcast/heima
 <li><p>分类启动(<strong>推荐的方式</strong>)</p>
 <ul>
 <li><p>启动和关闭HDFS：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="o">-</span><span class="n">dfs</span><span class="o">.</span><span class="n">sh</span>
-<span class="n">stop</span><span class="o">-</span><span class="n">dfs</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
+<p>~~~
+start-dfs.sh
+stop-dfs.sh
+~~~</p>
 </li>
 <li><p>启动和关闭YARN：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-yarn.sh
+<p>~~~shell
+start-yarn.sh
 stop-yarn.sh
-</pre></div>
-</div>
+~~~</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="hive">
-<h2><span class="section-number">16.4. </span>Hive的基本使用<a class="headerlink" href="#hive" title="永久链接至标题">¶</a></h2>
+<p>## Hive的基本使用</p>
 <ul>
 <li><p>启动HDFS和YARN</p>
 <ul>
 <li><p>第一台机器</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-dfs.sh
-</pre></div>
-</div>
+<p>~~~shell
+start-dfs.sh
+~~~</p>
 </li>
 <li><p>第三台机器</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="o">-</span><span class="n">yarn</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
+<p>~~~
+start-yarn.sh
+~~~</p>
 </li>
 </ul>
 </li>
 <li><p>第一次启动Hive需要初始化元数据</p>
-<blockquote>
-<div><p>仅第一次启动初始化</p>
-</div></blockquote>
+<p>&gt; 仅第一次启动初始化</p>
 <ul>
 <li><p>启动</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hive</span>
-</pre></div>
-</div>
+<p>~~~
+hive
+~~~</p>
 </li>
 </ul>
 </li>
 </ul>
-<div class="section" id="beeline">
-<h3><span class="section-number">16.4.1. </span>beeline<a class="headerlink" href="#beeline" title="永久链接至标题">¶</a></h3>
+<p>### beeline</p>
 <ul>
 <li><p>使用</p>
 <ul>
 <li><p>先启动MetaStore</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/hive --service metastore
-</pre></div>
-</div>
+<p>~~~shell
+bin/hive –service metastore
+~~~</p>
 </li>
 <li><p>再启动hiveserver2</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/hiveserver2
-</pre></div>
-</div>
+<p>~~~shell
+bin/hiveserver2
+~~~</p>
 </li>
 <li><p>启动beeline</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span> hive --service metastore &gt;&gt; logs/metastore.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-</pre></div>
-</div>
+<dl class="simple">
+<dt>~~~shell</dt><dd><p>hive –service metastore &gt;&gt; logs/metastore.log 2&gt;&amp;1 &amp;</p>
+</dd>
+</dl>
+<p>~~~</p>
 <ul>
 <li><p>后台启动</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>hiveserver2 &gt;&gt; logs/hiveserver2.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-</pre></div>
-</div>
+<p>~~~shell
+hiveserver2 &gt;&gt; logs/hiveserver2.log 2&gt;&amp;1 &amp;
+~~~</p>
 </li>
 </ul>
 </li>
 <li><p>进入beeline</p>
 <ul>
 <li><p>用法一：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beeline</span>
-</pre></div>
-</div>
+<p>~~~
+beeline
+~~~</p>
 <ul>
 <li><p>构建连接</p>
-<div class="highlight-beeline notranslate"><div class="highlight"><pre><span></span>!connect jdbc:hive2://node3:10000 root 123456
-</pre></div>
-</div>
+<p>~~~beeline
+!connect <a class="reference external" href="jdbc:hive2://node3:10000">jdbc:hive2://node3:10000</a> root 123456
+~~~</p>
 </li>
 </ul>
 </li>
 <li><p>用法二：</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>beeline -u jdbc:hive2://node3:10000 -n root -p <span class="m">123456</span>
-</pre></div>
-</div>
+<p>~~~shell
+beeline -u <a class="reference external" href="jdbc:hive2://node3:10000">jdbc:hive2://node3:10000</a> -n root -p 123456
+~~~</p>
 </li>
 <li><p>退出</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!quit
-</pre></div>
-</div>
+<p>~~~
+!quit
+~~~</p>
 </li>
 </ul>
 </li>
@@ -510,108 +450,98 @@ stop-yarn.sh
 <li><p>构建启动脚本</p>
 <ul>
 <li><p>构建metastore启动脚本</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#HIVE_HOME</span>
-<span class="nv">HIVE_HOME</span><span class="o">=</span>/export/servers/hive-2.1.0-bin
-<span class="c1">#run metastore</span>
-<span class="nv">$HIVE_HOME</span>/bin/hive --service metastore &gt;&gt; <span class="nv">$HIVE_HOME</span>/logs/metastore.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-</pre></div>
-</div>
+<p>~~~shell
+#!/bin/bash
+#HIVE_HOME
+HIVE_HOME=/export/servers/hive-2.1.0-bin
+#run metastore
+$HIVE_HOME/bin/hive –service metastore &gt;&gt; $HIVE_HOME/logs/metastore.log 2&gt;&amp;1 &amp;
+~~~</p>
 </li>
 <li><p>构建HiveServer2启动脚本</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#HIVE_HOME</span>
-<span class="nv">HIVE_HOME</span><span class="o">=</span>/export/servers/hive-2.1.0-bin
-<span class="c1">#run hiveserver2</span>
-<span class="nv">$HIVE_HOME</span>/bin/hiveserver2  &gt;&gt; <span class="nv">$HIVE_HOME</span>/logs/hiveserver2.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-</pre></div>
-</div>
+<p>~~~shell
+#!/bin/bash
+#HIVE_HOME
+HIVE_HOME=/export/servers/hive-2.1.0-bin
+#run hiveserver2
+$HIVE_HOME/bin/hiveserver2  &gt;&gt; $HIVE_HOME/logs/hiveserver2.log 2&gt;&amp;1 &amp;
+~~~</p>
 </li>
 <li><p>构建beeline启动脚本</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#HIVE_HOME</span>
-<span class="nv">HIVE_HOME</span><span class="o">=</span>/export/servers/hive-2.1.0-bin
-<span class="c1">#run beeline</span>
-<span class="nv">$HIVE_HOME</span>/bin/beeline -u jdbc:hive2://node3:10000 -n root -p <span class="m">123456</span>
-</pre></div>
-</div>
+<p>~~~shell
+#!/bin/bash
+#HIVE_HOME
+HIVE_HOME=/export/servers/hive-2.1.0-bin
+#run beeline
+$HIVE_HOME/bin/beeline -u <a class="reference external" href="jdbc:hive2://node3:10000">jdbc:hive2://node3:10000</a> -n root -p 123456
+~~~</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<hr class="docutils" />
-<ul>
-<li><p>在使用Hive时一个常用的场景是使用Hive执行文件，构建定时自动化脚本执行任务，在脚本中动态获取昨天的日期，并将日期作为参数传递给Hive脚本文件中</p>
-<ul>
+<blockquote>
+<div><ul>
 <li><p>通过参数传递表名和日期</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-<span class="c1">#动态获取日期</span>
-<span class="nv">yesterday</span><span class="o">=</span><span class="sb">`</span>date -d <span class="s1">&#39;-1 day&#39;</span> +%Y-%m-%d<span class="sb">`</span>
-
-<span class="c1">#动态获取的表名</span>
-<span class="nv">tbName</span><span class="o">=</span><span class="nv">$1</span>
-<span class="nb">echo</span> <span class="nv">$tbName</span>
-
-<span class="c1">#hive -e &quot;select * from $tbName limit 10&quot;</span>
-<span class="c1">#将脚本的变量转换为Hive中的变量</span>
-hive --hiveconf <span class="nv">tn</span><span class="o">=</span><span class="nv">$tbName</span> -f /export/datas/hive.hql
-</pre></div>
-</div>
+<p>~~~shell
+#!/bin/bash
+#动态获取日期
+yesterday=`date -d ‘-1 day’ +%Y-%m-%d`</p>
+<p>#动态获取的表名
+tbName=$1
+echo $tbName</p>
+<p>#hive -e “select * from $tbName limit 10”
+#将脚本的变量转换为Hive中的变量
+hive –hiveconf tn=$tbName -f /export/datas/hive.hql
+~~~</p>
 </li>
 <li><p>hql脚本</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>select * from ${hiveconf:tn} limit 10;
-</pre></div>
-</div>
+<p>~~~
+select * from ${hiveconf:tn} limit 10;
+~~~</p>
 </li>
 </ul>
-</li>
-</ul>
-</div>
-</div>
+</div></blockquote>
 <hr class="docutils" />
-<div class="section" id="hbase">
-<h2><span class="section-number">16.5. </span>HBASE基本使用<a class="headerlink" href="#hbase" title="永久链接至标题">¶</a></h2>
+<p>## HBASE基本使用</p>
 <ul>
 <li><p>配置环境变量</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1">#HBASE_HOME</span>
-<span class="nb">export</span> <span class="nv">HBASE_HOME</span><span class="o">=</span>/export/servers/hbase-2.1.0
-<span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>:<span class="nv">$PATH</span>:<span class="nv">$HBASE_HOME</span>/bin
-</pre></div>
-</div>
+<p>~~~shell
+#HBASE_HOME
+export HBASE_HOME=/export/servers/hbase-2.1.0
+export PATH=:$PATH:$HBASE_HOME/bin
+~~~</p>
 </li>
 <li><p>启动</p>
 <ul>
 <li><p>先启动HDFS和ZK</p>
 <ul>
 <li><p>启动HDFS：等待HDFS退出安全模式再启动HBASE</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="o">-</span><span class="n">dfs</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
+<p>~~~
+start-dfs.sh
+~~~</p>
 </li>
 <li><p>启动Zookeeper</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">servers</span><span class="o">/</span><span class="n">zookeeper</span><span class="o">-</span><span class="mf">3.4</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">start</span><span class="o">-</span><span class="n">zk</span><span class="o">-</span><span class="nb">all</span><span class="o">.</span><span class="n">sh</span> 
-</pre></div>
-</div>
+<p>~~~
+/export/servers/zookeeper-3.4.6/bin/start-zk-all.sh
+~~~</p>
 </li>
 <li><p>启动HBASE</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="o">-</span><span class="n">hbase</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
+<p>~~~
+start-hbase.sh
+~~~</p>
 </li>
 <li><p>关闭HBASE</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stop</span><span class="o">-</span><span class="n">hbase</span><span class="o">.</span><span class="n">sh</span>
-</pre></div>
-</div>
+<p>~~~
+stop-hbase.sh
+~~~</p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-</div>
 
 
            </div>
@@ -624,7 +554,7 @@ hive --hiveconf <span class="nv">tn</span><span class="o">=</span><span class="n
         <a href="../Blogs/index.html" class="btn btn-neutral float-right" title="Blogs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="Zookeeper.html" class="btn btn-neutral float-left" title="15. Zookeeper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ZookeeperAndHadoop.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -634,7 +564,7 @@ hive --hiveconf <span class="nv">tn</span><span class="o">=</span><span class="n
   <div role="contentinfo">
     <p>
         
-        &copy; 版权所有 2020, roohom
+        &copy; 版权所有 2020-2020, roohom
 
     </p>
   </div>

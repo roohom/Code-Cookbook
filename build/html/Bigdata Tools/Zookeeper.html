@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>15. Zookeeper &mdash; Code-Cookbook 0.1 文档</title>
+  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="16. 常用软件梳理" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" />
-    <link rel="prev" title="14. Structured Streaming" href="StructuredStreaming.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="ZookeeperAndHadoop.html" />
+    <link rel="prev" title="1. }" href="StructuredStreaming.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,34 +84,9 @@
             
             
               <p class="caption"><span class="caption-text">大数据</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Bigdata%E9%98%B2%E6%87%B5%E9%80%BC%E6%8C%87%E5%8D%97.html">3. Bigdata Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Flink%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86.html">4. Flink基础配置与基础原理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">5. Hadoop搭建总体步骤</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Hbase.html">6. Hbase</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kafka.html">7. Kafka</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Kylin.html">8. Kylin</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Redis.html">9. Redis</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Spark.html">10. Spark</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkCore.html">11. Spark Core</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkSQL.html">12. Spark SQL</a></li>
-<li class="toctree-l2"><a class="reference internal" href="SparkStreaming.html">13. Spark Streaming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="StructuredStreaming.html">14. Structured Streaming</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">15. Zookeeper</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">15.1. 辅助选举</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#zk">15.2. ZK选举</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">15.3. 节点类型</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">15.4. 监听机制</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">15.5. 基本使用</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">16. 常用软件梳理</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Bigdata Tools</a></li>
 </ul>
 <p class="caption"><span class="caption-text">博客</span></p>
 <ul>
@@ -172,7 +147,7 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li><span class="section-number">15. </span>Zookeeper</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -191,34 +166,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="zookeeper">
-<h1><span class="section-number">15. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h1>
-<div class="section" id="id1">
-<h2><span class="section-number">15.1. </span>辅助选举<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<ul class="simple">
+  <p># Zookeeper</p>
+<p>## 辅助选举</p>
+<ul>
 <li><p>zookeeper帮别的分布式框架在两个主节点之间选择一个工作的一个备份的</p></li>
-<li><p><strong>方式一</strong>：两个主节点A、B同时向zookeeper创建同一个临时节点(只有一个能创建成功)</p>
-<ul>
-<li><p>临时节点会随着创建者的消失而消失</p></li>
-<li><p>A创建成功了，A就是工作状态的主节点</p></li>
-<li><p>B创建失败就是备份状态Standby，B要监控这个临时节点</p>
-<ul>
+<li><p><strong>方式一</strong>：两个主节点A、B同时向zookeeper创建同一个临时节点(只有一个能创建成功)
+- 临时节点会随着创建者的消失而消失
+- A创建成功了，A就是工作状态的主节点
+- B创建失败就是备份状态Standby，B要监控这个临时节点</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>如果临时节点消失，说明A出现了问题</p></li>
 <li><p>B会创建这个临时节点，B成为新的active</p></li>
 </ul>
+</div></blockquote>
 </li>
+<li><p>方式二：两个主节点A、B都向zookeeper创建同一个临时顺序节点，两个都能创建成功
+- 临时顺序：谁先创建成功，谁的编号就小
+- 谁的编号小谁就是active，剩余的是Standby</p></li>
 </ul>
-</li>
-<li><p>方式二：两个主节点A、B都向zookeeper创建同一个临时顺序节点，两个都能创建成功</p>
-<ul>
-<li><p>临时顺序：谁先创建成功，谁的编号就小</p></li>
-<li><p>谁的编号小谁就是active，剩余的是Standby</p></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="zk">
-<h2><span class="section-number">15.2. </span>ZK选举<a class="headerlink" href="#zk" title="永久链接至标题">¶</a></h2>
+<p>## ZK选举</p>
 <ul>
 <li><p>zookeeper自己内部选择leader</p></li>
 <li><p>三台zookeeper</p>
@@ -237,12 +204,12 @@
 <li><p>myid：权重id</p>
 <ul>
 <li><p>自己指定</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># 集群中机器.权重 =机器名称.选举端口:同步端口</span>
-server.1<span class="o">=</span>node1:2888:3888
-server.2<span class="o">=</span>node2:2888:3888
-server.3<span class="o">=</span>node3:2888:3888
-</pre></div>
-</div>
+<p>~~~shell
+# 集群中机器.权重 =机器名称.选举端口:同步端口
+server.1=node1:2888:3888
+server.2=node2:2888:3888
+server.3=node3:2888:3888
+~~~</p>
 </li>
 <li><p>记录每台机器初始的权重，存储在dataDir下</p></li>
 </ul>
@@ -262,32 +229,29 @@ server.3<span class="o">=</span>node3:2888:3888
 </ul>
 </li>
 <li><p>情况2：leader故障，剩余的follower重新选举新的leader</p>
-<ul class="simple">
-<li><p>机器情况:</p>
 <ul>
-<li><p>node1：follower</p></li>
-<li><p>node2：follower</p></li>
-<li><p>node3：leader</p></li>
-<li><p>node4：follower</p></li>
-<li><p>node5：follower</p></li>
-</ul>
-</li>
-<li><p>写入数据：leader来广播</p>
-<ul>
-<li><p>客户端发起写入请求:4</p></li>
-<li><p>不论请求哪一台，这个请求都由node3来执行</p></li>
-<li><p>node3进行广播，超过半数的机器写入成功，就会返回成功了</p>
-<ul>
+<li><p>机器情况:
+- node1：follower
+- node2：follower
+- node3：leader
+- node4：follower
+- node5：follower</p></li>
+<li><p>写入数据：leader来广播
+- 客户端发起写入请求:4
+- 不论请求哪一台，这个请求都由node3来执行
+- node3进行广播，超过半数的机器写入成功，就会返回成功了</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>这样设计的原因：块</p></li>
 <li><p>超过半数的机器写入成功，说明只要zookeeper集群可用，数据就正常</p></li>
 </ul>
-</li>
-<li><p>极端情况：刚超过半数，leader宕机</p>
-<ul>
-<li><p>所有的follower重新选举</p></li>
-<li><p>先比较zxid，谁的数据就越全，谁就会优先成为leader</p></li>
-<li><p>如果zxid相同，就比较myid</p></li>
-<li><p>node2成为新的leader，会将数据广播给所有的follower</p></li>
+</div></blockquote>
+<ul class="simple">
+<li><p>极端情况：刚超过半数，leader宕机
+- 所有的follower重新选举
+- 先比较zxid，谁的数据就越全，谁就会优先成为leader
+- 如果zxid相同，就比较myid
+- node2成为新的leader，会将数据广播给所有的follower</p></li>
 </ul>
 </li>
 </ul>
@@ -295,139 +259,120 @@ server.3<span class="o">=</span>node3:2888:3888
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">15.3. </span>节点类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>## 节点类型</p>
 <ul>
 <li><p>类型</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create <span class="o">[</span>-s<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span> path data
+<p>~~~shell
+create [-s] [-e] path data
 -s :创建有序节点
 -e :创建临时节点
-</pre></div>
-</div>
-<ul>
+~~~</p>
+<ul class="simple">
 <li><p>持久性节点：除非手动删除，不会自动删除</p>
 <ul>
-<li><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create path data
-</pre></div>
-</div>
-</li>
+<li><p>~~~shell
+create path data
+~~~</p></li>
 </ul>
 </li>
 <li><p>持久有序节点：会给节点的名称自动编号，不会自动删除</p>
 <ul>
-<li><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create -s path data
-</pre></div>
-</div>
-</li>
+<li><p>~~~shell
+create -s path data
+~~~</p></li>
 </ul>
 </li>
 <li><p>临时节点：会随着所创建的客户端的消失而自动删除</p>
 <ul>
-<li><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create -s path data
-</pre></div>
-</div>
-</li>
+<li><p>~~~shell
+create -s path data
+~~~</p></li>
 </ul>
 </li>
 <li><p>临时有序节点：会随着客户端的连接断开而自动删除，会自动编号</p>
 <ul>
-<li><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create -s -e path data
-</pre></div>
-</div>
-</li>
+<li><p>~~~shell
+create -s -e path data
+~~~</p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id3">
-<h2><span class="section-number">15.4. </span>监听机制<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-<ul class="simple">
-<li><p>监听：监控某个节点所发生的变化：创建、删除，修改等</p>
+<p>## 监听机制</p>
 <ul>
-<li><p>只要发生对应的变化，就将这个变化获取到</p></li>
-<li><p>两个主节点，A是工作的，B是备份的，B要监听A创建的临时节点，如果这个临时节点消失，说明A故障，B要获取到这个节点删除这个信息，然后B重新创建这个节点，成为工作状态</p></li>
-<li><p>设置监听：watch：命令行中的监听是一次有效，一旦触发，需要重新设置监听</p>
-<ul>
-<li><p>设置：如 <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">path</span> <span class="pre">watch</span></code>,重点在于后面加上了可选项<code class="docutils literal notranslate"><span class="pre">watch</span></code></p></li>
+<li><p>监听：监控某个节点所发生的变化：创建、删除，修改等
+- 只要发生对应的变化，就将这个变化获取到
+- 两个主节点，A是工作的，B是备份的，B要监听A创建的临时节点，如果这个临时节点消失，说明A故障，B要获取到这个节点删除这个信息，然后B重新创建这个节点，成为工作状态
+- 设置监听：watch：命令行中的监听是一次有效，一旦触发，需要重新设置监听</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>设置：如 <cite>ls path watch</cite>,重点在于后面加上了可选项`watch`</p></li>
 </ul>
+</div></blockquote>
 </li>
 </ul>
-</li>
-</ul>
-</div>
-<div class="section" id="id4">
-<h2><span class="section-number">15.5. </span>基本使用<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>## 基本使用</p>
 <ul>
 <li><p>启动服务端</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> /export/servers/zookeeper-3.4.6/
+<p>~~~shell
+cd /export/servers/zookeeper-3.4.6/
 bin/zkServer.sh start
-</pre></div>
-</div>
+~~~</p>
 </li>
 <li><p>查看状态</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/zkServer.sh status
-</pre></div>
-</div>
+<p>~~~shell
+bin/zkServer.sh status
+~~~</p>
 </li>
 <li><p>关闭服务</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>bin/zkServer.sh stop
-</pre></div>
-</div>
+<p>~~~shell
+bin/zkServer.sh stop
+~~~</p>
 </li>
 <li><p>客户端连接服务端</p>
-<div class="highlight-sehll notranslate"><div class="highlight"><pre><span></span>bin/zkCli.sh -server hostname:port
+<p>~~~sehll
+bin/zkCli.sh -server hostname:port
 # 连接多台
 bin/zkCli.sh -server node1:2181,node2:2181,node3:2181
-</pre></div>
-</div>
+~~~</p>
 </li>
 <li><p>列举：只能使用绝对路径</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ls  path <span class="o">[</span>watch<span class="o">]</span>
-
-ls  /
-</pre></div>
-</div>
+<p>~~~shell
+ls  path [watch]</p>
+<p>ls  /
+~~~</p>
 </li>
 <li><p>创建</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>create <span class="o">[</span>-s<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span> path data
+<p>~~~shell
+create [-s] [-e] path data
 create /itcast hadoop
-</pre></div>
-</div>
+~~~</p>
 </li>
 <li><p>读取节点</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>get path <span class="o">[</span>watch<span class="o">]</span>
-
-get /itcast
-</pre></div>
-</div>
+<p>~~~shell
+get path [watch]</p>
+<p>get /itcast
+~~~</p>
 </li>
 <li><p>修改节点</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> path data <span class="o">[</span>version<span class="o">]</span>
-
-<span class="nb">set</span> /itcast  spark
-</pre></div>
-</div>
+<p>~~~shell
+set path data [version]</p>
+<p>set /itcast  spark
+~~~</p>
 </li>
 <li><p>删除节点</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rmr path
-
-rmr /itcast/heima
-</pre></div>
-</div>
+<p>~~~shell
+rmr path</p>
+<p>rmr /itcast/heima
+~~~</p>
 </li>
 <li><p>退出客户端</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>quit
-</pre></div>
-</div>
+<p>~~~shell
+quit
+~~~</p>
 </li>
 </ul>
-</div>
-</div>
 
 
            </div>
@@ -437,10 +382,10 @@ rmr /itcast/heima
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-right" title="16. 常用软件梳理" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ZookeeperAndHadoop.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="StructuredStreaming.html" class="btn btn-neutral float-left" title="14. Structured Streaming" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="StructuredStreaming.html" class="btn btn-neutral float-left" title="1. }" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -450,7 +395,7 @@ rmr /itcast/heima
   <div role="contentinfo">
     <p>
         
-        &copy; 版权所有 2020, roohom
+        &copy; 版权所有 2020-2020, roohom
 
     </p>
   </div>
