@@ -227,8 +227,11 @@
           hbase
           ```
 
-
 ### 架构
+
+![KafkaFramework](Kafka.assets/KafkaFramework.svg)
+
+
 
 - Hbase：Table：Region：Store：mem&storefile
 - Kakfa：Topic：Partition：Segment：.log & .index
@@ -253,7 +256,7 @@
 
 - Kafka中一个Topic可以对应多个分区，当写入数据会根据分区规则将这个数据写入对应的分区
 - 分区规则：
-  - 方式一：如果给定Keyu，按照Key的hash取余分区个数
+  - 方式一：如果给定Key，按照Key的hash取余分区个数
   - 方式二：如果没有给定Key，按照轮询方式
   - 方式三：指定分区写入
   - 方式四：自定义分区规则
@@ -545,7 +548,7 @@ public class UserPartition implements Partitioner {
 
 ### 保证生产数据不丢失不重复
 
-- 生产：生产=> Kafka
+> 保证生产者数据不丢失或者说一次性语义的机制是：**ACK机制**
 
 #### **ack确认机制**
 
@@ -562,6 +565,8 @@ public class UserPartition implements Partitioner {
 
 - all：写入分区时，必须所有的副本都写入成功才返回ack
 
+  > `acks=all` This means the leader will wait for the full set of in-sync replicas to acknowledge the record. This guarantees that the record will not be lost as long as at least one in-sync replica remains alive. This is the strongest available guarantee. This is equivalent to the `acks=-1` setting.
+
   - 安全：所有副本都有这个数据
 
   - 性能：非常慢
@@ -573,7 +578,7 @@ public class UserPartition implements Partitioner {
       ~~~
       min.insync.replicas=2
       ~~~
-  
+
 - 不丢失：重试机制
 
   - 只要没有收到ack，就可以重试
@@ -769,6 +774,7 @@ public class UserPartition implements Partitioner {
 
 
 
+
      此时你若想真正删除它，可以如下操作：
     
      （1）登录zookeeper客户端：命令：./bin/zookeeper-client
@@ -778,6 +784,7 @@ public class UserPartition implements Partitioner {
      （3）找到要删除的topic，执行命令：rmr /brokers/topics/【topic name】即可，此时topic被彻底删除。
 
  
+
 
 
 
@@ -816,4 +823,91 @@ public class UserPartition implements Partitioner {
   ~~~
 
   - 默认从Topic中最新的数据开始消费
+
+
+
+## Kafka Rebalance
+
+[点我去参考文章](https://juejin.cn/post/6844904032381698055)
+
+### 什么是Rebalance？
+
+Kafka Rebalance本质上是一种协定，规定了一个消费者组Consumer Group是如何达成一直的协定来订阅Topic的分区的。
+
+> 假设某个组下有20个consumer实例，该组订阅了一个有着100个分区的topic。正常情况下，Kafka会为每个consumer平均分配5个分区。这个分配过程就被称为rebalance。当consumer成功地执行rebalance后，组订阅topic的每个分区只会分配给组内的一个consumer实例。
+
+### 什么时候进行Rebalance？
+
+触发Rebalance有三个条件或者是场景：
+
+- 1、消费者组内消费者成员数量变动，如Consumer Group内新增一个Consumer，或者组内Consumer主动离开组，再或者是组内一个消费者直接崩溃导致Rebalance
+- 2、订阅topic数发生变更，比如使用基于正则表达式的订阅，当匹配正则表达式的新topic被创建时则会触发rebalance
+- 3、组订阅topic的分区数发生变更，比如使用命令脚本增加了订阅topic的分区数
+
+在实际情况下，最容易引发Rebalance的场景是第一种场景，但也其实不是消费者组增加消费者或者是消费者崩溃，<u>当consumer无法在指定的时间内完成消息的处理，那么coordinator就认为该consumer已经崩溃，从而引发新一轮rebalance</u>
+
+### 流程-当发生Rebalance是发生了什么？
+
+> [来源自：Kafka重平衡—Rebalance 你了解吗？](https://juejin.cn/post/6844904032381698055)，如有侵权，请[联系我](roohom@qq.com)删除
+
+consumer group在执行rebalance之前必须首先确认coordinator所在的broker，并创建与该broker相互通信的Socket连接。
+
+确定coordinator的算法与确定offset被提交到_consumer_offsets目标分区的算法是相同的。
+
+算法如下：
+
+- 计算Math.abs(groupID.hashCode)%offsets.topic.num.partitions参数值（默认是50），假设是10.
+- 寻找_consumer_offsets分区10的leader副本所在的broker，该broker即为这个group的coordinator。
+
+成功连接coordinator之后便可以执行rebalance操作。
+
+**目前rebalance主要分为两步：加入组和同步更新分配方案。**
+
+- **加入组**：这一步中组内所有consumer（即group.id相同的所有consumer实例）向coordinator发生JoinGroup请求。
+
+当收集全JoinGroup请求后，coordinator从中选择一个consumer担任group的leader，并把所有成员信息以及它们的订阅信息发送给leader。
+
+特别需要注意的是，group的leader和coordinator不是一个概念。
+
+leader是某个consumer实例，coordinator通常是Kafka集群中的一个broker。另外leader而非coordinator负责整个group的所有成员制定分配方案。
+
+- **同步更新分配方案**：这一步中leader开始制定分配方案，即根据前面提到的分配策略决定每个consumer都负责哪些topic的哪些分区。
+
+一旦分配完成，leader会把这个分配方案封装进SyncGroup请求并发送给coordinator。比较有意思的是，组内所有成员都会发送SyncGroup请求，不过只有leader发送的SyncGroup请求中包含了分配方案。
+
+coordinator接收到分配方案后把属于每个consumer的方案单独抽取出来作为SyncGroup请求的response返还给各自的consumer。
+
+
+
+
+
+##  Kafka的分区策略
+
+### 生产者分区策略
+
+> 生产者向Kafka中的Topic中生产数据时决定数据写入哪个Topic
+
+- 分区规则：
+  - 方式一：如果给定Key，按照Key的hash取余分区个数
+  - 方式二：如果没有给定Key，按照轮询方式
+  - 方式三：指定分区写入
+  - 方式四：自定义分区规则
+
+<u>通常在回答分区策略时，到此就已经可以算是结束，但是在涉及Rebalance时，Kafka有如下策略保证分区被消费者消费的重新分配</u>
+
+### Rebalance时分区分配
+
+> 消费者消费Kafka的Topic时，为保证消费者均匀消费Kafka的分区，而将分区分配个消费者的策略
+
+- Range策略
+  - 它将单个topic的所有分区按照顺序排列，然后把这些分区划分成固定大小的分区段并依次分配给每个consumer
+- round-robin策略
+  - 把所有topic的所有分区顺序摆开，然后轮询式地分配给各个consumer
+- Sticky策略
+  - 富有粘性的分配策略
+    - 分配分区尽可能均匀
+    - 分配分区尽可能和上一次保持一致
+- 自定义Consumer分配器(Assignor)
+
+
 

@@ -431,6 +431,60 @@ Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多
 
 
 
+## 广播变量
+
+- Flink支持广播。可以将数据广播到TaskManager上就可以供TaskManager中的SubTask/task去使用，数据存储到内存中。这样可以减少大量的shuffle操作，而不需要多次传递给集群节点；
+
+- 比如在数据join阶段，不可避免的就是大量的shuffle操作，我们可以把其中一个dataSet广播出去，一直加载到taskManager的内存中，可以直接在内存中拿数据，避免了大量的shuffle，导致集群性能下降；
+
+注意：
+
+- 广播变量是要把dataset广播到内存中，所以广播的数据量不能太大，否则会出现OOM
+- 广播变量的值不可修改，这样才能确保每个节点获取到的值都是一致的
+
+![FlinkBroadcastVariable](Flink.assets/FlinkBroadcastVariable.svg)
+
+### 如何使用
+
+ 编码步骤:
+
+- 1：广播数据
+  - .withBroadcastSet(DataSet, "name");
+
+- 2：获取广播的数据
+  - Collection<> broadcastSet =  getRuntimeContext().getBroadcastVariable("name");
+
+- 3:使用广播数据
+
+## 分布式缓存
+
+- Flink提供了一个分布式缓存，类似于hadoop，可以使用户在并行函数中很方便的读取本地文件，并把它放在taskmanager节点中，防止task重复拉取。
+- 此缓存的工作机制如下：程序注册一个文件或者目录(本地或者远程文件系统，例如hdfs或者s3)，通过ExecutionEnvironment注册缓存文件并为它起一个名称。
+- 当程序执行，<u>Flink自动将文件或者目录复制到所有taskmanager节点的本地文件系统，仅会执行一次</u>。用户可以通过这个指定的名称查找文件或者目录，然后从taskmanager节点的本地文件系统访问它。
+
+### 如何使用
+
+编码步骤:
+
+- 1：注册一个分布式缓存文件
+  - env.registerCachedFile("hdfs:///path/file", "cachefilename") 
+
+- 2：访问分布式缓存文件中的数据
+  -  File myFile = getRuntimeContext().getDistributedCache().getFile("cachefilename");
+
+开发步骤：
+
+- 1.获取执行环境
+- 2.加载数据源
+- 3.注册分布式缓存文件
+- 4.数据转换
+  - （1）获取分布式缓存文件
+  - （2）FileUtils解析文件
+  - （3）数据组合
+- 5.数据打印执行
+
+
+
 ## State
 
 ### Managed State & Raw State
@@ -470,7 +524,7 @@ Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多
 
 ### 执行流程
 
-![image-20201130205411747](Flink基础配置与基础原理.assets/image-20201130205411747.png)
+![image-20201130205411747](Flink.assets/image-20201130205411747.png)
 
 - 0.Flink的JobManager创建CheckpointCoordinator
 
