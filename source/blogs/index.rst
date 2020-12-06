@@ -11,5 +11,4 @@ Blogs
    :glob:
    :numbered:
    
-   
    *

@@ -23,7 +23,7 @@ Roohom's Code-Cookbook
    :glob:
    
    
-   Blogs/index
+   `Blogs`/index
    
    
 .. toctree::
