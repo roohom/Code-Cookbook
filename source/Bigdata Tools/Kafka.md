@@ -276,7 +276,7 @@ props.put("partitioner.class","bigdata.itcast.cn.kafka.partition.UserPartition")
 #### 自定义随机分区类
 
 ~~~java
-package bigdata.itcast.cn.kafka.partition;
+package bigdata.iroohom.me.kafka.partition;
 
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.common.Cluster;
@@ -475,7 +475,7 @@ public class UserPartition implements Partitioner {
       - 磁盘数据通过 DMA 拷贝到内核态 Buffer 后，直接通过 DMA 拷贝到 NIC Buffer(socket buffer)，无需 CPU 拷贝。这也是零拷贝这一说法的来源。除了减少数据拷贝外，因为整个读文件 - 网络发送由一个 sendfile 调用完成，整个过程只有两次上下文切换，因此大大提高了性能
       - Customer从broker读取数据，采用sendfile，将磁盘文件读到OS内核缓冲区后，直接转到socket buffer进行网络发送
   
-    ![traditionalCopy](Kafka.assets/traditionalCopy-1606737824163.svg)
+    ![ZeroCopy](Kafka.assets/ZeroCopy.svg)
   
     > 总的来说Kafka快的原因：
     > 1、partition顺序读写，充分利用磁盘特性，这是基础；
@@ -664,8 +664,8 @@ public class UserPartition implements Partitioner {
 |         log.roll.hours          | 168             | ==单个log文件生成的时间规则，默认7天一个log==            |
 |       log.cleaner.enable        | false           | ==false表示删除过期数据，如果为true，进行compact==       |
 |       log.cleanup.policy        | delete，compact | ==默认为delete，删除过期数据==                           |
-|      log.retention.minutes      | 分钟值          | ==segment生成多少分钟后删除==，做了标记                  |
-|       log.retention.hours       | 小时值          | ==segment生成多少小时后删除==                            |
+|      log.retention.minutes      | 分钟值          | segment生成多少分钟后删除，做了标记                      |
+|       log.retention.hours       | 小时值          | segment生成多少小时后删除                                |
 | log.retention.check.interval.ms | 毫秒值          | 多长时间检查一次是否有数据要标记删除                     |
 | log.cleaner.delete.retention.ms | 毫秒值          | segment标记删除后多长时间删除                            |
 |     log.cleaner.backoff.ms      | 毫秒值          | 多长时间检查一次是否有数据要删除                         |
@@ -775,6 +775,7 @@ public class UserPartition implements Partitioner {
 
 
 
+
      此时你若想真正删除它，可以如下操作：
     
      （1）登录zookeeper客户端：命令：./bin/zookeeper-client
@@ -784,6 +785,7 @@ public class UserPartition implements Partitioner {
      （3）找到要删除的topic，执行命令：rmr /brokers/topics/【topic name】即可，此时topic被彻底删除。
 
  
+
 
 
 
