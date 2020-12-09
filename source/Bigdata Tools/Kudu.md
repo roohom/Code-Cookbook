@@ -2,9 +2,7 @@
 
 ## Overview
 
->  Apache Kudu是由Cloudera开源的存储引擎，可以<u>同时提供低延迟的随机读写和高效的数据分析能力</u>。它是一个融合HDFS和HBase的功能的新组件，具备介于两者之间的新存储组件。
-
-### 背景
+>  Apache Kudu是由Cloudera开源的存储引擎，可以<u>同时提供低延迟的随机读写和高效的数据分析能力</u>。它是一个融合HDFS和HBase的功能的新组件
 
 - 静态数据
   - 以HDFS 引擎作为存储引擎，适用于高吞吐量的离线大数据分析场景
@@ -40,7 +38,7 @@ Kudu 中存在两个角色：
 
 KUDU 的数据模型与传统的关系型数据库类似，一个 KUDU 集群由多个表组成，每个表由多个字段组成，<u>一个表必须指定一个由若干个（>=1）字段组成的主键</u>
 
-Kudu中的每个字段类型都是强类型的，这与HBase的表中数据类型有所不同，HBase中所有的数据类型都是Bytes，Kudu中可以允许不同的字段设定不同的数据类型，这样就使得针对不同的累心可以使用不同的编码，从而节省了存储空间。
+Kudu中的每个字段类型都是强类型的，这与HBase的表中数据类型有所不同，HBase中所有的数据类型都是Bytes，Kudu中可以允许不同的字段设定不同的数据类型，这样就使得针对不同的类型可以使用不同的编码，从而节省了存储空间。
 
 ### 存储策略
 
@@ -70,6 +68,18 @@ Kudu中的每个字段类型都是强类型的，这与HBase的表中数据类�
   - 不利于数据顺序读的场景，造成顺序读数据的吞吐量低
 - 多级分区
   - <u>Kudu允许用户对一个表指定一个范围分区和多个Hash分区</u>
+
+
+
+## API使用
+
+### java版
+
+[传送门](https://github.com/roohom/CodeIndex/tree/main/Logistics/kudu-start-java)
+
+### 整合Spark
+
+[传送门](https://github.com/roohom/CodeIndex/tree/main/Logistics/Kudu-start)
 
 
 
