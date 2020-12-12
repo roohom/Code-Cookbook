@@ -92,11 +92,11 @@
   
   - **解决**：所有的数据都存储在元数据中，只要**将Hive元数据共享刚给其他工具即可**
   
-  > 默认的，Hive服务端会将Hive客户端的操作请求翻译成MapReduce API并提交给Hadoop，实现对Hive中的数据进行计算，此时Hive仅仅充当一个翻译工具，目的是将用户指定SQL语言翻译成MapReduce代码，而MapReduce运行计算是非常慢的，这样的方式效率低下，而Spark等工具效率高速度快，可以使用spark等工具代替Hive底层的MapReduce实现计算。但是这样一来，spark等工具怎么知道Hive中的表在哪里已经对应的HDFS数据在哪里呢，为了解决此问题，我们知道Hive的元数据中存储了Hive中的关键性信息，如数据库、表、列的信息，只要将Hive中的元数据共享给其他工具即可。
+  > 默认的，Hive服务端会将Hive客户端的操作请求翻译成MapReduce API并提交给Hadoop，实现对Hive中的数据进行计算，此时Hive仅仅充当一个翻译工具，目的是将用户指定SQL语言翻译成MapReduce代码，而MapReduce运行计算是非常慢的，这样的方式效率低下，而Spark等工具效率高速度快，可以使用spark等工具代替Hive底层的MapReduce实现计算。但是这样一来，spark等工具怎么知道Hive中的表在哪里以及对应的HDFS数据在哪里呢，为了解决此问题，我们知道Hive的元数据中存储了Hive中的关键性信息，如数据库、表、列的信息，只要将Hive中的元数据共享给其他工具即可。
   
 - 问：如何实现共享问题？
 
-  - 解决：**构建元数据管理服务MetaStore**，让所有需要访问JHive中表和对应的HDFS数据的工具直接访问MetaStore，MetaStore来告诉他们对应的数据在哪。
+  - 解决：**构建元数据管理服务MetaStore**，让所有需要访问Hive中表和对应的HDFS数据的工具直接访问MetaStore，MetaStore来告诉他们对应的数据在哪。
 
   > 如果让spark等其他计算工具直接访问Hive的元数据，会产生一系列权限问题，Hive的元数据是采用MySQL存储的，MySQL会对客户端的访问进行权限检查，使得访问不通过。但即使没有权限检查，其他工具直接访问Hive的元数据，也不清楚不知道访问到的元数据是干嘛的，有怎样的信息，为了解决此问题，Hive专门构建了MetaStore，让其他工具直接将**元数据读写请求**发送至MetaStore，MetaStore会解析客户端的请求，并告诉其需要访问的的数据在哪，以及数据的具体信息。
 
@@ -117,7 +117,7 @@
 
   - 配置了这个服务，就必须先开启MetaStore这个服务再使用Hive
 
-  > 由于所有对Hive元数据的读写请求都是经过MetaStore来处理的，所以必须开启MetaStore服务才能是Hive客户端访问Hive元数据。举个栗子：早期打电话，会有电话中转，张铁妞先将电话拨到服务台，告诉接线员我要打给王大锤，于是接线员就将线路接到了王大锤家，如果MetaStore没有先开启，张铁妞就不能直接拨打王大锤家的电话。
+  > 由于所有对Hive元数据的读写请求都是经过MetaStore来处理的，所以必须开启MetaStore服务才能使得Hive客户端访问Hive元数据。举个栗子：早期打电话，会有电话中转，张铁妞先将电话拨到服务台，告诉接线员我要打给王大锤，于是接线员就将线路接到了王大锤家，如果MetaStore没有先开启，张铁妞就不能直接拨打王大锤家的电话。
 
 ## 表的分类与结构
 
@@ -144,9 +144,21 @@
 
 - 特点：
 
-  - 手动删除外部表：元数据会被删除，但是数据不会被删除
+  - 手动删除外部表：**元数据会被删除，但是数据不会被删除**
 
     > 某个用户在读取该表之后将其删除，只是删除了元数据，数据仍然保留在HDFS上，多个人对同一份数据进行读取并建立了外部表，每个人使用完之后删除了自己的表，不影响最终保留在HDFS上的那份数据。
+
+  ~~~SQL
+  CREATE EXTERNAL TABLE TABLE_NAME(
+  	COL1 string,
+      COL2 string,
+      ...
+  )
+  PARTITION BY (daystr string)
+  LOCATION '/user/hive/warehouse/some_place'
+  ~~~
+
+  
 
 - 应用：
 
@@ -183,7 +195,7 @@
     select count(*) from hivelog where daystr=2020-08-29;
     ~~~
 
-    >  这么简单的依据SQL，我们知道Hive的底层是通过MapReduce来实现的，所以在底层MapReduce读取了HDFS上hivelog这个目录，将这个目录下的所有文件作为程序的输入，过滤的目的可以达到，可是这么一来，就需要读取所有的文件，而MapReduce运行起来好费时间和资源
+    >  这么简单的依据SQL，我们知道Hive的底层是通过MapReduce来实现的，所以在底层MapReduce读取了HDFS上hivelog这个目录，将这个目录下的所有文件作为程序的输入，过滤的目的可以达到，可是这么一来，就需要读取所有的文件，而MapReduce运行起来耗费时间和资源
 
 - 另一个场景：
 
@@ -205,7 +217,7 @@
 
 - 应用场景：
   
-- 需要按照一定的时间维度进行数据处理，数据量非常大的
+  - 需要按照一定的时间维度进行数据处理，数据量非常大
   
 - 实现方式：
 
@@ -220,28 +232,28 @@
       > 加载，这个时候，Hive实际在HDFS中数据表的目录下创建了N个以分区条件命名的目录
 
       ~~~SQL
-      load data local inpath '/export/datas/emp10.txt' into table
-      tb_emp_part1 partition(department = 10);
+      load data local inpath '/export/datas/emp10.txt' into table tb_emp_part1 partition(department = 10);
       
       此时目录名就是department=10
       ~~~
-
+      
     - 例如
 
       ~~~sql
-      insert overwrite table demo_static_partition 
-      partition(year="2020", month="04", 
-      day="2020-04-10", hour="22") 
-      select user_id, user_name, 
-      trade_year as year ,
-      trade_month as month,
-      trade_day as day,
-      trade_hour as hour  
+      insert overwrite table demo_static_partition partition(year="2020", month="04", day="2020-04-10", hour="22") 
+      select 
+      	user_id,
+      	user_name, 
+      	trade_year as year ,
+      	trade_month as month,
+      	trade_day as day,
+      	trade_hour as hour  
       from user_demo 
-      where trade_year="2020" 
-      and trade_month="04" 
-      and trade_day="2020-04-10" 
-      and trade_hour="22" 
+      where 
+      	trade_year="2020" 
+      	and trade_month="04" 
+      	and trade_day="2020-04-10" 
+      	and trade_hour="22" 
       ~~~
 
       
@@ -256,7 +268,7 @@
 
     - 实现步骤：
 
-      1. 开启自动分区
+      1. 开启自动分区（开启非严格模式）
 
          ~~~SQL
          set hive.exec.dynamic.partition.mode=nonstrict;
@@ -273,14 +285,14 @@
          ~~~
          
          ~~~sql
-         insert overwrite table demo_dynamic_partition 
-         partition(year=year, month=month, 
-         day=day, hour=hour) 
-         select user_id, user_name, 
-         trade_year as year ,
-         trade_month as month,
-         trade_day as day,
-         trade_hour as hour  
+         insert overwrite table demo_dynamic_partition partition(year=year, month=month, day=day, hour=hour) 
+         select 
+         	user_id,
+         	user_name, 
+         	trade_year as year ,
+         	trade_month as month,
+         	trade_day as day,
+         	trade_hour as hour  
          from user_demo 
          ~~~
          
@@ -319,7 +331,7 @@
         set hive.exec.max.created.files=1000000;
         ~~~
 
-      - 混合使用时，静态分区必须在动态分区的前面
+      - <u>混合使用时，静态分区必须在动态分区的前面</u>
 
         ~~~sql
         insert overwrite table demo_static_partition 
@@ -438,7 +450,7 @@
 select a.*, b.*
 from a,b; 
 
-# 为指定join条件，产生笛卡尔积
+# 未指定join条件，产生笛卡尔积
 select a.*, b.*
 from a join b;
 
@@ -547,7 +559,7 @@ MAP KEYS TERMINATED BY ':'; --指定KEY和Value之间的分隔符
 
     ~~~mysql
     create temporary function transDate as
-    'bigdata.itcast.cn.hive.udf.UserUDF';
+    'bigdata.iroohom.me.hive.udf.UserUDF';
     ~~~
 
   - 使用自己开发的函数
