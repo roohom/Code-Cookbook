@@ -680,11 +680,11 @@ public class UserPartition implements Partitioner {
 |         num.io.threads          | 8               | 处理读写硬盘的IO的线程数                                 |
 |       background.threads        | 4               | 后台处理的线程数，例如清理文件等                         |
 
-- AR：一个分区的所有副本
+- AR(all replicas)：一个分区的所有副本
 
-- ISR：一个分区的正在同步的副本，可用副本
+- ISR(in-sync replica)：一个分区的正在同步的副本，可用副本
 
-  - 如果leader故障，会从isr中重新选举一个新的leader
+  - 如果leader故障，会从ISR列表(存储在Zookeeper上)中重新选举一个新的leader
 
   - 判断条件：同步时间
 
@@ -697,6 +697,18 @@ public class UserPartition implements Partitioner {
 - OSR：不可用副本，也会与leader同步
 
   - 只要follower副本与leader副本没有在规定这个时间内，同步一次，就认为你是一个OSR
+  
+- LEO：日志末端偏移量，用来标识当前日志文件中下一条写入消息的offset
+
+  - 比如LEO=10，表示在该副本上已经保存了10条消息，偏移量为[0-9]
+
+- HW(HighWatermark)：高水位，标识了一个特定的消息偏移量，消费者只能消费这个offset之前的消息
+
+  - 作用是来判断副本的备份程度
+  - 小于或者等于HW的消息被认为是已经提交或者已经备份的
+  - Leader分区的HW是整个Topic的HW
+    - `leader HW值 = 所有副本LEO最小值`
+    - `follower HW值 =min(follower自身LEO 和 leader HW)`
 
 ## Kafka常用操作指南
 
@@ -769,13 +781,6 @@ public class UserPartition implements Partitioner {
     
      你可以通过命令：./bin/kafka-topics --zookeeper 【zookeeper server】 --list 来查看所有topic
 
- 
-
-
-
-
-
-
      此时你若想真正删除它，可以如下操作：
     
      （1）登录zookeeper客户端：命令：./bin/zookeeper-client
@@ -783,13 +788,6 @@ public class UserPartition implements Partitioner {
      （2）找到topic所在的目录：ls /brokers/topics
     
      （3）找到要删除的topic，执行命令：rmr /brokers/topics/【topic name】即可，此时topic被彻底删除。
-
- 
-
-
-
-
-
 
     另外被标记为marked for deletion的topic你可以在zookeeper客户端中通过命令获得：ls /admin/delete_topics/【topic name】，
     

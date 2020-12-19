@@ -487,6 +487,114 @@ Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多
 
 ## State
 
+### Keyed State & Operator State
+
+- Managed State的有KeyedState和OperatorState
+- Raw State的都是OperatorState
+
+#### Keyed State
+
+顾名思义就是Keyed Stream上的State，其与流上的特定的key绑定，对于流上每一个key可能都对应于一个State
+
+- ValueState getState(ValueStateDescriptor)
+- ReducingState getReducingState(ReducingStateDescriptor)
+  - 这种状态通过用户传入的reduceFunction，每次调用`add`方法添加值的时候，会调用reduceFunction，最后合并到一个单一的状态值
+- ListState getListState(ListStateDescriptor)
+- FoldingState getFoldingState(FoldingStateDescriptor)
+  - 跟ReducingState有点类似，不过它的状态值类型可以与`add`方法中传入的元素类型不同（这种状态将会在Flink未来版本中被删除）
+- MapState getMapState(MapStateDescriptor)
+  - 即状态值为一个map。用户通过`put`或`putAll`方法添加元素
+
+> Flink通过`StateDescriptor`来定义一个状态。这是一个抽象类，内部定义了状态名称、类型、序列化器等基础信息。与上面的状态对应，从`StateDescriptor`派生了`ValueStateDescriptor`, `ListStateDescriptor`等descriptor。
+
+
+
+一个使用MapState的样例：
+
+~~~java
+/**
+ * @ClassName: MinStockWindowFunction
+ * @Author: Roohom
+ * @Function: 分时个股窗口处理
+ * @Date: 2020/11/2 15:00
+ * @Software: IntelliJ IDEA
+ */
+public class MinStockWindowFunction extends RichWindowFunction<CleanBean, StockBean, String, TimeWindow> {
+
+    MapState<String, StockBean> stockMs = null;
+    /**
+     * @param parameters
+     * @throws Exception
+     */
+    @Override
+    public void open(Configuration parameters) throws Exception {
+        stockMs = getRuntimeContext().getMapState(new MapStateDescriptor<String, StockBean>("stockMs", String.class, StockBean.class));
+    }
+
+    /**
+     * @param s      分组字段
+     * @param window 窗口
+     * @param input  输入数据
+     * @param out    输出数据
+     * @throws Exception PASS
+     */
+    @Override
+    public void apply(String s, TimeWindow window, Iterable<CleanBean> input, Collector<StockBean> out) throws Exception {
+        //记录最新个股
+        CleanBean cleanBean = null;
+        for (CleanBean bean : input) {
+            if (cleanBean == null) {
+                cleanBean = bean;
+            }
+            if (cleanBean.getEventTime() < bean.getEventTime()) {
+                cleanBean = bean;
+            }
+        }
+        //获取分时成交额和成交数量
+        StockBean stockBeanLast = stockMs.get(cleanBean.getSecCode());
+        Long tradeVol = 0L;
+        Long tradeAmt = 0L;
+        if (stockBeanLast != null) {
+            //获取上一分钟的成交金额和成交数量
+            Long tradeVolDayLast = stockBeanLast.getTradeVolDay();
+            Long tradeAmtDayLast = stockBeanLast.getTradeAmtDay();
+
+            //分时成交量,分时成交量 （当前分钟的总成交量- 上一分钟的总成交量）
+            tradeVol = cleanBean.getTradeVolume() - tradeVolDayLast;
+            //分时成交金额,分时成交金额 （当前分钟的总成交金额- 上一分钟的总成交金额）
+            tradeAmt = cleanBean.getTradeAmt() - tradeAmtDayLast;
+        }
+        Long tradeTime = DateUtil.longTimeTransfer(cleanBean.getEventTime(), Constant.format_YYYYMMDDHHMMSS);
+
+        //封装输出流数据
+        StockBean stockBean = new StockBean(
+                cleanBean.getEventTime(),
+                cleanBean.getSecCode(),
+                cleanBean.getSecName(),
+                cleanBean.getPreClosePrice(),
+                cleanBean.getOpenPrice(),
+                cleanBean.getMaxPrice(),
+                cleanBean.getMinPrice(),
+                cleanBean.getTradePrice(),
+                tradeVol, tradeAmt,
+                cleanBean.getTradeVolume(),
+                cleanBean.getTradeAmt(),
+                tradeTime,
+                cleanBean.getSource()
+        );
+        out.collect(stockBean);
+        //更新MapState
+        stockMs.put(cleanBean.getSecCode(), stockBean);
+    }
+}
+~~~
+
+
+
+#### Operator State
+
+Operator State与特定的算子Operator进行绑定，整个Operator只对应于一个State，而在一个算子operator上可能有多个key，也就对应多个keyed state
+
 ### Managed State & Raw State
 
 - 托管状态
@@ -504,11 +612,7 @@ Flink 的所有组件都基于 Actor System 来进行通讯。Actor system是多
 - 从状态数据结构来说，Managed State 支持已知的数据结构，如 Value、List、Map 等。而 Raw State只支持字节数组 ，所有状态都要转换为二进制字节数组才可以。
 - 从推荐使用场景来说，Managed State 大多数情况下均可使用，而 Raw State 是当 Managed State 不够用时，比如需要自定义 Operator 时，才会使用 Raw State。
 
-#### Keyed State & Operator State
 
-- Managed State的有KeyedState和OperatorState
-
-- Raw State的都是OperatorState
 
 
 
