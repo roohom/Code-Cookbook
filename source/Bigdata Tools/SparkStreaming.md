@@ -19,8 +19,7 @@
 
 Spark Streaming是Spark生态系统当中一个重要的框架，它建立在Spark Core之上，**Spark Streaming底层就是Spark Core 只不过是划分了微批**
 
-对于Spark Streaming来说，将流式数据按照时间间隔BatchInterval划分为很多部分，每一部分
-Batch（批次），针对每批次数据Batch当做RDD进行快速分析和处理
+对于Spark Streaming来说，将流式数据按照时间间隔BatchInterval划分为很多部分，每一部分Batch（批次），针对每批次数据Batch当做RDD进行快速分析和处理
 
 它的核心是DStream[^1]，DStream类似于RDD，它实质上一系列的RDD的集合，DStream可以按照秒、分等时间间隔将数据流进行批量的划分。首先从接收到流数据之后，将其划分为多个batch，然后提交给Spark集群进行计算，最后将结果批量输出到HDFS或者数据库以及前端页面展示等等
 $$
@@ -197,7 +196,7 @@ DStream中每批次数据RDD在处理时，各个RDD之间存在依赖关系，D
 SparkStreaming流式计算框架，针对具体业务主要分为三类，使用不同函数进行处理：
 
 - 业务一：无状态Stateless
-  - 使用[transform](https://github.com/roohom/CodeIndex/blob/main/Spark/Spark-streaming/src/main/scala/me/iroohom/spark/rdd/StreamingTransformRDD.scala)和[foreacRDD](https://github.com/roohom/CodeIndex/blob/main/Spark/Spark-streaming/src/main/scala/me/iroohom/spark/output/StreamingOutputRDD.scala)函数
+  - 使用[transform](https://github.com/roohom/CodeIndex/blob/main/Spark/Spark-streaming/src/main/scala/me/iroohom/spark/rdd/StreamingTransformRDD.scala)和[foreachRDD](https://github.com/roohom/CodeIndex/blob/main/Spark/Spark-streaming/src/main/scala/me/iroohom/spark/output/StreamingOutputRDD.scala)函数
   - 比如实时增量数据ETL：实时从Kafka Topic中获取数据，经过初步转换操作，存储到Elasticsearch索引或HBase表中
 - 业务二：有状态State
   - 双十一大屏幕所有实时累加统计数字（比如销售额和销售量等），比如销售额、网站PV、UV等等

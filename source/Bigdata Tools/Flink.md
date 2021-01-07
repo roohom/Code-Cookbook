@@ -201,7 +201,7 @@
 
 ![FlinkOnYarn模式](./Flink.assets/FlinkOnYarn.png)
 
-![FlinkOnYarn](./Flink.assets/FlinkOnYarnMode.png)
+![FlinkOnYarn](Flink.assets/FlinkOnYarn.svg)
 
 - 1.Client上传jar包和配置文件到HDFS集群上
 
@@ -385,7 +385,13 @@ flink run -m yarn-cluster -ytm 1024 -yjm 1024 -ys 1 ../examples/batch/WordCount.
 
 上面我们提到：TaskManagers 实际执行的是 SubTask，而不是 Task，这里解释一下两者的区别：
 
-在执行分布式计算时，Flink 将可以链接的操作 (operators) 链接到一起(Operator Chains)，这就是 Task。之所以这样做， 是为了减少线程间切换和缓冲而导致的开销，在降低延迟的同时可以提高整体的吞吐量。 但不是所有的 operator 都可以被链接，如下 keyBy 等操作会导致网络 shuffle 和重分区，因此其就不能被链接，只能被单独作为一个 Task。  简单来说，**一个 Task 就是一个可以链接的最小的操作链 (Operator Chains)** 。如下图，source 和 map 算子被链接到一块，因此整个作业就只有三个 Task：
+> 我的个人理解：
+>
+> Flink中的Task对应于Spark中的Stage，而Flink中的SubTask才对应与Spark中的Task，在Spark中遇到Shuffle时就会划分Stage，也就是说遇到宽依赖就会划分Stage，而在Flink中也和此类似，可以被链接到一起的算子作为一个Task，一些算子之间因为会产生shuffle所以不能被链接，就产生了另外的Task
+>
+> 在Spark中一个分区一个并行度也就是一个Task，按照上面的理解，在Flink中就是一个分区一个并行度也就是一个SubTask，在Spark中一个Stage下面有多个Task，在Flink中一个Task下有多个SubTask
+
+在执行分布式计算时，Flink 将可以链接的操作 (operators) 链接到一起(Operator Chains)，这就是 Task。之所以这样做， 是为了减少线程间切换和缓冲而导致的开销，在降低延迟的同时可以提高整体的吞吐量。 但不是所有的 operator 都可以被链接，**<u>如下 keyBy 等操作会导致网络 shuffle 和重分区，因此其就不能被链接</u>**，只能被单独作为一个 Task。  简单来说，**一个 Task 就是一个可以链接的最小的操作链 (Operator Chains)** 。如下图，source 和 map 算子被链接到一块，因此整个作业就只有三个 Task：
 
 <div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/flink-task-subtask.png"/> </div>
 
