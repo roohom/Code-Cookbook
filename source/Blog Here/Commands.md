@@ -151,6 +151,7 @@ bin/stop-cluster.sh
 - 启动连接
 
   ~~~shell
+  cd /export/servers/confluent-5.5.1
   nohup bin/connect-distributed ./etc/kafka/connect-distributed.properties &
   ~~~
 
@@ -195,12 +196,42 @@ bin/stop-cluster.sh
            "table.whitelist": "uni.uni_table,uni.uni_table2",
            "snapshot.mode": "initial",
            "snapshot.locking.mode": "none",
-           "database.history.kafka.bootstrap.servers": "192.168.88.161:9092,192.168.88.162:9092,192.168.88.162:9092", 
+           "database.history.kafka.bootstrap.servers": "192.168.88.161:9092,192.168.88.162:9092,192.168.88.163:9092", 
            "database.history.kafka.topic": "dbhistory.ddl_history", 
            "include.schema.changes": "true"
            }
   }
   ~~~
+
+  - 完整版，本次测试不使用
+
+    ~~~json
+    {
+            "name": "pxc_flink_kudu_test_new", 
+            "config": {
+            "connector.class": "io.debezium.connector.mysql.MySqlConnector", 
+            "database.hostname": "192.168.88.161", 
+            "database.port": "3306", 
+            "database.user": "root", 
+            "database.password": "123456", 
+            "database.server.id": "5", 
+            "database.server.name": "pxc_cluster", 
+            "database.history.store.only.monitored.tables.ddl":"true",
+            "table.whitelist": "unit.unit_test,unit_test2",
+            "snapshot.mode": "initial",
+            "snapshot.locking.mode": "none",
+            "max.queue.size":"81290",
+            "max.batch.size":"20480",
+            "database.history.kafka.bootstrap.servers": "192.168.88.161:9092,192.168.88.162:9092,192.168.88.163:9092", 
+            "database.history.kafka.topic": "dbhistory.ddl_his_topic", 
+            "include.schema.changes": "true",
+            "transforms":"route",
+            "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
+            "transforms.route.regex":"(.*)\\.(.*)\\.(.*)",
+            "transforms.route.replacement":"local_test.$2.$3"
+            }
+    }
+    ~~~
 
 - 切换进入刚才所编写的`test.json`所存放的目录
 
@@ -248,11 +279,629 @@ bin/stop-cluster.sh
   curl http://localhost:8083/connectors
   ~~~
 
+  会返回类似于如下的信息即表明成功：
+
+  ~~~json
+  ["create_table_sync_test","dbz_connect_test","test","dbz_connect_test_4","dbz_connect_test_2"]
+  ~~~
+
 - 接下来操作MySQL数据库，进行DDL操作，进行CURD操作，此时Kafka会自动创建新的topic，消费刚刚多出来的topic，里面的数据格式为json格式的数据，包含了你所做的所有操作(不包含SELECT，因为没意义)
 
 
 
+##### 数据同步
 
+- 注意`payload`里面的内容
+  - c：插入
+  - u：更新
+  - d：删除
+
+- 对MySQL中的表进行插入操作，消费kafka中的topic(`database.server.name`.`database_name`.`table_name`)中的数据
+
+  ~~~json
+  {
+      "schema":{
+          "type":"struct",
+          "fields":[
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"name"
+                      }
+                  ],
+                  "optional":true,
+                  "name":"local_test.uni.uni_table2.Value",
+                  "field":"before"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"name"
+                      }
+                  ],
+                  "optional":true,
+                  "name":"local_test.uni.uni_table2.Value",
+                  "field":"after"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"version"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"connector"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"name"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"ts_ms"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "name":"io.debezium.data.Enum",
+                          "version":1,
+                          "parameters":{
+                              "allowed":"true,last,false"
+                          },
+                          "default":"false",
+                          "field":"snapshot"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"db"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"table"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"server_id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"gtid"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"file"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"pos"
+                      },
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"row"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":true,
+                          "field":"thread"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"query"
+                      }
+                  ],
+                  "optional":false,
+                  "name":"io.debezium.connector.mysql.Source",
+                  "field":"source"
+              },
+              {
+                  "type":"string",
+                  "optional":false,
+                  "field":"op"
+              },
+              {
+                  "type":"int64",
+                  "optional":true,
+                  "field":"ts_ms"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"total_order"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"data_collection_order"
+                      }
+                  ],
+                  "optional":true,
+                  "field":"transaction"
+              }
+          ],
+          "optional":false,
+          "name":"local_test.uni.uni_table2.Envelope"
+      },
+      "payload":{
+          "before":null,
+          "after":{
+              "id":2,
+              "name":"age"
+          },
+          "source":{
+              "version":"1.2.5.Final",
+              "connector":"mysql",
+              "name":"local_test",
+              "ts_ms":1610010822000,
+              "snapshot":"false",
+              "db":"uni",
+              "table":"uni_table2",
+              "server_id":1,
+              "gtid":null,
+              "file":"mysql_bin.000002",
+              "pos":4257,
+              "row":0,
+              "thread":24,
+              "query":null
+          },
+          "op":"c",
+          "ts_ms":1610010822566,
+          "transaction":null
+      }
+  }
+  ~~~
+
+- 更新操作update
+
+  ~~~json
+  {
+      "schema":{
+          "type":"struct",
+          "fields":[
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"name"
+                      }
+                  ],
+                  "optional":true,
+                  "name":"local_test.uni.uni_table2.Value",
+                  "field":"before"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"name"
+                      }
+                  ],
+                  "optional":true,
+                  "name":"local_test.uni.uni_table2.Value",
+                  "field":"after"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"version"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"connector"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"name"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"ts_ms"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "name":"io.debezium.data.Enum",
+                          "version":1,
+                          "parameters":{
+                              "allowed":"true,last,false"
+                          },
+                          "default":"false",
+                          "field":"snapshot"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"db"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"table"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"server_id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"gtid"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"file"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"pos"
+                      },
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"row"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":true,
+                          "field":"thread"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"query"
+                      }
+                  ],
+                  "optional":false,
+                  "name":"io.debezium.connector.mysql.Source",
+                  "field":"source"
+              },
+              {
+                  "type":"string",
+                  "optional":false,
+                  "field":"op"
+              },
+              {
+                  "type":"int64",
+                  "optional":true,
+                  "field":"ts_ms"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"total_order"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"data_collection_order"
+                      }
+                  ],
+                  "optional":true,
+                  "field":"transaction"
+              }
+          ],
+          "optional":false,
+          "name":"local_test.uni.uni_table2.Envelope"
+      },
+      "payload":{
+          "before":{
+              "id":2,
+              "name":"age"
+          },
+          "after":{
+              "id":2,
+              "name":"high"
+          },
+          "source":{
+              "version":"1.2.5.Final",
+              "connector":"mysql",
+              "name":"local_test",
+              "ts_ms":1610011059000,
+              "snapshot":"false",
+              "db":"uni",
+              "table":"uni_table2",
+              "server_id":1,
+              "gtid":null,
+              "file":"mysql_bin.000002",
+              "pos":4528,
+              "row":0,
+              "thread":24,
+              "query":null
+          },
+          "op":"u",
+          "ts_ms":1610011059616,
+          "transaction":null
+      }
+  }
+  ~~~
+
+- 删除操作delete
+
+  ~~~json
+  {
+      "schema":{
+          "type":"struct",
+          "fields":[
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"name"
+                      }
+                  ],
+                  "optional":true,
+                  "name":"local_test.uni.uni_table2.Value",
+                  "field":"before"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"name"
+                      }
+                  ],
+                  "optional":true,
+                  "name":"local_test.uni.uni_table2.Value",
+                  "field":"after"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"version"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"connector"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"name"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"ts_ms"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "name":"io.debezium.data.Enum",
+                          "version":1,
+                          "parameters":{
+                              "allowed":"true,last,false"
+                          },
+                          "default":"false",
+                          "field":"snapshot"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"db"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"table"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"server_id"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"gtid"
+                      },
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"file"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"pos"
+                      },
+                      {
+                          "type":"int32",
+                          "optional":false,
+                          "field":"row"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":true,
+                          "field":"thread"
+                      },
+                      {
+                          "type":"string",
+                          "optional":true,
+                          "field":"query"
+                      }
+                  ],
+                  "optional":false,
+                  "name":"io.debezium.connector.mysql.Source",
+                  "field":"source"
+              },
+              {
+                  "type":"string",
+                  "optional":false,
+                  "field":"op"
+              },
+              {
+                  "type":"int64",
+                  "optional":true,
+                  "field":"ts_ms"
+              },
+              {
+                  "type":"struct",
+                  "fields":[
+                      {
+                          "type":"string",
+                          "optional":false,
+                          "field":"id"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"total_order"
+                      },
+                      {
+                          "type":"int64",
+                          "optional":false,
+                          "field":"data_collection_order"
+                      }
+                  ],
+                  "optional":true,
+                  "field":"transaction"
+              }
+          ],
+          "optional":false,
+          "name":"local_test.uni.uni_table2.Envelope"
+      },
+      "payload":{
+          "before":{
+              "id":2,
+              "name":"high"
+          },
+          "after":null,
+          "source":{
+              "version":"1.2.5.Final",
+              "connector":"mysql",
+              "name":"local_test",
+              "ts_ms":1610011376000,
+              "snapshot":"false",
+              "db":"uni",
+              "table":"uni_table2",
+              "server_id":1,
+              "gtid":null,
+              "file":"mysql_bin.000002",
+              "pos":4810,
+              "row":0,
+              "thread":24,
+              "query":null
+          },
+          "op":"d",
+          "ts_ms":1610011376846,
+          "transaction":null
+      }
+  }
+  ~~~
+
+##### REST API控制
+
+- `curl -s <Kafka Connect Worker URL>:8083/ `
+  获取 Connect Worker 信息
+- `curl -s <Kafka Connect Worker URL>:8083/connector-plugins `
+  列出 Connect Worker 上所有 Connector
+- `curl -s <Kafka Connect Worker URL>:8083/connectors/<Connector名字>/tasks `
+  获取 Connector 上 Task 以及相关配置的信息
+- `curl -s <Kafka Connect Worker URL>:8083/connectors/<Connector名字>/status `
+  获取 Connector 状态信息
+- `curl -s <Kafka Connect Worker URL>:8083/connectors/<Connector名字>/config `
+  获取 Connector 配置信息
+- `curl -s -X PUT <Kafka Connect Worker URL>:8083/connectors/<Connector名字>/pause`
+  暂停 Connector
+- `curl -s -X PUT <Kafka Connect Worker URL>:8083/connectors/<Connector名字>/resume`
+  重启 Connector
+- `curl -s -X DELETE <Kafka Connect Worker URL>:8083/connectors/<Connector名字>`
+  删除 Connector
+
+- 举个栗子：
+
+  ~~~shell
+  # 提交一个任务
+  curl -s -X POST -H 'Content-Type: application/json' --data @curd_one_topic_test.json http://localhost:8083/connectors
+  ~~~
+
+  
 
 
 
