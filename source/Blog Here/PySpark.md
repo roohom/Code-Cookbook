@@ -151,6 +151,8 @@ if __name__ == '__main__':
     spark.sql("SELECT COUNT(*) FROM tab").show()
     df.toPandas() # 以pandas的表格形式展示
     spark.sql("SELECT * FROM tab LIMIT 20").toPandas() # 如果原表数据量太大，直接调用toPandas()的话，可能会导致Driver内存溢出，这里使用sql选取20行再以pandas的表格形式展示
+    
+    spark.stop()
 ~~~
 
 
