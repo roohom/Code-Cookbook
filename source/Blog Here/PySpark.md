@@ -114,6 +114,10 @@ def initSparkSession():
 
 ## PySpark读取Kudu
 
+> 如果想要成功读取Kudu，还需要Kudu-Spark的Jar包，放在合适的位置，在代码中由`os.environ["PYSPARK_SUBMIT_ARGS"] = '--jars kudu-spark2_2.11-1.13.0.jar pyspark-shell'`指定，示例中使用的是`kudu-spark2_2.11-1.13.0.jar`,位置为代码所在的目录，当然也可以使用绝对路径
+
+
+
 ~~~python
 def initSparkSession():
     """
