@@ -161,7 +161,57 @@ if __name__ == '__main__':
 
 
 
+## PySpark读取Hive
 
+- 为了成功支持读取Hive，在Windows环境下，需要本地安装spark环境，并且在spark的conf目录下放入Hive配置中的hive-site.xml和hadoop集群的core-site.xml、core-site.xml配置文件  
+
+> Configuration of Hive is done by placing your hive-site.xml, core-site.xml (for security configuration), and core-site.xml (for HDFS configuration) file in conf/.
+
+代码示例：
+
+~~~python
+def initSparkHiveSession():
+    """
+    实例化一个SparkSession对象
+    为了成功支持读取Hive，在Windows环境下，需要本地安装spark环境，
+    并且在spark的conf目录下放入Hive配置中的hive-site.xml和hadoop集群的core-site.xml、core-site.xml配置文件
+    """
+    import os
+    from pyspark.sql import SparkSession
+    
+    # 用来支持读Kudu的，在本程序所在同级目录下必须有kudu-spark2_2.11-1.13.0.jar这个jar包
+    os.environ["PYSPARK_SUBMIT_ARGS"] = '--jars kudu-spark2_2.11-1.13.0.jar pyspark-shell'
+    # 本地环境的JDK
+    os.environ ['JAVA_HOME'] = 'C:\Program Files\Java\jdk1.8.0_201'
+    # 本地环境的spark-hadoop集成包
+    os.environ ['SPARK_HOME'] = 'E:\spark-2.4.7-bin-hadoop2.7'
+    
+    import findspark
+    findspark.init("E:\spark-2.4.7-bin-hadoop2.7")
+    # config中配置Hive在HDFS上的目录地址，当创建数据库或者向表中写入文件时会在此目录下进行操作 
+    spark = SparkSession.builder \
+            .appName("SparkSQLHive") \
+            .config("spark.sql.warehouse.dir", "/user/hive/warehouse") \
+            .enableHiveSupport() \
+            .getOrCreate()
+    return spark
+
+
+if __name__ == '__main__':
+    # 实例化一个SparkSession对象
+    # spark = initSparkSession()
+    
+    # 将对象作为参数传入函数
+    # df = readKuduTable(spark, "node1:7051,node2:7051,node3:7051", "fox_tc_error_code_mapping")
+    
+    spark = initSparkHiveSession()
+    
+    spark.sql("USE DEFAULT")
+    spark.sql("SHOW TABLES").show()
+    spark.stop()
+~~~
+
+![image-20210428231837889](PySpark.assets/image-20210428231837889.png)
 
 
 
