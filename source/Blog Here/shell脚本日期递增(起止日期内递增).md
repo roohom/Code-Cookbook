@@ -58,7 +58,7 @@ done
   #!/bin/bash
   echo "DATE FORMAT IS %Y-%m-%d"
   
-  kinit -kt /opt/tabs/scb.keytab scb
+  kinit -kt /path/to/keytab username
   
   if [ $# == 0 ] 
   then
