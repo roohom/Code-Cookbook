@@ -50,8 +50,12 @@ done
 
 - SHELL脚本如下：
 
+  > 文件名为：event.sh
+
   ~~~shell
   #!/bin/bash
+  echo "DATE FORT IS %Y-%m-%d"
+  
   kinit -kt /opt/tabs/scb.keytab scb
   
   if [ $# == 0 ] 
@@ -87,6 +91,8 @@ done
 
 - 上面的SHELL脚本将会调用下面的Hive SQL文件：
 
+  > 文件名为：event.sql
+
   ~~~SQL
   SET hive.execution.engine=spark;
   SET spark.master=yarn-cluster;
@@ -98,14 +104,14 @@ done
   SET hive.spark.client.future.timeout=180;
   SET spark.app.name=sa_rtm_to_ods_rtm;
   
-  MSCK REPAIR TABLE sa_rtm;--修复元数据，一般不需要
+  MSCK REPAIR TABLE rtm.sa_rtm;--修复元数据，一般不需要
   
   INSERT OVERWRITE TABLE rtm.ods_rtm PARTITION(year='2021', dt = '${hivevar:start_day}')
   SELECT * FROM rtm.sa_rtm
   WHERE dt='${hivevar:start_day}';
   ~~~
 
-  
-
-
+> 说明：上面的SHELL脚本和下面的HiveSQL文件需要在一个目录下，或者在shell脚本中使用hive执行文件命令的地方写出sql文件的绝对路径
+>
+> 直接运行event.sh脚本并输入起止日期即可启动
 
