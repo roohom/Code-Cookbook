@@ -10,6 +10,8 @@
 
 ~~~shell
 #!/bin/bash
+echo "DATE FORMAT IS %Y-%m-%d"
+
 if [ $# == 0 ] 
 then
    echo "PLEASE INPUT [START_DATE AND END_DATE)"
@@ -54,7 +56,7 @@ done
 
   ~~~shell
   #!/bin/bash
-  echo "DATE FORT IS %Y-%m-%d"
+  echo "DATE FORMAT IS %Y-%m-%d"
   
   kinit -kt /opt/tabs/scb.keytab scb
   
