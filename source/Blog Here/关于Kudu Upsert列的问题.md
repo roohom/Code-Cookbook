@@ -34,7 +34,7 @@ INSERT INTO test.upsert_kudu_test VALUES(1, 'aaa',NOW());
 
 没有问题，impala可以直接查询出来
 
-<img src="关于Kudu Upsert列的问题.assets/image-20210721234205692.png" alt="image-20210721234205692" style="zoom:50%;" />
+<img src="KuduUpsertProblem.assets/image-20210721234205692.png" alt="image-20210721234205692" style="zoom:50%;" />
 
 可是，实际情况是，任务是使用Spark在集群环境中跑的，对于kudu中列数据的插入和修改都是通过spark来完成的，于是，我模拟在本地使用spark来插入和修改改表的数据，代码如下：
 
@@ -116,7 +116,7 @@ kuduContext.upsertRows(df,"impala::test.upsert_kudu_test", kuduWriteOptions);
 +---+-----+-------------------------+
 ~~~
 
-<img src="关于Kudu Upsert列的问题.assets/image-20210721235420550.png" alt="image-20210721235420550" style="zoom:50%;" />
+<img src="KuduUpsertProblem.assets/image-20210721235420550.png" alt="image-20210721235420550" style="zoom:50%;" />
 
 可以观察到，<u>name变了，可是时间却没有变</u>，好家伙，继续尝试，将etl_time加上，可是这次不写`AS etl_time`
 
@@ -140,7 +140,7 @@ kuduContext.upsertRows(df,"impala::test.upsert_kudu_test", kuduWriteOptions);
 +---+-----+-------------------------+
 ~~~
 
-<img src="关于Kudu Upsert列的问题.assets/image-20210721235517860.png" alt="image-20210721235517860" style="zoom:50%;" />
+<img src="KuduUpsertProblem.assets/image-20210721235517860.png" alt="image-20210721235517860" style="zoom:50%;" />
 
 可以观察到，<u>`etl_time`这个字段的值，并没有发生改变</u>
 
@@ -157,7 +157,7 @@ kuduContext.upsertRows(df,"impala::test.upsert_kudu_test", kuduWriteOptions);
 +---+-----+-------------------------+
 ~~~
 
-<img src="关于Kudu Upsert列的问题.assets/image-20210721235901197.png" alt="image-20210721235901197" style="zoom:50%;" />
+<img src="KuduUpsertProblem.assets/image-20210721235901197.png" alt="image-20210721235901197" style="zoom:50%;" />
 
 可以观察到，`etl_time`这个字段的值，这次改变了
 
