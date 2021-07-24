@@ -109,7 +109,7 @@ at org.springframework.beans.factory.support.ConstructorResolver.instantiate(Con
 
 怎么会呢，我在IDEA中搜索了`com.google.gson.GsonBuilder.setLenient()`,显示在2.8.6版本的源码中明明就有这个方法！
 
-![image-20210725013333715](Springboot整合Spark, 本地、集群部署.assets/image-20210725013333715.png)
+![image-20210725013333715](SpringbootIntegrateWithSpark.assets/image-20210725013333715.png)
 
 
 
@@ -200,7 +200,7 @@ Driver的控制台输出：
 
 成功创建了表，并且在表里写入了数据：
 
-![iShot2021-07-25 01.44.20](SpringbootIntegrateWithSpark.assets/iShot2021-07-25 01.44.20.png)
+![iShot2021-07-25 01.44.20](SpringbootIntegrateWithSpark.assets/iShot2021-07-25-01.44.20.png)
 
 ## 总结
 
