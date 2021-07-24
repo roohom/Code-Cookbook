@@ -2,6 +2,8 @@
 
 今天做线索下发，涉及到spark修改kudu列的数据，发现了一个问题，kudu表中的数据始终没有被修改，于是晚间我在本地尝试着复现了一波，发现了一些问题，记录于此，明天去测试环境再测试一下。
 
+> 补充：经过在测试环境的尝试(测试的集群环境的Kudu版本为1.9, 本地测试使用的是Kudu1.13的依赖包)，情况相同。
+
 ## 需求起源
 
 场景是这样的，<u>需求是原先存在于kudu表中的数据，有一列为主键，当该列的数据发生更新之后，直接将该条数据upsert。</u>
@@ -166,6 +168,6 @@ kuduContext.upsertRows(df,"impala::test.upsert_kudu_test", kuduWriteOptions);
 ## 结论
 
 - 在使用spark去upsert kudu列的时候，一定得讲SELECT得到的DF每个字段加上该列的名字，即加上`AS COLUMN_NAME`，经过尝试
-  - 不加`AS COLUMN_NAME`，kudu无法识别，不会进行更新
+  - 不加`AS COLUMN_NAME`，kudu无法识别，不会进行更新，同时也不会报错
   - 加上了`AS COLUMN_NAME`，但是COLUMN_NAME错了，Kudu则会报错
 - Kudu是列式存储
