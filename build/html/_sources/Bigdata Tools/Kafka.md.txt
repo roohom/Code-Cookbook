@@ -227,8 +227,11 @@
           hbase
           ```
 
-
 ### 架构
+
+![KafkaFramework](Kafka.assets/KafkaFramework.svg)
+
+
 
 - Hbase：Table：Region：Store：mem&storefile
 - Kakfa：Topic：Partition：Segment：.log & .index
@@ -253,7 +256,7 @@
 
 - Kafka中一个Topic可以对应多个分区，当写入数据会根据分区规则将这个数据写入对应的分区
 - 分区规则：
-  - 方式一：如果给定Keyu，按照Key的hash取余分区个数
+  - 方式一：如果给定Key，按照Key的hash取余分区个数
   - 方式二：如果没有给定Key，按照轮询方式
   - 方式三：指定分区写入
   - 方式四：自定义分区规则
@@ -273,7 +276,7 @@ props.put("partitioner.class","bigdata.itcast.cn.kafka.partition.UserPartition")
 #### 自定义随机分区类
 
 ~~~java
-package bigdata.itcast.cn.kafka.partition;
+package bigdata.iroohom.me.kafka.partition;
 
 import org.apache.kafka.clients.producer.Partitioner;
 import org.apache.kafka.common.Cluster;
@@ -472,7 +475,7 @@ public class UserPartition implements Partitioner {
       - 磁盘数据通过 DMA 拷贝到内核态 Buffer 后，直接通过 DMA 拷贝到 NIC Buffer(socket buffer)，无需 CPU 拷贝。这也是零拷贝这一说法的来源。除了减少数据拷贝外，因为整个读文件 - 网络发送由一个 sendfile 调用完成，整个过程只有两次上下文切换，因此大大提高了性能
       - Customer从broker读取数据，采用sendfile，将磁盘文件读到OS内核缓冲区后，直接转到socket buffer进行网络发送
   
-    ![traditionalCopy](Kafka.assets/traditionalCopy-1606737824163.svg)
+    ![ZeroCopy](Kafka.assets/ZeroCopy.svg)
   
     > 总的来说Kafka快的原因：
     > 1、partition顺序读写，充分利用磁盘特性，这是基础；
@@ -545,50 +548,54 @@ public class UserPartition implements Partitioner {
 
 ### 保证生产数据不丢失不重复
 
-- 生产：生产=> Kafka
+> 保证生产者数据不丢失或者说一次性语义的机制是：**ACK机制**
 
-- **ack确认机制**：生产者给Kafka发送数据
+#### **ack确认机制**
 
-  - 0：不管Kafka有没有收到，不断发送下一条
+生产者给Kafka发送数据
 
-    - 数据易丢失，不会选用
+- 0：不管Kafka有没有收到，不断发送下一条
 
-  - 1：只要写入分区对应的leader分区，就返回ack
+  - 数据易丢失，不会选用
 
-    - 安全：所有从副本分区会与leader分区同步数据
-    - 丢失：如果leader刚写入，返回ack，这时候副本没有同步成功，leader分区故障会导致数据丢失
+- 1：只要写入分区对应的leader分区，就返回ack
 
-  - all：写入分区时，必须所有的副本都写入成功才返回ack
+  - 安全：所有从副本分区会与leader分区同步数据
+  - 丢失：如果leader刚写入，返回ack，这时候副本没有同步成功，leader分区故障会导致数据丢失
 
-    - 安全：所有副本都有这个数据
+- all：写入分区时，必须所有的副本都写入成功才返回ack
 
-    - 性能：非常慢
+  > `acks=all` This means the leader will wait for the full set of in-sync replicas to acknowledge the record. This guarantees that the record will not be lost as long as at least one in-sync replica remains alive. This is the strongest available guarantee. This is equivalent to the `acks=-1` setting.
 
-      - 如何解决性能问题？
+  - 安全：所有副本都有这个数据
 
-      - 如果为all，可以配置有多少个副本同步成功以后，就返回ack(类似于zookeeper中的超过半数就返回一样)
+  - 性能：非常慢
 
-        ~~~
-        min.insync.replicas=2
-        ~~~
+    - 如何解决性能问题？
+
+    - 如果为all，可以配置有多少个副本同步成功以后，就返回ack(类似于zookeeper中的超过半数就返回一样)
+
+      ~~~
+      min.insync.replicas=2
+      ~~~
 
 - 不丢失：重试机制
 
   - 只要没有收到ack，就可以重试
 
-- 不重复
+#### 幂等性问题
 
-  - 场景：生产者给Kafka发送户数，Kafka接收并写入数据到分区，返回ack，由于网络原因ack丢失了
-    - 对于Kafka而言数据已经接收并写入成功，但是对于生产者而言没有收到ack，认为Kafka没有收到，由于重试机制会再次发送此条数据，就导致了Kafka中的数据重复
-  - 问题：幂等性问题
-    - Kafka中生产的幂等性问题：对于一条数据，不论生产者发送多少次，最终只写入Kafka一次
-  - 解决：
-    - 生产者生产数据的时候，增加两个标记
-      - 数据id：每条新数据会自动+1
-      - 生产者id：由Kafka分配，新的生产者会得到一个于之前一模一样的id
-    - 在kafka接收到新数据的时候，做一次判断：判断这个数据的id是否比上一次写入的数据的id大1
-      - 如果大1，就写入数据
-      - 如果不大1（相等），就丢弃此条数据（说明重复了）
+- 场景：生产者给Kafka发送户数，Kafka接收并写入数据到分区，返回ack，由于网络原因ack丢失了
+  - 对于Kafka而言数据已经接收并写入成功，但是对于生产者而言没有收到ack，认为Kafka没有收到，由于重试机制会再次发送此条数据，就导致了Kafka中的数据重复
+- 问题：幂等性问题
+  - Kafka中生产的幂等性问题：对于一条数据，不论生产者发送多少次，最终只写入Kafka一次
+- 解决：
+  - 生产者生产数据的时候，增加两个标记
+    - 数据id：每条新数据会自动+1
+    - 生产者id：由Kafka分配，新的生产者会得到一个于之前一模一样的id
+  - 在kafka接收到新数据的时候，做一次判断：判断这个数据的id是否比上一次写入的数据的id大1
+    - 如果大1，就写入数据
+    - 如果不大1（相等），就丢弃此条数据（说明重复了）
 
 ### 保证消费数据不丢失不重复
 
@@ -657,8 +664,8 @@ public class UserPartition implements Partitioner {
 |         log.roll.hours          | 168             | ==单个log文件生成的时间规则，默认7天一个log==            |
 |       log.cleaner.enable        | false           | ==false表示删除过期数据，如果为true，进行compact==       |
 |       log.cleanup.policy        | delete，compact | ==默认为delete，删除过期数据==                           |
-|      log.retention.minutes      | 分钟值          | ==segment生成多少分钟后删除==，做了标记                  |
-|       log.retention.hours       | 小时值          | ==segment生成多少小时后删除==                            |
+|      log.retention.minutes      | 分钟值          | segment生成多少分钟后删除，做了标记                      |
+|       log.retention.hours       | 小时值          | segment生成多少小时后删除                                |
 | log.retention.check.interval.ms | 毫秒值          | 多长时间检查一次是否有数据要标记删除                     |
 | log.cleaner.delete.retention.ms | 毫秒值          | segment标记删除后多长时间删除                            |
 |     log.cleaner.backoff.ms      | 毫秒值          | 多长时间检查一次是否有数据要删除                         |
@@ -673,11 +680,11 @@ public class UserPartition implements Partitioner {
 |         num.io.threads          | 8               | 处理读写硬盘的IO的线程数                                 |
 |       background.threads        | 4               | 后台处理的线程数，例如清理文件等                         |
 
-- AR：一个分区的所有副本
+- AR(all replicas)：一个分区的所有副本
 
-- ISR：一个分区的正在同步的副本，可用副本
+- ISR(in-sync replica)：一个分区的正在同步的副本，可用副本
 
-  - 如果leader故障，会从isr中重新选举一个新的leader
+  - 如果leader故障，会从ISR列表(存储在Zookeeper上)中重新选举一个新的leader
 
   - 判断条件：同步时间
 
@@ -690,6 +697,18 @@ public class UserPartition implements Partitioner {
 - OSR：不可用副本，也会与leader同步
 
   - 只要follower副本与leader副本没有在规定这个时间内，同步一次，就认为你是一个OSR
+  
+- LEO：日志末端偏移量，用来标识当前日志文件中下一条写入消息的offset
+
+  - 比如LEO=10，表示在该副本上已经保存了10条消息，偏移量为[0-9]
+
+- HW(HighWatermark)：高水位，标识了一个特定的消息偏移量，消费者只能消费这个offset之前的消息
+
+  - 作用是来判断副本的备份程度
+  - 小于或者等于HW的消息被认为是已经提交或者已经备份的
+  - Leader分区的HW是整个Topic的HW
+    - `leader HW值 = 所有副本LEO最小值`
+    - `follower HW值 =min(follower自身LEO 和 leader HW)`
 
 ## Kafka常用操作指南
 
@@ -762,10 +781,6 @@ public class UserPartition implements Partitioner {
     
      你可以通过命令：./bin/kafka-topics --zookeeper 【zookeeper server】 --list 来查看所有topic
 
- 
-
-
-
      此时你若想真正删除它，可以如下操作：
     
      （1）登录zookeeper客户端：命令：./bin/zookeeper-client
@@ -773,10 +788,6 @@ public class UserPartition implements Partitioner {
      （2）找到topic所在的目录：ls /brokers/topics
     
      （3）找到要删除的topic，执行命令：rmr /brokers/topics/【topic name】即可，此时topic被彻底删除。
-
- 
-
-
 
     另外被标记为marked for deletion的topic你可以在zookeeper客户端中通过命令获得：ls /admin/delete_topics/【topic name】，
     
@@ -812,4 +823,91 @@ public class UserPartition implements Partitioner {
   ~~~
 
   - 默认从Topic中最新的数据开始消费
+
+
+
+## Kafka Rebalance
+
+[点我去参考文章](https://juejin.cn/post/6844904032381698055)
+
+### 什么是Rebalance？
+
+Kafka Rebalance本质上是一种协定，规定了一个消费者组Consumer Group是如何达成一直的协定来订阅Topic的分区的。
+
+> 假设某个组下有20个consumer实例，该组订阅了一个有着100个分区的topic。正常情况下，Kafka会为每个consumer平均分配5个分区。这个分配过程就被称为rebalance。当consumer成功地执行rebalance后，组订阅topic的每个分区只会分配给组内的一个consumer实例。
+
+### 什么时候进行Rebalance？
+
+触发Rebalance有三个条件或者是场景：
+
+- 1、消费者组内消费者成员数量变动，如Consumer Group内新增一个Consumer，或者组内Consumer主动离开组，再或者是组内一个消费者直接崩溃导致Rebalance
+- 2、订阅topic数发生变更，比如使用基于正则表达式的订阅，当匹配正则表达式的新topic被创建时则会触发rebalance
+- 3、组订阅topic的分区数发生变更，比如使用命令脚本增加了订阅topic的分区数
+
+在实际情况下，最容易引发Rebalance的场景是第一种场景，但也其实不是消费者组增加消费者或者是消费者崩溃，<u>当consumer无法在指定的时间内完成消息的处理，那么coordinator就认为该consumer已经崩溃，从而引发新一轮rebalance</u>
+
+### 流程-当发生Rebalance是发生了什么？
+
+> [来源自：Kafka重平衡—Rebalance 你了解吗？](https://juejin.cn/post/6844904032381698055)，如有侵权，请[联系我](roohom@qq.com)删除
+
+consumer group在执行rebalance之前必须首先确认coordinator所在的broker，并创建与该broker相互通信的Socket连接。
+
+确定coordinator的算法与确定offset被提交到_consumer_offsets目标分区的算法是相同的。
+
+算法如下：
+
+- 计算Math.abs(groupID.hashCode)%offsets.topic.num.partitions参数值（默认是50），假设是10.
+- 寻找_consumer_offsets分区10的leader副本所在的broker，该broker即为这个group的coordinator。
+
+成功连接coordinator之后便可以执行rebalance操作。
+
+**目前rebalance主要分为两步：加入组和同步更新分配方案。**
+
+- **加入组**：这一步中组内所有consumer（即group.id相同的所有consumer实例）向coordinator发生JoinGroup请求。
+
+当收集全JoinGroup请求后，coordinator从中选择一个consumer担任group的leader，并把所有成员信息以及它们的订阅信息发送给leader。
+
+特别需要注意的是，group的leader和coordinator不是一个概念。
+
+leader是某个consumer实例，coordinator通常是Kafka集群中的一个broker。另外leader而非coordinator负责整个group的所有成员制定分配方案。
+
+- **同步更新分配方案**：这一步中leader开始制定分配方案，即根据前面提到的分配策略决定每个consumer都负责哪些topic的哪些分区。
+
+一旦分配完成，leader会把这个分配方案封装进SyncGroup请求并发送给coordinator。比较有意思的是，组内所有成员都会发送SyncGroup请求，不过只有leader发送的SyncGroup请求中包含了分配方案。
+
+coordinator接收到分配方案后把属于每个consumer的方案单独抽取出来作为SyncGroup请求的response返还给各自的consumer。
+
+
+
+
+
+##  Kafka的分区策略
+
+### 生产者分区策略
+
+> 生产者向Kafka中的Topic中生产数据时决定数据写入哪个Topic
+
+- 分区规则：
+  - 方式一：如果给定Key，按照Key的hash取余分区个数
+  - 方式二：如果没有给定Key，按照轮询方式
+  - 方式三：指定分区写入
+  - 方式四：自定义分区规则
+
+<u>通常在回答分区策略时，到此就已经可以算是结束，但是在涉及Rebalance时，Kafka有如下策略保证分区被消费者消费的重新分配</u>
+
+### Rebalance时分区分配
+
+> 消费者消费Kafka的Topic时，为保证消费者均匀消费Kafka的分区，而将分区分配个消费者的策略
+
+- Range策略
+  - 它将单个topic的所有分区按照顺序排列，然后把这些分区划分成固定大小的分区段并依次分配给每个consumer
+- round-robin策略
+  - 把所有topic的所有分区顺序摆开，然后轮询式地分配给各个consumer
+- Sticky策略
+  - 富有粘性的分配策略
+    - 分配分区尽可能均匀
+    - 分配分区尽可能和上一次保持一致
+- 自定义Consumer分配器(Assignor)
+
+
 

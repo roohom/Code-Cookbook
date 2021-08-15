@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>SQL &mdash; Code-Cookbook 0.1 文档</title>
   
@@ -13,10 +13,15 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -37,8 +42,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="JDBC.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../Auxiliary%20tools/Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" /> 
+    <link rel="next" title="1. JDBC" href="JDBC.html" />
+    <link rel="prev" title="3. Sqoop" href="../Auxiliary%20tools/Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
           
 
           
@@ -66,7 +71,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,22 +88,30 @@
               
             
             
-              <p class="caption"><span class="caption-text">大数据</span></p>
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">博客</span></p>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SQL相关</span></p>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">SQL</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SQL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JDBC.html">1. JDBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">2. MySQL 50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">3. MySQL语句执行顺序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Replace%20into.html">4. Replace into</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SQL%20JOINS.html">5. SQL JOINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WITH-AS.html">6. WITH AS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html">7. 使用sql处理json数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html">8. 宽表与数据库设计三范式</a></li>
 </ul>
 </li>
 </ul>
@@ -141,6 +154,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -152,8 +167,8 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/SQL/index.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/SQL/index.rst.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -169,6 +184,48 @@
   <div class="section" id="sql">
 <h1>SQL<a class="headerlink" href="#sql" title="永久链接至标题">¶</a></h1>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBC.html">1. JDBC</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JDBC.html#id1">1.1. 预处理对象</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JDBC.html#id2">1.2. 连接池</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JDBC.html#id3">1.3. 事务</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">2. MySQL 50题记录</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html#id1">2.1. 整理在前:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html#id2">2.2. 可能涉及的到的知识:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html#id5">2.3. 题设条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html#id6">2.4. 题目(1~50)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">3. MySQL语句执行顺序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Replace%20into.html">4. Replace into</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Replace%20into.html#id1">4.1. 作用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Replace%20into.html#id2">4.2. 限制条件</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SQL%20JOINS.html">5. SQL JOINS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SQL%20JOINS.html#join">5.1. 几个测试说明各种join的区别:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WITH-AS.html">6. WITH AS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="WITH-AS.html#id1">6.1. 功能</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WITH-AS.html#id2">6.2. 使用方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WITH-AS.html#id3">6.3. 注意事项</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html">7. 使用sql处理json数据</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html#impala">7.1. IMPALA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html#hive">7.2. HIVE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html#spark">7.3. SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html">8. 宽表与数据库设计三范式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html#id2">8.1. 宽表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html#id3">8.2. 三范式</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -177,37 +234,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="JDBC.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../Auxiliary%20tools/Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="JDBC.html" class="btn btn-neutral float-right" title="1. JDBC" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../Auxiliary%20tools/Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" class="btn btn-neutral float-left" title="3. Sqoop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 版权所有 2020-2020, roohom
+        &#169; 版权所有 2020-2021, roohom.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
-
         </div>
       </div>
 

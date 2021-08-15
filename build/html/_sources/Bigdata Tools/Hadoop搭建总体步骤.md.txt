@@ -38,16 +38,12 @@
   | ResourceManager |       |       |   *   |
   |   NodeManager   |   *   |   *   |   *   |
 
-  
-
 - 启动和关闭hdfs（未配置环境变量的情况下要去sbin目录下）
 
   ~~~shell
   start-dfs.sh
   stop-dfs.sh
   ~~~
-
-  
 
 - 启动和关闭yarn
 
@@ -56,23 +52,30 @@
   stop-yarn.sh
   ~~~
 
-  
 
 ## Hadoop分布式上安装
 
 - 解压安装
 
-- 修改配置
+- 修改配置：<u>配置文件都在Hadoop的etc/hadoop目录下</u>
 
   - *-env.sh：用于配置环境变量
     - hadoop-env.sh
+      - Hadoop的环境变量，比如声明`JAVA_HOME`
     - mapred-env.sh
+      - MapReduce的环境变量
     - yarn-env.sh
+      - YARN的环境变量
   - *-site.xml
     - core-site.xml
+      - 配置Hadoop的全局的一些属性
+      - 比如端口号、块大小等
     - hdfs-site.xml
+      - HDFS的属性配置
       - dfs.replication：配置每个文件块的副本数
     - mapred-site.xml
+      - MapReduce的一些属性
+      - 比如Web端口
     - yarn-site.xml
   - slaves：用于配置从节点[DataNode、NodeManager]地址
     - 计算节点都与存储节点在同一台机器（DataNode也是NodeManager）
@@ -83,7 +86,7 @@
 
     - 只能在NameNode所在的机器格式化
 
-      ~~~
+      ~~~shell
     hdfs namenode -format
       ~~~
 

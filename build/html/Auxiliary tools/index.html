@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Auxiliary tools &mdash; Code-Cookbook 0.1 文档</title>
   
@@ -13,10 +13,15 @@
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -37,8 +42,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Apache%20Avro.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../Blogs/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html" /> 
+    <link rel="next" title="1. Apache Avro" href="Apache%20Avro.html" />
+    <link rel="prev" title="40. Java OOP防脱发指南" href="../Blog%20Here/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
           
 
           
@@ -66,7 +71,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,22 +88,25 @@
               
             
             
-              <p class="caption"><span class="caption-text">大数据</span></p>
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">博客</span></p>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Auxiliary tools</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Auxiliary tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Avro.html">1. Apache Avro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Docker.html">2. Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">3. Sqoop</a></li>
 </ul>
 </li>
 </ul>
-<p class="caption"><span class="caption-text">SQL相关</span></p>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
@@ -141,6 +149,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -152,8 +162,8 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/Auxiliary tools/index.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/Auxiliary tools/index.rst.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -169,6 +179,24 @@
   <div class="section" id="auxiliary-tools">
 <h1>Auxiliary tools<a class="headerlink" href="#auxiliary-tools" title="永久链接至标题">¶</a></h1>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Apache%20Avro.html">1. Apache Avro</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Avro.html#why-we-choose-avro">1.1. Why we choose Avro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Avro.html#id1">1.2. 数据类型</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Docker.html">2. Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Docker.html#overview">2.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Docker.html#id1">2.2. 启动和停止</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">3. Sqoop</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html#id1">3.1. 简单使用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html#id3">3.2. 增量导入</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html#sqoop-job">3.3. Sqoop Job</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 
@@ -177,37 +205,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Apache%20Avro.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../Blogs/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="Apache%20Avro.html" class="btn btn-neutral float-right" title="1. Apache Avro" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../Blog%20Here/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html" class="btn btn-neutral float-left" title="40. Java OOP防脱发指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 版权所有 2020-2020, roohom
+        &#169; 版权所有 2020-2021, roohom.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
-
         </div>
       </div>
 

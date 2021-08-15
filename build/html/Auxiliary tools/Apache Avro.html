@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
+  <title>1. Apache Avro &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -37,7 +42,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" />
+    <link rel="next" title="2. Docker" href="Docker.html" />
     <link rel="prev" title="Auxiliary tools" href="index.html" /> 
 </head>
 
@@ -52,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
           
 
           
@@ -66,7 +71,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,20 +88,33 @@
               
             
             
-              <p class="caption"><span class="caption-text">大数据</span></p>
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">博客</span></p>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Auxiliary tools</a></li>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Auxiliary tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Apache Avro</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-we-choose-avro">1.1. Why we choose Avro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.2. 数据类型</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">1.2.1. 原生类型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">1.2.2. 复杂数据类型</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SQL相关</span></p>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Docker.html">2. Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">3. Sqoop</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
@@ -139,6 +157,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -147,13 +167,13 @@
         
           <li><a href="index.html">Auxiliary tools</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li><span class="section-number">1. </span>Apache Avro</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/Auxiliary tools/Apache Avro.md.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/Auxiliary tools/Apache Avro.md.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -166,36 +186,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p># Apache Avro</p>
-<p>&gt; Avro是Hadoop的子项目，是高性能的数据传输中间件。Avro可以做到将数据进行序列化，适用于远程或本地大批量数据交互。在传输的过程中Avro对数据二进制序列化后节约数据存储空间和网络传输带宽。</p>
-<p>## Why we choose Avro</p>
-<ul>
-<li><p>优点：
-- 数据结构丰富</p>
+  <div class="section" id="apache-avro">
+<h1><span class="section-number">1. </span>Apache Avro<a class="headerlink" href="#apache-avro" title="永久链接至标题">¶</a></h1>
 <blockquote>
-<div><ul class="simple">
+<div><p>Avro是Hadoop的子项目，是高性能的数据传输中间件。Avro可以做到将数据进行序列化，适用于远程或本地大批量数据交互。在传输的过程中Avro对数据二进制序列化后节约数据存储空间和网络传输带宽。</p>
+</div></blockquote>
+<div class="section" id="why-we-choose-avro">
+<h2><span class="section-number">1.1. </span>Why we choose Avro<a class="headerlink" href="#why-we-choose-avro" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>优点：</p>
+<ul>
+<li><p>数据结构丰富</p>
+<ul>
 <li><p>8中基本类型</p></li>
 <li><p>6中复杂类型：<strong>records</strong>，enums, map, union等</p></li>
 </ul>
-</div></blockquote>
-<ul>
+</li>
 <li><p>数据格式友好：json</p></li>
-<li><p>序列化数据传输和存储（字节类型）
-- 节省网络带宽，提高数据磁盘的读写性能</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>为什么节省带宽？
-- 一部分是因为schema(约束)，一部分是数据体</p></li>
-<li><p>如何提高读写性能？
-- 数据是序列化数据</p></li>
+<li><p>序列化数据传输和存储（字节类型）</p>
+<ul>
+<li><p>节省网络带宽，提高数据磁盘的读写性能</p>
+<ul>
+<li><p>为什么节省带宽？</p>
+<ul>
+<li><p>一部分是因为schema(约束)，一部分是数据体</p></li>
 </ul>
-</div></blockquote>
+</li>
+<li><p>如何提高读写性能？</p>
+<ul>
+<li><p>数据是序列化数据</p></li>
+</ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>## 数据类型</p>
-<p>### 原生类型</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">1.2. </span>数据类型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3><span class="section-number">1.2.1. </span>原生类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p>null: 表示没有值</p></li>
 <li><p>boolean: 表示一个二进制布尔值</p></li>
@@ -206,31 +239,49 @@
 <li><p>bytes: 表示8位的无符号字节序列</p></li>
 <li><p>string: Unicode 编码的字符序列</p></li>
 </ul>
-<p>&gt;  总共就这8种原生数据类型，这些原生数据类型均没有明确的属性。</p>
-<p>### 复杂数据类型</p>
-<p>&gt; AVRO支持6种复杂类型，分别是：records, enums, arrays, maps, unions，fixed</p>
-<p>#### Records</p>
-<ul>
-<li><p>此数据结构内部字段可以由多种基本类型组成</p></li>
-<li><p>必选属性
-- name：文件名
-- type：类型指定（records）
-- fields：具体字段，可以包含多个字段（此字段是一个数组）</p>
 <blockquote>
-<div><ul class="simple">
-<li><p>包含属性字段：
-- name：字段名
-- type：定义Schema的一个JSON对象，或者是命名一条记录定义的JSON string</p></li>
-</ul>
+<div><p>总共就这8种原生数据类型，这些原生数据类型均没有明确的属性。</p>
 </div></blockquote>
-</li>
-<li><p>非必选属性：
-- namespace：是一个JSON String命名空间，定义文件路径
-- doc：是一个JSON String，为使用这个Schema的用户提供文档
-- aliases: 是JSON的一个string数组，为这条记录提供别名</p></li>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">1.2.2. </span>复杂数据类型<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>AVRO支持6种复杂类型，分别是：records, enums, arrays, maps, unions，fixed</p>
+</div></blockquote>
+<div class="section" id="records">
+<h4><span class="section-number">1.2.2.1. </span>Records<a class="headerlink" href="#records" title="永久链接至标题">¶</a></h4>
+<ul class="simple">
+<li><p>此数据结构内部字段可以由多种基本类型组成</p></li>
+<li><p>必选属性</p>
+<ul>
+<li><p>name：文件名</p></li>
+<li><p>type：类型指定（records）</p></li>
+<li><p>fields：具体字段，可以包含多个字段（此字段是一个数组）</p>
+<ul>
+<li><p>包含属性字段：</p>
+<ul>
+<li><p>name：字段名</p></li>
+<li><p>type：定义Schema的一个JSON对象，或者是命名一条记录定义的JSON string</p></li>
 </ul>
-<p>#### Enums</p>
-<p>&gt; Enums使用的名为“enum”的type并且支持如下的属性：</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>非必选属性：</p>
+<ul>
+<li><p>namespace：是一个JSON String命名空间，定义文件路径</p></li>
+<li><p>doc：是一个JSON String，为使用这个Schema的用户提供文档</p></li>
+<li><p>aliases: 是JSON的一个string数组，为这条记录提供别名</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="enums">
+<h4><span class="section-number">1.2.2.2. </span>Enums<a class="headerlink" href="#enums" title="永久链接至标题">¶</a></h4>
+<blockquote>
+<div><p>Enums使用的名为“enum”的type并且支持如下的属性：</p>
+</div></blockquote>
 <ul class="simple">
 <li><p>name: 必有属性，是一个JSON string，提供了enum的名字。</p></li>
 <li><p>namespace，也是一个JSON string，用来限定和修饰name属性。</p></li>
@@ -238,13 +289,13 @@
 <li><p>doc: 可选属性，是一个JSON string，为使用这个Schema的用户提供文档。</p></li>
 <li><p>symbols: 必有属性，是一个JSON string数组，列举了所有的symbol，在enum中的所有symbol都必须是唯一的，不允许重复。比如下面的例子：</p></li>
 </ul>
-<p>~~~
-引用
-{ “type”: “enum”,
-“name”: “Person”,
-“symbols” : [“name”, “age”, “address”, “sex”]
-}
-~~~</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">引用</span>
+<span class="p">{</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;enum&quot;</span><span class="p">,</span>
+<span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Person&quot;</span><span class="p">,</span>
+<span class="s2">&quot;symbols&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <p>Enums使用的名为“enum”的type并且支持如下的属性：</p>
 <p>name: 必有属性，是一个JSON string，提供了enum的名字。</p>
 <p>namespace，也是一个JSON string，用来限定和修饰name属性。</p>
@@ -256,33 +307,47 @@
 <p>“name”: “Person”,</p>
 <p>“symbols” : [“name”, “age”, “address”, “sex”]</p>
 <p>}</p>
-<p>#### Arrays</p>
-<p>&gt; Array使用名为”array”的type，并且支持一个属性</p>
+</div>
+<div class="section" id="arrays">
+<h4><span class="section-number">1.2.2.3. </span>Arrays<a class="headerlink" href="#arrays" title="永久链接至标题">¶</a></h4>
+<blockquote>
+<div><p>Array使用名为”array”的type，并且支持一个属性</p>
+</div></blockquote>
 <ul>
 <li><p>items: array中元素的Schema</p>
-<p>&gt; 比如一个string的数组声明为：
-&gt;
-&gt; 引用
-&gt;
-&gt; {“type”: “array”, “items”: “string”}</p>
+<blockquote>
+<div><p>比如一个string的数组声明为：</p>
+<p>引用</p>
+<p>{“type”: “array”, “items”: “string”}</p>
+</div></blockquote>
 </li>
 </ul>
-<p>#### Maps</p>
+</div>
+<div class="section" id="maps">
+<h4><span class="section-number">1.2.2.4. </span>Maps<a class="headerlink" href="#maps" title="永久链接至标题">¶</a></h4>
 <p>Map使用名为”map”的type，并且支持一个属性</p>
 <ul class="simple">
 <li><p>values: 用来定义map的值的Schema。Maps的key都是string。比如一个key为string，value为long的maps定义为：</p></li>
 </ul>
-<p>&gt; 引用
-&gt;
-&gt; {“type”: “map”, “values”: “long”}</p>
-<p>#### Unions</p>
+<blockquote>
+<div><p>引用</p>
+<p>{“type”: “map”, “values”: “long”}</p>
+</div></blockquote>
+</div>
+<div class="section" id="unions">
+<h4><span class="section-number">1.2.2.5. </span>Unions<a class="headerlink" href="#unions" title="永久链接至标题">¶</a></h4>
 <p>Unions就像上面提到的，使用JSON的数组表示。比如:</p>
-<p>&gt; 引用
-&gt;
-&gt; [“string”, “null”]</p>
+<blockquote>
+<div><p>引用</p>
+<p>[“string”, “null”]</p>
+</div></blockquote>
 <p>声明了一个union的Schema，其元素即可以是string，也可以是null。</p>
-<p>&gt; Unions不能包含多个相同类型的Schema，除非是命名的record类型、命名的fixed类型和命名的enum类型。比如，如果unions中包含两个array类型，或者包含两个map类型都不允许；但是两个具有不同name的相同类型却可以。由此可见，union是通过Schema的name来区分元素Schema的，因为array和map没有name属性，当然只能存在一个array或者map。（使用name作为解析的原因是这样做会使得读写unions更加高效）。unions不能紧接着包含其他的union。</p>
-<p>#### Fixed</p>
+<blockquote>
+<div><p>Unions不能包含多个相同类型的Schema，除非是命名的record类型、命名的fixed类型和命名的enum类型。比如，如果unions中包含两个array类型，或者包含两个map类型都不允许；但是两个具有不同name的相同类型却可以。由此可见，union是通过Schema的name来区分元素Schema的，因为array和map没有name属性，当然只能存在一个array或者map。（使用name作为解析的原因是这样做会使得读写unions更加高效）。unions不能紧接着包含其他的union。</p>
+</div></blockquote>
+</div>
+<div class="section" id="fixed">
+<h4><span class="section-number">1.2.2.6. </span>Fixed<a class="headerlink" href="#fixed" title="永久链接至标题">¶</a></h4>
 <ul class="simple">
 <li><p>Fixed类型使用”fixed”的type name，并且支持三个属性：</p></li>
 <li><p>name: 必有属性，表示这个fixed的名称，JSON string。</p></li>
@@ -290,69 +355,68 @@
 <li><p>aliases: 可选属性，同上</p></li>
 <li><p>size: 必选属性，一个整数，志明每个值的字节数。</p></li>
 </ul>
-<p>&gt; 比如16字节的fixed可以声明为：
-&gt;
-&gt; 引用
-&gt;
-&gt; {“type”: “fixed”, “size”: 16, “name”: “md5”}</p>
+<blockquote>
+<div><p>比如16字节的fixed可以声明为：</p>
+<p>引用</p>
+<p>{“type”: “fixed”, “size”: 16, “name”: “md5”}</p>
+</div></blockquote>
 <ul>
 <li><p>Record, enums 和 fixed都是命名的类型，这三种类型都各有一个全名，全名有两部分组成：名称和命名空间。名称的相等是定义在全名基础上的。</p></li>
 <li><p>全名的名字部分和record的field名字必须：</p>
-<p>&gt; 以[<a href="#id1"><span class="problematic" id="id2">A-Za-z_</span></a>]开头
-&gt; 接下来的名字中只能包含[<a href="#id3"><span class="problematic" id="id4">A-Za-z0-9_</span></a>]</p>
+<blockquote>
+<div><p>以[A-Za-z_]开头
+接下来的名字中只能包含[A-Za-z0-9_]</p>
+</div></blockquote>
 </li>
 <li><p>namespace是以点分隔的一系列名字。</p></li>
 <li><p>在record、enum和fixed的定义中，全名由以下的任意一条决定：</p>
-<p>&gt; 同时指定name和namespace，比如使用 “name”: “User”, “namespace”: “me.iroohom”来表示全名me.iroohom.User。
-&gt;
-&gt; 指定全名
-&gt;
-&gt; - 如果name中包含点号，则认为是全名。比如用 “name”: “org.foo.X” 表示全名org.foo.X。
-&gt;
-&gt; 仅仅指定name，name中没有点号
-&gt;
-&gt; - 在这种情况下命名空间取自距离最近的父亲的Schema或者protocol。比如声明了”name”: “X”， 这段声明在一条记录“org.foo.Y”的field中，那么X的全名就是org.foo.X。
-&gt;
-&gt; 原生类型没有命名空间，并且不可以在命名空间中定义原生类型。</p>
+<blockquote>
+<div><p>同时指定name和namespace，比如使用 “name”: “User”, “namespace”: “me.iroohom”来表示全名me.iroohom.User。</p>
+<p>指定全名</p>
+<ul class="simple">
+<li><p>如果name中包含点号，则认为是全名。比如用 “name”: “org.foo.X” 表示全名org.foo.X。</p></li>
+</ul>
+<p>仅仅指定name，name中没有点号</p>
+<ul class="simple">
+<li><p>在这种情况下命名空间取自距离最近的父亲的Schema或者protocol。比如声明了”name”: “X”， 这段声明在一条记录“org.foo.Y”的field中，那么X的全名就是org.foo.X。</p></li>
+</ul>
+<p>原生类型没有命名空间，并且不可以在命名空间中定义原生类型。</p>
+</div></blockquote>
 </li>
 </ul>
+</div>
+</div>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="Auxiliary tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="Docker.html" class="btn btn-neutral float-right" title="2. Docker" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Auxiliary tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 版权所有 2020-2020, roohom
+        &#169; 版权所有 2020-2021, roohom.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
-
         </div>
       </div>
 

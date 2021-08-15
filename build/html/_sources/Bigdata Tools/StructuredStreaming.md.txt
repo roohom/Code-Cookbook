@@ -260,9 +260,9 @@ val query = resultStreamDF
 
 **为了实现Exactly-Once语义目标，Structured Streaming设计source、sink和execution engine来追踪计算处理的进度，这样就可以在任何一个步骤出现失败时自动重试**
 
-- 每个Streaming source都被设计成支持offset，进而可以让Spark来追踪读取的位置
-- Spark基于checkpoint和wal来持久化保存每个trigger interval内处理的offset的范围
-- ink被设计成可以支持在多次计算处理时保持幂等性，就是说，用同样的一批数据，无论多少次去更新sink，都会保持一致和相同的状态
+- <u>每个Streaming source都被设计成支持offset</u>，进而可以让Spark来追踪读取的位置
+- Spark<u>基于checkpoint和wa</u>l来持久化保存每个trigger interval内处理的offset的范围
+- <u>Sink被设计成可以支持在多次计算处理时保持幂等性</u>，就是说，用同样的一批数据，无论多少次去更新sink，都会保持一致和相同的状态
 
 综合利用**基于offset的source**，**基于checkpoint和wal的execution engine**，以及**基于幂等性的sink**，可以支持完整的一次且仅一次的语义。
 

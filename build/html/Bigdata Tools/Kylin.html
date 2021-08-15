@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
+  <title>9. Kylin &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -37,8 +42,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Redis.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="Kafka.html" /> 
+    <link rel="next" title="10. Redis" href="Redis.html" />
+    <link rel="prev" title="8. Kudu" href="Kudu.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
           
 
           
@@ -66,7 +71,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,20 +88,52 @@
               
             
             
-              <p class="caption"><span class="caption-text">大数据</span></p>
-<ul>
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Bigdata Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink.html">3. Flink</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%E6%90%AD%E5%BB%BA%E6%80%BB%E4%BD%93%E6%AD%A5%E9%AA%A4.html">4. Hadoop搭建总体步骤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">5. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hive%E6%95%B0%E4%BB%93.html">6. Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">7. Kafka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kudu.html">8. Kudu</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">9. Kylin</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">9.1. 概述</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">9.2. 启动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">9.3. 使用</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">9.4. 工作原理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">9.4.1. 技术架构</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">9.4.2. 增量构建</a></li>
 </ul>
-<p class="caption"><span class="caption-text">博客</span></p>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">9.5. 碎片管理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cuboid">9.6. Cuboid剪枝优化</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">10. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html">11. Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SparkCore.html">12. Spark Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SparkSQL.html">13. Spark SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SparkStreaming.html">14. Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StructuredStreaming.html">15. Structured Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">16. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZookeeperAndHadoop.html">17. ZookeeperAndHadoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">18. 常用软件梳理</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SQL相关</span></p>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
@@ -139,6 +176,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -147,13 +186,13 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li><span class="section-number">9. </span>Kylin</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/Bigdata Tools/Kylin.md.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/Bigdata Tools/Kylin.md.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -166,8 +205,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p># Kylin</p>
-<p>## 概述</p>
+  <div class="section" id="kylin">
+<h1><span class="section-number">9. </span>Kylin<a class="headerlink" href="#kylin" title="永久链接至标题">¶</a></h1>
+<div class="section" id="id1">
+<h2><span class="section-number">9.1. </span>概述<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>是一个OLAP数据分析平台（新版本支持实时模块）。</p></li>
 <li><p>优点：</p>
@@ -175,30 +216,35 @@
 <li><p>可以基于海量数据进行OLAP分析</p></li>
 <li><p>亚秒级交互式查询（查询性能好）</p></li>
 <li><p>CUBE数据预聚合 （以空间换时间）</p>
-<p>&gt; 以存储空间换取查询性能的提升，减少查询消耗的时间</p>
+<blockquote>
+<div><p>以存储空间换取查询性能的提升，减少查询消耗的时间</p>
+</div></blockquote>
 <ul>
 <li><p>Kylin拉取Hive中的历史数据，进行cube构建</p></li>
 <li><p>cube会根据维度进行指标聚合</p>
-<p>&gt; Cube负载加载Hive数据，通过维度字段对指标字段进行预聚合，聚合好之后将结果数据存储在Hbase</p>
+<blockquote>
+<div><p>Cube负载加载Hive数据，通过维度字段对指标字段进行预聚合，聚合好之后将结果数据存储在Hbase</p>
+</div></blockquote>
 </li>
 <li><p>cube构建好之后会将结果数据保存在Hbase</p>
-<p>&gt; 结果数据指的是：聚合好的指标数据</p>
-</li>
-</ul>
-</li>
-</ul>
-<dl>
-<dt>&gt;</dt><dd><blockquote>
-<div><p>&gt; 维度越多，在构建的时候越耗性能</p>
+<blockquote>
+<div><p>结果数据指的是：聚合好的指标数据</p>
 </div></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; 维度越多，在构建的时候越耗性能
+</pre></div>
+</div>
 <ul class="simple">
 <li><p>web查询数据是通过Kylin的查询服务，直接查询Hbase的数据</p></li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-<p>## 启动</p>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">9.2. </span>启动<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>启动zookeeper</p></li>
 <li><p>启动HDFS</p></li>
@@ -207,178 +253,188 @@
 <li><p>启动Hive</p>
 <ul>
 <li><p>启动MetaStore</p>
-<p>~~~shell
-cd $HIVE_HOME/bin
-hive –service metastore &amp;
-~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$HIVE_HOME</span>/bin
+hive --service metastore <span class="p">&amp;</span>
+</pre></div>
+</div>
 </li>
 <li><p>启动hivesever2</p>
-<p>~~~shell
-cd $HIVE_HOME/bin
-hive –service hiveserver2 &amp;
-~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$HIVE_HOME</span>/bin
+hive --service hiveserver2 <span class="p">&amp;</span>
+</pre></div>
+</div>
 </li>
 </ul>
 </li>
 <li><p>启动Yarn HistoryServer</p>
-<p>~~~shell
-mr-jobhistory-daemon.sh start historyserver
-~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mr-jobhistory-daemon.sh start historyserver
+</pre></div>
+</div>
 </li>
 <li><p>启动Kylin</p>
-<p>~~~shell
-cd $KYLIN_HOME/bin
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> <span class="nv">$KYLIN_HOME</span>/bin
 ./kylin.sh start
-~~~</p>
+</pre></div>
+</div>
 </li>
 <li><p>页面访问地址：</p>
-<p>~~~
-<a class="reference external" href="http://node01:7070">http://node01:7070</a>
-~~~</p>
-<p>&gt; 用户名:ADMIN
-&gt;
-&gt; 密码:KYLIN</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">node01</span><span class="p">:</span><span class="mi">7070</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>用户名:ADMIN</p>
+<p>密码:KYLIN</p>
+</div></blockquote>
 </li>
 </ul>
-<p>## 使用</p>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">9.3. </span>使用<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
-<li><p>使用Kylin构建Cube
-- 1、首先数据必须先存在于Hive
-- 2、加载Hive中的数据
-- 3、创建Model，需要指定表，指定维度、指定聚合指标
-- 4、创建Cube，需要指定model名称，指定维度、指定聚合指标、指定构建引擎
-- 5、构建Cube
-- 6、数据查询</p></li>
+<li><p>使用Kylin构建Cube</p>
+<ul>
+<li><p>1、首先数据必须先存在于Hive</p></li>
+<li><p>2、加载Hive中的数据</p></li>
+<li><p>3、创建Model，需要指定表，指定维度、指定聚合指标</p></li>
+<li><p>4、创建Cube，需要指定model名称，指定维度、指定聚合指标、指定构建引擎</p></li>
+<li><p>5、构建Cube</p></li>
+<li><p>6、数据查询</p></li>
 </ul>
-<p>&gt; 可能遇到的问题：
-&gt;
-&gt; 如果build不成功，考虑将HDFS上的元数据和Hbase中Kylin的元数据删除
-&gt;
-&gt; 具体步骤：
-&gt;
-&gt; - 清理HDFS上Kylin元数据目录下的文件
-&gt; - 清理HBase上Kylin元数据表的数据”KYLIN_Metadata”
-&gt; - 删除对应cube在HBase上的表</p>
-<p>## 工作原理</p>
-<p>&gt; 本质上是MOLAP（多维立方体分析）</p>
+</li>
+</ul>
+<blockquote>
+<div><p>可能遇到的问题：</p>
+<p>如果build不成功，考虑将HDFS上的元数据和Hbase中Kylin的元数据删除</p>
+<p>具体步骤：</p>
+<ul class="simple">
+<li><p>清理HDFS上Kylin元数据目录下的文件</p></li>
+<li><p>清理HBase上Kylin元数据表的数据”KYLIN_Metadata”</p></li>
+<li><p>删除对应cube在HBase上的表</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">9.4. </span>工作原理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>本质上是MOLAP（多维立方体分析）</p>
+</div></blockquote>
 <ul class="simple">
 <li><p>Cube：多维立方体，是一个形象的说法，cube模型称为多维立方体模型，由Cuboid组成</p></li>
 <li><p>Cuboid：立方形，也是一个形象说法，对任意一组维度进行组合（维度的数量可以是0,1，或者更多），得到的聚合结果，被称为cuboid（任意多个维度组合形成的物化视图）。cuboid的数量取决于维度的数量，总数量=2^(维度的个数)次方</p></li>
 </ul>
-<p>### 技术架构</p>
-<p>![framework](./Kylin/Framework.png)</p>
+<div class="section" id="id5">
+<h3><span class="section-number">9.4.1. </span>技术架构<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p><img alt="framework" src="../_images/Framework.png" /></p>
 <ul class="simple">
-<li><p>在线查询模式主要处于上半部分，离线构建处于下半部分。以下为Kylin技术架构的具体内容：
-- 数据源主要是Hadoop Hive，数据以关系表的形式输入，且符合星形模型，保存着待分析的用户数据。根据元数据的定义，构建引擎从数据源抽取数据，并构建Cube</p>
+<li><p>在线查询模式主要处于上半部分，离线构建处于下半部分。以下为Kylin技术架构的具体内容：</p>
 <ul>
+<li><p>数据源主要是Hadoop Hive，数据以关系表的形式输入，且符合星形模型，保存着待分析的用户数据。根据元数据的定义，构建引擎从数据源抽取数据，并构建Cube</p></li>
 <li><p>Kylin可以使用MapReduce或者Spark作为构建引擎。构建后的Cube保存在右侧的存储引擎中，一般选用HBase作为存储</p></li>
 <li><p>完成了离线构建后，用户可以从上方查询系统发送SQL进行查询分析</p></li>
 <li><p>Kylin提供了各种Rest API、JDBC/ODBC接口。无论从哪个接口进入，SQL最终都会来到Rest服务层，再转交给查询引擎进行处理</p></li>
 <li><p>SQL语句是基于数据源的关系模型书写的，而不是Cube</p>
 <ul>
-<li><ol class="arabic simple">
-<li><p>Kylin在设计时，刻意对查询用户屏蔽了Cube的概念</p></li>
-</ol>
-</li>
-<li><ol class="arabic simple" start="2">
-<li><p>分析师只需要理解简单的关系模型就可以使用Kylin，没有额外的学习门槛，传统的SQL应用也很容易迁移</p></li>
-</ol>
-</li>
-<li><ol class="arabic simple" start="3">
-<li><p>查询引擎解析SQL，生成基于关系表的逻辑执行计划，然后将其转译为基于Cube的物理执行计划，最后查询预计算生成的Cube并产生结果，<strong>整个过程不会访问原始数据源</strong></p></li>
-</ol>
-</li>
+<li><p>(1) Kylin在设计时，刻意对查询用户屏蔽了Cube的概念</p></li>
+<li><p>(2) 分析师只需要理解简单的关系模型就可以使用Kylin，没有额外的学习门槛，传统的SQL应用也很容易迁移</p></li>
+<li><p>(3) 查询引擎解析SQL，生成基于关系表的逻辑执行计划，然后将其转译为基于Cube的物理执行计划，最后查询预计算生成的Cube并产生结果，<strong>整个过程不会访问原始数据源</strong></p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<p>### 增量构建</p>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">9.4.2. </span>增量构建<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p><strong>cube、cuboid和segment的关系</strong></p>
 <ul>
-<li><p><strong>cube、cuboid和segment的关系</strong>
-- 一个cube包含多个cuboid
-- 一个cube包含多个多个segment</p>
-<blockquote>
-<div><ul class="simple">
+<li><p>一个cube包含多个cuboid</p></li>
+<li><p>一个cube包含多个多个segment</p>
+<ul>
 <li><p>一个segment对应于Hbase中的一张表，在做增量构建的时候，每增量构建一次，形成一个segment</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
-<li><p>cuboid和segment的关系
-- cuboid是任意维度组合之后，聚合形成的结果数据，这些结果数据数据结构是一样的
-- segment是物理存储概念，每一张表（每一个segment）的数据结构是一样的</p></li>
+</li>
+<li><p>cuboid和segment的关系</p>
+<ul>
+<li><p>cuboid是任意维度组合之后，聚合形成的结果数据，这些结果数据数据结构是一样的</p></li>
+<li><p>segment是物理存储概念，每一张表（每一个segment）的数据结构是一样的</p></li>
+</ul>
+</li>
 <li><p>每一个增量构建的segment是有起止时间的，是通过时间进行分区</p></li>
 </ul>
 </li>
 </ul>
-<p>#### 增量构建与全量构建的对比</p>
-<div class="line-block">
-<div class="line"><strong>全量构建</strong>                      | <strong>增量构建</strong>                                               |</div>
-<div class="line">——————————— | ———————————————————- |</div>
-<div class="line">每次更新时都需要更新整个数据集    | 每次只对需要更新的时间范围进行更新，因此离线计算量相对较小 |</div>
-<div class="line">查询时不需要合并不同Segment的结果 | 查询时需要合并不同Segment的结果，因此查询性能会受影响      |</div>
-<div class="line">不需要后续的Segment合并           | 累计一定量的Segment之后，需要进行合并                      |</div>
-<div class="line">适合小数据量或全表更新的Cube      | 适合大数据量的Cube                                         |</div>
+<div class="section" id="id7">
+<h4><span class="section-number">9.4.2.1. </span>增量构建与全量构建的对比<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h4>
+<p>| <strong>全量构建</strong>                      | <strong>增量构建</strong>                                               |
+| ——————————— | ———————————————————- |
+| 每次更新时都需要更新整个数据集    | 每次只对需要更新的时间范围进行更新，因此离线计算量相对较小 |
+| 查询时不需要合并不同Segment的结果 | 查询时需要合并不同Segment的结果，因此查询性能会受影响      |
+| 不需要后续的Segment合并           | 累计一定量的Segment之后，需要进行合并                      |
+| 适合小数据量或全表更新的Cube      | 适合大数据量的Cube                                         |</p>
 </div>
-<p>## 碎片管理</p>
-<p>&gt; 指的是对一个cube下的segment进行管理</p>
-<ul>
-<li><p>管理方式
-- 合并：对多个segment进行合并操作，也就是对多个segment合并形成一个segment</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><span class="section-number">9.5. </span>碎片管理<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
 <blockquote>
-<div><ul class="simple">
+<div><p>指的是对一个cube下的segment进行管理</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>管理方式</p>
+<ul>
+<li><p>合并：对多个segment进行合并操作，也就是对多个segment合并形成一个segment</p>
+<ul>
 <li><p>手动合并：在Model中，Action下面选择Merge操作，多个segment会被合并成一个，原来的segment将会被删除，在Merge的过程中不影响查询</p></li>
 <li><p>自动合并：(<strong>推荐使用</strong>)</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
+</li>
 <li><p>删除：对不再使用的segment进行删除，只保留有效的segment</p></li>
-<li><p>自定合并
-- 如果自动合并阈值里包含多条阈值数据
-- 首先判断各segment的日期合并，判断是否满足最大的阈值条件，满足就合并，反之不合并
-- 若上一步未满足，会判断是否满足较小的阈值条件，满足就合并，反之不合并</p></li>
+<li><p>自定合并</p>
+<ul>
+<li><p>如果自动合并阈值里包含多条阈值数据</p></li>
+<li><p>首先判断各segment的日期合并，判断是否满足最大的阈值条件，满足就合并，反之不合并</p></li>
+<li><p>若上一步未满足，会判断是否满足较小的阈值条件，满足就合并，反之不合并</p></li>
 </ul>
 </li>
 </ul>
-<p>## Cuboid剪枝优化</p>
+</li>
+</ul>
+</div>
+<div class="section" id="cuboid">
+<h2><span class="section-number">9.6. </span>Cuboid剪枝优化<a class="headerlink" href="#cuboid" title="永久链接至标题">¶</a></h2>
 <p>减少一个维度，cuboid的数量直接减半</p>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Redis.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Kafka.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="Redis.html" class="btn btn-neutral float-right" title="10. Redis" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Kudu.html" class="btn btn-neutral float-left" title="8. Kudu" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 版权所有 2020-2020, roohom
+        &#169; 版权所有 2020-2021, roohom.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
-
         </div>
       </div>
 

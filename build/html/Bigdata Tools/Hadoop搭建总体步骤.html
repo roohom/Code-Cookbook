@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
+  <title>4. Hadoop搭建总体步骤 &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -37,8 +42,8 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Hbase.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="Flink.html" /> 
+    <link rel="next" title="5. Hbase" href="Hbase.html" />
+    <link rel="prev" title="3. Flink" href="Flink.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
           
 
           
@@ -66,7 +71,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,20 +88,45 @@
               
             
             
-              <p class="caption"><span class="caption-text">大数据</span></p>
-<ul>
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Bigdata Tools</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Druid.html">1. Apache Druid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Flume.html">2. Apache Flume</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Flink.html">3. Flink</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. Hadoop搭建总体步骤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#linux">4.1. Linux集群环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.2. 节点规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.3. Hadoop分布式上安装</a></li>
 </ul>
-<p class="caption"><span class="caption-text">博客</span></p>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Hbase.html">5. Hbase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hive%E6%95%B0%E4%BB%93.html">6. Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kafka.html">7. Kafka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kudu.html">8. Kudu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Kylin.html">9. Kylin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Redis.html">10. Redis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark.html">11. Spark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SparkCore.html">12. Spark Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SparkSQL.html">13. Spark SQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SparkStreaming.html">14. Spark Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="StructuredStreaming.html">15. Structured Streaming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Zookeeper.html">16. Zookeeper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ZookeeperAndHadoop.html">17. ZookeeperAndHadoop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html">18. 常用软件梳理</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SQL相关</span></p>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
@@ -139,6 +169,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -147,13 +179,13 @@
         
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li><span class="section-number">4. </span>Hadoop搭建总体步骤</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/Bigdata Tools/Hadoop搭建总体步骤.md.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/Bigdata Tools/Hadoop搭建总体步骤.md.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -166,28 +198,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p># Hadoop搭建总体步骤</p>
-<p>## Linux集群环境</p>
-<ul>
+  <div class="section" id="hadoop">
+<h1><span class="section-number">4. </span>Hadoop搭建总体步骤<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h1>
+<div class="section" id="linux">
+<h2><span class="section-number">4.1. </span>Linux集群环境<a class="headerlink" href="#linux" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
 <li><p>三台机器</p></li>
-<li><p>配置
-- 机器名映射
-- 防火墙和selinux
-- 免秘钥登录
-- 时钟同步
-- JDK
-- MySQL</p>
-<blockquote>
-<div><ul class="simple">
+<li><p>配置</p>
+<ul>
+<li><p>机器名映射</p></li>
+<li><p>防火墙和selinux</p></li>
+<li><p>免秘钥登录</p></li>
+<li><p>时钟同步</p></li>
+<li><p>JDK</p></li>
+<li><p>MySQL</p>
+<ul>
 <li><p>Java：存储业务数据、用户信息、商业信息、订单信息</p></li>
-<li><p>大数据：用于存储关键性数据
-- 软件元数据
-- 分析的结果</p></li>
+<li><p>大数据：用于存储关键性数据</p>
+<ul>
+<li><p>软件元数据</p></li>
+<li><p>分析的结果</p></li>
 </ul>
-</div></blockquote>
 </li>
 </ul>
-<p>## 节点规划</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">4.2. </span>节点规划<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <p>设计每个进程启动在哪些机器上</p>
 <ul>
 <li><p>整个Hadoop启动的进程</p>
@@ -203,58 +243,80 @@
 </ul>
 </li>
 <li><p>节点规划</p>
-<div class="line-block">
-<div class="line-block">
-<div class="line">机器       | node1 | node2 | node3 |</div>
-</div>
-<div class="line">:————-: | :—: | :—: | :—: |</div>
-<div class="line-block">
-<div class="line">NameNode     |   *   |       |       |</div>
-<div class="line">DataNode     |   *   |   *   |   *   |</div>
-</div>
-<div class="line">ResourceManager |       |       |   *   |</div>
-<div class="line-block">
-<div class="line">NodeManager   |   *   |   *   |   *   |</div>
-</div>
-</div>
+<p>|      机器       | node1 | node2 | node3 |
+| :————-: | :—: | :—: | :—: |
+|    NameNode     |   *   |       |       |
+|    DataNode     |   *   |   *   |   *   |
+| ResourceManager |       |       |   *   |
+|   NodeManager   |   *   |   *   |   *   |</p>
 </li>
 <li><p>启动和关闭hdfs（未配置环境变量的情况下要去sbin目录下）</p>
-<p>~~~shell
-start-dfs.sh
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-dfs.sh
 stop-dfs.sh
-~~~</p>
+</pre></div>
+</div>
 </li>
 <li><p>启动和关闭yarn</p>
-<p>~~~shell
-start-yarn.sh
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-yarn.sh
 stop-yarn.sh
-~~~</p>
+</pre></div>
+</div>
 </li>
 </ul>
-<p>## Hadoop分布式上安装</p>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">4.3. </span>Hadoop分布式上安装<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <ul>
 <li><p>解压安装</p></li>
-<li><p>修改配置</p>
+<li><p>修改配置：<u>配置文件都在Hadoop的etc/hadoop目录下</u></p>
+<ul class="simple">
+<li><p>*-env.sh：用于配置环境变量</p>
 <ul>
-<li><p><a href="#id1"><span class="problematic" id="id2">*</span></a>-env.sh：用于配置环境变量
-- hadoop-env.sh
-- mapred-env.sh
-- yarn-env.sh</p></li>
-<li><p><a href="#id3"><span class="problematic" id="id4">*</span></a>-site.xml
-- core-site.xml
-- hdfs-site.xml</p>
-<blockquote>
-<div><ul class="simple">
+<li><p>hadoop-env.sh</p>
+<ul>
+<li><p>Hadoop的环境变量，比如声明<code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code></p></li>
+</ul>
+</li>
+<li><p>mapred-env.sh</p>
+<ul>
+<li><p>MapReduce的环境变量</p></li>
+</ul>
+</li>
+<li><p>yarn-env.sh</p>
+<ul>
+<li><p>YARN的环境变量</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>*-site.xml</p>
+<ul>
+<li><p>core-site.xml</p>
+<ul>
+<li><p>配置Hadoop的全局的一些属性</p></li>
+<li><p>比如端口号、块大小等</p></li>
+</ul>
+</li>
+<li><p>hdfs-site.xml</p>
+<ul>
+<li><p>HDFS的属性配置</p></li>
 <li><p>dfs.replication：配置每个文件块的副本数</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
-<li><p>mapred-site.xml</p></li>
+</li>
+<li><p>mapred-site.xml</p>
+<ul>
+<li><p>MapReduce的一些属性</p></li>
+<li><p>比如Web端口</p></li>
+</ul>
+</li>
 <li><p>yarn-site.xml</p></li>
 </ul>
 </li>
-<li><p>slaves：用于配置从节点[DataNode、NodeManager]地址
-- 计算节点都与存储节点在同一台机器（DataNode也是NodeManager）</p></li>
+<li><p>slaves：用于配置从节点[DataNode、NodeManager]地址</p>
+<ul>
+<li><p>计算节点都与存储节点在同一台机器（DataNode也是NodeManager）</p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>启动服务</p>
@@ -262,79 +324,81 @@ stop-yarn.sh
 <li><p>第一次启动服务吗，需要格式化</p>
 <ul>
 <li><p>只能在NameNode所在的机器格式化</p>
-<p>~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </li>
 </ul>
-<dl class="simple">
-<dt>hdfs namenode -format</dt><dd><p>~~~</p>
-</dd>
-</dl>
+<p>hdfs namenode -format</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </li>
 <li><p>core-site.xml和hdfs-site.xml配置编写错误，修正后需要重新格式化</p></li>
 <li><p>启动</p>
 <ul>
 <li><p>启动hdfs</p>
-<p>~~~shell
-start-dfs.sh 只能在NN所在的机器启动
-~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-dfs.sh 只能在NN所在的机器启动
+</pre></div>
+</div>
 </li>
 <li><p>启动yarn</p>
-<p>~~~shell
-start-yarn.sh 只能在RM所在的机器启动
-~~~</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>start-yarn.sh 只能在RM所在的机器启动
+</pre></div>
+</div>
 </li>
 </ul>
 </li>
 <li><p>端口：</p>
 <ul class="simple">
-<li><p>HDFS：NameNode启动开放
-- 8020：RPC协议，用于客户端请求服务端，节点之间的远程调用
-- 50070：http协议，用于访问网页</p></li>
-<li><p>YARN：ResourceManager启动开放
-- 8032：RPC协议，用于客户端请求服务端，节点之间的远程调用
-- 8088：http协议，用于访问网页</p></li>
+<li><p>HDFS：NameNode启动开放</p>
+<ul>
+<li><p>8020：RPC协议，用于客户端请求服务端，节点之间的远程调用</p></li>
+<li><p>50070：http协议，用于访问网页</p></li>
+</ul>
+</li>
+<li><p>YARN：ResourceManager启动开放</p>
+<ul>
+<li><p>8032：RPC协议，用于客户端请求服务端，节点之间的远程调用</p></li>
+<li><p>8088：http协议，用于访问网页</p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Hbase.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="Flink.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="Hbase.html" class="btn btn-neutral float-right" title="5. Hbase" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Flink.html" class="btn btn-neutral float-left" title="3. Flink" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 版权所有 2020-2020, roohom
+        &#169; 版权所有 2020-2021, roohom.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
-
         </div>
       </div>
 

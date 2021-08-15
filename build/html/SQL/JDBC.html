@@ -3,20 +3,25 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>&lt;no title&gt; &mdash; Code-Cookbook 0.1 文档</title>
+  <title>1. JDBC &mdash; Code-Cookbook 0.1 文档</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -26,10 +31,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/translations.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
@@ -37,7 +42,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" />
+    <link rel="next" title="2. MySQL 50题记录" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" />
     <link rel="prev" title="SQL" href="index.html" /> 
 </head>
 
@@ -52,7 +57,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Code-Cookbook
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
           
 
           
@@ -66,7 +71,7 @@
           
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="在文档中搜索" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -83,22 +88,37 @@
               
             
             
-              <p class="caption"><span class="caption-text">大数据</span></p>
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">博客</span></p>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../Blogs/index.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption"><span class="caption-text">SQL相关</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="index.html">SQL</a></li>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SQL</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. JDBC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.1. 预处理对象</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.2. 连接池</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.3. 事务</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">2. MySQL 50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">3. MySQL语句执行顺序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Replace%20into.html">4. Replace into</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SQL%20JOINS.html">5. SQL JOINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WITH-AS.html">6. WITH AS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html">7. 使用sql处理json数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html">8. 宽表与数据库设计三范式</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -139,6 +159,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -147,13 +169,13 @@
         
           <li><a href="index.html">SQL</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li><span class="section-number">1. </span>JDBC</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/SQL/JDBC.md.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/SQL/JDBC.md.txt" rel="nofollow"> 查看页面源码</a>
           
         
       </li>
@@ -166,239 +188,201 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p># JDBC
-JDBC规范（掌握四个核心对象，都在java.sql下）：</p>
+  <div class="section" id="jdbc">
+<h1><span class="section-number">1. </span>JDBC<a class="headerlink" href="#jdbc" title="永久链接至标题">¶</a></h1>
+<p>JDBC规范（掌握四个核心对象，都在java.sql下）：</p>
 <ul>
 <li><p>DriverManager：用于注册驱动</p></li>
 <li><p>Connection: 建立与数据库的连接</p></li>
 <li><p>Statement: 操作数据库sql语句的对象</p></li>
 <li><p>ResultSet: 结果集或一张虚拟表</p></li>
-<li><dl>
-<dt>操作步骤:</dt><dd><ul>
+<li><p>操作步骤:</p>
+<ul>
 <li><p>在idea中导入mysql驱动包</p></li>
-<li><dl class="simple">
-<dt>在java程序中注册mysql驱动</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt>Class.forName(“驱动包”)</dt><dd><ul>
+<li><p>在java程序中注册mysql驱动</p>
+<ul class="simple">
+<li><p>Class.forName(“驱动包”)</p>
+<ul>
 <li><p>加载(注册)后的数据驱动，会同意由DriverManager类来管理</p></li>
 <li><p>此代码一般书写在静态代码块里</p></li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl class="simple">
-<dt>使用jdbc中的常用API对象，进行数据库连接</dt><dd><ul class="simple">
+<li><p>使用jdbc中的常用API对象，进行数据库连接</p>
+<ul class="simple">
 <li><p>数据库的链接需要通过DriverManager类来调用驱动，实现和数据库的链接，连接成功返回Connect对象</p></li>
-<li><p><cite>String url = “jdbc:mysql://localhost:3306/”</cite></p></li>
-<li><p><cite>Connection condb = DriverManager.getConnecction(url[ip,port],username,password)</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">String</span> <span class="pre">url</span> <span class="pre">=</span> <span class="pre">&quot;jdbc:mysql://localhost:3306/&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Connection</span> <span class="pre">condb</span> <span class="pre">=</span> <span class="pre">DriverManager.getConnecction(url[ip,port],username,password)</span></code></p></li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl>
-<dt>使用JDBC常用API对象，操作数据库中的表(使用mysql语句)</dt><dd><ul>
+<li><p>使用JDBC常用API对象，操作数据库中的表(使用mysql语句)</p>
+<ul>
 <li><p>String sql = “select * from table_name” //insert update delete</p></li>
 <li><p>使用Statement来进行数据库操作</p></li>
 <li><p>Statement stmt = condb.createStatement();</p></li>
-<li><dl>
-<dt>执行sql查询</dt><dd><ul>
+<li><p>执行sql查询</p>
+<ul>
 <li><p>ResultSet rs = stmt.executeQuery(“select * from table_name”)</p></li>
-<li><dl>
-<dt>从获取的结果集向下移动一行，并判断是否有记录存在</dt><dd><ul>
+<li><p>从获取的结果集向下移动一行，并判断是否有记录存在</p>
+<ul>
 <li><p>rs.next()</p></li>
-<li><p>~~~java
-while(rs.next)
-{</p>
-<blockquote>
-<div><p>rs.getInt(“cid”);//从结果集取出int类型的字段
-rs.getIng(“age”);
-rs.getStrinh(“cname”);
-rs.getInt(1);//根据指定的索引获取表中相应的字段下的数据(数据表中的索引从1开始)</p>
-</div></blockquote>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="k">while</span><span class="p">(</span><span class="n">rs</span><span class="p">.</span><span class="na">next</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="s">&quot;cid&quot;</span><span class="p">);</span><span class="c1">//从结果集取出int类型的字段</span>
+    <span class="n">rs</span><span class="p">.</span><span class="na">getIng</span><span class="p">(</span><span class="s">&quot;age&quot;</span><span class="p">);</span>
+    <span class="n">rs</span><span class="p">.</span><span class="na">getStrinh</span><span class="p">(</span><span class="s">&quot;cname&quot;</span><span class="p">);</span>
+    <span class="n">rs</span><span class="p">.</span><span class="na">getInt</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="c1">//根据指定的索引获取表中相应的字段下的数据(数据表中的索引从1开始)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
 <li><p>接收数据库表后的结果</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>查询的结果集(执行了select语句之后，会生成一张临时的虚拟表)</p></li>
 </ul>
-</div></blockquote>
 </li>
-<li><dl class="simple">
-<dt>释放资源</dt><dd><ul class="simple">
+<li><p>释放资源</p>
+<ul class="simple">
 <li><p>rs.close()</p></li>
 <li><p>stmt.close()</p></li>
 <li><p>conndb.close()</p></li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-<p>## 预处理对象
-jdb针对SQL注入问题，提供一个预处理对象，java.sql.PreparedStatement
-- 使用</p>
-<blockquote>
-<div><dl>
-<dt>~~~java</dt><dd><p>PrepaerdStatement pstmt = conndb.preparedStatement(String sql)
-在jdbc中针对预编译的sql语句，可以使用占位符:? , 来表示要添加的参数
-String sql = “select * from 表名 where id = ? and name=?”;
-//可以使用preparedStatement给占位符传递参数？
-pstmt.setInt(占位符序号，传递的具数据) //占位符从1开始
-pstmt.setString(2,”张三”)</p>
-<p>//执行
-pstmt.ecexuteQuery(); //五参数</p>
-</dd>
-</dl>
-<p>~~~</p>
-</div></blockquote>
-<p>## 连接池
-存放多个连接的集合
-- 使用目的:解决建立数据库连接耗费资源和时间很多的问题，提高性能
-- 常见连接池:C3P0、DRUID
-- C3P0连接池</p>
-<blockquote>
-<div><ul class="simple">
+<div class="section" id="id1">
+<h2><span class="section-number">1.1. </span>预处理对象<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>jdb针对SQL注入问题，提供一个预处理对象，java.sql.PreparedStatement</p>
+<ul>
+<li><p>使用</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>    PrepaerdStatement pstmt = conndb.preparedStatement(String sql)
+    在jdbc中针对预编译的sql语句，可以使用占位符:? , 来表示要添加的参数
+    String sql = &quot;select * from 表名 where id = ? and name=?&quot;;
+    //可以使用preparedStatement给占位符传递参数？
+    pstmt.setInt(占位符序号，传递的具数据) //占位符从1开始
+    pstmt.setString(2,&quot;张三&quot;)
+
+    //执行
+    pstmt.ecexuteQuery(); //五参数
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">1.2. </span>连接池<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>存放多个连接的集合</p>
+<ul class="simple">
+<li><p>使用目的:解决建立数据库连接耗费资源和时间很多的问题，提高性能</p></li>
+<li><p>常见连接池:C3P0、DRUID</p></li>
+<li><p>C3P0连接池</p>
+<ul>
 <li><p>C3P0是开源免费的数据库连接池。目前使用它的开源项目有：Spring、Hibernate等。使用C3P0连接池需要导入jar包</p></li>
-<li><dl class="simple">
-<dt>开发步骤:</dt><dd><ul>
+<li><p>开发步骤:</p>
+<ul>
 <li><p>1、idea中创建项目工程</p></li>
 <li><p>2、在项目工作中导入jar包（数据库的驱动包、c3p0的jar包）</p></li>
 <li><p>3、编写配置文件 c3p0-config.xml，放在src中（注：文件名一定不要写错）</p></li>
 <li><p>4、编写工具类</p></li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl class="simple">
-<dt>参数说明</dt><dd><ul>
+<li><p>参数说明</p>
+<ul>
 <li><p>initialPoolSize : 初始连接数  刚创建好连接池的时候准备的连接数量</p></li>
 <li><p>maxPoolSize : 最大连接数 连接池中最多可以放多少个连接</p></li>
 <li><p>checkoutTimeout : 最大等待时间 连接池中没有连接时最长等待时间</p></li>
 <li><p>maxIdleTime : 最大空闲回收时间 连接池中的空闲连接多久没有使用就会回收</p></li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-</div></blockquote>
-<p>## 事务
-数据库中的事务:为了确保多条SQL语句执行完成，在SQL语句执行之前开始事物，在所有的SQL语句执行结束之后，结束事物(提交，回滚)
-- 作用:</p>
-<blockquote>
-<div><ul class="simple">
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">1.3. </span>事务<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>数据库中的事务:为了确保多条SQL语句执行完成，在SQL语句执行之前开始事物，在所有的SQL语句执行结束之后，结束事物(提交，回滚)</p>
+<ul class="simple">
+<li><p>作用:</p>
+<ul>
 <li><p>保证在一个事务中多次SQL操作要么全都成功，要么全都失败，保障的是数据的安全性、完整性</p></li>
 </ul>
-</div></blockquote>
-<ul class="simple">
-<li><dl class="simple">
-<dt>开启事物:</dt><dd><p>start transaction</p>
-</dd>
-</dl>
 </li>
+<li><p>开启事物:
+start transaction</p></li>
 <li><p>执行多条SQL语句并提交</p></li>
-<li><dl class="simple">
-<dt>回滚</dt><dd><p>rollback</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>原理:</dt><dd><ul>
-<li><dl class="simple">
-<dt>没有开启事务</dt><dd><ul>
+<li><p>回滚
+rollback</p></li>
+<li><p>原理:</p>
+<ul>
+<li><p>没有开启事务</p>
+<ul>
 <li><p>SQL语句会直接操作数据库中的数据</p></li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl class="simple">
-<dt>开启了事务</dt><dd><ul>
+<li><p>开启了事务</p>
+<ul>
 <li><p>SQL语句会缓存在日志中，不会直接啊哦做数据库中的数据</p></li>
 <li><p>commit–缓存的SQL语句会操作数据库中的数据</p></li>
 <li><p>rollback–销毁缓存的数据</p></li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl class="simple">
-<dt>事物特征:ACID</dt><dd><ul>
+<li><p>事物特征:ACID</p>
+<ul>
 <li><p>原子性Atomicity</p></li>
 <li><p>一致性Consistency</p></li>
 <li><p>隔离性Isolation</p></li>
 <li><p>永久性Durability</p></li>
 </ul>
-</dd>
-</dl>
 </li>
-<li><dl class="simple">
-<dt>并发问题</dt><dd><ul>
+<li><p>并发问题</p>
+<ul>
 <li><p>脏读：一个事务读到了另一个事务未提交的数据.</p></li>
 <li><p>不可重复读：一个事务读到了另一个事务已经提交(update)的数据。引发另一个事务，在事务中的多次查询结果不一致。</p></li>
 <li><p>虚读 /幻读：一个事务读到了另一个事务已经提交(insert/delet)的数据。导致另一个事务，在事务中多次查询的结果不一致。</p></li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
+</div>
+</div>
 
 
            </div>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="index.html" class="btn btn-neutral float-left" title="SQL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html" class="btn btn-neutral float-right" title="2. MySQL 50题记录" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="SQL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; 版权所有 2020-2020, roohom
+        &#169; 版权所有 2020-2021, roohom.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
     
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
 
 </footer>
-
         </div>
       </div>
 
