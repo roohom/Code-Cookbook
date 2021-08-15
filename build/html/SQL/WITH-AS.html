@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>6. WITH AS &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="7. 使用sql处理json数据" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html" />
+    <link rel="prev" title="5. SQL JOINS" href="SQL%20JOINS.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SQL</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="JDBC.html">1. JDBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">2. MySQL 50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">3. MySQL语句执行顺序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Replace%20into.html">4. Replace into</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SQL%20JOINS.html">5. SQL JOINS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6. WITH AS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">6.1. 功能</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">6.2. 使用方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">6.3. 注意事项</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html">7. 使用sql处理json数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html">8. 宽表与数据库设计三范式</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">SQL</a> &raquo;</li>
+        
+      <li><span class="section-number">6. </span>WITH AS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/SQL/WITH-AS.md.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="with-as">
+<h1><span class="section-number">6. </span>WITH AS<a class="headerlink" href="#with-as" title="永久链接至标题">¶</a></h1>
+<p><a class="reference external" href="https://www.cnblogs.com/Niko12230/p/5945133.html">详细使用</a></p>
+<div class="section" id="id1">
+<h2><span class="section-number">6.1. </span>功能<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<p>这种写法称为CTE，将子查询语句置前，提高SQL代码的可读性和便于维护，某些情况下提高查询的效率</p>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">6.2. </span>使用方法<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>举个栗子：</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">WITH</span> <span class="n">tmp</span> <span class="k">AS</span>
+<span class="p">(</span><span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">stu</span><span class="p">)</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">score</span> <span class="k">AS</span> <span class="n">s</span> <span class="k">WHERE</span> <span class="n">s</span><span class="p">.</span><span class="n">id</span> <span class="k">IN</span> <span class="n">tmp</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>而不使用WITH AS 写法则需要这样写：</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">score</span> <span class="n">s</span>
+<span class="k">WHERE</span> <span class="n">s</span><span class="p">.</span><span class="n">id</span> <span class="k">in</span>
+	<span class="p">(</span><span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">stu</span><span class="p">)</span> <span class="k">AS</span> <span class="n">tmp</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">6.3. </span>注意事项<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>CTE后面必须直接跟使用CTE的SQL语句（如select、insert、update等），否则，CTE将失效。如下面的SQL语句将无法正常使用CTE：</p></li>
+<li><p>CTE后面也可以跟其他的CTE，但只能使用一个with，多个CTE中间用逗号（,）分隔，如下面的SQL语句所示：</p>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">with</span>
+<span class="n">cte1</span> <span class="k">as</span>
+<span class="p">(</span>
+    <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">table1</span> <span class="k">where</span> <span class="n">name</span> <span class="k">like</span> <span class="s1">&#39;abc%&#39;</span>
+<span class="p">),</span>
+<span class="n">cte2</span> <span class="k">as</span>
+<span class="p">(</span>
+    <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">table2</span> <span class="k">where</span> <span class="n">id</span> <span class="o">&gt;</span> <span class="mi">20</span>
+<span class="p">),</span>
+<span class="n">cte3</span> <span class="k">as</span>
+<span class="p">(</span>
+    <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">table3</span> <span class="k">where</span> <span class="n">price</span> <span class="o">&lt;</span> <span class="mi">100</span>
+<span class="p">)</span>
+<span class="k">select</span> <span class="n">a</span><span class="p">.</span><span class="o">*</span> <span class="k">from</span> <span class="n">cte1</span> <span class="n">a</span><span class="p">,</span> <span class="n">cte2</span> <span class="n">b</span><span class="p">,</span> <span class="n">cte3</span> <span class="k">c</span> <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span>
+</pre></div>
+</div>
+</li>
+<li><p>……</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="%E4%BD%BF%E7%94%A8sql%E5%A4%84%E7%90%86json%E6%95%B0%E6%8D%AE.html" class="btn btn-neutral float-right" title="7. 使用sql处理json数据" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="SQL%20JOINS.html" class="btn btn-neutral float-left" title="5. SQL JOINS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2020-2021, roohom.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

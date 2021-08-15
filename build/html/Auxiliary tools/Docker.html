@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>2. Docker &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3. Sqoop" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" />
+    <link rel="prev" title="1. Apache Avro" href="Apache%20Avro.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Auxiliary tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Apache%20Avro.html">1. Apache Avro</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Docker</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.2. 启动和停止</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html">3. Sqoop</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Auxiliary tools</a> &raquo;</li>
+        
+      <li><span class="section-number">2. </span>Docker</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Auxiliary tools/Docker.md.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="docker">
+<h1><span class="section-number">2. </span>Docker<a class="headerlink" href="#docker" title="永久链接至标题">¶</a></h1>
+<div class="section" id="overview">
+<h2><span class="section-number">2.1. </span>Overview<a class="headerlink" href="#overview" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>Docker是一个开源的容器引擎，是一种容器技术，解决软件跨环境迁移问题</p>
+</div></blockquote>
+<p>Docker本身并不是容器，它是创建容器的工具，是应用容器引擎</p>
+<p>两句口号：</p>
+<ul class="simple">
+<li><p>“Build, Ship and Run”。也就是，“搭建、发送、运行”</p></li>
+<li><p>“Build once，Run anywhere（搭建一次，到处能用）”</p></li>
+</ul>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">2.2. </span>启动和停止<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>操作 指令
+启动docker 		systemctl start docker
+停止docker 		systemctl stop docker
+重启docker 		systemctl restart docker
+查看docker状态	   systemctl status docker
+开机启动 	   	   systemctl <span class="nb">enable</span> docker
+查看docker概要信息 	docker info
+查看docker帮助文档 	docker --help
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Sqoop%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8.html" class="btn btn-neutral float-right" title="3. Sqoop" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Apache%20Avro.html" class="btn btn-neutral float-left" title="1. Apache Avro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2020-2021, roohom.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

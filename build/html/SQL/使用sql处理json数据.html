@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>7. 使用sql处理json数据 &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="8. 宽表与数据库设计三范式" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html" />
+    <link rel="prev" title="6. WITH AS" href="WITH-AS.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SQL</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="JDBC.html">1. JDBC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%2050%E9%A2%98%E8%AE%B0%E5%BD%95.html">2. MySQL 50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html">3. MySQL语句执行顺序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Replace%20into.html">4. Replace into</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SQL%20JOINS.html">5. SQL JOINS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="WITH-AS.html">6. WITH AS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">7. 使用sql处理json数据</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#impala">7.1. IMPALA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hive">7.2. HIVE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#spark">7.3. SPARK</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html">8. 宽表与数据库设计三范式</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">SQL</a> &raquo;</li>
+        
+      <li><span class="section-number">7. </span>使用sql处理json数据</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/SQL/使用sql处理json数据.md.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sqljson">
+<h1><span class="section-number">7. </span>使用sql处理json数据<a class="headerlink" href="#sqljson" title="永久链接至标题">¶</a></h1>
+<blockquote>
+<div><p>在impala和hive中都有<code class="docutils literal notranslate"><span class="pre">get_json_object</span></code>函数</p>
+</div></blockquote>
+<p>当表中有json数据需要处理，提取出其中的某个键对应的值的时候，可以使用<code class="docutils literal notranslate"><span class="pre">get_json_object()</span></code>函数来处理</p>
+<div class="section" id="impala">
+<h2><span class="section-number">7.1. </span>IMPALA<a class="headerlink" href="#impala" title="永久链接至标题">¶</a></h2>
+<ul>
+<li><p>解析单个json字符串</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">get_json_object</span><span class="p">(</span><span class="s1">&#39;{&quot;a&quot;:&quot;123&quot;, &quot;b&quot;: &quot;456&quot;}&#39;</span><span class="p">,</span> <span class="s1">&#39;$.a&#39;</span><span class="p">)</span>
+<span class="c1">-- 123</span>
+
+<span class="k">select</span> <span class="n">get_json_object</span><span class="p">(</span><span class="s1">&#39;{&quot;a&quot;:&quot;123&quot;, &quot;b&quot;: &quot;456&quot;}&#39;</span><span class="p">,</span> <span class="s1">&#39;$.b&#39;</span><span class="p">)</span>
+<span class="c1">-- 456</span>
+</pre></div>
+</div>
+</li>
+<li><p>解析多个json字符串</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">get_json_object</span><span class="p">(</span><span class="s1">&#39;[{&quot;a&quot;:&quot;123&quot;, &quot;b&quot;: &quot;456&quot;},{&quot;a&quot;:&quot;23&quot;, &quot;b&quot;: &quot;56&quot;}]&#39;</span><span class="p">,</span> <span class="s1">&#39;$[0].a&#39;</span><span class="p">)</span>
+<span class="c1">-- 123</span>
+
+<span class="k">select</span> <span class="n">get_json_object</span><span class="p">(</span><span class="s1">&#39;[{&quot;a&quot;:&quot;123&quot;, &quot;b&quot;: &quot;456&quot;},{&quot;a&quot;:&quot;23&quot;, &quot;b&quot;: &quot;56&quot;}]&#39;</span><span class="p">,</span> <span class="s1">&#39;$[1].a&#39;</span><span class="p">)</span>
+<span class="c1">-- 23</span>
+</pre></div>
+</div>
+</li>
+<li><p>当 json 字符串中存在 <code class="docutils literal notranslate"><span class="pre">$</span></code> 标志符，可用 <code class="docutils literal notranslate"><span class="pre">replace</span></code> 先替换成空，再进行值的提取</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">select</span> <span class="n">get_json_object</span><span class="p">(</span><span class="k">replace</span><span class="p">(</span><span class="s1">&#39;{&quot;$a&quot;:&quot;123&quot;, &quot;$b&quot;: &quot;456&quot;}&#39;</span><span class="p">,</span> <span class="s1">&#39;$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;$.a&#39;</span><span class="p">)</span>
+<span class="c1">-- 123</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="hive">
+<h2><span class="section-number">7.2. </span>HIVE<a class="headerlink" href="#hive" title="永久链接至标题">¶</a></h2>
+<p>有这样一个json字符串</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>data =
+{
+ &quot;store&quot;:
+        {
+         &quot;fruit&quot;:[{&quot;weight&quot;:8,&quot;type&quot;:&quot;apple&quot;}, {&quot;weight&quot;:9,&quot;type&quot;:&quot;pear&quot;}],  
+         &quot;bicycle&quot;:{&quot;price&quot;:19.95,&quot;color&quot;:&quot;red&quot;}
+         }, 
+ &quot;email&quot;:&quot;amy@only_for_json_udf_test.net&quot;, 
+ &quot;owner&quot;:&quot;amy&quot; 
+}
+</pre></div>
+</div>
+<ul>
+<li><p>解析单层值</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>select get_json_object(data, &#39;$.owner&#39;) from test;
+结果：amy
+</pre></div>
+</div>
+</li>
+<li><p>解析多层值</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>select get_json_object(data, &#39;$.store.bicycle.price&#39;) from test;
+结果：19.95
+</pre></div>
+</div>
+</li>
+<li><p>取出数组值</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>select get_json_object(data, &#39;$.store.fruit[0]&#39;) from test;
+结果：{&quot;weight&quot;:8,&quot;type&quot;:&quot;apple&quot;}
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="spark">
+<h2><span class="section-number">7.3. </span>SPARK<a class="headerlink" href="#spark" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>初次之外，spark还有别的处理json的函数，<a class="reference external" href="http://spark.apache.org/docs/latest/sql-ref-functions-builtin.html">详见官网</a></p>
+</div></blockquote>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span>-- get_json_object
+SELECT get_json_object(&#39;{&quot;a&quot;:&quot;b&quot;}&#39;, &#39;$.a&#39;);
++-------------------------------+
+|get_json_object({&quot;a&quot;:&quot;b&quot;}, $.a)|
++-------------------------------+
+|                              b|
++-------------------------------+
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="%E5%AE%BD%E8%A1%A8%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1%E4%B8%89%E8%8C%83%E5%BC%8F.html" class="btn btn-neutral float-right" title="8. 宽表与数据库设计三范式" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="WITH-AS.html" class="btn btn-neutral float-left" title="6. WITH AS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2020-2021, roohom.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

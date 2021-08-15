@@ -1,0 +1,594 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>36. JAVA设计模式 &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="38. 设计模式六大原则" href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" />
+    <link rel="prev" title="35. 生产者消费者模型问题" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 面试题整理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL面试</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html">3. 元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Annotation.html#id2">4. 注解解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Closure%26Currying.html">5. Scala函数中闭包(Closure)和柯里化(Currying)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html">6. 集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html#id9">7. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Commands.html">8. Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EOF.html">9. EOF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Git.html">10. Git问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%20distcp.html">11. Hadoop distcp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">12. Hive SQL50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IO%E6%B5%81.html">13. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%20Cookbook.html">14. JAVA Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java8%20Stream%28%29.html">15. Java8 Stream API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_Maven.html">16. Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_OOP.html">17. Java_OOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">18. 使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PySpark.html">19. PySpark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PySparkOnYarn.html">20. PySpark On Yarn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimpleDataStruct.html">21. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Socket.html">22. Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1RSA%20premaster%20secret%20error.html">23. Spark提交任务RSA premaster secret error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Springboot%E6%95%B4%E5%90%88Spark%2C%20%E6%9C%AC%E5%9C%B0%E3%80%81%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.html">24. Springboot整合Spark, 本地、集群部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vim%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4.html">25. Vim查找和替换命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shell%E8%84%9A%E6%9C%AC%E6%97%A5%E6%9C%9F%E9%80%92%E5%A2%9E%28%E8%B5%B7%E6%AD%A2%E6%97%A5%E6%9C%9F%E5%86%85%E9%80%92%E5%A2%9E%29.html">26. Shell脚本日期递增(起止日期内递增)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%85%B3%E4%BA%8EKudu%20Upsert%E5%88%97%E7%9A%84%E9%97%AE%E9%A2%98.html">27. 关于Kudu Upsert列的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%85%B3%E4%BA%8EKudu%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BF%AE%E6%94%B9.html">28. 关于Kudu列的顺序的修改</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">29. 可能有用的学习链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">30. Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">31. 多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B0%86Spark%20DataFrame%E4%B8%AD%E7%9A%84%E6%95%B0%E5%80%BC%E5%8F%96%E5%87%BA.html">32. 将Spark DataFrame中的数值取出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%89%93%E5%8D%B0%E6%9C%AC%E6%9C%BAIP.html">33. 打印本机IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%9C%AC%E5%9C%B0%E8%BF%9E%E6%8E%A5%E9%9C%80%E8%A6%81Kerberos%E8%AE%A4%E8%AF%81%E7%9A%84Hive.html">34. 本地连接需要Kerberos认证的Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">35. 生产者消费者模型问题</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">36. JAVA设计模式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#strategy-pattern">36.1. 0、策略模式Strategy Pattern</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">36.1.1. overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#demo">36.1.2. Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">36.2. 1、模板方法模式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">36.2.1. overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">36.2.2. Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">36.3. 2、单例模式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">36.3.1. 饿汉式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">36.3.2. 懒汉式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">36.3.3. 一个案例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#continuing">37. Continuing…</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">38. 设计模式六大原则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">39. 面向对象知识点梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">40. Java OOP防脱发指南</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Blogs</a> &raquo;</li>
+        
+      <li><span class="section-number">36. </span>JAVA设计模式</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Blog Here/设计模式.md.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="java">
+<h1><span class="section-number">36. </span>JAVA设计模式<a class="headerlink" href="#java" title="永久链接至标题">¶</a></h1>
+<div class="section" id="strategy-pattern">
+<h2><span class="section-number">36.1. </span>0、策略模式Strategy Pattern<a class="headerlink" href="#strategy-pattern" title="永久链接至标题">¶</a></h2>
+<div class="section" id="overview">
+<h3><span class="section-number">36.1.1. </span>overview<a class="headerlink" href="#overview" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>来一点菜鸟教程上的介绍(帮助理解，拿来用用，读书人怎么能叫抄呢？)：</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>意图：定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。</p></li>
+<li><p>主要解决：在有多种算法相似的情况下，使用 if…else 所带来的复杂和难以维护。</p></li>
+<li><p>何时使用：一个系统有许多许多类，而区分它们的只是他们直接的行为。</p></li>
+<li><p>如何解决：将这些算法封装成一个一个的类，任意地替换。</p></li>
+<li><p>关键代码：实现同一个接口。</p></li>
+<li><p>应用实例： 1、诸葛亮的锦囊妙计，每一个锦囊就是一个策略。 2、旅行的出游方式，选择骑自行车、坐汽车，每一种旅行方式都是一个策略。 3、JAVA AWT 中的 LayoutManager。</p></li>
+<li><p>优点： 1、算法可以自由切换。 2、避免使用多重条件判断。 3、扩展性良好。</p></li>
+<li><p>缺点： 1、策略类会增多。 2、所有策略类都需要对外暴露。</p></li>
+<li><p>使用场景： 1、如果在一个系统里面有许多类，它们之间的区别仅在于它们的行为，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为。 2、一个系统需要动态地在几种算法中选择一种。 3、如果一个对象有很多的行为，如果不用恰当的模式，这些行为就只好使用多重的条件选择语句来实现。</p></li>
+</ul>
+</div>
+<div class="section" id="demo">
+<h3><span class="section-number">36.1.2. </span>Demo<a class="headerlink" href="#demo" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>菜鸟教程上的演示案例写得简单易懂，这里直接抄了，哦不，引用，读书人怎么能叫抄呢？</p>
+</div></blockquote>
+<p>1、首先创建一个Strategy接口，我们的策略都要实现这一个接口</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Strategy</span> <span class="p">{</span>
+   <span class="kd">public</span> <span class="kt">int</span> <span class="nf">doOperation</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>2、创建实现接口的实体类</p>
+<p>加法运算的策略</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OperationAdd</span> <span class="kd">implements</span> <span class="n">Strategy</span><span class="p">{</span>
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="kt">int</span> <span class="nf">doOperation</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>减法运算的策略</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OperationSubtract</span> <span class="kd">implements</span> <span class="n">Strategy</span><span class="p">{</span>
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="kt">int</span> <span class="nf">doOperation</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">num1</span> <span class="o">-</span> <span class="n">num2</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>乘法运算的策略</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">OperationMultiply</span> <span class="kd">implements</span> <span class="n">Strategy</span><span class="p">{</span>
+   <span class="nd">@Override</span>
+   <span class="kd">public</span> <span class="kt">int</span> <span class="nf">doOperation</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">num1</span> <span class="o">*</span> <span class="n">num2</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>3、创建Context类</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Context</span> <span class="p">{</span>
+   <span class="kd">private</span> <span class="n">Strategy</span> <span class="n">strategy</span><span class="p">;</span>
+ 
+   <span class="kd">public</span> <span class="nf">Context</span><span class="p">(</span><span class="n">Strategy</span> <span class="n">strategy</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">strategy</span> <span class="o">=</span> <span class="n">strategy</span><span class="p">;</span>
+   <span class="p">}</span>
+ 
+   <span class="kd">public</span> <span class="kt">int</span> <span class="nf">executeStrategy</span><span class="p">(</span><span class="kt">int</span> <span class="n">num1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="p">){</span>
+      <span class="k">return</span> <span class="n">strategy</span><span class="p">.</span><span class="na">doOperation</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>4、Context类可以查看改变策略时的行为变化</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">StrategyPatternDemo</span> <span class="p">{</span>
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">Context</span> <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Context</span><span class="p">(</span><span class="k">new</span> <span class="n">OperationAdd</span><span class="p">());</span>    
+      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;10 + 5 = &quot;</span> <span class="o">+</span> <span class="n">context</span><span class="p">.</span><span class="na">executeStrategy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+ 
+      <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Context</span><span class="p">(</span><span class="k">new</span> <span class="n">OperationSubtract</span><span class="p">());</span>      
+      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;10 - 5 = &quot;</span> <span class="o">+</span> <span class="n">context</span><span class="p">.</span><span class="na">executeStrategy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+ 
+      <span class="n">context</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Context</span><span class="p">(</span><span class="k">new</span> <span class="n">OperationMultiply</span><span class="p">());</span>    
+      <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;10 * 5 = &quot;</span> <span class="o">+</span> <span class="n">context</span><span class="p">.</span><span class="na">executeStrategy</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">));</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>5、执行结果</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="mi">10</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="mi">10</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">=</span> <span class="mi">50</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">36.2. </span>1、模板方法模式<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h3><span class="section-number">36.2.1. </span>overview<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<blockquote>
+<div><p>模板方法模式就是在模板方法中按照一定的规则和顺序调用基本方法。</p>
+</div></blockquote>
+<p><strong>优点：</strong> 1、封装不变部分，扩展可变部分。 2、提取公共代码，便于维护。 3、行为由父类控制，子类实现。</p>
+<p>**缺点：**每一个不同的实现都需要一个子类来实现，导致类的个数增加，使得系统更加庞大。</p>
+<p><strong>使用场景：</strong> 1、有多个子类共有的方法，且逻辑相同。 2、重要的、复杂的方法，可以考虑作为模板方法。</p>
+<p>**注意事项：**为防止恶意操作，一般模板方法都加上 final 关键词。</p>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">36.2.2. </span>Demo<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">HummerModel</span> <span class="p">{</span> 
+<span class="cm">/*</span>
+<span class="cm"> * 首先，这个模型要能够被发动起来，别管是手摇发动，还是电力发动，反正</span>
+<span class="cm"> * 是要能够发动起来，那这个实现要在实现类里了</span>
+<span class="cm"> */</span>
+<span class="kd">protected</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">start</span><span class="p">();</span> 
+ 
+<span class="c1">//能发动，那还要能停下来，那才是真本事</span>
+<span class="kd">protected</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">stop</span><span class="p">();</span> 
+ 
+<span class="c1">//喇叭会出声音，是滴滴叫，还是哔哔叫</span>
+<span class="kd">protected</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">alarm</span><span class="p">();</span> 
+ 
+<span class="c1">//引擎会轰隆隆的响，不响那是假的</span>
+<span class="kd">protected</span> <span class="kd">abstract</span> <span class="kt">void</span> <span class="nf">engineBoom</span><span class="p">();</span> 
+ 
+<span class="c1">//那模型应该会跑吧，别管是人推的，还是电力驱动，总之要会跑</span>
+<span class="kd">final</span> <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span> 
+ 
+ <span class="c1">//先发动汽车</span>
+ <span class="k">this</span><span class="p">.</span><span class="na">start</span><span class="p">();</span> 
+ 
+ <span class="c1">//引擎开始轰鸣</span>
+ <span class="k">this</span><span class="p">.</span><span class="na">engineBoom</span><span class="p">();</span> 
+ 
+ <span class="c1">//喇嘛想让它响就响，不想让它响就不响</span>
+ <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">isAlarm</span><span class="p">()){</span> 
+ <span class="k">this</span><span class="p">.</span><span class="na">alarm</span><span class="p">();</span> 
+ <span class="p">}</span> 
+ 
+ <span class="c1">//到达目的地就停车</span>
+ <span class="k">this</span><span class="p">.</span><span class="na">stop</span><span class="p">();</span> 
+ <span class="p">}</span> 
+ 
+<span class="c1">//钩子方法，默认喇叭是会响的</span>
+<span class="kd">protected</span> <span class="kt">boolean</span> <span class="nf">isAlarm</span><span class="p">(){</span> 
+ <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> 
+ <span class="p">}</span> 
+<span class="p">}</span> 
+</pre></div>
+</div>
+<p>上面的isAlarm()叫做钩子方法，子类可以重写。run方法定义了调用其他方法的顺序，并且子类不能修改，这叫做模板方法。</p>
+<p>start、stop、alarm、engineBoom 这四个方法是子类必须实现的，而且这四个方法的修改对应了不同的类，这个叫做基本方法，基本方法又分为三种：在抽象类中实现了的基本方法叫做具体方法；在抽象类中没有实现，在子类中实现了叫做抽象方法，我们这四个基本方法都是抽象方法，由子类来实现的；还有一种就是钩子方法。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">36.3. </span>2、单例模式<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<blockquote>
+<div><p>在整个软件系统中有些对象值需要实例化一个，并不需要每次用到时都去实例化一个新的对象。</p>
+</div></blockquote>
+<div class="section" id="id5">
+<h3><span class="section-number">36.3.1. </span>饿汉式<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>好处</p>
+<ul>
+<li><p>天然的线程安全的</p></li>
+</ul>
+</li>
+<li><p>坏处</p>
+<ul>
+<li><p>对象一开始就加载，可能长时间用不到</p></li>
+</ul>
+</li>
+</ul>
+<p>一个示例：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * 饿汉式 HUNGRY</span>
+<span class="cm"> * 静态方法最先加载，当加载完成之后调用内部静态对象(实例化一个Bank对象)</span>
+<span class="cm"> * 当实例化成功之后，由于不能调用Bank的实例化方法直接new一个对象，只能</span>
+<span class="cm"> * 使用提供的公共的静态方法去取已经实例化好的静态对象，所以每次调用Bank得到的都是</span>
+<span class="cm"> * 同一个预先加载好的静态对象</span>
+<span class="cm"> * 坏处：对象加载之后可能一直用不到，创建时间过长</span>
+<span class="cm"> * 好处：是线程安全的</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author roohom</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bank</span> <span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * 私有化类的构造器</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="nf">Bank</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 内部类创建的对象，要求此对象和静态的方法一致也是静态的</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Bank</span> <span class="n">bankInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Bank</span><span class="p">();</span>
+
+
+    <span class="cm">/**</span>
+<span class="cm">     * 提供公共静态的方法，返回类的对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return 类的对象</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Bank</span> <span class="nf">getInstance</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">bankInstance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">36.3.2. </span>懒汉式<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>好处</p>
+<ul>
+<li><p>延迟对象的创建，用到的时候才创建，不浪费</p></li>
+</ul>
+</li>
+<li><p>坏处</p>
+<ul>
+<li><p>是线程不安全的</p></li>
+</ul>
+</li>
+</ul>
+<p>一个示例：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * LAZY</span>
+<span class="cm"> * 好处：延迟对象的创建，用到的时候才创建</span>
+<span class="cm"> * 坏处：下面的写法是线程不安全的</span>
+<span class="cm"> * 改进一下 https://zhuanlan.zhihu.com/p/52316864</span>
+<span class="cm"> *</span>
+<span class="cm"> * @Author: roohom</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Order</span> <span class="p">{</span>
+    <span class="cm">/**</span>
+<span class="cm">     * 私有化类的构造器</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="nf">Order</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+    
+    <span class="cm">/**</span>
+<span class="cm">     * 声明类的对象 不初始化</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Order</span> <span class="n">orderInstance</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 声明public、static返回当前类的一个对象</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return orderInstance</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Order</span> <span class="nf">getOrderInstance</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="c1">//如果orderInstance为null，那说明是第一次调用，就直接new一个</span>
+        <span class="c1">//线程不安全就体现在这里</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">orderInstance</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">orderInstance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Order</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="c1">//如果不是第一次调用，说明之前new过了，那就直接返回之前new过的那个</span>
+        <span class="k">return</span> <span class="n">orderInstance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">36.3.3. </span>一个案例<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>来看看java.lang的源码关于runtime的部分</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Every Java application has a single instance of class</span>
+<span class="cm"> * &lt;code&gt;Runtime&lt;/code&gt; that allows the application to interface with</span>
+<span class="cm"> * the environment in which the application is running. The current</span>
+<span class="cm"> * runtime can be obtained from the &lt;code&gt;getRuntime&lt;/code&gt; method.</span>
+<span class="cm"> * &lt;p&gt;</span>
+<span class="cm"> * An application cannot create its own instance of this class.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @author  unascribed</span>
+<span class="cm"> * @see     java.lang.Runtime#getRuntime()</span>
+<span class="cm"> * @since   JDK1.0</span>
+<span class="cm"> */</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Runtime</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="n">Runtime</span> <span class="n">currentRuntime</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Runtime</span><span class="p">();</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * Returns the runtime object associated with the current Java application.</span>
+<span class="cm">     * Most of the methods of class &lt;code&gt;Runtime&lt;/code&gt; are instance</span>
+<span class="cm">     * methods and must be invoked with respect to the current runtime object.</span>
+<span class="cm">     *</span>
+<span class="cm">     * @return  the &lt;code&gt;Runtime&lt;/code&gt; object associated with the current</span>
+<span class="cm">     *          Java application.</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Runtime</span> <span class="nf">getRuntime</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">currentRuntime</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cm">/** Don&#39;t let anyone else instantiate this class */</span>
+    <span class="kd">private</span> <span class="nf">Runtime</span><span class="p">()</span> <span class="p">{}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="continuing">
+<h1><span class="section-number">37. </span>Continuing…<a class="headerlink" href="#continuing" title="永久链接至标题">¶</a></h1>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" class="btn btn-neutral float-right" title="38. 设计模式六大原则" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html" class="btn btn-neutral float-left" title="35. 生产者消费者模型问题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2020-2021, roohom.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

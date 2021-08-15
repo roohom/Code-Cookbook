@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3. 元注解 &mdash; Code-Cookbook 0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="5. Scala函数中闭包(Closure)和柯里化(Currying)" href="Closure%26Currying.html" />
+    <link rel="prev" title="2. 实时存储NoSQL面试" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0904%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86.html">1. 面试题整理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html">2. 实时存储NoSQL面试</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. 元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4. 注解解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Closure%26Currying.html">5. Scala函数中闭包(Closure)和柯里化(Currying)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html">6. 集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Collection.html#id9">7. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Commands.html">8. Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EOF.html">9. EOF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Git.html">10. Git问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hadoop%20distcp.html">11. Hadoop distcp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Hive%20SQL50%E9%A2%98%E8%AE%B0%E5%BD%95.html">12. Hive SQL50题记录</a></li>
+<li class="toctree-l2"><a class="reference internal" href="IO%E6%B5%81.html">13. <code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%20Cookbook.html">14. JAVA Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java8%20Stream%28%29.html">15. Java8 Stream API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_Maven.html">16. Maven</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java_OOP.html">17. Java_OOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Java%E4%B8%ADSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">18. 使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PySpark.html">19. PySpark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PySparkOnYarn.html">20. PySpark On Yarn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="SimpleDataStruct.html">21. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Socket.html">22. Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Spark%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1RSA%20premaster%20secret%20error.html">23. Spark提交任务RSA premaster secret error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Springboot%E6%95%B4%E5%90%88Spark%2C%20%E6%9C%AC%E5%9C%B0%E3%80%81%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.html">24. Springboot整合Spark, 本地、集群部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vim%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4.html">25. Vim查找和替换命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shell%E8%84%9A%E6%9C%AC%E6%97%A5%E6%9C%9F%E9%80%92%E5%A2%9E%28%E8%B5%B7%E6%AD%A2%E6%97%A5%E6%9C%9F%E5%86%85%E9%80%92%E5%A2%9E%29.html">26. Shell脚本日期递增(起止日期内递增)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%85%B3%E4%BA%8EKudu%20Upsert%E5%88%97%E7%9A%84%E9%97%AE%E9%A2%98.html">27. 关于Kudu Upsert列的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%85%B3%E4%BA%8EKudu%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BF%AE%E6%94%B9.html">28. 关于Kudu列的顺序的修改</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html">29. 可能有用的学习链接</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%83%BD%E6%9C%89%E7%94%A8%E7%9A%84%E5%AD%A6%E4%B9%A0%E9%93%BE%E6%8E%A5.html#hive-orc">30. Hive - ORC 文件存储格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">31. 多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%B0%86Spark%20DataFrame%E4%B8%AD%E7%9A%84%E6%95%B0%E5%80%BC%E5%8F%96%E5%87%BA.html">32. 将Spark DataFrame中的数值取出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%89%93%E5%8D%B0%E6%9C%AC%E6%9C%BAIP.html">33. 打印本机IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%9C%AC%E5%9C%B0%E8%BF%9E%E6%8E%A5%E9%9C%80%E8%A6%81Kerberos%E8%AE%A4%E8%AF%81%E7%9A%84Hive.html">34. 本地连接需要Kerberos认证的Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">35. 生产者消费者模型问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">36. JAVA设计模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html#continuing">37. Continuing…</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">38. 设计模式六大原则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">39. 面向对象知识点梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">40. Java OOP防脱发指南</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Blogs</a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>元注解</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Blog Here/Annotation.md.txt" rel="nofollow"> 查看页面源码</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">3. </span>元注解<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>元注解是针对自定义注解的
+补充:枚举(Enum)</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">enum</span> <span class="n">枚举名</span><span class="p">{</span>
+    <span class="n">市区</span>
+    <span class="n">县城</span>
+    <span class="n">乡镇</span>
+    <span class="n">村庄</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>&#64;target</p>
+<ul>
+<li><p>可选的参数值在枚举类ElementType中包括</p></li>
+<li><p>TYPE</p></li>
+<li><p>FIELD</p></li>
+<li><p>METHOD</p></li>
+<li><p>PARAMETER</p></li>
+<li><p>CONSTRUCTOR</p></li>
+<li><p>LOCAL_VARIABLE</p></li>
+</ul>
+</li>
+<li><p>&#64;Retention</p>
+<ul>
+<li><p>作用 : 定义该注解的生命周期(有效范围)</p></li>
+<li><p>可选额参数值在枚举类型RetentionPolicy</p></li>
+<li><p>SOURCE</p>
+<ul>
+<li><p>针对一些检查性的操作，比如&#64;override</p></li>
+</ul>
+</li>
+<li><p>CLASS</p>
+<ul>
+<li><p>使用场景：在编译时进行一些预处理操作，比如：生成一些辅助代码，就用CLASS注解</p></li>
+</ul>
+</li>
+<li><p>RUNTIME</p>
+<ul>
+<li><p>使用得最多</p></li>
+<li><p>要在运行时去动态获取注解信息，那只能用RUNTIME注解</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h1><span class="section-number">4. </span>注解解析<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h1>
+<p>在开发中，针对注解进行Java代码解析开发时，需要使用到:
+Annotation:所有注解类型的公共接口，类似所有类的父类是Object
+AnnotationElement:封装了解析注解的相关方法</p>
+<ul class="simple">
+<li><p>常用方法</p>
+<ul>
+<li><p>boolean isAnnotationPresent(class annotationClass)判断当前对象是否有指定的注解
+比如: Bookshelf对象.isAnnotationPresent(Book.class),也可以是方法对象、构造器对象、成员变量对象</p></li>
+<li><p>T getAnnotation(Class<T> annotationClass) 获得当前对象上指定的注解对象
+比如:</p></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Closure%26Currying.html" class="btn btn-neutral float-right" title="5. Scala函数中闭包(Closure)和柯里化(Currying)" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="1008%E6%A8%A1%E6%8B%9F%E9%9D%A2%E8%AF%95%E6%95%B4%E7%90%86.html" class="btn btn-neutral float-left" title="2. 实时存储NoSQL面试" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2020-2021, roohom.
+
+    </p>
+  </div>
+    
+    
+    
+    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
