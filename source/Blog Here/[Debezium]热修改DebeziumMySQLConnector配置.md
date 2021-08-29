@@ -1,4 +1,4 @@
-# [debeizum]热修改Debezium MySQL Connector配置
+# [debezium]热修改Debezium MySQL Connector配置
 
 > 此操作针对debezium1.2，更高版本应该也支持。
 
