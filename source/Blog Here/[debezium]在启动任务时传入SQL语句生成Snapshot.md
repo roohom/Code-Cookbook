@@ -28,7 +28,7 @@
 > This property contains a comma-separated list of fully-qualified tables *(DB_NAME.TABLE_NAME)*. Select statements for the individual tables are specified in further configuration properties, one for each table, identified by the id `snapshot.select.statement.overrides.[DB_NAME].[TABLE_NAME]`. The value of those properties is the SELECT statement to use when retrieving data from the specific table during snapshotting. *A possible use case for large append-only tables is setting a specific point where to start (resume) snapshotting, in case a previous snapshotting was interrupted.*
 > **Note**: This setting has impact on snapshots only. Events captured from binlog are not affected by it at all.
 
-大意是说，该参数控制了从表中哪些行数据将被包括在snapshot中。该参数仅仅会作用在snapshot上，从binlog中解析到的时间并不会被影响。该配置包含一个使用逗号分割的表的全名，如：`snapshot.select.statement.overrides.[DB_NAME].[TABLE_NAME]`,该参数的值为一个SELECT语句，在从特定的表里拉取数据做snapshot的时候会运行该SQL语句，一个可能的用处就是在一个特别大的追加数据的表中，当之前的一个snapshot被中断了而需要从一个特定的位置重新做snapshot。
+大意是说，该参数控制了从表中哪些行数据将被包括在snapshot中。该参数仅仅会作用在snapshot上，从binlog中解析到的事件并不会被影响。该配置包含一个使用逗号分割的表的全名，如：`snapshot.select.statement.overrides.[DB_NAME].[TABLE_NAME]`,该参数的值为一个SELECT语句，在从特定的表里拉取数据做snapshot的时候会运行该SQL语句，一个可能的用处就是在一个特别大的追加数据的表中，当之前的一个snapshot被中断了而需要从一个特定的位置重新做snapshot。
 
 (这我都能翻译好，我太牛逼了)
 
@@ -55,7 +55,7 @@
     "database.user":"user",
     "database.server.id":"120",
     "snapshot.select.statement.overrides":"mos_realtime_sync.tm_users",
-    "database.history.kafka.bootstrap.servers":"10.122.44.113:9092,10.122.44.114:9092,10.122.44.115:9092",
+    "database.history.kafka.bootstrap.servers":"broker:9092,broker:9092,broker:9092",
     "database.server.name":"bdp_mos_realtime_sync_test",
     "selfConvert.tsts":"-46800000",
     "selfConvert.type":"com.csvw.spi.CustomerConvert",
