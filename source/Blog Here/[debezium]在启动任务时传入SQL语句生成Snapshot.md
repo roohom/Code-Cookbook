@@ -2,6 +2,8 @@
 
 ## 前情概要
 
+> As MySQL is typically set up to purge binlogs after a specified period of time, the MySQL connector performs and initial *consistent snapshot* of each of your databases. The MySQL connector reads the binlog from the point at which the snapshot was made.
+
 **当启动一个debezium的MySQL Connector时，debezium会默认对所有行的数据做一份snapshot，然后将该份数据发送到Kafka(如果下游是Kafka)中，而对于后面发生的数据库的插入、更新和删除操作时，才会使用binlog做监听，将数据发送到Kafka中。**
 
 ## 一个问题
@@ -86,3 +88,7 @@
   ~~~
 
 第一个表示SELECT语句的名称，为对应的表使用SELECT语句，将会去使用哪个语句，由于配置了`"mos_realtime_sync.tm_users"`,那么debezium会去配置属性里面去找标签为`snapshot.select.statement.overrides.mos_realtime_sync.tm_users`的配置，使用里面的SQL语句，在从库名为`mos_realtime_sync`的表名为`tm_users`使用SQL语句`select * from mos_realtime_sync.tm_users where id > 2892777`去生成snapshot
+
+
+
+经过实际测试，上面的配置是可行的，测试的版本为debezium1.2。
