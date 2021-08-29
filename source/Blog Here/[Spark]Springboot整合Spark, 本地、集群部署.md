@@ -1,4 +1,4 @@
-# Springboot整合Spark, 本地、集群部署
+# [Spark]Springboot整合Spark, 本地、集群部署
 
 > 最近需要完善一个底层执行引擎为Spark的数仓项目，其功能宏观上看类似于`hive -f `命令，让不懂java的但会写sql的人也能胜任数仓开发。项目使用Springboot2.4 和Spark2.4 ，代码为java完成，最终实现可以在本地、集群包括client模式和cluster模式来提交运行。这其中坑也不少，下面是对该探索过程的总结，主要探讨的是上线部署过程中遇到的种种问题以及解决方式。
 

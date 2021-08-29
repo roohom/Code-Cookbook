@@ -1,4 +1,4 @@
-# 将Spark DataFrame中的数值取出
+# [Spark]将Spark DataFrame中的数值取出
 
 有时候经过Spark SQL计算得到的结果往往就一行，而且需要将该结果取出，作为字符串参与别的代码块的判断条件，所以就需要将DF中的一行数据取出并且转换为String，下面探讨的是用一些办法实现该需求，分别有java和scala实现。
 

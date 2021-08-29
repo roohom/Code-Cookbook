@@ -1,4 +1,4 @@
-# Spark提交任务RSA premaster secret error
+# [Spark]Spark提交任务RSA premaster secret error
 
 今天在使用spark-submit提交一个Springboot整合spark，并且支持读写kudu表的jar包到集群运行时，报了错，
 
