@@ -51,3 +51,4 @@
 ~~~shell
 curl -s -X PUT -H 'Content-Type: application/json' --data @mos-uos_debezium_connector2.json http://localhost:8083/connectors/dbz_mos-uos/config
 ~~~
+
