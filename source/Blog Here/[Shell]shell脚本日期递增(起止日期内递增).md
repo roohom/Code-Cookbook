@@ -117,3 +117,51 @@ done
 >
 > 直接运行event.sh脚本并输入起止日期即可启动
 
+**再一个应用：**
+
+如果有一个脚本需要跑历史数据，并且<u>只需要历史日期为周日的那天才执行</u>，那么可以使用下面的脚本：
+
+~~~shell
+#!/bin/bash
+echo "DATE FORMAT IS %Y-%m-%d"
+
+if [ $# == 0 ] 
+then
+   echo "PLEASE INPUT [START_DATE AND END_DATE)"
+   exit
+fi
+
+if [ $# == 1 ]
+then
+	echo "YOU NEED TO INPUT START_DATE OR END_DATE"
+	exit
+fi
+now=`date +"%Y-%m-%d %H:%M:%S"`
+
+start_day=$1
+end_day=$2
+job_name=$3
+
+echo "$now -------INFO: start_day has set as $start_day-----------"
+echo "$now -------INFO: end_day has set as $end_day    -----------"
+echo "$now -------INFO: job_name has set as $job_name  -----------"
+
+while (( `date -d "$start_day" +%Y%m%d`<=`date -d "$end_day" +%Y%m%d`))
+do  
+    echo "`date +"%Y-%m-%d %H:%M:%S"` -------INFO: today is $start_day   -----------"
+    next_day=`date -d "$start_day +1 day" +%Y-%m-%d`
+    echo "`date +"%Y-%m-%d %H:%M:%S"` -------INFO: next day is $next_day   -----------"
+    if [ `date -d $start_day +%w` -eq 0 ]
+    then 
+        echo "这里执行实际的脚本......"
+    else
+        echo "`date +"%Y-%m-%d %H:%M:%S"` -------INFO: $start_day不是周日 ---------------"
+    fi
+    start_day=`date -d "$start_day +1 day" +%Y-%m-%d`
+    if [[ $start_day == $end_day ]];
+    then
+         break
+    fi
+done
+~~~
+
