@@ -140,10 +140,10 @@ public class HttpPostSource extends RichSourceFunction<String> {
 
 同样可以将数据使用http发送出去，sink到其他端
 
-这里使用别人已经写好的工具，需要在maven中引入
+这里使用别人已经写好的工具，需要在maven中引入，由于该依赖并不存在于中央仓库，开发者说明了使用方法，也就是去github上将仓库clone到本地，再使用`maven clean install`在本地编译并打入本地仓库之后，即可在项目pom中引入
 
 ~~~xml
-<!--flink-connector-http-->
+<!--flink-connector-http--> 
 <dependency>
     <groupId>net.galgus</groupId>
     <artifactId>flink-connector-http</artifactId>
