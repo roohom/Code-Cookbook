@@ -183,5 +183,138 @@ Unions就像上面提到的，使用JSON的数组表示。比如:
   >
   > 原生类型没有命名空间，并且不可以在命名空间中定义原生类型。
 
+## How to user Avro
+
+- 1、首先需要在maven中引入依赖：
+
+  ~~~xml
+  <dependencies>
+      <dependency>
+          <groupId>org.apache.avro</groupId>
+          <artifactId>avro</artifactId>
+          <version>1.8.1</version>
+      </dependency>
+  </dependencies>
+  ~~~
+
+  
+
+- 2、其次需要在maven中配置Avro编译插件
+
+  ~~~xml
+  <plugins>
+          <!--maven编译插件-->
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+              </configuration>
+          </plugin>
+          <!--Avro编译插件-->
+          <plugin>
+              <groupId>org.apache.avro</groupId>
+              <artifactId>avro-maven-plugin</artifactId>
+              <version>1.8.1</version>
+              <executions>
+                  <execution>
+                      <phase>generate-sources</phase>
+                      <goals>
+                          <goal>schema</goal>
+                      </goals>
+                      <configuration>
+                          <!--Avro源文件-->
+                          <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
+                          <!--Avro编译生成文件-->
+                          <outputDirectory>${project.basedir}/src/main/java/</outputDirectory>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+      </plugins>
+  </build>
+  ~~~
+
+- 3、在我们的项目中引入`.avsc`文件，也就是放在步骤2中的`sourceDirectory`中的路径中
+
+  ~~~json
+  {"namespace": "me.roohom.avro",
+   "type": "record",
+   "name": "User",
+   "fields": [
+       {"name": "name", "type": "string"},
+       {"name": "age",  "type": ["int", "null"]},
+       {"name": "address", "type": ["string", "null"]}
+   ]
+  }
+  ~~~
+
+  
+
+- 4、在项目中使用maven进行编译，此时，会在步骤2中的`outputDirectory`中生成我们的model类的代码。
+
+- 5、序列化一个对象：
+
+  ~~~java
+  //新建对象
+  User user = new User();
+  
+  //封装数据
+  user.setName("Allen");
+  user.setAge(22);
+  user.setAddress("安徽");
+  
+  User anoUser = new User("xx", 19, "北京");
+  User thirdUser = User.newBuilder()
+          .setName("aa")
+          .setAge(20)
+          .setAddress("西安")
+          .build();
+  
+  //序列化 定义模式
+  SpecificDatumWriter<Object> datumWriter = new SpecificDatumWriter<>(user.getSchema());
+  
+  //数据序列化对象
+  DataFileWriter<Object> dataFileWriter = new DataFileWriter<>(datumWriter);
+  
+  //设置序列化文件路径
+  dataFileWriter.create(user.getSchema(), new File("avro.txt"));
+  
+  dataFileWriter.append(user);
+  dataFileWriter.append(anoUser);
+  dataFileWriter.append(thirdUser);
+  
+  dataFileWriter.close();
+  ~~~
+
+- 6、从持久化文件中反序列化一个对象
+
+  ~~~java
+  //反序列化
+  SpecificDatumReader<User> datumReader = new SpecificDatumReader<>(User.class);
+  DataFileReader dataFileReader = new DataFileReader<User>(new File("avro.txt"), datumReader);
+  for (Object users : dataFileReader) {
+      System.out.println("反序列化" + users);
+  }
+  ~~~
+
+  当然，也可以使用更通用的办法去反序列化，而不需要指定具体的model类，让avro自己去推断解析schema
+
+  ~~~java
+  File file = new File("avro.txt");
+  File schemaFile = new File("src/main/avro/user.avsc");
+  Schema schema = new Schema.Parser().parse(schemaFile);
+  
+  //反序列化
+  SpecificDatumReader<GenericData> datumReader = new SpecificDatumReader<>(schema);
+  DataFileReader<GenericData> dataFileReader = new DataFileReader<GenericData>(file, datumReader);
+  for (Object db : dataFileReader) {
+      System.out.println("反序列化:" + db);
+  }
+  ~~~
+
+  
+
 
 
