@@ -39,7 +39,7 @@
 
 > AVRO支持6种复杂类型，分别是：records, enums, arrays, maps, unions，fixed
 
-#### Records
+Records
 
 - 此数据结构内部字段可以由多种基本类型组成
 - 必选属性
@@ -54,7 +54,7 @@
   - doc：是一个JSON String，为使用这个Schema的用户提供文档
   - aliases: 是JSON的一个string数组，为这条记录提供别名
 
-#### Enums
+Enums
 
 > Enums使用的名为“enum”的type并且支持如下的属性：
 
@@ -100,7 +100,7 @@ symbols: 必有属性，是一个JSON string数组，列举了所有的symbol，
 
 }
 
-#### Arrays
+Arrays
 
 > Array使用名为"array"的type，并且支持一个属性
 
@@ -114,7 +114,7 @@ symbols: 必有属性，是一个JSON string数组，列举了所有的symbol，
 
   
 
-#### Maps
+Maps
 
 Map使用名为"map"的type，并且支持一个属性
 
@@ -126,7 +126,7 @@ Map使用名为"map"的type，并且支持一个属性
 
 
 
-#### Unions
+Unions
 
 Unions就像上面提到的，使用JSON的数组表示。比如:
 
@@ -140,7 +140,7 @@ Unions就像上面提到的，使用JSON的数组表示。比如:
 
 
 
-#### Fixed
+Fixed
 
 - Fixed类型使用"fixed"的type name，并且支持三个属性：
 
@@ -183,7 +183,7 @@ Unions就像上面提到的，使用JSON的数组表示。比如:
   >
   > 原生类型没有命名空间，并且不可以在命名空间中定义原生类型。
 
-## How to user Avro
+## How to use Avro
 
 - 1、首先需要在maven中引入依赖：
 
@@ -316,5 +316,145 @@ Unions就像上面提到的，使用JSON的数组表示。比如:
 
   
 
+## How to use Avro with Kafka
 
+当我们需要将数据使用avro序列化框架序列化之后发送到Kafka时，就需要自定义序列化器，使用下面的办法可以自定义序列化器，在向kafka发送数据的时候使用：
+
+~~~java
+/**
+ * @ClassName: AvroSerializer
+ * @Author: Roohom
+ * @Function: 自定义序列化
+ * @Date: 2020/10/28 17:32
+ * @Software: IntelliJ IDEA
+ */
+public class AvroSerializer<T extends SpecificRecordBase> implements Serializer<T> {
+    //泛型参数继承avro基类，实现序列化接口
+    
+    @Override
+    public void configure(Map<String, ?> configs, boolean isKey) {
+
+    }
+
+    /**
+     * 仅需要复写此方法即可以实现自定义序列化
+     *
+     * @param topic Kafka topic
+     * @param data  数据
+     * @return 输出流字节数组
+     */
+    @Override
+    public byte[] serialize(String topic, T data) {
+        //设置Schema约束对象
+        SpecificDatumWriter<Object> datumWriter = new SpecificDatumWriter<>(data.getSchema());
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        BinaryEncoder binaryEncoder = EncoderFactory.get().directBinaryEncoder(outputStream, null);
+        try {
+            //通过write方法，会将avro类型的数据，编码成字节流，数据会存储在outputStream字节输出流对象中
+            datumWriter.write(data, binaryEncoder);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return outputStream.toByteArray();
+    }
+
+    @Override
+    public void close() {
+    }
+}
+~~~
+
+下面一个kafka生产者实例，在properties中声明了值的序列化器：
+
+~~~java
+public class KafkaPro<T extends SpecificRecordBase> {
+    public Properties getProperties() {
+        Properties properties = new Properties();
+        properties.put("bootstrap.servers", "localhost:9092");
+        properties.put("acks", "0");
+        properties.put("retries", "0");
+        properties.put("batch.size", "16384");
+        properties.put("linger.ms", "1");
+        properties.put("buffer.memory", "33554421");
+        properties.put("key.serializer", StringSerializer.class.getName());
+        properties.setProperty("value.serializer", AvroSerializer.class.getName());
+
+        return properties;
+    }
+    /**
+     * 获取kafka生产者对象
+     */
+    KafkaProducer<String, T> producer = new KafkaProducer<>(getProperties());
+    public void sendData(String topic, T data) {
+        producer.send(new ProducerRecord(topic, data));
+    }
+}
+~~~
+
+## How to use Avro with Flink
+
+使用Flink消费kafka数据
+
+~~~java
+Properties properties = new Properties();
+properties.setProperty("bootstrap.servers", "localhost:9092");
+properties.setProperty("group.id", "test");
+DataStream<String> stream = env
+	.addSource(new FlinkKafkaConsumer<>("topic", new SimpleStringSchema(), properties));
+~~~
+
+上面的实例需要指定一个`DeserializationSchema`，当数据为avro格式的数据时需要指定为`AvroDeserializationSchema`
+
+Schema可以通过从Avro自动生成的class中推测得到，也可以通过使用GenericRecords和手动提供的Schema配合来得到
+
+比如：
+
+~~~java
+AvroDeserializationSchema<User> UserSchema = AvroDeserializationSchema.forSpecific(User.class);
+~~~
+
+maven中需要引入
+
+~~~xml
+<dependency>
+    <groupId>org.apache.flink</groupId>
+    <artifactId>flink-avro</artifactId>
+    <version>1.12.3</version>
+</dependency>
+~~~
+
+
+
+当采用了Avro序列化框架将数据序列化后存储在Kafka之后，采用Flink消费kafka的topic数据的时候，可以自定义Schema去消费解析数据
+
+~~~java
+public class AvroDeserializationSchema<T> implements DeserializationSchema<T> {
+    private String topicName;
+
+    public AvroDeserializationSchema(String topicName) {
+        this.topicName = topicName;
+    }
+    @Override
+    public T deserialize(byte[] message) throws IOException {
+        //定义反序列化约束对象
+        SpecificDatumReader<T> avroSchema = new SpecificDatumReader(XXX.class)
+        //获取反序列化编码对象
+        ByteArrayInputStream bis = new ByteArrayInputStream(message);
+        //二进制对象
+        BinaryDecoder binaryDecoder = DecoderFactory.get().binaryDecoder(bis, null);
+
+        T read = avroSchema.read(null, binaryDecoder);
+        return read;
+    }
+    @Override
+    public boolean isEndOfStream(T nextElement) {
+        return false;
+    }
+    @Override
+    public TypeInformation<T> getProducedType() {
+        TypeInformation<T> of = (TypeInformation<T>) TypeInformation.of(XXX.class);
+        return of;
+    }
+}
+~~~
 
