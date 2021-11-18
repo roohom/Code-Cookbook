@@ -458,3 +458,19 @@ public class AvroDeserializationSchema<T> implements DeserializationSchema<T> {
 }
 ~~~
 
+- 使用Flink读取Avro文件
+
+  > User是一个使用avro框架自动生成的model类
+
+  ~~~java
+  StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+  Path path = new Path("path/to/your/file");
+  AvroInputFormat<User> avroInputFormat = new AvroInputFormat<>(path, User.class);
+  
+  DataStreamSource<User> inputAvroStream = env.createInput(avroInputFormat);
+  inputAvroStream.print();
+  
+  env.execute();
+  ~~~
+
+  
