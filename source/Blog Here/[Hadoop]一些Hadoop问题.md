@@ -1,4 +1,4 @@
-# 面试题整理
+# [Hadoop]一些Hadoop问题
 
 ### 1.Hadoop中Split和Block的区别？([看这篇博客](https://www.jianshu.com/p/3e3758519777))
 

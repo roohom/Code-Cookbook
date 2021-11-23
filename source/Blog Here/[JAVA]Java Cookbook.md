@@ -1,4 +1,4 @@
-# JAVA Cookbook
+# [JAVA]JAVA Cookbook
 
 [TOC]
 
@@ -45,15 +45,15 @@ Java是一门**强类型**语言：在定义变量时就指定了变量的具体
     - 布尔Boolean 一个字节
         - True
         - False
-    ![avatar](./charTypes.png)
+        ![avatar](./charTypes.png)
 - 引用数据类型
     - 类
     - 接口
     - 数组[]
 
 - 标识符
-给程序中变量、类、方法、数组等起的名字
-要求(命名规则):
+  给程序中变量、类、方法、数组等起的名字
+  要求(命名规则):
     - 标识符只能由:大小字母、数字、下划线、$组成
     - 必须是以：英文字母或下划线或$开头（不能是数字开头）
     - 不能是Java中的关键字
@@ -98,7 +98,7 @@ Java是一门**强类型**语言：在定义变量时就指定了变量的具体
         - 加、减、乘、除、取余           
 
 - 逻辑运算符
-只能针对Boolean进行运算 
+  只能针对Boolean进行运算 
     - **短路与**&&
         - 作用：等同于逻辑与(&)
         - 特殊之处:
@@ -119,7 +119,7 @@ Java是一门**强类型**语言：在定义变量时就指定了变量的具体
 
 
 - 键盘录入
-试用步骤:
+  试用步骤:
     - 1.导入Scanner包 import java.util.Scanner;
     - 2.创建Scanner对象,Scanner sc = new Scanner(System.in);
     - 3.获取键盘录入的数据:
@@ -252,7 +252,7 @@ Java是一门**强类型**语言：在定义变量时就指定了变量的具体
         ~~~
       <font color="red">上面代码在调用change和调用之后number的数值都是100</font>
     - 方法中传递的参数类型是引用数据类型时，传递的是地址值(内存中开辟的空间的地址值)，当在方法中对传递的引用类型的参数
-    进行相关操作时，会直接影响实参  
+      进行相关操作时，会直接影响实参  
         ~~~java
           public static void main(String[] args) {
                   int[] arr = {10, 20, 30};
@@ -384,7 +384,7 @@ Java是一门**强类型**语言：在定义变量时就指定了变量的具体
       }
     ~~~
     - 在开发中，通常会把类中所有的成员变量，全部修饰为private，然后提供public 数据类型 getXxx() 、
-    public void setXxx(数据类型 变量)方法 
+      public void setXxx(数据类型 变量)方法 
         - 快捷键 Alt+Insert 点击generate下的Getter and Setter快速生成  
     
 - this关键字

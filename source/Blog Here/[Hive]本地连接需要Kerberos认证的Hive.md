@@ -1,4 +1,4 @@
-# 本地连接需要Kerberos认证的Hive
+# [Hive]本地连接需要Kerberos认证的Hive
 
 代码中使用如下来进行认证：
 
