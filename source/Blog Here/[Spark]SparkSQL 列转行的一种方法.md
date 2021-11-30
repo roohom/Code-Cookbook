@@ -69,11 +69,57 @@ df.show()
 +---+---+---+---+---+---+
 ~~~
 
+## 解决办法
+
+使用**侧视图**
+
+先将id后面的字段A、B、C、D、E做成一个Array，再侧视图中配合explode函数将行explode成rows。大致实现如下：
+
+~~~python
+sql = """
+select id, k
+from (
+select id,array(A,B,C,D,E) as `ev`
+from source
+) a 
+lateral view explode(a.ev) as k
+"""
+
+spark.sql(sql).createOrReplaceTempView("later")
+spark.sql("select * from later").show()
+~~~
+
+结果输出：
+
+~~~ini
++---+---+
+| id|  k|
++---+---+
+|  a|  2|
+|  a|  3|
+|  a|  4|
+|  a|  5|
+|  a|  6|
+|  b|  4|
+|  b|  2|
+|  b| 10|
+|  b|  3|
+|  b|  4|
+|  c|  2|
+|  c|  1|
+|  c|  3|
+|  c|  2|
+|  c|  0|
++---+---+
+~~~
+
+
+
 
 
 ## 隆重介绍
 
-或许应该有别的方法得到我们想要的结果，但是下面**隆重介绍**一个sparkSQL中的函数，一步即可得到我们想要的结果集。
+或许应该有别的方法(如上)得到我们想要的结果，但是下面**隆重介绍**一个sparkSQL中的函数，一步即可得到我们想要的结果集。
 
 该函数即为：`STACK(n, expr1, ..., exprk)`
 
