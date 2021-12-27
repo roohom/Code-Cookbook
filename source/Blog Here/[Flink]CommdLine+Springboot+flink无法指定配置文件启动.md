@@ -23,3 +23,13 @@ jar后面的`-jn`为使用CommandLine自定义的命令行参数，核心在于`
 
 
 > 说明：以上使用Flink的Application mode运行模式可以成功提交并切换配置文件，可是使用Yarn session模式和yarn-per-job模式却不行。探索中...
+
+### 补充
+
+当使用yarn-session模式或者yarn-per-job模式提交任务时，使用
+
+~~~shell
+export FLINK_ENV_JAVA_OPTS="-Dspring.profiles.active=test"
+~~~
+
+可以达成想要的效果，但是`-D env.java.opts="-Dspring.profiles.active=test" `却不可以，测试的Flink版本为1.12
