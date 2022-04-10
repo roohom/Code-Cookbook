@@ -220,3 +220,313 @@ FlinkKafkaProducer<String> myProducer = new FlinkKafkaProducer<>(
 
 stream.addSink(myProducer);
 ~~~
+
+
+
+## HTTP
+
+以下为自定义的HttpSource用以获取http接口数据的核心代码，里面包含了一些复杂的业务代码(先在open方法中调用接口获取到token，再拿着token去run方法中调用接口获取数据)，经过删繁就简就进行简单替换即可实现自己的业务需求。
+
+~~~java
+package com.xxxx.xxxx.source;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xxxx.xxxx.utils.HttpUtils;
+import lombok.SneakyThrows;
+import org.apache.flink.configuration.Configuration;
+import org.apache.flink.metrics.Counter;
+import org.apache.flink.metrics.SimpleCounter;
+import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * Flink从接口获取数据
+ *
+ * @author roohom
+ */
+public class HttpSource extends RichSourceFunction<String> {
+    private final Logger LOG = LoggerFactory.getLogger(HttpSource.class);
+
+    private volatile boolean isRunning = true;
+    private final String getURL;
+    private final String getSizeURL;
+    private final String tokenPostURL;
+    private final HashMap<String, String> postBody;
+    private final long requestInterval;
+
+    // count out event
+    private transient Counter counter;
+
+    public HttpSource(String getURL, String getSizeURL, String tokenPostURL, HashMap<String, String> postBody, long requestInterval) {
+        this.getURL = getURL;
+        this.getSizeURL = getSizeURL;
+        this.tokenPostURL = tokenPostURL;
+        this.postBody = postBody;
+        this.requestInterval = requestInterval;
+    }
+
+    String token;
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public void open(Configuration parameters) throws Exception {
+        counter = new SimpleCounter();
+        this.counter = getRuntimeContext()
+                .getMetricGroup()
+                .counter("httpCounter");
+        //获取TOKEN
+        String tokenJson = HttpUtils.doPost(tokenPostURL, postBody);
+        JsonNode jsonNode = objectMapper.readTree(tokenJson);
+        JsonNode accessToken = jsonNode.get("access_token");
+        JsonNode tokenType = jsonNode.get("token_type");
+        token = tokenType.toString().replace("\"", "") + " " + accessToken.toString().replaceAll("\"", "");
+
+    }
+
+    @Override
+    public void run(SourceContext<String> ctx) throws Exception {
+        String totalSizeMsg = "";
+        int size = 0;
+        try {
+            //获取全部数据的个数
+            totalSizeMsg = HttpUtils.doGet(getSizeURL, token);
+            JsonNode sizeNode = objectMapper.readTree(totalSizeMsg);
+            size = Integer.parseInt(sizeNode.get("data").toString());
+            LOG.info("HttpSource -> Get the size of all omd data -> {}", size);
+        } catch (Exception e) {
+            LOG.info("HttpSource -> Do get request failed.");
+            e.printStackTrace();
+        }
+        //将消息切分，每一页20条
+        for (int i = 1; i <= (size / 20) + 1; i++) {
+            String requestURL = getURL;
+            requestURL += "?pageNo=" + i + "&pageSize=20";
+            String message = HttpUtils.doGet(requestURL, token);
+            LOG.info("HttpSource -> GET the url here, the url is -> {}", requestURL);
+
+            collectMessage(ctx, objectMapper, message);
+            Thread.sleep(requestInterval);
+        }
+    }
+
+    @Override
+    public void cancel() {
+        isRunning = false;
+    }
+
+    /**
+     * 收集数据以发送
+     *
+     * @param ctx 流上下文
+     */
+    @SneakyThrows
+    public void collectMessage(SourceContext<String> ctx, ObjectMapper objectMapper, String message) {
+        JsonNode dataNodes = objectMapper.readTree(message).get("data");
+        List<Object> dataList = objectMapper.readValue(dataNodes.toString(), List.class);
+        dataList.forEach(x -> {
+            try {
+                ctx.collect(objectMapper.writeValueAsString(x));
+                this.counter.inc();
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+}
+
+~~~
+
+上面用到的HttpUtils如下：
+
+~~~java
+package com.xxxx.xxxx.utils;
+
+import lombok.SneakyThrows;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+public class HttpUtils {
+
+
+    private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
+
+    /**
+     * 默认超时时间
+     */
+    private static final int DEFAULT_TIME_OUT = 3000;
+
+    /**
+     * get请求，超时时间默认
+     *
+     * @param api 请求URL
+     * @return 响应JSON字符串
+     */
+    public static String doGet(String api, String token) {
+        return doGet(api, token, DEFAULT_TIME_OUT);
+    }
+
+
+    /**
+     * get请求，超时时间传参
+     *
+     * @param api     请求URL
+     * @param timeOut 请求超时时间（毫秒）
+     * @return 响应JSON字符串
+     */
+    public static String doGet(String api, int timeOut) {
+        HttpGet httpGet = new HttpGet(api);
+        RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout(timeOut)
+                .setConnectionRequestTimeout(timeOut)
+                .build();
+        httpGet.setConfig(config);
+
+        try (CloseableHttpClient client = HttpClients.createDefault();
+             CloseableHttpResponse response = client.execute(httpGet)) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            log.error("get " + api + " failed!", e);
+        }
+        return null;
+    }
+
+    /**
+     * get请求，超时时间传参
+     *
+     * @param api     请求URL
+     * @param token   token
+     * @param timeOut 请求超时时间（毫秒）
+     * @return 响应JSON字符串
+     */
+    public static String doGet(String api, String token, int timeOut) {
+        HttpGet httpGet = new HttpGet(api);
+        RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout(timeOut)
+                .setConnectionRequestTimeout(timeOut)
+                .setAuthenticationEnabled(true)
+                .build();
+
+        httpGet.setConfig(config);
+        httpGet.addHeader(new BasicHeader("Content-Type", "application/json"));
+        httpGet.addHeader(new BasicHeader("Authorization", token));
+
+        try (CloseableHttpClient client = HttpClients.createDefault();
+             CloseableHttpResponse response = client.execute(httpGet)) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            log.error("get " + api + " failed!", e);
+        }
+        return null;
+    }
+
+    /**
+     * post请求，超时时间默认
+     *
+     * @param api  请求URL
+     * @param body 请求体JSON字符串
+     * @return 响应JSON字符串
+     */
+    public static String doPost(String api, String body) {
+        return doPost(api, body, DEFAULT_TIME_OUT);
+    }
+
+    /**
+     * post请求，超时时间默认
+     *
+     * @param api  请求URL
+     * @param body 请求体JSON字符串
+     * @return 响应JSON字符串
+     */
+    public static String doPost(String api, HashMap<String, String> body) {
+        return doPost(api, body, DEFAULT_TIME_OUT);
+    }
+
+
+    /**
+     * post请求，超时时间传参
+     *
+     * @param api     请求URL
+     * @param body    请求体JSON字符串
+     * @param timeOut 请求超时时间（毫秒）
+     * @return 响应JSON字符串
+     */
+    public static String doPost(String api, String body, int timeOut) {
+        HttpPost httpPost = new HttpPost(api);
+        StringEntity entity = new StringEntity(body, "utf-8");
+        entity.setContentType("application/json");
+        entity.setContentEncoding("utf-8");
+        httpPost.setEntity(entity);
+        RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout(timeOut)
+                .setConnectionRequestTimeout(timeOut)
+                .build();
+        httpPost.setConfig(config);
+
+        try (CloseableHttpClient client = HttpClients.createDefault();
+             CloseableHttpResponse response = client.execute(httpPost)) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            log.error("post " + api + " failed!", e);
+        }
+        return null;
+    }
+
+    /**
+     * post请求，超时时间传参
+     *
+     * @param api     请求URL
+     * @param body    请求体Map
+     * @param timeOut 请求超时时间（毫秒）
+     * @return 响应JSON字符串
+     */
+    @SneakyThrows
+    public static String doPost(String api, HashMap<String, String> body, int timeOut) {
+        HttpPost httpPost = new HttpPost(api);
+
+        ArrayList<NameValuePair> pairs = new ArrayList<>();
+        body.forEach(
+                (x, y) -> pairs.add(new BasicNameValuePair(x, y))
+        );
+
+        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+        httpPost.setEntity(new UrlEncodedFormEntity(pairs, "UTF-8"));
+        RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout(timeOut)
+                .setConnectionRequestTimeout(timeOut)
+                .build();
+        httpPost.setConfig(config);
+
+        try (CloseableHttpClient client = HttpClients.createDefault();
+             CloseableHttpResponse response = client.execute(httpPost)) {
+            return EntityUtils.toString(response.getEntity());
+        } catch (IOException e) {
+            log.error("post " + api + " failed!", e);
+        }
+        return null;
+    }
+}
+~~~
+
