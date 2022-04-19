@@ -1,4 +1,4 @@
-# Java8 Stream API
+# [Java]Java8 Stream API
 
 本文严重参考自：[传送门1](https://blog.csdn.net/y_k_y/article/details/84633001)
 
