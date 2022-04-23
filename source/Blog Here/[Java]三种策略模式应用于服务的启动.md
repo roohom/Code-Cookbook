@@ -109,8 +109,8 @@ public interface BaseService<T> {
 
 ~~~java
 @Component("stream")
-public class AsterixStreamService implements Serializable, BaseService<ParameterOptions> {
-    private final Logger LOG = LoggerFactory.getLogger(AsterixStreamService.class);
+public class StreamService implements Serializable, BaseService<ParameterOptions> {
+    private final Logger LOG = LoggerFactory.getLogger(StreamService.class);
     @SneakyThrows
     public void launchJob(ParameterOptions parameterOptions) {
         //Some thing we do here.
@@ -134,7 +134,7 @@ public class Application implements CommandLineRunner {
     private Map<String, BaseService<ParameterOptions>> serviceMap;
 
     public static void main(String[] args) throws ParseException {
-        SpringApplication.run(AudiAsterixTransformSensorApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Override
