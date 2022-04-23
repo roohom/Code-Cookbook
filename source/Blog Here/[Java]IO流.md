@@ -1,4 +1,4 @@
-# `IO Stream`
+# [Java]`IO Stream`
 
 [TOC]
 
@@ -24,7 +24,7 @@
             - FileOutputStream
             - bos.write(byte[] buf, int offset, int len)
             - 如:bos.write(buf,0,len);
-常用方法
+            常用方法
 - `FileOutputStream` 写
   
     - `write(int b)` 向文件中写入一个字节数据

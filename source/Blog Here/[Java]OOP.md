@@ -1,4 +1,4 @@
-# Java_OOP
+# [Java]Java_OOP
 
 > Object Oriented Programming
 
@@ -119,12 +119,12 @@ c.private修饰的内容只能在本类的内部进行访问
     final修饰变量 最终变量      
 
 - 使用方式
-final关键字修饰类表示该类不能被继承，比如说java.lang.System/String 类等;
+  final关键字修饰类表示该类不能被继承，比如说java.lang.System/String 类等;
     - 通常用于防止滥用继承
-final关键字修饰成员方法表示该方法不能被重写;
+  final关键字修饰成员方法表示该方法不能被重写;
     - 比如:java.text.SimpleDateFormat类中的format()方法        
     - 通常用于防止不经意间造成的重写
-final关键字修饰成员变量表示必须制定初始值并且不能更改
+  final关键字修饰成员变量表示必须制定初始值并且不能更改
     - 如:java.lang.Thread类中的MAX_PRORITY 
     - 通常用于描述常量的数据
   

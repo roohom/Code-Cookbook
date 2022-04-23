@@ -1,4 +1,4 @@
-# Scala函数中闭包(Closure)和柯里化(Currying)
+# [Scala]函数中闭包(Closure)和柯里化(Currying)
 
 > 闭包在英文中表达是Closure
 
