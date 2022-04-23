@@ -1,4 +1,4 @@
-# 设计模式六大原则
+# [Java]设计模式六大原则
 
 > 本文由大量内容引用自：[去看原文](https://www.cnblogs.com/shijingjing07/p/6227728.html)
 

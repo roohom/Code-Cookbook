@@ -1,4 +1,4 @@
-# JAVA设计模式
+# [Java]设计模式
 
 ## 0、策略模式Strategy Pattern
 
