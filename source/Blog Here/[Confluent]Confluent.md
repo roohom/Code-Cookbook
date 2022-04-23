@@ -1,4 +1,4 @@
-# Confluent
+# [Confluent]Confluent快速上手
 
 ## MySQL PXC Cluster
 
