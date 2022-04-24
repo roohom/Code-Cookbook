@@ -117,13 +117,13 @@ public class Driver extends NonRegisteringDriver implements java.sql.Driver {
 
 发现它实现了`java.sql.Driver`这个接口，而这个接口来自于java核心类库`rt.jar`
 
-![image-20220424204834685]([Java]spi.assets/image-20220424204834685.png)
+![image-20220424204834685](spi.assets/image-20220424204834685.png)
 
 ### 二 ImpalaJDBC的案例
 
 同样地，我们引入impalajdbc的依赖，这个包不好找，如果找不到直接去下载它的jar然后引入到项目中，这里只做分析
 
-![image-20220424205415763]([Java]spi.assets/image-20220424205415763.png)
+![image-20220424205415763](spi.assets/image-20220424205415763.png)
 
 可以看到一个和MySQL jdbc的jar包一样的东西，进去看看内容：
 
