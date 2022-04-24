@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>1. Apache Avro &mdash; Code-Cookbook 0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>1. Apache Avro &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="2. Docker" href="Docker.html" />
     <link rel="prev" title="Auxiliary tools" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Code-Cookbook
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="在文档中搜索" />
@@ -76,28 +37,17 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<p class="caption"><span class="caption-text">博客</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Auxiliary tools</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. Apache Avro</a><ul>
@@ -107,6 +57,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#id3">1.2.2. 复杂数据类型</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-avro">1.3. How to use Avro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-avro-with-kafka">1.4. How to use Avro with Kafka</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-avro-with-flink">1.5. How to use Avro with Flink</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Docker.html">2. Docker</a></li>
@@ -114,85 +67,43 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Code-Cookbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">Auxiliary tools</a> &raquo;</li>
-        
       <li><span class="section-number">1. </span>Apache Avro</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/Auxiliary tools/Apache Avro.md.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="apache-avro">
-<h1><span class="section-number">1. </span>Apache Avro<a class="headerlink" href="#apache-avro" title="永久链接至标题">¶</a></h1>
+             
+  <section id="apache-avro">
+<h1><span class="section-number">1. </span>Apache Avro<a class="headerlink" href="#apache-avro" title="永久链接至标题"></a></h1>
 <blockquote>
 <div><p>Avro是Hadoop的子项目，是高性能的数据传输中间件。Avro可以做到将数据进行序列化，适用于远程或本地大批量数据交互。在传输的过程中Avro对数据二进制序列化后节约数据存储空间和网络传输带宽。</p>
 </div></blockquote>
-<div class="section" id="why-we-choose-avro">
-<h2><span class="section-number">1.1. </span>Why we choose Avro<a class="headerlink" href="#why-we-choose-avro" title="永久链接至标题">¶</a></h2>
+<section id="why-we-choose-avro">
+<h2><span class="section-number">1.1. </span>Why we choose Avro<a class="headerlink" href="#why-we-choose-avro" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>优点：</p>
 <ul>
@@ -224,11 +135,11 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id1">
-<h2><span class="section-number">1.2. </span>数据类型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id2">
-<h3><span class="section-number">1.2.1. </span>原生类型<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id1">
+<h2><span class="section-number">1.2. </span>数据类型<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<section id="id2">
+<h3><span class="section-number">1.2.1. </span>原生类型<a class="headerlink" href="#id2" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>null: 表示没有值</p></li>
 <li><p>boolean: 表示一个二进制布尔值</p></li>
@@ -242,14 +153,13 @@
 <blockquote>
 <div><p>总共就这8种原生数据类型，这些原生数据类型均没有明确的属性。</p>
 </div></blockquote>
-</div>
-<div class="section" id="id3">
-<h3><span class="section-number">1.2.2. </span>复杂数据类型<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id3">
+<h3><span class="section-number">1.2.2. </span>复杂数据类型<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>AVRO支持6种复杂类型，分别是：records, enums, arrays, maps, unions，fixed</p>
 </div></blockquote>
-<div class="section" id="records">
-<h4><span class="section-number">1.2.2.1. </span>Records<a class="headerlink" href="#records" title="永久链接至标题">¶</a></h4>
+<p>Records</p>
 <ul class="simple">
 <li><p>此数据结构内部字段可以由多种基本类型组成</p></li>
 <li><p>必选属性</p>
@@ -276,9 +186,7 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="enums">
-<h4><span class="section-number">1.2.2.2. </span>Enums<a class="headerlink" href="#enums" title="永久链接至标题">¶</a></h4>
+<p>Enums</p>
 <blockquote>
 <div><p>Enums使用的名为“enum”的type并且支持如下的属性：</p>
 </div></blockquote>
@@ -305,11 +213,9 @@
 <p>引用</p>
 <p>{ “type”: “enum”,</p>
 <p>“name”: “Person”,</p>
-<p>“symbols” : [“name”, “age”, “address”, “sex”]</p>
+<p>“symbols” : [”name”, “age”, “address”, “sex”]</p>
 <p>}</p>
-</div>
-<div class="section" id="arrays">
-<h4><span class="section-number">1.2.2.3. </span>Arrays<a class="headerlink" href="#arrays" title="永久链接至标题">¶</a></h4>
+<p>Arrays</p>
 <blockquote>
 <div><p>Array使用名为”array”的type，并且支持一个属性</p>
 </div></blockquote>
@@ -318,36 +224,30 @@
 <blockquote>
 <div><p>比如一个string的数组声明为：</p>
 <p>引用</p>
-<p>{“type”: “array”, “items”: “string”}</p>
+<p>{”type”: “array”, “items”: “string”}</p>
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="maps">
-<h4><span class="section-number">1.2.2.4. </span>Maps<a class="headerlink" href="#maps" title="永久链接至标题">¶</a></h4>
+<p>Maps</p>
 <p>Map使用名为”map”的type，并且支持一个属性</p>
 <ul class="simple">
 <li><p>values: 用来定义map的值的Schema。Maps的key都是string。比如一个key为string，value为long的maps定义为：</p></li>
 </ul>
 <blockquote>
 <div><p>引用</p>
-<p>{“type”: “map”, “values”: “long”}</p>
+<p>{”type”: “map”, “values”: “long”}</p>
 </div></blockquote>
-</div>
-<div class="section" id="unions">
-<h4><span class="section-number">1.2.2.5. </span>Unions<a class="headerlink" href="#unions" title="永久链接至标题">¶</a></h4>
+<p>Unions</p>
 <p>Unions就像上面提到的，使用JSON的数组表示。比如:</p>
 <blockquote>
 <div><p>引用</p>
-<p>[“string”, “null”]</p>
+<p>[”string”, “null”]</p>
 </div></blockquote>
 <p>声明了一个union的Schema，其元素即可以是string，也可以是null。</p>
 <blockquote>
 <div><p>Unions不能包含多个相同类型的Schema，除非是命名的record类型、命名的fixed类型和命名的enum类型。比如，如果unions中包含两个array类型，或者包含两个map类型都不允许；但是两个具有不同name的相同类型却可以。由此可见，union是通过Schema的name来区分元素Schema的，因为array和map没有name属性，当然只能存在一个array或者map。（使用name作为解析的原因是这样做会使得读写unions更加高效）。unions不能紧接着包含其他的union。</p>
 </div></blockquote>
-</div>
-<div class="section" id="fixed">
-<h4><span class="section-number">1.2.2.6. </span>Fixed<a class="headerlink" href="#fixed" title="永久链接至标题">¶</a></h4>
+<p>Fixed</p>
 <ul class="simple">
 <li><p>Fixed类型使用”fixed”的type name，并且支持三个属性：</p></li>
 <li><p>name: 必有属性，表示这个fixed的名称，JSON string。</p></li>
@@ -358,7 +258,7 @@
 <blockquote>
 <div><p>比如16字节的fixed可以声明为：</p>
 <p>引用</p>
-<p>{“type”: “fixed”, “size”: 16, “name”: “md5”}</p>
+<p>{”type”: “fixed”, “size”: 16, “name”: “md5”}</p>
 </div></blockquote>
 <ul>
 <li><p>Record, enums 和 fixed都是命名的类型，这三种类型都各有一个全名，全名有两部分组成：名称和命名空间。名称的相等是定义在全名基础上的。</p></li>
@@ -384,57 +284,306 @@
 </div></blockquote>
 </li>
 </ul>
+</section>
+</section>
+<section id="how-to-use-avro">
+<h2><span class="section-number">1.3. </span>How to use Avro<a class="headerlink" href="#how-to-use-avro" title="永久链接至标题"></a></h2>
+<ul>
+<li><p>1、首先需要在maven中引入依赖：</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>org.apache.avro<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>avro<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.8.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+<span class="nt">&lt;/dependencies&gt;</span>
+</pre></div>
 </div>
+</li>
+<li><p>2、其次需要在maven中配置Avro编译插件</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;plugins&gt;</span>
+        <span class="c">&lt;!--maven编译插件--&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>maven-compiler-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                <span class="nt">&lt;source&gt;</span>1.8<span class="nt">&lt;/source&gt;</span>
+                <span class="nt">&lt;target&gt;</span>1.8<span class="nt">&lt;/target&gt;</span>
+            <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+        <span class="c">&lt;!--Avro编译插件--&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>org.apache.avro<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>avro-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.8.1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;executions&gt;</span>
+                <span class="nt">&lt;execution&gt;</span>
+                    <span class="nt">&lt;phase&gt;</span>generate-sources<span class="nt">&lt;/phase&gt;</span>
+                    <span class="nt">&lt;goals&gt;</span>
+                        <span class="nt">&lt;goal&gt;</span>schema<span class="nt">&lt;/goal&gt;</span>
+                    <span class="nt">&lt;/goals&gt;</span>
+                    <span class="nt">&lt;configuration&gt;</span>
+                        <span class="c">&lt;!--Avro源文件--&gt;</span>
+                        <span class="nt">&lt;sourceDirectory&gt;</span>${project.basedir}/src/main/avro/<span class="nt">&lt;/sourceDirectory&gt;</span>
+                        <span class="c">&lt;!--Avro编译生成文件--&gt;</span>
+                        <span class="nt">&lt;outputDirectory&gt;</span>${project.basedir}/src/main/java/<span class="nt">&lt;/outputDirectory&gt;</span>
+                    <span class="nt">&lt;/configuration&gt;</span>
+                <span class="nt">&lt;/execution&gt;</span>
+            <span class="nt">&lt;/executions&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</pre></div>
 </div>
+</li>
+<li><p>3、在我们的项目中引入<code class="docutils literal notranslate"><span class="pre">.avsc</span></code>文件，也就是放在步骤2中的<code class="docutils literal notranslate"><span class="pre">sourceDirectory</span></code>中的路径中</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="nt">&quot;namespace&quot;</span><span class="p">:</span> <span class="s2">&quot;me.roohom.avro&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;record&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">[</span>
+     <span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">},</span>
+     <span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;age&quot;</span><span class="p">,</span>  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">]},</span>
+     <span class="p">{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;address&quot;</span><span class="p">,</span> <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;string&quot;</span><span class="p">,</span> <span class="s2">&quot;null&quot;</span><span class="p">]}</span>
+ <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
 </div>
+</li>
+<li><p>4、在项目中使用maven进行编译，此时，会在步骤2中的<code class="docutils literal notranslate"><span class="pre">outputDirectory</span></code>中生成我们的model类的代码。</p></li>
+<li><p>5、序列化一个对象：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//新建对象</span>
+<span class="n">User</span> <span class="n">user</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="p">();</span>
+
+<span class="c1">//封装数据</span>
+<span class="n">user</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;Allen&quot;</span><span class="p">);</span>
+<span class="n">user</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span>
+<span class="n">user</span><span class="p">.</span><span class="na">setAddress</span><span class="p">(</span><span class="s">&quot;安徽&quot;</span><span class="p">);</span>
+
+<span class="n">User</span> <span class="n">anoUser</span> <span class="o">=</span> <span class="k">new</span> <span class="n">User</span><span class="p">(</span><span class="s">&quot;xx&quot;</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="s">&quot;北京&quot;</span><span class="p">);</span>
+<span class="n">User</span> <span class="n">thirdUser</span> <span class="o">=</span> <span class="n">User</span><span class="p">.</span><span class="na">newBuilder</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;aa&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">setAddress</span><span class="p">(</span><span class="s">&quot;西安&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">build</span><span class="p">();</span>
+
+<span class="c1">//序列化 定义模式</span>
+<span class="n">SpecificDatumWriter</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">datumWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpecificDatumWriter</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getSchema</span><span class="p">());</span>
+
+<span class="c1">//数据序列化对象</span>
+<span class="n">DataFileWriter</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">dataFileWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataFileWriter</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">datumWriter</span><span class="p">);</span>
+
+<span class="c1">//设置序列化文件路径</span>
+<span class="n">dataFileWriter</span><span class="p">.</span><span class="na">create</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="na">getSchema</span><span class="p">(),</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;avro.txt&quot;</span><span class="p">));</span>
+
+<span class="n">dataFileWriter</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">user</span><span class="p">);</span>
+<span class="n">dataFileWriter</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">anoUser</span><span class="p">);</span>
+<span class="n">dataFileWriter</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">thirdUser</span><span class="p">);</span>
+
+<span class="n">dataFileWriter</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+</pre></div>
 </div>
+</li>
+<li><p>6、从持久化文件中反序列化一个对象</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//反序列化</span>
+<span class="n">SpecificDatumReader</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">datumReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpecificDatumReader</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+<span class="n">DataFileReader</span> <span class="n">dataFileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataFileReader</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;avro.txt&quot;</span><span class="p">),</span> <span class="n">datumReader</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">Object</span> <span class="n">users</span> <span class="p">:</span> <span class="n">dataFileReader</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;反序列化&quot;</span> <span class="o">+</span> <span class="n">users</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>当然，也可以使用更通用的办法去反序列化，而不需要指定具体的model类，让avro自己去推断解析schema</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">File</span> <span class="n">file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;avro.txt&quot;</span><span class="p">);</span>
+<span class="n">File</span> <span class="n">schemaFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="s">&quot;src/main/avro/user.avsc&quot;</span><span class="p">);</span>
+<span class="n">Schema</span> <span class="n">schema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Schema</span><span class="p">.</span><span class="na">Parser</span><span class="p">().</span><span class="na">parse</span><span class="p">(</span><span class="n">schemaFile</span><span class="p">);</span>
+
+<span class="c1">//反序列化</span>
+<span class="n">SpecificDatumReader</span><span class="o">&lt;</span><span class="n">GenericData</span><span class="o">&gt;</span> <span class="n">datumReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpecificDatumReader</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">schema</span><span class="p">);</span>
+<span class="n">DataFileReader</span><span class="o">&lt;</span><span class="n">GenericData</span><span class="o">&gt;</span> <span class="n">dataFileReader</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DataFileReader</span><span class="o">&lt;</span><span class="n">GenericData</span><span class="o">&gt;</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">datumReader</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">Object</span> <span class="n">db</span> <span class="p">:</span> <span class="n">dataFileReader</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;反序列化:&quot;</span> <span class="o">+</span> <span class="n">db</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="how-to-use-avro-with-kafka">
+<h2><span class="section-number">1.4. </span>How to use Avro with Kafka<a class="headerlink" href="#how-to-use-avro-with-kafka" title="永久链接至标题"></a></h2>
+<p>当我们需要将数据使用avro序列化框架序列化之后发送到Kafka时，就需要自定义序列化器，使用下面的办法可以自定义序列化器，在向kafka发送数据的时候使用：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @ClassName: AvroSerializer</span>
+<span class="cm"> * @Author: Roohom</span>
+<span class="cm"> * @Function: 自定义序列化</span>
+<span class="cm"> * @Date: 2020/10/28 17:32</span>
+<span class="cm"> * @Software: IntelliJ IDEA</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">AvroSerializer</span><span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">SpecificRecordBase</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Serializer</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">//泛型参数继承avro基类，实现序列化接口</span>
+    
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="p">(</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="o">?&gt;</span> <span class="n">configs</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">isKey</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 仅需要复写此方法即可以实现自定义序列化</span>
+<span class="cm">     *</span>
+<span class="cm">     * @param topic Kafka topic</span>
+<span class="cm">     * @param data  数据</span>
+<span class="cm">     * @return 输出流字节数组</span>
+<span class="cm">     */</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">byte</span><span class="o">[]</span> <span class="nf">serialize</span><span class="p">(</span><span class="n">String</span> <span class="n">topic</span><span class="p">,</span> <span class="n">T</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//设置Schema约束对象</span>
+        <span class="n">SpecificDatumWriter</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">datumWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpecificDatumWriter</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="na">getSchema</span><span class="p">());</span>
+        <span class="n">ByteArrayOutputStream</span> <span class="n">outputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="p">();</span>
+        <span class="n">BinaryEncoder</span> <span class="n">binaryEncoder</span> <span class="o">=</span> <span class="n">EncoderFactory</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">directBinaryEncoder</span><span class="p">(</span><span class="n">outputStream</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="c1">//通过write方法，会将avro类型的数据，编码成字节流，数据会存储在outputStream字节输出流对象中</span>
+            <span class="n">datumWriter</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">binaryEncoder</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">outputStream</span><span class="p">.</span><span class="na">toByteArray</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">close</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>下面一个kafka生产者实例，在properties中声明了值的序列化器：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">KafkaPro</span><span class="o">&lt;</span><span class="n">T</span> <span class="kd">extends</span> <span class="n">SpecificRecordBase</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="n">Properties</span> <span class="nf">getProperties</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">Properties</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="p">();</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;bootstrap.servers&quot;</span><span class="p">,</span> <span class="s">&quot;localhost:9092&quot;</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;acks&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;retries&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;batch.size&quot;</span><span class="p">,</span> <span class="s">&quot;16384&quot;</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;linger.ms&quot;</span><span class="p">,</span> <span class="s">&quot;1&quot;</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;buffer.memory&quot;</span><span class="p">,</span> <span class="s">&quot;33554421&quot;</span><span class="p">);</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;key.serializer&quot;</span><span class="p">,</span> <span class="n">StringSerializer</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+        <span class="n">properties</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;value.serializer&quot;</span><span class="p">,</span> <span class="n">AvroSerializer</span><span class="p">.</span><span class="na">class</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span>
+
+        <span class="k">return</span> <span class="n">properties</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="cm">/**</span>
+<span class="cm">     * 获取kafka生产者对象</span>
+<span class="cm">     */</span>
+    <span class="n">KafkaProducer</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">producer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">KafkaProducer</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">getProperties</span><span class="p">());</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendData</span><span class="p">(</span><span class="n">String</span> <span class="n">topic</span><span class="p">,</span> <span class="n">T</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">producer</span><span class="p">.</span><span class="na">send</span><span class="p">(</span><span class="k">new</span> <span class="n">ProducerRecord</span><span class="p">(</span><span class="n">topic</span><span class="p">,</span> <span class="n">data</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-use-avro-with-flink">
+<h2><span class="section-number">1.5. </span>How to use Avro with Flink<a class="headerlink" href="#how-to-use-avro-with-flink" title="永久链接至标题"></a></h2>
+<p>使用Flink消费kafka数据</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Properties</span> <span class="n">properties</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Properties</span><span class="p">();</span>
+<span class="n">properties</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;bootstrap.servers&quot;</span><span class="p">,</span> <span class="s">&quot;localhost:9092&quot;</span><span class="p">);</span>
+<span class="n">properties</span><span class="p">.</span><span class="na">setProperty</span><span class="p">(</span><span class="s">&quot;group.id&quot;</span><span class="p">,</span> <span class="s">&quot;test&quot;</span><span class="p">);</span>
+<span class="n">DataStream</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">env</span>
+	<span class="p">.</span><span class="na">addSource</span><span class="p">(</span><span class="k">new</span> <span class="n">FlinkKafkaConsumer</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="s">&quot;topic&quot;</span><span class="p">,</span> <span class="k">new</span> <span class="n">SimpleStringSchema</span><span class="p">(),</span> <span class="n">properties</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>上面的实例需要指定一个<code class="docutils literal notranslate"><span class="pre">DeserializationSchema</span></code>，当数据为avro格式的数据时需要指定为<code class="docutils literal notranslate"><span class="pre">AvroDeserializationSchema</span></code></p>
+<p>Schema可以通过从Avro自动生成的class中推测得到，也可以通过使用GenericRecords和手动提供的Schema配合来得到</p>
+<p>比如：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">AvroDeserializationSchema</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">UserSchema</span> <span class="o">=</span> <span class="n">AvroDeserializationSchema</span><span class="p">.</span><span class="na">forSpecific</span><span class="p">(</span><span class="n">User</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>maven中需要引入</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.apache.flink<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>flink-avro<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.12.3<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</pre></div>
+</div>
+<p>当采用了Avro序列化框架将数据序列化后存储在Kafka之后，采用Flink消费kafka的topic数据的时候，可以自定义Schema去消费解析数据</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AvroDeserializationSchema</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">DeserializationSchema</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">topicName</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">AvroDeserializationSchema</span><span class="p">(</span><span class="n">String</span> <span class="n">topicName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">topicName</span> <span class="o">=</span> <span class="n">topicName</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">T</span> <span class="nf">deserialize</span><span class="p">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">message</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="p">{</span>
+        <span class="c1">//定义反序列化约束对象</span>
+        <span class="n">SpecificDatumReader</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">avroSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SpecificDatumReader</span><span class="p">(</span><span class="n">XXX</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
+        <span class="c1">//获取反序列化编码对象</span>
+        <span class="n">ByteArrayInputStream</span> <span class="n">bis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+        <span class="c1">//二进制对象</span>
+        <span class="n">BinaryDecoder</span> <span class="n">binaryDecoder</span> <span class="o">=</span> <span class="n">DecoderFactory</span><span class="p">.</span><span class="na">get</span><span class="p">().</span><span class="na">binaryDecoder</span><span class="p">(</span><span class="n">bis</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+
+        <span class="n">T</span> <span class="n">read</span> <span class="o">=</span> <span class="n">avroSchema</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="n">binaryDecoder</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">read</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEndOfStream</span><span class="p">(</span><span class="n">T</span> <span class="n">nextElement</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="n">TypeInformation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">getProducedType</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">TypeInformation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">of</span> <span class="o">=</span> <span class="p">(</span><span class="n">TypeInformation</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span> <span class="n">TypeInformation</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">XXX</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">of</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul>
+<li><p>使用Flink读取Avro文件</p>
+<blockquote>
+<div><p>User是一个使用avro框架自动生成的model类</p>
+</div></blockquote>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">StreamExecutionEnvironment</span> <span class="n">env</span> <span class="o">=</span> <span class="n">StreamExecutionEnvironment</span><span class="p">.</span><span class="na">getExecutionEnvironment</span><span class="p">();</span>
+<span class="n">Path</span> <span class="n">path</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Path</span><span class="p">(</span><span class="s">&quot;path/to/your/file&quot;</span><span class="p">);</span>
+<span class="n">AvroInputFormat</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">avroInputFormat</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AvroInputFormat</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">User</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+
+<span class="n">DataStreamSource</span><span class="o">&lt;</span><span class="n">User</span><span class="o">&gt;</span> <span class="n">inputAvroStream</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="na">createInput</span><span class="p">(</span><span class="n">avroInputFormat</span><span class="p">);</span>
+<span class="n">inputAvroStream</span><span class="p">.</span><span class="na">print</span><span class="p">();</span>
+
+<span class="n">env</span><span class="p">.</span><span class="na">execute</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Docker.html" class="btn btn-neutral float-right" title="2. Docker" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Auxiliary tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="Docker.html" class="btn btn-neutral float-right" title="2. Docker" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2021, roohom.
-
-    </p>
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
   </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

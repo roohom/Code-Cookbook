@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>39. [Kudu]关于Kudu Upsert列的问题 &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="40. [Kudu]关于Kudu列的顺序的修改" href="%5BKudu%5D%E5%85%B3%E4%BA%8EKudu%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BF%AE%E6%94%B9.html" />
+    <link rel="prev" title="38. [Kerberos]Message stream modified (41)错误" href="%5BKerberos%5DMessage%20stream%20modified%20%2841%29%E9%94%99%E8%AF%AF.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">博客</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Boxed%20Error.html">1. [Springboot x spark]java.util.concurrent.ExecutionException: Boxed Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BApollo%5DApollo%20Config%20Center.html">2. [Apollo]Apollo Config Center</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BConfluent%5DConfluent.html">3. [Confluent]Confluent快速上手</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DCommdLine%2BSpringboot%2Bflink%E6%97%A0%E6%B3%95%E6%8C%87%E5%AE%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8.html">4. [Flink]CommdLine+Springboot+flink无法指定配置文件启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlink-connector-http.html">5. [Flink]Flink-connector-http</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlinkSource.html">6. [Flink]Flink Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DProcessFunction%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%8A%9B%E5%87%BAInvalidProgramException.html">7. [Flink]ProcessFunction无法使用，抛出InvalidProgramException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E4%BD%BF%E7%94%A8%E7%8A%B6%E6%80%81%E7%AE%97%E5%AD%90%E5%B0%86stream%E8%81%9A%E5%90%88%E8%BE%93%E5%87%BA.html">8. [Flink]使用状态算子将stream聚合输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E5%A6%82%E4%BD%95%E6%9B%B4%E9%80%9A%E7%94%A8%E5%9C%B0%E5%B0%86Kafka%28%E6%88%96%E5%85%B6%E4%BB%96%29%E6%95%B0%E6%8D%AE%E8%90%BD%E5%9C%B0Hive%EF%BC%9F.html">9. [Flink]如何更通用地将Kafka(或其他)数据落地Hive？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%8F%E5%88%97%E5%8C%96%E6%B6%88%E8%B4%B9Kafka%E6%95%B0%E6%8D%AE.html">10. [Flink]自定义序列化消费Kafka数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BGit%5DGit.html">11. [Git]Git问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BGit%5D%E8%AF%AF%E5%9C%A8Master%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B9%B6commit%E6%97%A0%E6%B3%95push.html">12. [Git]误在Master分支开发并commit无法push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHadoop%5DHadoop%20distcp.html">13. [Hadoop]Hadoop distcp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHadoop%5D%E4%B8%80%E4%BA%9BHadoop%E9%97%AE%E9%A2%98.html">14. [Hadoop]一些Hadoop问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5DHive%E5%88%86%E5%8C%BA%E8%A1%A8%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA.html">15. [Hive]Hive分区表批量删除分区</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E5%9C%A8%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E6%B7%BB%E5%8A%A0%E5%AD%97%E6%AE%B5.html">16. [Hive]在指定位置添加字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E5%A4%96%E9%83%A8%E8%A1%A8%E4%BF%AE%E6%94%B9%E4%B8%BA%E5%86%85%E9%83%A8%E8%A1%A8.html">17. [Hive]外部表修改为内部表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E6%9C%AC%E5%9C%B0%E8%BF%9E%E6%8E%A5%E9%9C%80%E8%A6%81Kerberos%E8%AE%A4%E8%AF%81%E7%9A%84Hive.html">18. [Hive]本地连接需要Kerberos认证的Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJAVA%5DJava%20Cookbook.html">19. [JAVA]JAVA Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DAnnotation.html">20. [Java]元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DAnnotation.html#id1">21. 注解解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DCollection.html">22. [Java]集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DCollection.html#id8">23. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DIO%E6%B5%81.html">24. [Java]<code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DJava8%20Stream.html">25. [Java]Java8 Stream API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DOOP.html">26. [Java]Java_OOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DSocket.html">27. [Java]Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">28. [Java]使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E4%B8%89%E7%A7%8D%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%90%AF%E5%8A%A8.html">29. [Java]三种策略模式应用于服务的启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">30. [Java]多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">31. [Java]生产者消费者模型问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%A9%E9%A1%B9%E7%9B%AE%E9%A1%BA%E5%88%A9%E8%AF%BB%E5%8F%96resources%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6.html">32. [Java]让项目顺利读取resources目录下的文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">33. [Java]设计模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html#continuing">34. Continuing…</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">35. [Java]设计模式六大原则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">36. [Java]面向对象知识点梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">37. [Java]OOP防脱发指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKerberos%5DMessage%20stream%20modified%20%2841%29%E9%94%99%E8%AF%AF.html">38. [Kerberos]Message stream modified (41)错误</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">39. [Kudu]关于Kudu Upsert列的问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">39.1. 需求起源</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">39.2. 复现</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">39.2.1. 建表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">39.2.2. 插入数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">39.2.3. 出现问题</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">39.3. 结论</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKudu%5D%E5%85%B3%E4%BA%8EKudu%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BF%AE%E6%94%B9.html">40. [Kudu]关于Kudu列的顺序的修改</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BMongoDB%5DMongoDB%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2.html">41. [MongoDB]MongoDB基本查询</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BPySpark%5DPySpark.html">42. [Pyspark]PySpark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BPySpark%5DPySparkOnYarn.html">43. [PySpark]PySpark On Yarn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5DSQLIn%26NotIn.html">44. [SQL]<code class="docutils literal notranslate"><span class="pre">IN</span></code> OR <code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">IN</span></code> , IS A PROBLEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E4%B8%9A%E5%8A%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%60create_time%60%E5%92%8C%60update_time%60.html">45. [SQL]业务数据库中的<code class="docutils literal notranslate"><span class="pre">create_time</span></code>和<code class="docutils literal notranslate"><span class="pre">update_time</span></code>分析时的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E4%B8%BA%E4%BB%80%E4%B9%88LEFT%20JOIN%E5%90%8E%E6%80%BB%E6%95%B0%E5%8D%B4%E4%B8%8E%E5%8F%B3%E8%A1%A8%E7%9A%84%E6%80%BB%E6%95%B0%E4%B8%80%E6%A0%B7%E4%BA%86%EF%BC%9F.html">46. [SQL]为什么LEFT JOIN后总数却与右表的总数一样了？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E6%B1%82%E7%94%A8%E6%88%B7%E4%BB%BB%E6%84%8F%E5%A4%A9%E8%BF%9E%E7%BB%AD%E7%99%BB%E5%BD%95%28%E6%AF%8F%E5%A4%A9%E4%B8%BA%E7%AC%AC%E5%A4%9A%E5%B0%91%E5%A4%A9%E8%BF%9E%E7%BB%AD%E7%99%BB%E5%BD%95%29.html">47. [SQL]求用户任意天连续登录(每天为第多少天连续登录)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E8%AE%A1%E7%AE%97%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F%E7%9A%84%E5%B9%B4-%E5%91%A8%28%E4%B8%BA%E6%9F%90%E5%B9%B4%E7%9A%84%E7%AC%AC%E5%A4%9A%E5%B0%91%E5%91%A8%29.html">48. [SQL]计算指定日期的<strong>年-周</strong>(为某年的第多少周)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BScala%5DClosure%26Currying.html">49. [Scala]函数中闭包(Closure)和柯里化(Currying)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5DEOF.html">50. [Shell]EOF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5Dshell%E8%84%9A%E6%9C%AC%E6%97%A5%E6%9C%9F%E9%80%92%E5%A2%9E%28%E8%B5%B7%E6%AD%A2%E6%97%A5%E6%9C%9F%E5%86%85%E9%80%92%E5%A2%9E%29.html">51. [Shell]Shell脚本日期递增(起止日期内递增)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5D%E6%89%93%E5%8D%B0%E6%9C%AC%E6%9C%BAIP.html">52. [Shell]打印本机IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSparkStreaming%5D%E6%B6%88%E8%B4%B9kafka%E5%86%99%E5%85%A5Hive%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98.html">53. [SparkStreaming]消费kafka写入Hive失败的问题Lease timeout of 0 seconds expired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSparkSQL%20%E5%88%97%E8%BD%AC%E8%A1%8C%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95.html">54. [Spark]SparkSQL 列转行的一种方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSparkSQLJDBC%E5%B9%B6%E5%8F%91%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%8F%96.html">55. [Spark]SparkSQL JDBC并发连接读取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSpark%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1RSA%20premaster%20secret%20error.html">56. [Spark]Spark提交任务RSA premaster secret error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSpringboot%E6%95%B4%E5%90%88Spark%2C%20%E6%9C%AC%E5%9C%B0%E3%80%81%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.html">57. [Spark]Springboot整合Spark, 本地、集群部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5D%E4%BD%BF%E7%94%A8Java%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARow.html">58. [Spark]如何使用Java创建一个Row</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5D%E5%B0%86Spark%20DataFrame%E4%B8%AD%E7%9A%84%E6%95%B0%E5%80%BC%E5%8F%96%E5%87%BA.html">59. [Spark]将Spark DataFrame中的数值取出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpringboot%5DokHttp%E9%94%99%E8%AF%AFException%20in%20thread%20OkHttp%20Dispatcher%20java.lang.IllegalStateException%20closed.html">60. [Springboot]okHttp错误:<em>Exception</em> in thread “OkHttp Dispatcher” <em>java.lang.IllegalStateException</em>: closed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BVim%5D%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4.html">61. [Vim]Vim查找和替换命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5Bdebezium%5D%E5%9C%A8%E5%90%AF%E5%8A%A8%E4%BB%BB%E5%8A%A1%E6%97%B6%E4%BC%A0%E5%85%A5SQL%E8%AF%AD%E5%8F%A5%E7%94%9F%E6%88%90Snapshot.html">62. [debezium]在启动任务时传入SQL语句生成Snapshot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5Bdebezium%5D%E7%83%AD%E4%BF%AE%E6%94%B9DebeziumMySQLConnector%E9%85%8D%E7%BD%AE.html">63. [debezium]热修改Debezium MySQL Connector配置</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Blogs</a> &raquo;</li>
+      <li><span class="section-number">39. </span>[Kudu]关于Kudu Upsert列的问题</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Blog Here/[Kudu]关于Kudu Upsert列的问题.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="kudu-kudu-upsert">
+<h1><span class="section-number">39. </span>[Kudu]关于Kudu Upsert列的问题<a class="headerlink" href="#kudu-kudu-upsert" title="永久链接至标题"></a></h1>
+<p>今天做线索下发，涉及到spark修改kudu列的数据，发现了一个问题，kudu表中的数据始终没有被修改，于是晚间我在本地尝试着复现了一波，发现了一些问题，记录于此，明天去测试环境再测试一下。</p>
+<blockquote>
+<div><p>补充：经过在测试环境的尝试(测试的集群环境的Kudu版本为1.9, 本地测试使用的是Kudu1.13的依赖包)，情况相同。</p>
+</div></blockquote>
+<section id="id1">
+<h2><span class="section-number">39.1. </span>需求起源<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>场景是这样的，<u>需求是原先存在于kudu表中的数据，有一列为主键，当该列的数据发生更新之后，直接将该条数据upsert。</u></p>
+</section>
+<section id="id2">
+<h2><span class="section-number">39.2. </span>复现<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<section id="id3">
+<h3><span class="section-number">39.2.1. </span>建表<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
+<p>我在本地使用impala建了一个表，名为upsert_kudu_test</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">upsert_kudu_test</span><span class="p">(</span>
+<span class="n">id</span> <span class="nb">int</span><span class="p">,</span>
+<span class="n">name</span> <span class="n">string</span><span class="p">,</span>
+<span class="n">etl_time</span> <span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">STORED</span> <span class="k">AS</span> <span class="n">kudu</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>在kudu中其实际名为：impala::test.upsert_kudu_test</p>
+</section>
+<section id="id4">
+<h3><span class="section-number">39.2.2. </span>插入数据<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>使用impala可以直接插入数据</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">test</span><span class="p">.</span><span class="n">upsert_kudu_test</span> <span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;aaa&#39;</span><span class="p">,</span><span class="n">NOW</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>没有问题，impala可以直接查询出来</p>
+<p><img alt="111" src="../_images/image-20210721234205692.png" /></p>
+<p>可是，实际情况是，任务是使用Spark在集群环境中跑的，对于kudu中列数据的插入和修改都是通过spark来完成的，于是，我模拟在本地使用spark来插入和修改改表的数据，代码如下：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">SparkSession</span> <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+                <span class="p">.</span><span class="na">master</span><span class="p">(</span><span class="s">&quot;local[4]&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">appName</span><span class="p">(</span><span class="s">&quot;UpsertKuduRows&quot;</span><span class="p">)</span>
+                <span class="p">.</span><span class="na">getOrCreate</span><span class="p">();</span>
+
+<span class="n">KuduContext</span> <span class="n">kuduContext</span> <span class="o">=</span> <span class="k">new</span> <span class="n">KuduContext</span><span class="p">(</span><span class="s">&quot;cdh001:7051&quot;</span><span class="p">,</span> <span class="n">spark</span><span class="p">.</span><span class="na">sparkContext</span><span class="p">());</span>
+<span class="n">KuduWriteOptions</span> <span class="n">kuduWriteOptions</span> <span class="o">=</span> <span class="k">new</span> <span class="n">KuduWriteOptions</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+
+<span class="c1">//插入</span>
+<span class="n">Dataset</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="na">sql</span><span class="p">(</span><span class="s">&quot;select 2 AS id, &#39;ggg&#39; AS name, NOW() AS etl_time&quot;</span><span class="p">);</span>
+<span class="n">df</span><span class="p">.</span><span class="na">show</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="n">kuduContext</span><span class="p">.</span><span class="na">upsertRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s">&quot;impala::test.upsert_kudu_test&quot;</span><span class="p">,</span> <span class="n">kuduWriteOptions</span><span class="p">);</span>
+
+<span class="c1">//读取</span>
+<span class="n">Dataset</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span> <span class="n">kuduDF</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="na">read</span><span class="p">()</span>
+        <span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;kudu&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="s">&quot;kudu.master&quot;</span><span class="p">,</span> <span class="s">&quot;cdh001:7051&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">option</span><span class="p">(</span><span class="s">&quot;kudu.table&quot;</span><span class="p">,</span> <span class="s">&quot;impala::test.upsert_kudu_test&quot;</span><span class="p">)</span>
+        <span class="p">.</span><span class="na">load</span><span class="p">();</span>
+
+<span class="n">kuduDF</span><span class="p">.</span><span class="na">createOrReplaceTempView</span><span class="p">(</span><span class="s">&quot;test_view&quot;</span><span class="p">);</span>
+<span class="n">spark</span><span class="p">.</span><span class="na">sql</span><span class="p">(</span><span class="s">&quot;select * from test_view&quot;</span><span class="p">).</span><span class="na">show</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>此时，表中成功插入了一条id=2，name=ggg，etl_time=2021-07-21 23:18:17.812的数据</p>
+</section>
+<section id="id5">
+<h3><span class="section-number">39.2.3. </span>出现问题<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>我开始思考我白天的时候为什么在upsert数据也就是更新数据的时候没有成功，我一开始以为是在创建KuduWriteOptions时，其第二个参数设置为true的原因，可是当我无论怎么设置它，都不太好使。</p>
+<div class="highlight-properties notranslate"><div class="highlight"><pre><span></span>KuduWriteOptions holds configuration of writes to Kudu tables.
+Params:
+ignoreDuplicateRowErrors – when inserting, ignore any new rows that have a primary key conflict with existing rows
+ignoreNull – update only non-Null columns if set true
+repartition – if set to true, the data will be repartitioned to match the partitioning of the target Kudu table
+repartitionSort – if set to true, the data will also be sorted while being repartitioned. This is only used if repartition is true.
+handleSchemaDrift – if set to true, when fields with names that are not in the target Kudu table are encountered, the Kudu table will be altered to include new columns for those fields.
+</pre></div>
+</div>
+<p>该参数名叫<code class="docutils literal notranslate"><span class="pre">ionoreNull</span></code>,尝试的过程中，尝试的过程中，我试着将etl_time直接不写，以为该数据就不会更新，可是结果出乎我意料，id=2的name成功更新了，etl_time却没有更新</p>
+<p>1、原先数据为：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+---+-----+-------------------------+</span>
+<span class="o">|</span><span class="mi">1</span>  <span class="o">|</span><span class="n">aaa</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">22</span> <span class="mi">07</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mf">26.21934</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">2</span>  <span class="o">|</span><span class="n">ggg</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mf">17.812</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">3</span>  <span class="o">|</span><span class="n">ddd</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mf">50.712</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">4</span>  <span class="o">|</span><span class="mi">22222</span><span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mf">29.275</span>  <span class="o">|</span>
+<span class="o">+---+-----+-------------------------+</span>
+</pre></div>
+</div>
+<p>2、我使用如下语句upsert</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//插入</span>
+<span class="n">Dataset</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="na">sql</span><span class="p">(</span><span class="s">&quot;select 4 AS id, &#39;33333&#39; AS name&quot;</span><span class="p">);</span>
+<span class="n">df</span><span class="p">.</span><span class="na">show</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="n">kuduContext</span><span class="p">.</span><span class="na">upsertRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s">&quot;impala::test.upsert_kudu_test&quot;</span><span class="p">,</span> <span class="n">kuduWriteOptions</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>此时数据变为</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="c1">---+-----+-------------------------+</span>
+<span class="o">|</span><span class="n">id</span> <span class="o">|</span><span class="n">name</span> <span class="o">|</span><span class="n">etl_time</span>                 <span class="o">|</span>
+<span class="o">+</span><span class="c1">---+-----+-------------------------+</span>
+<span class="o">|</span><span class="mi">1</span>  <span class="o">|</span><span class="n">aaa</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">22</span> <span class="mi">07</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">26</span><span class="p">.</span><span class="mi">21934</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">2</span>  <span class="o">|</span><span class="n">ggg</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">17</span><span class="p">.</span><span class="mi">812</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">3</span>  <span class="o">|</span><span class="n">ddd</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">50</span><span class="p">.</span><span class="mi">712</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">4</span>  <span class="o">|</span><span class="mi">33333</span><span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">29</span><span class="p">.</span><span class="mi">275</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">---+-----+-------------------------+</span>
+</pre></div>
+</div>
+<p><img alt="222" src="../_images/image-20210721235420550.png" /></p>
+<p>可以观察到，<u>name变了，可是时间却没有变</u>，好家伙，继续尝试，将etl_time加上，可是这次不写<code class="docutils literal notranslate"><span class="pre">AS</span> <span class="pre">etl_time</span></code></p>
+<p>3、使用如下代码插入数据</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//插入</span>
+<span class="n">Dataset</span><span class="o">&lt;</span><span class="n">Row</span><span class="o">&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="na">sql</span><span class="p">(</span><span class="s">&quot;select 4 AS id, &#39;33333&#39; AS name,NOW()&quot;</span><span class="p">);</span>
+<span class="n">df</span><span class="p">.</span><span class="na">show</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="n">kuduContext</span><span class="p">.</span><span class="na">upsertRows</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s">&quot;impala::test.upsert_kudu_test&quot;</span><span class="p">,</span> <span class="n">kuduWriteOptions</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>此时数据变为：</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="c1">---+-----+-------------------------+</span>
+<span class="o">|</span><span class="mi">1</span>  <span class="o">|</span><span class="n">aaa</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">22</span> <span class="mi">07</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">26</span><span class="p">.</span><span class="mi">21934</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">2</span>  <span class="o">|</span><span class="n">ggg</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">17</span><span class="p">.</span><span class="mi">812</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">3</span>  <span class="o">|</span><span class="n">ddd</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">50</span><span class="p">.</span><span class="mi">712</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">4</span>  <span class="o">|</span><span class="mi">33333</span><span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">29</span><span class="p">.</span><span class="mi">275</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">---+-----+-------------------------+</span>
+</pre></div>
+</div>
+<p><img alt="333" src="../_images/image-20210721235517860.png" /></p>
+<p>可以观察到，<u><code class="docutils literal notranslate"><span class="pre">etl_time</span></code>这个字段的值，并没有发生改变</u></p>
+<p>4、接着尝试，这次将<code class="docutils literal notranslate"><span class="pre">AS</span> <span class="pre">etl_time</span></code>加上</p>
+<p>得到结果如下：</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="o">+</span><span class="c1">---+-----+-------------------------+</span>
+<span class="o">|</span><span class="mi">1</span>  <span class="o">|</span><span class="n">aaa</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">22</span> <span class="mi">07</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">26</span><span class="p">.</span><span class="mi">21934</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">2</span>  <span class="o">|</span><span class="n">ggg</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">18</span><span class="p">:</span><span class="mi">17</span><span class="p">.</span><span class="mi">812</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">3</span>  <span class="o">|</span><span class="n">ddd</span>  <span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">50</span><span class="p">.</span><span class="mi">712</span>  <span class="o">|</span>
+<span class="o">|</span><span class="mi">4</span>  <span class="o">|</span><span class="mi">33333</span><span class="o">|</span><span class="mi">2021</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">21</span> <span class="mi">23</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">43</span><span class="p">.</span><span class="mi">471</span>  <span class="o">|</span>
+<span class="o">+</span><span class="c1">---+-----+-------------------------+</span>
+</pre></div>
+</div>
+<p><img alt="444" src="../_images/image-20210721235901197.png" /></p>
+<p>可以观察到，<code class="docutils literal notranslate"><span class="pre">etl_time</span></code>这个字段的值，这次改变了</p>
+</section>
+</section>
+<section id="id6">
+<h2><span class="section-number">39.3. </span>结论<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>在使用spark去upsert kudu列的时候，一定得讲SELECT得到的DF每个字段加上该列的名字，即加上<code class="docutils literal notranslate"><span class="pre">AS</span> <span class="pre">COLUMN_NAME</span></code>，经过尝试</p>
+<ul>
+<li><p>不加<code class="docutils literal notranslate"><span class="pre">AS</span> <span class="pre">COLUMN_NAME</span></code>，kudu无法识别，不会进行更新，同时也不会报错</p></li>
+<li><p>加上了<code class="docutils literal notranslate"><span class="pre">AS</span> <span class="pre">COLUMN_NAME</span></code>，但是COLUMN_NAME错了，Kudu则会报错</p></li>
+</ul>
+</li>
+<li><p>Kudu是列式存储</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="%5BKerberos%5DMessage%20stream%20modified%20%2841%29%E9%94%99%E8%AF%AF.html" class="btn btn-neutral float-left" title="38. [Kerberos]Message stream modified (41)错误" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="%5BKudu%5D%E5%85%B3%E4%BA%8EKudu%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BF%AE%E6%94%B9.html" class="btn btn-neutral float-right" title="40. [Kudu]关于Kudu列的顺序的修改" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

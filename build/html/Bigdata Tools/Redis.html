@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>10. Redis &mdash; Code-Cookbook 0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>10. Redis &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="11. Spark" href="Spark.html" />
     <link rel="prev" title="9. Kylin" href="Kylin.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Code-Cookbook
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="在文档中搜索" />
@@ -76,19 +37,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
@@ -146,90 +96,48 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<p class="caption"><span class="caption-text">博客</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Code-Cookbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
-        
       <li><span class="section-number">10. </span>Redis</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/Bigdata Tools/Redis.md.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="redis">
-<h1><span class="section-number">10. </span>Redis<a class="headerlink" href="#redis" title="永久链接至标题">¶</a></h1>
-<div class="section" id="id1">
-<h2><span class="section-number">10.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+             
+  <section id="redis">
+<h1><span class="section-number">10. </span>Redis<a class="headerlink" href="#redis" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">10.1. </span>介绍<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>本质：分布式的<strong>基于内存</strong>的NoSQL<strong>数据库</strong></p>
 <ul>
@@ -295,9 +203,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">10.2. </span>应用场景<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id2">
+<h2><span class="section-number">10.2. </span>应用场景<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>传统的web开发</p>
 <ul>
@@ -324,9 +232,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id3">
-<h2><span class="section-number">10.3. </span>特点<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id3">
+<h2><span class="section-number">10.3. </span>特点<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>分布式</p></li>
 <li><p>基于内存</p></li>
@@ -339,9 +247,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="windowsredis">
-<h2><span class="section-number">10.4. </span>Windows上使用Redis<a class="headerlink" href="#windowsredis" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="windowsredis">
+<h2><span class="section-number">10.4. </span>Windows上使用Redis<a class="headerlink" href="#windowsredis" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>架构</p>
 <ul>
@@ -396,14 +304,14 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id4">
-<h2><span class="section-number">10.5. </span>数据类型和语法<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
-<div class="section" id="string">
-<h3><span class="section-number">10.5.1. </span>String<a class="headerlink" href="#string" title="永久链接至标题">¶</a></h3>
-</div>
-<div class="section" id="hash">
-<h3><span class="section-number">10.5.2. </span>Hash<a class="headerlink" href="#hash" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id4">
+<h2><span class="section-number">10.5. </span>数据类型和语法<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<section id="string">
+<h3><span class="section-number">10.5.1. </span>String<a class="headerlink" href="#string" title="永久链接至标题"></a></h3>
+</section>
+<section id="hash">
+<h3><span class="section-number">10.5.2. </span>Hash<a class="headerlink" href="#hash" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>语法</p>
 <ul>
@@ -440,9 +348,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="list">
-<h3><span class="section-number">10.5.3. </span>List<a class="headerlink" href="#list" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="list">
+<h3><span class="section-number">10.5.3. </span>List<a class="headerlink" href="#list" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>应用：有序可重复的集合的数据</p>
 <ul class="simple">
@@ -502,9 +410,9 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="set">
-<h3><span class="section-number">10.5.4. </span>Set<a class="headerlink" href="#set" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="set">
+<h3><span class="section-number">10.5.4. </span>Set<a class="headerlink" href="#set" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>应用：无序不可重复的集合，用于去重统计等等</p>
 <ul class="simple">
@@ -540,9 +448,9 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="zset">
-<h3><span class="section-number">10.5.5. </span>Zset<a class="headerlink" href="#zset" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="zset">
+<h3><span class="section-number">10.5.5. </span>Zset<a class="headerlink" href="#zset" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>应用：有序不可重复的集合，一般用于排序取TopN</p></li>
 <li><p>使用</p>
@@ -584,9 +492,9 @@ lrange list1  <span class="m">0</span>  <span class="m">1</span>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id5">
-<h3><span class="section-number">10.5.6. </span>通用命令<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id5">
+<h3><span class="section-number">10.5.6. </span>通用命令<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">*</span></code> ：列举当前数据库中的所有KV</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">del</span></code>：用于删除当前数据库中的某个KV</p>
@@ -614,10 +522,10 @@ move s2 <span class="m">0</span>
 </div>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id6">
-<h2><span class="section-number">10.6. </span>持久化<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="id6">
+<h2><span class="section-number">10.6. </span>持久化<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>Redis如何实现将内存中的数据写入磁盘</p>
 <ul>
@@ -626,8 +534,8 @@ move s2 <span class="m">0</span>
 </ul>
 </li>
 </ul>
-<div class="section" id="rdb">
-<h3><span class="section-number">10.6.1. </span>RDB<a class="headerlink" href="#rdb" title="永久链接至标题">¶</a></h3>
+<section id="rdb">
+<h3><span class="section-number">10.6.1. </span>RDB<a class="headerlink" href="#rdb" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>功能：在规定时间内，内存中产生了一定次数的更新(增删改)，就会将内存中的数据做一次全量快照</p></li>
 <li><p>实现：</p>
@@ -689,9 +597,9 @@ move s2 <span class="m">0</span>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="aof">
-<h3><span class="section-number">10.6.2. </span>AOF<a class="headerlink" href="#aof" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="aof">
+<h3><span class="section-number">10.6.2. </span>AOF<a class="headerlink" href="#aof" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>设计：</p>
 <ul class="simple">
@@ -736,12 +644,12 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id7">
-<h2><span class="section-number">10.7. </span>集群搭建<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id8">
-<h3><span class="section-number">10.7.1. </span>模式<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">10.7. </span>集群搭建<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
+<section id="id8">
+<h3><span class="section-number">10.7.1. </span>模式<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>单节点</p>
 <ul>
@@ -761,9 +669,9 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id9">
-<h3><span class="section-number">10.7.2. </span>主从复制<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id9">
+<h3><span class="section-number">10.7.2. </span>主从复制<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -806,7 +714,7 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </div>
 </li>
 <li><p>启动所有机器的redis-server</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">servers</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="mf">3.2.8</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">servers</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="mf">3.2</span><span class="o">.</span><span class="mi">8</span>
 <span class="n">src</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="n">server</span> <span class="n">redis</span><span class="o">.</span><span class="n">conf</span>
 <span class="n">ps</span> <span class="o">-</span><span class="n">ef</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">redis</span>
 </pre></div>
@@ -826,9 +734,9 @@ appendfsync everysec:折中的做法，交由后台线程每秒fsync一次，每
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="sentinel">
-<h3><span class="section-number">10.7.3. </span>哨兵模式Sentinel<a class="headerlink" href="#sentinel" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="sentinel">
+<h3><span class="section-number">10.7.3. </span>哨兵模式Sentinel<a class="headerlink" href="#sentinel" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -923,9 +831,9 @@ jedis = mymaster.getResource();
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id10">
-<h3><span class="section-number">10.7.4. </span>集群模式<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id10">
+<h3><span class="section-number">10.7.4. </span>集群模式<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>架构</p>
 <ul class="simple">
@@ -938,12 +846,12 @@ jedis = mymaster.getResource();
 <li><p>演示：一台机器启动三个Redis：作为三个Master，只要端口不一致即可</p></li>
 <li><p>第一台机器解压重新安装</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">software</span><span class="o">/</span>
-<span class="n">tar</span> <span class="o">-</span><span class="n">zxf</span> <span class="n">redis</span><span class="o">-</span><span class="mf">3.2.8</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">C</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span>
+<span class="n">tar</span> <span class="o">-</span><span class="n">zxf</span> <span class="n">redis</span><span class="o">-</span><span class="mf">3.2</span><span class="o">.</span><span class="mf">8.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span> <span class="o">-</span><span class="n">C</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span>
 </pre></div>
 </div>
 </li>
 <li><p>编译</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="mf">3.2.8</span><span class="o">/</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="mf">3.2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span>
 <span class="n">make</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">install</span>
 </pre></div>
 </div>
@@ -1021,8 +929,8 @@ gem install redis
 </div>
 </li>
 <li><p>创建redis集群</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="mf">3.2.8</span><span class="o">/</span><span class="n">src</span><span class="o">/</span>
-  <span class="o">./</span><span class="n">redis</span><span class="o">-</span><span class="n">trib</span><span class="o">.</span><span class="n">rb</span> <span class="n">create</span> <span class="o">--</span><span class="n">replicas</span> <span class="mi">0</span> <span class="mf">192.168.88.221</span><span class="p">:</span><span class="mi">7001</span> <span class="mf">192.168.88.221</span><span class="p">:</span><span class="mi">7002</span> <span class="mf">192.168.88.221</span><span class="p">:</span><span class="mi">7003</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">export</span><span class="o">/</span><span class="n">redis</span><span class="o">-</span><span class="mf">3.2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">src</span><span class="o">/</span>
+  <span class="o">./</span><span class="n">redis</span><span class="o">-</span><span class="n">trib</span><span class="o">.</span><span class="n">rb</span> <span class="n">create</span> <span class="o">--</span><span class="n">replicas</span> <span class="mi">0</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">88.221</span><span class="p">:</span><span class="mi">7001</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">88.221</span><span class="p">:</span><span class="mi">7002</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">88.221</span><span class="p">:</span><span class="mi">7003</span>
 </pre></div>
 </div>
 <ul>
@@ -1071,18 +979,18 @@ src/redis-cli -c -h node1 -p 7001
 </ul>
 </li>
 </ul>
-<div class="section" id="id11">
-<h4><span class="section-number">10.7.4.1. </span>动态添加和删除节点<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
+<section id="id11">
+<h4><span class="section-number">10.7.4.1. </span>动态添加和删除节点<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
 <blockquote>
 <div><p>参考文章,<a class="reference external" href="https://www.cnblogs.com/maybesuch/p/10309403.html">传送门</a> 或者<a class="reference external" href="https://www.cnblogs.com/kevingrace/p/7910692.html">Redis Cluster日常操作命令梳理</a></p>
 </div></blockquote>
-</div>
-</div>
-</div>
-<div class="section" id="id12">
-<h2><span class="section-number">10.8. </span>Redis的数据分区<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id13">
-<h3><span class="section-number">10.8.1. </span><a class="reference external" href="https://blog.csdn.net/Coxhuang/article/details/104645989/">虚拟槽分区</a><a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="id12">
+<h2><span class="section-number">10.8. </span>Redis的数据分区<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+<section id="id13">
+<h3><span class="section-number">10.8.1. </span><a class="reference external" href="https://blog.csdn.net/Coxhuang/article/details/104645989/">虚拟槽分区</a><a class="headerlink" href="#id13" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>虚拟槽分区巧妙地使用了哈希空间，使用分散度良好的哈希函数把所有数据映射到一个固定范围的整数集合中，整数定义为槽（slot）。这个范围一般远远大于节点数，</p>
 <p>Redis Cluster采用虚拟槽分区，比如 Redis Cluster 槽范围是 0 ~ 16383。Redis 集群包含了 16384 个哈希槽，每个 Key 经过计算后会落在一个具体的槽位上，而每个槽位落到哪个节点上,根据自己的节点配置。</p>
@@ -1098,9 +1006,9 @@ src/redis-cli -c -h node1 -p 7001
 <p>这种结构很容易添加或者删除节点。如果增加一个节点 6，就需要从节点 1 ~ 5 获得部分槽分配到节点 6 上。如果想移除节点 1，需要将节点 1 中的槽移到节点 2 ~ 5 上，然后将没有任何槽的节点 1 从集群中移除即可。</p>
 <p>由于从一个节点将 哈希槽 移动到另一个节点并不会 停止服务，所以无论 添加删除或者改变某个节点的哈希槽的数量都不会造成集群不可用的状态.</p>
 </div></blockquote>
-</div>
-<div class="section" id="id14">
-<h3><span class="section-number">10.8.2. </span>分区的规则<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id14">
+<h3><span class="section-number">10.8.2. </span>分区的规则<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>通过槽位计算，将不同的KV存储在不同的Redis的Master中</p></li>
 <li><p>Redis Cluster 采用虚拟槽分区(Redis Cluster是Redis自带的集群)，所有的键根据哈希函数映射到 0~16383 整数槽内，计算公式：<code class="docutils literal notranslate"><span class="pre">slot</span> <span class="pre">=</span> <span class="pre">CRC16（key）&amp;</span> <span class="pre">16383</span></code>。每个节点负责维护一部分槽以及槽所映射的键值数据。</p></li>
@@ -1111,10 +1019,10 @@ src/redis-cli -c -h node1 -p 7001
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id15">
-<h2><span class="section-number">10.9. </span>可能遇到的问题<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="id15">
+<h2><span class="section-number">10.9. </span>可能遇到的问题<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
 <ul>
 <li><p>1、redis-cluster 启动或者Jedis客户端连接遇到<strong>CLUSTERDOWN Hash slot not served</strong>问题</p>
 <ul>
@@ -1189,55 +1097,38 @@ redis-trib.rb fix node01:7003
 </ul>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Spark.html" class="btn btn-neutral float-right" title="11. Spark" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Kylin.html" class="btn btn-neutral float-left" title="9. Kylin" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="Spark.html" class="btn btn-neutral float-right" title="11. Spark" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2021, roohom.
-
-    </p>
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
   </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

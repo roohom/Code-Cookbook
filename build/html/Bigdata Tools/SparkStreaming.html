@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>14. Spark Streaming &mdash; Code-Cookbook 0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>14. Spark Streaming &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="15. Structured Streaming" href="StructuredStreaming.html" />
     <link rel="prev" title="13. Spark SQL" href="SparkSQL.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Code-Cookbook
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="在文档中搜索" />
@@ -76,19 +37,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
@@ -131,88 +81,46 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<p class="caption"><span class="caption-text">博客</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Code-Cookbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
-        
       <li><span class="section-number">14. </span>Spark Streaming</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/Bigdata Tools/SparkStreaming.md.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="spark-streaming">
-<h1><span class="section-number">14. </span>Spark Streaming<a class="headerlink" href="#spark-streaming" title="永久链接至标题">¶</a></h1>
+             
+  <section id="spark-streaming">
+<h1><span class="section-number">14. </span>Spark Streaming<a class="headerlink" href="#spark-streaming" title="永久链接至标题"></a></h1>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><blockquote>
 <div><p>Spark中针对流式数据处理的方案有：</p>
 <ul class="simple">
@@ -224,8 +132,8 @@
 <div><p><strong>Spark Streaming与Flink流式计算的本质区别是什么？</strong></p>
 <p>Spark Streaming是基于微批(Micro batch)的，而Flink基于实时流，来一条数据处理一条数据</p>
 </div></blockquote>
-<div class="section" id="id1">
-<h2><span class="section-number">14.1. </span>计算思想<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<section id="id1">
+<h2><span class="section-number">14.1. </span>计算思想<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p><em>Spark Streaming makes it easy to build scalable fault-tolerent streaming applications.</em></p>
 </div></blockquote>
@@ -240,9 +148,9 @@ $$</p>
 <blockquote>
 <div><p>Notes：对于目前版本的Spark Streaming而言，其最小的Batch Size的选取在0.5~5秒钟之间，所以Spark Streaming能够满足流式准实时计算场景，对实时性要求非常高的如高频实时交易场景则不太适合。</p>
 </div></blockquote>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">14.2. </span>编程步骤<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id2">
+<h2><span class="section-number">14.2. </span>编程步骤<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <ol>
 <li><p>Define the input sources by creating input DStreams.
 定义从哪个数据源接收流式数据，封装到DStream中</p></li>
@@ -258,9 +166,9 @@ $$</p>
 启动流式应用，并且一直等待程序终止（人为或异常），最后停止运行</p></li>
 </ol>
 <p>[^2]:说了一大堆，就第二点最重要，第二点还不会写 :)</p>
-</div>
-<div class="section" id="id3">
-<h2><span class="section-number">14.3. </span>应用监控<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id3">
+<h2><span class="section-number">14.3. </span>应用监控<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p>当流式处理程序运行时，可以通过主机名+端口号4040访问程序监控页面</p>
 </div></blockquote>
@@ -277,31 +185,31 @@ $$</p>
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id4">
-<h2><span class="section-number">14.4. </span>工作原理<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id4">
+<h2><span class="section-number">14.4. </span>工作原理<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p>SparkStreaming处理流式数据时，按照时间间隔划分数据为微批次（Micro-Batch），每批次数据当做RDD，再进行处理分析。</p>
 </div></blockquote>
 <p><img alt="HowSparkStreamingWorks" src="../_images/HowSparkStreamingWorks.svg" /></p>
-<div class="section" id="streaming-context">
-<h3><span class="section-number">14.4.1. </span>Streaming Context<a class="headerlink" href="#streaming-context" title="永久链接至标题">¶</a></h3>
+<section id="streaming-context">
+<h3><span class="section-number">14.4.1. </span>Streaming Context<a class="headerlink" href="#streaming-context" title="永久链接至标题"></a></h3>
 <p>当SparkStreaming流式应用启动（streamingContext.start）时，首先创建StreamingContext流式上下文实例对象，整个流式应用环境构建，底层还是SparkContext</p>
 <p>当StreamingContext对象构建以后，启动接收器Receiver，专门从数据源端接收数据，<strong>此接收器作为Task任务运行在Executor中，一直运行（Long Runing），一直接收数据</strong></p>
 <p>从WEB UI界面【Jobs Tab】可以看到【Job-0】是一个Receiver接收器，一直在运行，以Task方式运行，需要1Core CPU</p>
 <p><img alt="image-20201126163124557" src="../_images/image-20201126163124557.png" /></p>
-</div>
-<div class="section" id="receiver">
-<h3><span class="section-number">14.4.2. </span>Receiver接收数据<a class="headerlink" href="#receiver" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="receiver">
+<h3><span class="section-number">14.4.2. </span>Receiver接收数据<a class="headerlink" href="#receiver" title="永久链接至标题"></a></h3>
 <p>启动每个接收器Receiver以后，实时从数据源端接收数据（比如TCP Socket），也是按照时间间隔将接收的流式数据划分为很多<strong>Block</strong>（块）</p>
 <p>接收器 Receiver划分流式数据的时间间隔BlockInterval ，<strong>默认值为 200ms</strong>，通过属性【spark.streaming.blockInterval】设置。接收器将接收的数据划分为Block以后，按照设置的存储级别对Block进行存储，从TCP Socket中接收数据默认的存储级别为：MEMORY_AND_DISK_SER_2，先存储内存，不足再存储磁盘，存储2副本</p>
-</div>
-<div class="section" id="blocks">
-<h3><span class="section-number">14.4.3. </span>汇报接收Blocks<a class="headerlink" href="#blocks" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="blocks">
+<h3><span class="section-number">14.4.3. </span>汇报接收Blocks<a class="headerlink" href="#blocks" title="永久链接至标题"></a></h3>
 <p>接收器Receiver将实时汇报接收的数据对应的Block信息，当BatchInterval时间达到以后，StreamingContext将对应时间范围内数据block当做RDD，加载SparkContext处理数据</p>
-</div>
-<div class="section" id="id5">
-<h3><span class="section-number">14.4.4. </span>重要参数<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id5">
+<h3><span class="section-number">14.4.4. </span>重要参数<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>批次时间间隔BatchInterval[^4]</p>
 <ul>
@@ -316,10 +224,10 @@ $$</p>
 </li>
 </ul>
 <p>[^4]:举个栗子：BatchInterval：1s = 1000ms = 5 * BlockInterval 每批次RDD数据中，有5个Block，每个Block就是RDD一个分区数据</p>
-</div>
-</div>
-<div class="section" id="dstream">
-<h2><span class="section-number">14.5. </span>DStream<a class="headerlink" href="#dstream" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="dstream">
+<h2><span class="section-number">14.5. </span>DStream<a class="headerlink" href="#dstream" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p>SparkStreaming模块将流式数据封装的数据结构：DStream（Discretized Stream，离散化数据流，连续不断的数据流），代表持续性的数据流和经过各种Spark算子操作后的结果数据流</p>
 </div></blockquote>
@@ -332,8 +240,8 @@ $$
 DStream = Seq[RDD]
 $$</p>
 <p>DStream中每批次数据RDD在处理时，各个RDD之间存在依赖关系，DStream之间也有依赖关系，RDD具有容错性，那么DStream也具有容错性</p>
-<div class="section" id="id6">
-<h3><span class="section-number">14.5.1. </span>函数<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<section id="id6">
+<h3><span class="section-number">14.5.1. </span>函数<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>主要有两大类：</p>
 <p>一类是将一个DStream转换为另一个DStream的Transformation</p>
@@ -380,14 +288,14 @@ $$</p>
 </li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="id7">
-<h3><span class="section-number">14.5.2. </span><strong>一个建议</strong><a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id7">
+<h3><span class="section-number">14.5.2. </span><strong>一个建议</strong><a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
 <p>对RDD操作的就不要对DStream操作，当调用DStream中某个函数在RDD中也存在，使用针对RDD操作</p>
-</div>
-</div>
-<div class="section" id="id8">
-<h2><span class="section-number">14.6. </span>流式应用状态<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="id8">
+<h2><span class="section-number">14.6. </span>流式应用状态<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 <p>SparkStreaming流式计算框架，针对具体业务主要分为三类，使用不同函数进行处理：</p>
 <ul class="simple">
 <li><p>业务一：无状态Stateless</p>
@@ -409,55 +317,38 @@ $$</p>
 </ul>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="StructuredStreaming.html" class="btn btn-neutral float-right" title="15. Structured Streaming" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="SparkSQL.html" class="btn btn-neutral float-left" title="13. Spark SQL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="StructuredStreaming.html" class="btn btn-neutral float-right" title="15. Structured Streaming" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2021, roohom.
-
-    </p>
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
   </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

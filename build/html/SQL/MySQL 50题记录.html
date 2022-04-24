@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>2. MySQL 50题记录 &mdash; Code-Cookbook 0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>2. MySQL 50题记录 &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="3. MySQL语句执行顺序" href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html" />
     <link rel="prev" title="1. JDBC" href="JDBC.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Code-Cookbook
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="在文档中搜索" />
@@ -76,32 +37,21 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<p class="caption"><span class="caption-text">博客</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">SQL</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="JDBC.html">1. JDBC</a></li>
@@ -127,79 +77,37 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Code-Cookbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">SQL</a> &raquo;</li>
-        
       <li><span class="section-number">2. </span>MySQL 50题记录</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/SQL/MySQL 50题记录.md.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="mysql-50">
-<h1><span class="section-number">2. </span>MySQL 50题记录<a class="headerlink" href="#mysql-50" title="永久链接至标题">¶</a></h1>
+             
+  <section id="mysql-50">
+<h1><span class="section-number">2. </span>MySQL 50题记录<a class="headerlink" href="#mysql-50" title="永久链接至标题"></a></h1>
 <p><a class="reference external" href="https://blog.csdn.net/fashion2014/article/details/78826299">点我去原文</a></p>
 <p>[TOC]</p>
-<div class="section" id="id1">
-<h2><span class="section-number">2.1. </span>整理在前:<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<section id="id1">
+<h2><span class="section-number">2.1. </span>整理在前:<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>关于MySQL日期查询</p>
 <ul>
@@ -233,18 +141,18 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">2.2. </span>可能涉及的到的知识:<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<div class="section" id="if">
-<h3><span class="section-number">2.2.1. </span>IF表达式<a class="headerlink" href="#if" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.2. </span>可能涉及的到的知识:<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<section id="if">
+<h3><span class="section-number">2.2.1. </span>IF表达式<a class="headerlink" href="#if" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>在MySQL中if()函数的用法类似于java中的三目表达式，其用处也比较多，具体语法如下：
 <code class="docutils literal notranslate"><span class="pre">IF(expr1,expr2,expr3)</span></code>，如果expr1的值为true，则返回expr2的值，如果expr1的值为false，则返回expr3的值。</p></li>
 </ul>
-</div>
-<div class="section" id="id3">
-<h3><span class="section-number">2.2.2. </span>用户变量<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id3">
+<h3><span class="section-number">2.2.2. </span>用户变量<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>MySQL用户变量：基于会话变量实现的，可以暂存值，并传递给同一连接里的下一条SQL使用的变量，当客户端连接退出时，变量会被释放。</p>
 <p>MySQL用户变量应用场景：<strong>同一连接，未关闭情况下，帮你暂存一些计算结果。</strong></p>
@@ -285,9 +193,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id4">
-<h3><span class="section-number">2.2.3. </span>日期转换<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id4">
+<h3><span class="section-number">2.2.3. </span>日期转换<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">DATE_FORMAT(DATE,FORMAT)</span></code>，按照指定的format格式对date日期进行格式化</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="nf">DATE_FORMAT</span><span class="p">(</span><span class="s1">&#39;2020-08-15&#39;</span><span class="p">,</span><span class="s1">&#39;%m%d&#39;</span><span class="p">);</span> <span class="c1">--  0815</span>
@@ -316,10 +224,10 @@
 </div>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id5">
-<h2><span class="section-number">2.3. </span>题设条件<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.3. </span>题设条件<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">建表</span>
 <span class="o">--</span><span class="n">学生表</span>
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n n-Quoted">`Student`</span><span class="p">(</span>
@@ -389,9 +297,9 @@
 <span class="k">insert</span> <span class="k">into</span> <span class="n">Score</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;07&#39;</span> <span class="p">,</span> <span class="s1">&#39;03&#39;</span> <span class="p">,</span> <span class="mi">98</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id6">
-<h2><span class="section-number">2.4. </span>题目(1~50)<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id6">
+<h2><span class="section-number">2.4. </span>题目(1~50)<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p>1、查询”01”课程比”02”课程成绩高的学生的信息及课程分数</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- 1、查询&quot;01&quot;课程比&quot;02&quot;课程成绩高的学生的信息及课程分数</span>
 <span class="c1">-- 方式一:</span>
@@ -1313,55 +1221,38 @@ IF(expr1,expr2,expr3)，如果expr1的值为true，则返回expr2的值，如果
 <span class="k">where</span> <span class="k">month</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">s_birth</span><span class="p">)</span> <span class="o">=</span> <span class="k">month</span><span class="p">(</span><span class="nf">date_format</span><span class="p">(</span><span class="nf">now</span><span class="p">(),</span> <span class="s1">&#39;%Y%m%d&#39;</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html" class="btn btn-neutral float-right" title="3. MySQL语句执行顺序" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="JDBC.html" class="btn btn-neutral float-left" title="1. JDBC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="MySQL%E8%AF%AD%E5%8F%A5%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.html" class="btn btn-neutral float-right" title="3. MySQL语句执行顺序" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2021, roohom.
-
-    </p>
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
   </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

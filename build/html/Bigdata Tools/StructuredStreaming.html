@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>15. Structured Streaming &mdash; Code-Cookbook 0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>15. Structured Streaming &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="16. Zookeeper" href="Zookeeper.html" />
     <link rel="prev" title="14. Spark Streaming" href="SparkStreaming.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Code-Cookbook
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="在文档中搜索" />
@@ -76,19 +37,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
@@ -150,96 +100,54 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<p class="caption"><span class="caption-text">博客</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Code-Cookbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
-        
       <li><span class="section-number">15. </span>Structured Streaming</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/Bigdata Tools/StructuredStreaming.md.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="structured-streaming">
-<h1><span class="section-number">15. </span>Structured Streaming<a class="headerlink" href="#structured-streaming" title="永久链接至标题">¶</a></h1>
+             
+  <section id="structured-streaming">
+<h1><span class="section-number">15. </span>Structured Streaming<a class="headerlink" href="#structured-streaming" title="永久链接至标题"></a></h1>
 <blockquote>
 <div><p>Structured Streaming是一个基于Spark SQL引擎的可扩展、容错的流处理引擎</p>
 </div></blockquote>
 <blockquote>
 <div><p>Spark Streaming是Apache Spark早期基于RDD开发的流式系统，用户使用DStream API来编写代码，支持高吞吐和良好的容错。其背后的<u>主要模型是Micro Batch（微批处理），也就是将数据流切成等时间间隔（BatchInterval）的小批量任务来执行</u>。<u>一个流的数据源从逻辑上来说就是一个不断增长的动态表格，随着时间的推移，新数据被持续不断地添加到表格的末尾，用户可以使用Dataset/DataFrame或者 SQL 来对这个动态数据源进行实时查询</u>。</p>
 </div></blockquote>
-<div class="section" id="spark-streaming">
-<h2><span class="section-number">15.1. </span>Spark Streaming的不足<a class="headerlink" href="#spark-streaming" title="永久链接至标题">¶</a></h2>
+<section id="spark-streaming">
+<h2><span class="section-number">15.1. </span>Spark Streaming的不足<a class="headerlink" href="#spark-streaming" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>使用 Processing Time 而不是 Event Time</p>
 <ul>
@@ -263,9 +171,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id1">
-<h2><span class="section-number">15.2. </span>Structured Streaming 和其他系统的显著区别<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id1">
+<h2><span class="section-number">15.2. </span>Structured Streaming 和其他系统的显著区别<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>Incremental query model（增量查询模型）</p>
 <ul>
@@ -279,16 +187,16 @@
 </li>
 <li><p>Spark SQL 执行引擎做了非常多的优化工作，比如执行计划优化、codegen、内存管理等。这也是Structured Streaming取得高性能和高吞吐的一个原因</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h2><span class="section-number">15.3. </span>核心思想<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id2">
+<h2><span class="section-number">15.3. </span>核心思想<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p>Structured Streaming最核心的思想就是<strong>将实时到达的数据看作是一个不断追加的unbound table无界表，到达流的每个数据项就像是表中的一个新行被附加到无边界的表中，用静态结构化数据的批处理查询方式进行流计算</strong>。</p>
 </div></blockquote>
 <p><img alt="image-20201129195924333" src="../_images/image-20201129195924333.png" /></p>
-</div>
-<div class="section" id="id3">
-<h2><span class="section-number">15.4. </span>输入源<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id3">
+<h2><span class="section-number">15.4. </span>输入源<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>File Source</p>
 <ul>
@@ -303,11 +211,11 @@
 </li>
 <li><p>Kafka Source</p></li>
 </ul>
-</div>
-<div class="section" id="streaming-queries">
-<h2><span class="section-number">15.5. </span>Streaming Queries<a class="headerlink" href="#streaming-queries" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id4">
-<h3><span class="section-number">15.5.1. </span>输出模式<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="streaming-queries">
+<h2><span class="section-number">15.5. </span>Streaming Queries<a class="headerlink" href="#streaming-queries" title="永久链接至标题"></a></h2>
+<section id="id4">
+<h3><span class="section-number">15.5.1. </span>输出模式<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>Append Mode：追加模式，默认模式</p>
 <ul>
@@ -325,18 +233,18 @@
 </ul>
 </li>
 </ul>
-<div class="section" id="id5">
-<h4><span class="section-number">15.5.1.1. </span>不同的模式支持不同的输出模式<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<section id="id5">
+<h4><span class="section-number">15.5.1.1. </span>不同的模式支持不同的输出模式<a class="headerlink" href="#id5" title="永久链接至标题"></a></h4>
 <p><img alt="image-20201129201624561" src="../_images/image-20201129201624561.png" /></p>
-</div>
-</div>
-<div class="section" id="id6">
-<h3><span class="section-number">15.5.2. </span>触发间隔<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+<section id="id6">
+<h3><span class="section-number">15.5.2. </span>触发间隔<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
 <p>触发器Trigger决定了多久执行一次查询并输出结果，当不设置时，默认只要有新数据，就立即执行查询Query，再进行输出</p>
 <p><img alt="image-20201129201609267" src="../_images/image-20201129201609267.png" /></p>
-</div>
-<div class="section" id="id7">
-<h3><span class="section-number">15.5.3. </span>检查点<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id7">
+<h3><span class="section-number">15.5.3. </span>检查点<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
 <p>在Structured Streaming中使用Checkpoint 检查点进行故障恢复。如果实时应用发生故障或关机，可以恢复之前的查询的进度和状态，并从停止的地方继续执行，使用Checkpoint和预写日志WAL完成。使用检查点位置配置查询，那么查询将所有进度信息（即每个触发器中处理的偏移范围）和运行聚合（例如词频统计wordcount）保存到检查点位置。此检查点位置必须是HDFS兼容文件系统中的路径，两种方式设置Checkpoint Location位置：</p>
 <ul class="simple">
 <li><p>方式一：DataStreamWriter设置</p>
@@ -367,9 +275,9 @@
 </li>
 <li><p>记录状态目录【state】</p></li>
 </ul>
-</div>
-<div class="section" id="sinks">
-<h3><span class="section-number">15.5.4. </span>输出Sinks<a class="headerlink" href="#sinks" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="sinks">
+<h3><span class="section-number">15.5.4. </span>输出Sinks<a class="headerlink" href="#sinks" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>Structured Streaming 非常显式地提出了**输入(Source)、执行(StreamExecution)、输出(Sink)**的3个组件，并且在每个组件显式地做到fault-tolerant（容错），由此得到整个streaming程序的 <code class="docutils literal notranslate"><span class="pre">end-to-end</span> <span class="pre">exactly-once</span> <span class="pre">guarantees</span></code></p>
 </div></blockquote>
@@ -381,8 +289,8 @@
 <li><p>Memory Sink及Kafka Sink</p></li>
 </ol>
 <p><img alt="image-20201129202252970" src="../_images/image-20201129202252970.png" /></p>
-<div class="section" id="id8">
-<h4><span class="section-number">15.5.4.1. </span>文件接收器<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h4>
+<section id="id8">
+<h4><span class="section-number">15.5.4.1. </span>文件接收器<a class="headerlink" href="#id8" title="永久链接至标题"></a></h4>
 <p>将输出存储到目录文件中，支持文件格式：parquet、orc、json、csv等</p>
 <blockquote>
 <div><p>注意:</p>
@@ -393,71 +301,71 @@
 <li><p>此外支持写入分区表，实际项目中常常按时间划分</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="memory-sink">
-<h4><span class="section-number">15.5.4.2. </span>Memory Sink<a class="headerlink" href="#memory-sink" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="memory-sink">
+<h4><span class="section-number">15.5.4.2. </span>Memory Sink<a class="headerlink" href="#memory-sink" title="永久链接至标题"></a></h4>
 <p>此种接收器作为调试使用，输出作为内存表存储在内存中， 支持Append和Complete输出模式。这应该用于低数据量的调试目的，因为整个输出被收集并存储在驱动程序的内存中，因此，请谨慎使用</p>
-</div>
-<div class="section" id="foreach-sink">
-<h4><span class="section-number">15.5.4.3. </span>Foreach Sink<a class="headerlink" href="#foreach-sink" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="foreach-sink">
+<h4><span class="section-number">15.5.4.3. </span>Foreach Sink<a class="headerlink" href="#foreach-sink" title="永久链接至标题"></a></h4>
 <p>Structured Streaming提供接口foreach和foreachBatch，允许用户在流式查询的输出上应用任意操作和编写逻辑，比如输出到MySQL表、Redis数据库等外部存系统。其中<strong>foreach允许每行自定义写入逻辑，foreachBatch允许在每个微批量的输出上进行任意操作和自定义逻辑，建议使用foreachBatch操作</strong>。
 foreach表达自定义编写器逻辑具体来说，需要编写类class继承ForeachWriter，其中包含三个方法来表达数据写入逻辑：打开，处理和关闭</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">streamingDatasetOfString</span><span class="p">.</span><span class="n">writeStream</span><span class="p">.</span><span class="n">foreach</span><span class="p">(</span>
-    <span class="k">new</span> <span class="nc">ForeachWriter</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span> <span class="p">{</span> 
-        <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="n">partitionId</span><span class="p">:</span> <span class="nc">Long</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nc">Long</span><span class="p">):</span> <span class="nc">Boolean</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// Open connection }</span>
-        <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="nc">String</span><span class="p">):</span> <span class="nc">Unit</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// Write string to connection }</span>
-        <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">errorOrNull</span><span class="p">:</span> <span class="nc">Throwable</span><span class="p">):</span> <span class="nc">Unit</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// Close the connection } </span>
-   <span class="p">}</span> 
-<span class="p">).</span><span class="n">start</span><span class="p">()</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">streamingDatasetOfString</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">foreach</span><span class="o">(</span>
+    <span class="k">new</span> <span class="nc">ForeachWriter</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">{</span> 
+        <span class="k">def</span> <span class="n">open</span><span class="o">(</span><span class="n">partitionId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">version</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span> <span class="c1">// Open connection }</span>
+        <span class="k">def</span> <span class="n">process</span><span class="o">(</span><span class="n">record</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="c1">// Write string to connection }</span>
+        <span class="k">def</span> <span class="n">close</span><span class="o">(</span><span class="n">errorOrNull</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="c1">// Close the connection } </span>
+   <span class="o">}</span> 
+<span class="o">).</span><span class="n">start</span><span class="o">()</span>
 </pre></div>
 </div>
 <p>举个代码栗子:</p>
 <p>如果要实现将词频统计结果写入MySQL：编写MySQLForeachWriter，继承ForeachWriter，其中DataFrame中数据类型为Row</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="cm">/** * 创建类继承ForeachWriter，将数据写入到MySQL表中，泛型为：Row，针对DataFrame操作，每条数据类型就是Row */</span> 
-<span class="k">class</span> <span class="nc">MySQLForeachWriter</span> <span class="k">extends</span> <span class="nc">ForeachWriter</span><span class="p">[</span><span class="nc">Row</span><span class="p">]{</span> 
+<span class="k">class</span> <span class="nc">MySQLForeachWriter</span> <span class="k">extends</span> <span class="nc">ForeachWriter</span><span class="o">[</span><span class="kt">Row</span><span class="o">]{</span> 
     <span class="c1">// 定义变量 </span>
-    <span class="kd">var</span> <span class="n">conn</span><span class="p">:</span> <span class="nc">Connection</span> <span class="o">=</span> <span class="n">_</span> <span class="kd">var</span> <span class="n">pstmt</span><span class="p">:</span> <span class="nc">PreparedStatement</span> <span class="o">=</span> <span class="n">_</span> <span class="kd">val</span> <span class="n">insertSQL</span> <span class="o">=</span> <span class="s">&quot;REPLACE INTO `tb_word_count` (`id`, `word`, `count`) VALUES (NULL, ?, ?)&quot;</span> 
+    <span class="k">var</span> <span class="n">conn</span><span class="k">:</span> <span class="kt">Connection</span> <span class="o">=</span> <span class="k">_</span> <span class="k">var</span> <span class="n">pstmt</span><span class="k">:</span> <span class="kt">PreparedStatement</span> <span class="o">=</span> <span class="k">_</span> <span class="k">val</span> <span class="n">insertSQL</span> <span class="o">=</span> <span class="s">&quot;REPLACE INTO `tb_word_count` (`id`, `word`, `count`) VALUES (NULL, ?, ?)&quot;</span> 
     <span class="c1">// open connection </span>
-    <span class="k">override</span> <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="n">partitionId</span><span class="p">:</span> <span class="nc">Long</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nc">Long</span><span class="p">):</span> <span class="nc">Boolean</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="k">override</span> <span class="k">def</span> <span class="n">open</span><span class="o">(</span><span class="n">partitionId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">,</span> <span class="n">version</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="o">{</span> 
         <span class="c1">// a. 加载驱动类 </span>
-        <span class="nc">Class</span><span class="p">.</span><span class="n">forName</span><span class="p">(</span><span class="s">&quot;com.mysql.cj.jdbc.Driver&quot;</span><span class="p">)</span> 
+        <span class="nc">Class</span><span class="o">.</span><span class="n">forName</span><span class="o">(</span><span class="s">&quot;com.mysql.cj.jdbc.Driver&quot;</span><span class="o">)</span> 
         <span class="c1">// b. 获取连接 </span>
-        <span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="p">.</span><span class="n">getConnection</span><span class="p">(</span> <span class="s">&quot;jdbc:mysql://node1:3306/db_sparkserverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&quot;</span><span class="p">,</span>
-                                           <span class="s">&quot;root&quot;</span><span class="p">,</span>
-                                           <span class="s">&quot;123456&quot;</span> <span class="p">)</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">.</span><span class="n">getConnection</span><span class="o">(</span> <span class="s">&quot;jdbc:mysql://node1:3306/db_sparkserverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&quot;</span><span class="o">,</span>
+                                           <span class="s">&quot;root&quot;</span><span class="o">,</span>
+                                           <span class="s">&quot;123456&quot;</span> <span class="o">)</span>
 <span class="c1">// c. 获取PreparedStatement </span>
-        <span class="n">pstmt</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">prepareStatement</span><span class="p">(</span><span class="n">insertSQL</span><span class="p">)</span> 
+        <span class="n">pstmt</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">prepareStatement</span><span class="o">(</span><span class="n">insertSQL</span><span class="o">)</span> 
         <span class="c1">//println(s&quot;p-${partitionId}: ${conn}&quot;) </span>
         <span class="c1">// 返回，表示获取连接成功 </span>
-        <span class="kc">true</span> <span class="p">}</span> 
+        <span class="kc">true</span> <span class="o">}</span> 
     <span class="c1">// write data to connection </span>
-    <span class="k">override</span> <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="nc">Row</span><span class="p">):</span> <span class="nc">Unit</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="k">override</span> <span class="k">def</span> <span class="n">process</span><span class="o">(</span><span class="n">row</span><span class="k">:</span> <span class="kt">Row</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> 
         <span class="c1">// 设置参数 </span>
-        <span class="n">pstmt</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">.</span><span class="n">getAs</span><span class="p">[</span><span class="nc">String</span><span class="p">](</span><span class="s">&quot;value&quot;</span><span class="p">))</span> 
-        <span class="n">pstmt</span><span class="p">.</span><span class="n">setLong</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">row</span><span class="p">.</span><span class="n">getAs</span><span class="p">[</span><span class="nc">Long</span><span class="p">](</span><span class="s">&quot;count&quot;</span><span class="p">))</span> 
+        <span class="n">pstmt</span><span class="o">.</span><span class="n">setString</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">row</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">&quot;value&quot;</span><span class="o">))</span> 
+        <span class="n">pstmt</span><span class="o">.</span><span class="n">setLong</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="n">row</span><span class="o">.</span><span class="n">getAs</span><span class="o">[</span><span class="kt">Long</span><span class="o">](</span><span class="s">&quot;count&quot;</span><span class="o">))</span> 
         <span class="c1">// 执行插入 </span>
-        <span class="n">pstmt</span><span class="p">.</span><span class="n">executeUpdate</span><span class="p">()</span>
-    <span class="p">}</span> 
+        <span class="n">pstmt</span><span class="o">.</span><span class="n">executeUpdate</span><span class="o">()</span>
+    <span class="o">}</span> 
     <span class="c1">// close the connection </span>
-    <span class="k">override</span> <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="n">errorOrNull</span><span class="p">:</span> <span class="nc">Throwable</span><span class="p">):</span> <span class="nc">Unit</span> <span class="o">=</span> <span class="p">{</span> 
-        <span class="k">if</span><span class="p">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">pstmt</span><span class="p">)</span> <span class="n">pstmt</span><span class="p">.</span><span class="n">close</span><span class="p">()</span> 
-        <span class="k">if</span><span class="p">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">conn</span><span class="p">)</span> <span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span> 
-    <span class="p">}</span> 
-<span class="p">}</span>
+    <span class="k">override</span> <span class="k">def</span> <span class="n">close</span><span class="o">(</span><span class="n">errorOrNull</span><span class="k">:</span> <span class="kt">Throwable</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> 
+        <span class="k">if</span><span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">pstmt</span><span class="o">)</span> <span class="n">pstmt</span><span class="o">.</span><span class="n">close</span><span class="o">()</span> 
+        <span class="k">if</span><span class="o">(</span><span class="kc">null</span> <span class="o">!=</span> <span class="n">conn</span><span class="o">)</span> <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="o">()</span> 
+    <span class="o">}</span> 
+<span class="o">}</span>
 </pre></div>
 </div>
 <p>调用方法:</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// 设置Streaming应用输出及启动 </span>
-<span class="kd">val</span> <span class="n">query</span><span class="p">:</span> <span class="nc">StreamingQuery</span> <span class="o">=</span> <span class="n">resultStreamDF</span><span class="p">.</span><span class="n">writeStream</span> 
+<span class="k">val</span> <span class="n">query</span><span class="k">:</span> <span class="kt">StreamingQuery</span> <span class="o">=</span> <span class="n">resultStreamDF</span><span class="o">.</span><span class="n">writeStream</span> 
 <span class="c1">// 对流式应用输出来说，设置输出模式，Update表示有数据更新才输出，没数据更新不输出 </span>
-	<span class="p">.</span><span class="n">outputMode</span><span class="p">(</span><span class="nc">OutputMode</span><span class="p">.</span><span class="nc">Update</span><span class="p">())</span> 
-	<span class="p">.</span><span class="n">foreach</span><span class="p">(</span><span class="k">new</span> <span class="nc">MySQLForeachWriter</span><span class="p">())</span> 
-	<span class="p">.</span><span class="n">start</span><span class="p">()</span> <span class="c1">// 启动start流式应用</span>
+	<span class="o">.</span><span class="n">outputMode</span><span class="o">(</span><span class="nc">OutputMode</span><span class="o">.</span><span class="nc">Update</span><span class="o">())</span> 
+	<span class="o">.</span><span class="n">foreach</span><span class="o">(</span><span class="k">new</span> <span class="nc">MySQLForeachWriter</span><span class="o">())</span> 
+	<span class="o">.</span><span class="n">start</span><span class="o">()</span> <span class="c1">// 启动start流式应用</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="foreachbatch-sink">
-<h4><span class="section-number">15.5.4.4. </span>ForeachBatch Sink<a class="headerlink" href="#foreachbatch-sink" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="foreachbatch-sink">
+<h4><span class="section-number">15.5.4.4. </span>ForeachBatch Sink<a class="headerlink" href="#foreachbatch-sink" title="永久链接至标题"></a></h4>
 <p>方法foreachBatch允许指定在流式查询的每个微批次的输出数据上执行的函数，需要两个参数：微批次的输出数据DataFrame或Dataset、微批次的唯一ID</p>
 <p>注意:</p>
 <ul>
@@ -470,42 +378,42 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>第五、foreachBatch不适用于连续处理模式，因为它从根本上依赖于流式查询的微批量执行。 如果以连续模式写入数据，请改用foreach</p></li>
 </ul>
 <p>举个栗子:使用foreachBatch写入MySQL</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">query</span> <span class="o">=</span> <span class="n">resultStreamDF</span>
-      <span class="p">.</span><span class="n">writeStream</span>
-      <span class="p">.</span><span class="n">outputMode</span><span class="p">(</span><span class="nc">OutputMode</span><span class="p">.</span><span class="nc">Update</span><span class="p">())</span>
-      <span class="p">.</span><span class="n">queryName</span><span class="p">(</span><span class="s">&quot;query-wordcount&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">trigger</span><span class="p">(</span><span class="nc">Trigger</span><span class="p">.</span><span class="nc">ProcessingTime</span><span class="p">(</span><span class="s">&quot;5 seconds&quot;</span><span class="p">))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">query</span> <span class="o">=</span> <span class="n">resultStreamDF</span>
+      <span class="o">.</span><span class="n">writeStream</span>
+      <span class="o">.</span><span class="n">outputMode</span><span class="o">(</span><span class="nc">OutputMode</span><span class="o">.</span><span class="nc">Update</span><span class="o">())</span>
+      <span class="o">.</span><span class="n">queryName</span><span class="o">(</span><span class="s">&quot;query-wordcount&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">trigger</span><span class="o">(</span><span class="nc">Trigger</span><span class="o">.</span><span class="nc">ProcessingTime</span><span class="o">(</span><span class="s">&quot;5 seconds&quot;</span><span class="o">))</span>
 
       <span class="cm">/**</span>
 <span class="cm">       * VITAL: 使用foreach 函数将数据保存到MySQL</span>
 <span class="cm">       */</span>
       <span class="c1">//def foreachBatch(function: VoidFunction2[Dataset[T], java.lang.Long]): DataStreamWriter[T]</span>
-      <span class="p">.</span><span class="n">foreachBatch</span> <span class="p">{</span> <span class="p">(</span><span class="n">batchDF</span><span class="p">:</span> <span class="nc">DataFrame</span><span class="p">,</span> <span class="n">batchId</span><span class="p">:</span> <span class="nc">Long</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="n">println</span><span class="p">(</span><span class="s">s&quot;BatchID: </span><span class="si">${</span><span class="n">batchId</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">batchDF</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">)</span> <span class="p">{</span>
+      <span class="o">.</span><span class="n">foreachBatch</span> <span class="o">{</span> <span class="o">(</span><span class="n">batchDF</span><span class="k">:</span> <span class="kt">DataFrame</span><span class="o">,</span> <span class="n">batchId</span><span class="k">:</span> <span class="kt">Long</span><span class="o">)</span> <span class="o">=&gt;</span>
+        <span class="n">println</span><span class="o">(</span><span class="s">s&quot;BatchID: </span><span class="si">${</span><span class="n">batchId</span><span class="si">}</span><span class="s">&quot;</span><span class="o">)</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">batchDF</span><span class="o">.</span><span class="n">isEmpty</span><span class="o">)</span> <span class="o">{</span>
           <span class="n">batchDF</span>
             <span class="c1">//降低分区数目</span>
-            <span class="p">.</span><span class="n">coalesce</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">write</span>
-            <span class="p">.</span><span class="n">mode</span><span class="p">(</span><span class="nc">SaveMode</span><span class="p">.</span><span class="nc">Overwrite</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;jdbc&quot;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;driver&quot;</span><span class="p">,</span> <span class="s">&quot;com.mysql.cj.jdbc.Driver&quot;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;url&quot;</span><span class="p">,</span> <span class="s">&quot;jdbc:mysql://node1:3306/?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&quot;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;user&quot;</span><span class="p">,</span> <span class="s">&quot;root&quot;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;password&quot;</span><span class="p">,</span> <span class="s">&quot;123456&quot;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;dbtable&quot;</span><span class="p">,</span> <span class="s">&quot;db_spark.tb_word_count2&quot;</span><span class="p">)</span>
-            <span class="p">.</span><span class="n">save</span><span class="p">()</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
+            <span class="o">.</span><span class="n">coalesce</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">write</span>
+            <span class="o">.</span><span class="n">mode</span><span class="o">(</span><span class="nc">SaveMode</span><span class="o">.</span><span class="nc">Overwrite</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;jdbc&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;driver&quot;</span><span class="o">,</span> <span class="s">&quot;com.mysql.cj.jdbc.Driver&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;url&quot;</span><span class="o">,</span> <span class="s">&quot;jdbc:mysql://node1:3306/?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;user&quot;</span><span class="o">,</span> <span class="s">&quot;root&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;password&quot;</span><span class="o">,</span> <span class="s">&quot;123456&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;dbtable&quot;</span><span class="o">,</span> <span class="s">&quot;db_spark.tb_word_count2&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="n">save</span><span class="o">()</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
       <span class="c1">// 设置检查点目录</span>
-      <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="s">&quot;datas/structured/ckpt-wordcount002&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">start</span><span class="p">()</span> <span class="c1">// 启动流式查询</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;checkpointLocation&quot;</span><span class="o">,</span> <span class="s">&quot;datas/structured/ckpt-wordcount002&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">start</span><span class="o">()</span> <span class="c1">// 启动流式查询</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="id9">
-<h3><span class="section-number">15.5.5. </span>容错语义<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+<section id="id9">
+<h3><span class="section-number">15.5.5. </span>容错语义<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>Structured Streaming的核心设计理念和目标之一：支持一次且仅一次Extracly-Once的语义</p>
 </div></blockquote>
@@ -528,16 +436,16 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p><u>Sink被设计成可以支持在多次计算处理时保持幂等性</u>，就是说，用同样的一批数据，无论多少次去更新sink，都会保持一致和相同的状态</p></li>
 </ul>
 <p>综合利用<strong>基于offset的source</strong>，<strong>基于checkpoint和wal的execution engine</strong>，以及<strong>基于幂等性的sink</strong>，可以支持完整的一次且仅一次的语义。</p>
-</div>
-</div>
-<div class="section" id="kafka">
-<h2><span class="section-number">15.6. </span>集成Kafka<a class="headerlink" href="#kafka" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="kafka">
+<h2><span class="section-number">15.6. </span>集成Kafka<a class="headerlink" href="#kafka" title="永久链接至标题"></a></h2>
 <p><a class="reference external" href="http://spark.apache.org/docs/2.4.5/structured-streaming-kafka-integration.html">StructuredStreaming集成Kafka</a></p>
 <blockquote>
 <div><p>目前仅支持Kafka 0.10.+版本及以上，底层使用Kafka New Consumer API拉取数据，如果Kafka版本为0.8.0版本，<a class="reference external" href="https://github.com/jerryshao/spark-kafka-0-8-sql">StructuredStreaming集成Kafka参考文档</a></p>
 </div></blockquote>
-<div class="section" id="kafka-source">
-<h3><span class="section-number">15.6.1. </span>Kafka  Source<a class="headerlink" href="#kafka-source" title="永久链接至标题">¶</a></h3>
+<section id="kafka-source">
+<h3><span class="section-number">15.6.1. </span>Kafka  Source<a class="headerlink" href="#kafka-source" title="永久链接至标题"></a></h3>
 <p>Structured Streaming消费Kafka数据，采用的是poll方式拉取数据，与Spark Streaming中New Consumer API集成方式一致。从Kafka Topics中读取消息，需要指定数据源（kafka）、Kafka集群的连接地址（kafka.bootstrap.servers）、消费的topic（subscribe或subscribePattern）， 指定topic 的时候，可以使用正则来指定，也可以指定一个 topic 的集合</p>
 <p>消费kafka Topic数据的三种方式</p>
 <ul class="simple">
@@ -553,15 +461,15 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 </ul>
 <p><img alt="image-20201129205501341" src="../_images/image-20201129205501341.png" /></p>
 <p>在实际开发时，往往需要获取每条数据的消息，存储在value字段中，<strong>由于是binary类型，需要转换为字符串String类型</strong>；此外了方便数据操作，通常将获取的key和value的DataFrame转换为Dataset强类型:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span> <span class="n">inputStreamDF</span><span class="p">:</span> <span class="nc">Dataset</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span> <span class="o">=</span> <span class="n">kafkaStreamDF</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">val</span> <span class="n">inputStreamDF</span><span class="k">:</span> <span class="kt">Dataset</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="o">=</span> <span class="n">kafkaStreamDF</span>
       <span class="c1">//Selects a set of SQL expressions. This is a variant of `select` that accepts SQL expressions.</span>
-      <span class="p">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s">&quot;CAST(VALUE AS STRING)&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">as</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span>
+      <span class="o">.</span><span class="n">selectExpr</span><span class="o">(</span><span class="s">&quot;CAST(VALUE AS STRING)&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sink-kafka">
-<h3><span class="section-number">15.6.2. </span>Sink Kafka<a class="headerlink" href="#sink-kafka" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="sink-kafka">
+<h3><span class="section-number">15.6.2. </span>Sink Kafka<a class="headerlink" href="#sink-kafka" title="永久链接至标题"></a></h3>
 <p>往Kafka里面写数据类似读取数据，可以在DataFrame上调用writeStream来写入Kafka，设置参数指定value，其中key是可选的，如果不指定就是null。如果key为null，有时候可能导致分区数据不均匀。</p>
 <p>DataFrame写入Kafka时Schema需要的字段：</p>
 <ul class="simple">
@@ -569,9 +477,9 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>value(String or binary)</p></li>
 <li><p>topic(String)</p></li>
 </ul>
-</div>
-<div class="section" id="id10">
-<h3><span class="section-number">15.6.3. </span>Kafka配置<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id10">
+<h3><span class="section-number">15.6.3. </span>Kafka配置<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
 <p><a class="reference external" href="http://kafka.apache.org/20/documentation.html#producerconfigs">生产者配置(Producer Configs)</a></p>
 <p><a class="reference external" href="http://kafka.apache.org/20/documentation.html#newconsumerconfigs">消费者配置(Consumer Configs)</a></p>
 <p>注意以下Kafka参数属性可以不设置，如果设置的话，Kafka source或者sink可能会抛出错误：</p>
@@ -580,14 +488,14 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>auto.offset.reset：在将source选项startingOffsets设置为指定从哪里开始。结构化流管理内部消费的偏移量，而不是依赖Kafka消费者来完成。这将确保在topic/partitons动态订阅时不会遗漏任何数据。注意，只有在启动新的流式查询时才会应用startingOffsets，并且恢复操作始终会从查询停止的位置启动；</p></li>
 <li><p>key.deserializer/value.deserializer：Keys/Values总是被反序列化为ByteArrayDeserializer的字节数组，使用DataFrame操作显式反序列化keys/values</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// 构建SparkConf对象</span>
-    <span class="kd">val</span> <span class="n">sparkConf</span><span class="p">:</span> <span class="nc">SparkConf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="p">()</span>
-      <span class="p">.</span><span class="n">setAppName</span><span class="p">(</span><span class="n">clazz</span><span class="p">.</span><span class="n">getSimpleName</span><span class="p">.</span><span class="n">stripSuffix</span><span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">))</span>
-      <span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;spark.debug.maxToStringFields&quot;</span><span class="p">,</span> <span class="s">&quot;2000&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;spark.sql.debug.maxToStringFields&quot;</span><span class="p">,</span> <span class="s">&quot;2000&quot;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="n">sparkConf</span><span class="k">:</span> <span class="kt">SparkConf</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SparkConf</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">setAppName</span><span class="o">(</span><span class="n">clazz</span><span class="o">.</span><span class="n">getSimpleName</span><span class="o">.</span><span class="n">stripSuffix</span><span class="o">(</span><span class="s">&quot;$&quot;</span><span class="o">))</span>
+      <span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;spark.debug.maxToStringFields&quot;</span><span class="o">,</span> <span class="s">&quot;2000&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;spark.sql.debug.maxToStringFields&quot;</span><span class="o">,</span> <span class="s">&quot;2000&quot;</span><span class="o">)</span>
       <span class="c1">// VITAL: 设置使用Kryo 序列化方式 当不能java序列化的时候，需要设置Kyro序列化</span>
-      <span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="s">&quot;spark.serializer&quot;</span><span class="p">,</span> <span class="s">&quot;org.apache.spark.serializer.KryoSerializer&quot;</span><span class="p">)</span>
+      <span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;spark.serializer&quot;</span><span class="o">,</span> <span class="s">&quot;org.apache.spark.serializer.KryoSerializer&quot;</span><span class="o">)</span>
       <span class="c1">// VITAL: 注册序列化的数据类型</span>
-      <span class="p">.</span><span class="n">registerKryoClasses</span><span class="p">(</span><span class="nc">Array</span><span class="p">(</span><span class="k">classOf</span><span class="p">[</span><span class="nc">ImmutableBytesWritable</span><span class="p">],</span> <span class="k">classOf</span><span class="p">[</span><span class="nc">Result</span><span class="p">]))</span>
+      <span class="o">.</span><span class="n">registerKryoClasses</span><span class="o">(</span><span class="nc">Array</span><span class="o">(</span><span class="n">classOf</span><span class="o">[</span><span class="kt">ImmutableBytesWritable</span><span class="o">],</span> <span class="n">classOf</span><span class="o">[</span><span class="kt">Result</span><span class="o">]))</span>
 </pre></div>
 </div>
 </li>
@@ -595,10 +503,10 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>enable.auto.commit：Kafka source不提交任何offset</p></li>
 <li><p>interceptor.classes：Kafka source总是以字节数组的形式读取key和value。使用ConsumerInterceptor是不安全的，因为它可能会打断查询</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="id11">
-<h2><span class="section-number">15.7. </span>事件时间窗口分析<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="id11">
+<h2><span class="section-number">15.7. </span>事件时间窗口分析<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p>在SparkStreaming中窗口统计分析：Window Operation（设置窗口大小WindowInterval和滑动大小SlideInterval），按照Streaming 流式应用接收数据的时间进行窗口设计的，其实是不符合实际应用场景的。</p>
 <p>在结构化流Structured Streaming中窗口数据统计时间是基于数据本身事件时间EventTime字段统计，更加合理性，<a class="reference external" href="http://spark.apache.org/docs/2.4.5/structured-streaming-programming-guide.html#window-operations-on-event-time">官方文档</a></p>
@@ -610,31 +518,31 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>事件时间</p></li>
 </ul>
 <p>parkStreaming框架仅仅支持处理时间ProcessTime，StructuredStreaming支持事件时间和处理时间，Flink框架支持三种时间数据操作</p>
-<div class="section" id="id12">
-<h3><span class="section-number">15.7.1. </span>案例：词频统计<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h3>
+<section id="id12">
+<h3><span class="section-number">15.7.1. </span>案例：词频统计<a class="headerlink" href="#id12" title="永久链接至标题"></a></h3>
 <p><img alt="image-20201129211454864" src="../_images/image-20201129211454864.png" /></p>
 <p>单词在10分钟窗口【12:00-12:10、12:05-12:15、12:10-12:20】等之间接收的单词中计数。注意，【12:00-12:10】表示处理数据的事件时间为12:00之后但12:10之前的数据。思考一下，12:07的一条数据，应该增加对应于两个窗口12:00-12:10和12:05-12:15的计数</p>
-</div>
-<div class="section" id="id13">
-<h3><span class="section-number">15.7.2. </span>窗口的生成<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h3>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">catalyst</span><span class="p">.</span><span class="n">analysis</span><span class="p">.</span><span class="nc">TimeWindowing</span>
+</section>
+<section id="id13">
+<h3><span class="section-number">15.7.2. </span>窗口的生成<a class="headerlink" href="#id13" title="永久链接至标题"></a></h3>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">catalyst</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="nc">TimeWindowing</span>
 <span class="c1">// 窗口个数</span>
 <span class="cm">/* 最大的窗口数 = 向上取整(窗口长度/滑动步长) */</span>
-<span class="n">maxNumOverlapping</span> <span class="o">&lt;-</span> <span class="n">ceil</span><span class="p">(</span><span class="n">windowDuration</span> <span class="o">/</span> <span class="n">slideDuration</span><span class="p">)</span>
-<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">maxNumOverlapping</span><span class="p">)</span>
+<span class="n">maxNumOverlapping</span> <span class="o">&lt;-</span> <span class="n">ceil</span><span class="o">(</span><span class="n">windowDuration</span> <span class="o">/</span> <span class="n">slideDuration</span><span class="o">)</span>
+<span class="k">for</span> <span class="o">(</span><span class="n">i</span> <span class="o">&lt;-</span> <span class="mi">0</span> <span class="n">until</span> <span class="n">maxNumOverlapping</span><span class="o">)</span>
         <span class="cm">/**</span>
 <span class="cm">        timestamp是event-time 传进的时间戳</span>
 <span class="cm">        startTime是window窗口参数，默认是0 second 从时间的0s</span>
 <span class="cm">        含义：event-time从1970年...有多少个滑动步长，如果说浮点数会向上取整</span>
 <span class="cm">        */</span>
-    <span class="n">windowId</span> <span class="o">&lt;-</span> <span class="n">ceil</span><span class="p">((</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">startTime</span><span class="p">)</span> <span class="o">/</span> <span class="n">slideDuration</span><span class="p">)</span>
+    <span class="n">windowId</span> <span class="o">&lt;-</span> <span class="n">ceil</span><span class="o">((</span><span class="n">timestamp</span> <span class="o">-</span> <span class="n">startTime</span><span class="o">)</span> <span class="o">/</span> <span class="n">slideDuration</span><span class="o">)</span>
         <span class="cm">/**</span>
 <span class="cm">        windowId * slideDuration 向上取能整除滑动步长的时间</span>
 <span class="cm">        (i - maxNumOverlapping) * slideDuration 每一个窗口开始时间相差一个步长</span>
 <span class="cm">        */</span>
-    <span class="n">windowStart</span> <span class="o">&lt;-</span> <span class="n">windowId</span> <span class="o">*</span> <span class="n">slideDuration</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">maxNumOverlapping</span><span class="p">)</span> <span class="o">*</span> <span class="n">slideDuration</span> <span class="o">+</span> <span class="n">startTime</span>
+    <span class="n">windowStart</span> <span class="o">&lt;-</span> <span class="n">windowId</span> <span class="o">*</span> <span class="n">slideDuration</span> <span class="o">+</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">maxNumOverlapping</span><span class="o">)</span> <span class="o">*</span> <span class="n">slideDuration</span> <span class="o">+</span> <span class="n">startTime</span>
     <span class="n">windowEnd</span> <span class="o">&lt;-</span> <span class="n">windowStart</span> <span class="o">+</span> <span class="n">windowDuration</span>
-    <span class="k">return</span> <span class="n">windowStart</span><span class="p">,</span> <span class="n">windowEnd</span>
+    <span class="k">return</span> <span class="n">windowStart</span><span class="o">,</span> <span class="n">windowEnd</span>
 </pre></div>
 </div>
 <ul>
@@ -645,23 +553,23 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 </li>
 </ul>
 <p><img alt="image-20201129211930077" src="../_images/image-20201129211930077.png" /></p>
-</div>
-<div class="section" id="id14">
-<h3><span class="section-number">15.7.3. </span>延迟数据<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id14">
+<h3><span class="section-number">15.7.3. </span>延迟数据<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
 <p>Structured Streaming可以保证一条旧的数据进入到流上时，依然可以基于这些“迟到”的数据重新计算并更新计算结果</p>
 <p><img alt="image-20201129212230997" src="../_images/image-20201129212230997.png" /></p>
 <blockquote>
 <div><p>上图中在12:04（即事件时间）生成的单词可能在12:11被应用程序接收，此时，应用程序应使用时间12:04而不是12:11更新窗口12:00-12:10的旧计数</p>
 </div></blockquote>
-</div>
-<div class="section" id="watermark">
-<h3><span class="section-number">15.7.4. </span>Watermark<a class="headerlink" href="#watermark" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="watermark">
+<h3><span class="section-number">15.7.4. </span>Watermark<a class="headerlink" href="#watermark" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>lets the engine automatically track the current event time in the data and attempt to clean up old state accordingly.</p>
 </div></blockquote>
 <p>Spark 2.1引入的watermarking允许用户指定延迟数据的阈值，也允许引擎清除掉旧的状态。即根据watermark机制来设置和判断消息的有效性，如可以获取消息本身的时间戳，然后根据该时间戳来判断消息的到达是否延迟（乱序）以及延迟的时间是否在容忍的范围内（延迟的数据是否处理）。</p>
-<div class="section" id="id15">
-<h4><span class="section-number">15.7.4.1. </span>设置水位线<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h4>
+<section id="id15">
+<h4><span class="section-number">15.7.4.1. </span>设置水位线<a class="headerlink" href="#id15" title="永久链接至标题"></a></h4>
 <p>通过指定event-time列（上一批次数据中EventTime最大值）和预估事件的延迟时间上限（Threshold）来定义一个查询的水位线watermark。</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="nc">Watermark</span> <span class="o">=</span> <span class="nc">MaxEventTime</span> <span class="o">-</span> <span class="nc">Threshod</span>
 </pre></div>
@@ -676,9 +584,9 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 </ul>
 </div></blockquote>
 <p><img alt="image-20201129212648884" src="../_images/image-20201129212648884.png" /></p>
-</div>
-<div class="section" id="id16">
-<h4><span class="section-number">15.7.4.2. </span>官方案例<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="id16">
+<h4><span class="section-number">15.7.4.2. </span>官方案例<a class="headerlink" href="#id16" title="永久链接至标题"></a></h4>
 <p>词频统计WordCount，设置阈值Threshold为10分钟，每5分钟触发执行一次</p>
 <p><img alt="image-20201129212716573" src="../_images/image-20201129212716573.png" /></p>
 <ul class="simple">
@@ -705,13 +613,13 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <blockquote>
 <div><p>如果用于接收处理结果的sink不支持更新操作，则只能选择Append模式</p>
 </div></blockquote>
-</div>
-</div>
-</div>
-<div class="section" id="streaming-deduplication">
-<h2><span class="section-number">15.8. </span>Streaming Deduplication<a class="headerlink" href="#streaming-deduplication" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id17">
-<h3><span class="section-number">15.8.1. </span>用武之地<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="streaming-deduplication">
+<h2><span class="section-number">15.8. </span>Streaming Deduplication<a class="headerlink" href="#streaming-deduplication" title="永久链接至标题"></a></h2>
+<section id="id17">
+<h3><span class="section-number">15.8.1. </span>用武之地<a class="headerlink" href="#id17" title="永久链接至标题"></a></h3>
 <p>在实时流式应用中，最典型的应用场景：网站UV统计</p>
 <ul class="simple">
 <li><p>业务需求一：实时统计网站UV，比如每日网站UV</p></li>
@@ -722,122 +630,105 @@ foreach表达自定义编写器逻辑具体来说，需要编写类class继承Fo
 <li><p>无 Watermark：对重复记录到达的时间没有限制。查询会保留所有的过去记录作为状态用于去重</p></li>
 <li><p>有 Watermark：对重复记录到达的时间有限制。查询会根据水印删除旧的状态数据</p></li>
 </ul>
-</div>
-<div class="section" id="id18">
-<h3><span class="section-number">15.8.2. </span>使用<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id18">
+<h3><span class="section-number">15.8.2. </span>使用<a class="headerlink" href="#id18" title="永久链接至标题"></a></h3>
 <p><img alt="image-20201129213338113" src="../_images/image-20201129213338113.png" /></p>
-</div>
-<div class="section" id="id19">
-<h3><span class="section-number">15.8.3. </span>代码示例<a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id19">
+<h3><span class="section-number">15.8.3. </span>代码示例<a class="headerlink" href="#id19" title="永久链接至标题"></a></h3>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
 <span class="cm"> * StructuredStreaming对流数据按照某些字段进行去重操作，比如实现UV类似统计分析</span>
 <span class="cm"> * TODO:待测试</span>
 <span class="cm"> */</span>
-<span class="k">object</span> <span class="nc">StructuredDeduplication</span> <span class="p">{</span>
-  <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span> <span class="nc">Unit</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="kd">val</span> <span class="n">spark</span><span class="p">:</span> <span class="nc">SparkSession</span> <span class="o">=</span> <span class="nc">SparkSession</span><span class="p">.</span><span class="n">builder</span><span class="p">()</span>
-      <span class="p">.</span><span class="n">appName</span><span class="p">(</span><span class="bp">this</span><span class="p">.</span><span class="n">getClass</span><span class="p">.</span><span class="n">getSimpleName</span><span class="p">.</span><span class="n">stripSuffix</span><span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">))</span>
-      <span class="p">.</span><span class="n">master</span><span class="p">(</span><span class="s">&quot;local[2]&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="s">&quot;2&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
-    <span class="k">import</span> <span class="nn">spark</span><span class="p">.</span><span class="nn">implicits</span><span class="p">.</span><span class="n">_</span>
-    <span class="k">import</span> <span class="nn">org</span><span class="p">.</span><span class="nn">apache</span><span class="p">.</span><span class="nn">spark</span><span class="p">.</span><span class="nn">sql</span><span class="p">.</span><span class="nn">functions</span><span class="p">.</span><span class="n">_</span>
+<span class="k">object</span> <span class="nc">StructuredDeduplication</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="n">spark</span><span class="k">:</span> <span class="kt">SparkSession</span> <span class="o">=</span> <span class="nc">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">()</span>
+      <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="n">getClass</span><span class="o">.</span><span class="n">getSimpleName</span><span class="o">.</span><span class="n">stripSuffix</span><span class="o">(</span><span class="s">&quot;$&quot;</span><span class="o">))</span>
+      <span class="o">.</span><span class="n">master</span><span class="o">(</span><span class="s">&quot;local[2]&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">config</span><span class="o">(</span><span class="s">&quot;spark.sql.shuffle.partitions&quot;</span><span class="o">,</span> <span class="s">&quot;2&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
+    <span class="k">import</span> <span class="nn">spark.implicits._</span>
+    <span class="k">import</span> <span class="nn">org.apache.spark.sql.functions._</span>
 
-    <span class="kd">val</span> <span class="n">inputTable</span><span class="p">:</span> <span class="nc">DataFrame</span> <span class="o">=</span> <span class="n">spark</span><span class="p">.</span><span class="n">readStream</span>
-      <span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;socket&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">,</span> <span class="s">&quot;node1&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;port&quot;</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="k">val</span> <span class="n">inputTable</span><span class="k">:</span> <span class="kt">DataFrame</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span>
+      <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;socket&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;host&quot;</span><span class="o">,</span> <span class="s">&quot;node1&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;port&quot;</span><span class="o">,</span> <span class="mi">9999</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">load</span><span class="o">()</span>
 
-    <span class="kd">val</span> <span class="n">resultTableDF</span><span class="p">:</span> <span class="nc">DataFrame</span> <span class="o">=</span> <span class="n">inputTable</span>
-      <span class="p">.</span><span class="n">as</span><span class="p">[</span><span class="nc">String</span><span class="p">]</span>
-      <span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">line</span> <span class="o">=&gt;</span> <span class="n">line</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">line</span><span class="p">.</span><span class="n">trim</span><span class="p">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">select</span><span class="p">(</span>
-        <span class="n">get_json_object</span><span class="p">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="p">,</span> <span class="s">&quot;$.eventTime&quot;</span><span class="p">).</span><span class="n">as</span><span class="p">(</span><span class="s">&quot;eventTime&quot;</span><span class="p">),</span>
-        <span class="n">get_json_object</span><span class="p">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="p">,</span> <span class="s">&quot;$.eventType&quot;</span><span class="p">).</span><span class="n">as</span><span class="p">(</span><span class="s">&quot;eventType&quot;</span><span class="p">),</span>
-        <span class="n">get_json_object</span><span class="p">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="p">,</span> <span class="s">&quot;$.userID&quot;</span><span class="p">).</span><span class="n">as</span><span class="p">(</span><span class="s">&quot;userID&quot;</span><span class="p">)</span>
-      <span class="p">)</span>
+    <span class="k">val</span> <span class="n">resultTableDF</span><span class="k">:</span> <span class="kt">DataFrame</span> <span class="o">=</span> <span class="n">inputTable</span>
+      <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
+      <span class="o">.</span><span class="n">filter</span><span class="o">(</span><span class="n">line</span> <span class="o">=&gt;</span> <span class="n">line</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">line</span><span class="o">.</span><span class="n">trim</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">select</span><span class="o">(</span>
+        <span class="n">get_json_object</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="o">,</span> <span class="s">&quot;$.eventTime&quot;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&quot;eventTime&quot;</span><span class="o">),</span>
+        <span class="n">get_json_object</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="o">,</span> <span class="s">&quot;$.eventType&quot;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&quot;eventType&quot;</span><span class="o">),</span>
+        <span class="n">get_json_object</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;value&quot;</span><span class="o">,</span> <span class="s">&quot;$.userID&quot;</span><span class="o">).</span><span class="n">as</span><span class="o">(</span><span class="s">&quot;userID&quot;</span><span class="o">)</span>
+      <span class="o">)</span>
       <span class="c1">//按照userID和eventType进行去重</span>
-      <span class="p">.</span><span class="n">dropDuplicates</span><span class="p">(</span><span class="s">&quot;userID&quot;</span><span class="p">,</span> <span class="s">&quot;eventType&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">$</span><span class="s">&quot;userID&quot;</span><span class="p">,</span> <span class="n">$</span><span class="s">&quot;eventType&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">count</span><span class="p">()</span>
+      <span class="o">.</span><span class="n">dropDuplicates</span><span class="o">(</span><span class="s">&quot;userID&quot;</span><span class="o">,</span> <span class="s">&quot;eventType&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">groupBy</span><span class="o">(</span><span class="n">$</span><span class="s">&quot;userID&quot;</span><span class="o">,</span> <span class="n">$</span><span class="s">&quot;eventType&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">count</span><span class="o">()</span>
 
 
-    <span class="kd">val</span> <span class="n">query</span> <span class="o">=</span> <span class="n">resultTableDF</span>
-      <span class="p">.</span><span class="n">writeStream</span>
-      <span class="p">.</span><span class="n">outputMode</span><span class="p">(</span><span class="nc">OutputMode</span><span class="p">.</span><span class="nc">Complete</span><span class="p">())</span>
-      <span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">&quot;console&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;numRows&quot;</span><span class="p">,</span> <span class="s">&quot;100&quot;</span><span class="p">)</span>
-      <span class="p">.</span><span class="n">option</span><span class="p">(</span><span class="s">&quot;truncate&quot;</span><span class="p">,</span> <span class="s">&quot;false&quot;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="n">query</span> <span class="o">=</span> <span class="n">resultTableDF</span>
+      <span class="o">.</span><span class="n">writeStream</span>
+      <span class="o">.</span><span class="n">outputMode</span><span class="o">(</span><span class="nc">OutputMode</span><span class="o">.</span><span class="nc">Complete</span><span class="o">())</span>
+      <span class="o">.</span><span class="n">format</span><span class="o">(</span><span class="s">&quot;console&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;numRows&quot;</span><span class="o">,</span> <span class="s">&quot;100&quot;</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;truncate&quot;</span><span class="o">,</span> <span class="s">&quot;false&quot;</span><span class="o">)</span>
       <span class="c1">//VITAL:流式应用需要启动</span>
-      <span class="p">.</span><span class="n">start</span><span class="p">()</span>
+      <span class="o">.</span><span class="n">start</span><span class="o">()</span>
 
-    <span class="n">query</span><span class="p">.</span><span class="n">awaitTermination</span><span class="p">()</span>
-    <span class="n">query</span><span class="p">.</span><span class="n">stop</span><span class="p">()</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">awaitTermination</span><span class="o">()</span>
+    <span class="n">query</span><span class="o">.</span><span class="n">stop</span><span class="o">()</span>
 
-  <span class="p">}</span>
-<span class="p">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="id20">
-<h2><span class="section-number">15.9. </span>附录<a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id21">
-<h3><span class="section-number">15.9.1. </span>幂等性<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+<section id="id20">
+<h2><span class="section-number">15.9. </span>附录<a class="headerlink" href="#id20" title="永久链接至标题"></a></h2>
+<section id="id21">
+<h3><span class="section-number">15.9.1. </span>幂等性<a class="headerlink" href="#id21" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>在HTTP/1.1中对幂等性的定义：一次和多次请求某一个资源对于资源本身应该具有同样的结果（网络超时等问题除外）。也就是说，其任意多次执行对资源本身所产生的影响均与一次执行的影响相同。幂等性是系统服务对外一种承诺（而不是实现），承诺只要调用接口成功，外部多次调用对系统的影响是一致的。声明为幂等的服务会认为外部调用失败是常态，并且失败之后必然会有重试</p>
 </div></blockquote>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="16. Zookeeper" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="SparkStreaming.html" class="btn btn-neutral float-left" title="14. Spark Streaming" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="Zookeeper.html" class="btn btn-neutral float-right" title="16. Zookeeper" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2021, roohom.
-
-    </p>
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
   </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

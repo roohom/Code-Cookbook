@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>13. Spark SQL &mdash; Code-Cookbook 0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>13. Spark SQL &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="14. Spark Streaming" href="SparkStreaming.html" />
     <link rel="prev" title="12. Spark Core" href="SparkCore.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Code-Cookbook
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="在文档中搜索" />
@@ -76,19 +37,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
@@ -133,90 +83,48 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<p class="caption"><span class="caption-text">博客</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Code-Cookbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
-        
       <li><span class="section-number">13. </span>Spark SQL</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/Bigdata Tools/SparkSQL.md.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="spark-sql">
-<h1><span class="section-number">13. </span>Spark SQL<a class="headerlink" href="#spark-sql" title="永久链接至标题">¶</a></h1>
-<div class="section" id="id1">
-<h2><span class="section-number">13.1. </span>概述<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+             
+  <section id="spark-sql">
+<h1><span class="section-number">13. </span>Spark SQL<a class="headerlink" href="#spark-sql" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">13.1. </span>概述<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p><strong>Spark SQL</strong> is Apache Spark’s module for working with structured data.</p>
 <p><em>针对结构化数据处理的模块</em></p>
@@ -226,16 +134,16 @@
 <li><p>离线分析：<code class="docutils literal notranslate"><span class="pre">SparkSQL</span></code>模块</p></li>
 <li><p>实时分析：<code class="docutils literal notranslate"><span class="pre">StructuredStreaming</span></code>模块，属于SparkSQL模块针对实时流式数据处理功能</p></li>
 </ul>
-<div class="section" id="id2">
-<h3><span class="section-number">13.1.1. </span>历史时间线<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<section id="id2">
+<h3><span class="section-number">13.1.1. </span>历史时间线<a class="headerlink" href="#id2" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>SparkSQL模块一直到Spark 2.0版本才算真正稳定，发挥其巨大功能</p>
 </div></blockquote>
 <p><img alt="image-20201122100609282" src="../_images/image-20201122100609282.png" /></p>
 <p>SparkSQL模块来源于Hive框架，但是其功能远大于Hive，SparkSQL用于Hive的所有功能，并且SparkSQL天然集成（兼容）Hive，从其中读取数据进行分析处理</p>
-</div>
-<div class="section" id="id3">
-<h3><span class="section-number">13.1.2. </span>数据结构<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id3">
+<h3><span class="section-number">13.1.2. </span>数据结构<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
 <p>$$
 DataFrame = RDD[Row] + Schema
 $$</p>
@@ -254,10 +162,10 @@ $$</p>
 <blockquote>
 <div><p>DataFrame = Dataset[Row]</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="dataframe">
-<h2><span class="section-number">13.2. </span>DataFrame<a class="headerlink" href="#dataframe" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="dataframe">
+<h2><span class="section-number">13.2. </span>DataFrame<a class="headerlink" href="#dataframe" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p>在Spark中，<strong>DataFrame是一种以RDD为基础的分布式数据集，类似于传统数据库中的二维表格</strong></p>
 <p>DataFrame与RDD的主要区别在于，前者带有schema元信息，即DataFrame所表示的二维表数据集的每一列都带有名称和类型。使得Spark SQL得以洞察更多的结构信息，从而对藏于DataFrame背后的数据源以及作用于DataFrame之上的变换进行针对性的优化，最终达到大幅提升运行时效率。反观RDD，由于无从得
@@ -277,32 +185,32 @@ $$</p>
 </ul>
 </li>
 </ul>
-<div class="section" id="rdddataframe">
-<h3><span class="section-number">13.2.1. </span>RDD与DataFrame的区别<a class="headerlink" href="#rdddataframe" title="永久链接至标题">¶</a></h3>
+<section id="rdddataframe">
+<h3><span class="section-number">13.2.1. </span>RDD与DataFrame的区别<a class="headerlink" href="#rdddataframe" title="永久链接至标题"></a></h3>
 <p>DataFrame与RDD的主要区别在于，DataFrame带有schema元信息，即DataFrame所表示的二维表数据集的每一列都带有名称和类型。使得Spark SQL得以洞察更多的结构信息，从而对藏于DataFrame背后的数据源以及作用于DataFrame之上的变换进行了针对性的优化，最终达到大幅提升运行时效率的目标。</p>
 <p>RDD，由于无从得知所存数据元素的具体内部结构，Spark Core只能在stage层面进行简单、通用的流水线优化。 DataFrame底层是以RDD为基础的分布式数据集，和RDD的主要区别的是：RDD中没有schema信息，而DataFrame中数据每一行都包含schema</p>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame</span> <span class="pre">=</span> <span class="pre">RDD[Row]</span> <span class="pre">+</span> <span class="pre">shcema</span></code></p>
-</div>
-<div class="section" id="shuffle">
-<h3><span class="section-number">13.2.2. </span>Shuffle分区数目<a class="headerlink" href="#shuffle" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="shuffle">
+<h3><span class="section-number">13.2.2. </span>Shuffle分区数目<a class="headerlink" href="#shuffle" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>在SparkSQL中当Job中产生Shuffle时，默认的分区数（spark.sql.shuffle.partitions ）为200，在实际项目中要合理的设置。在构建SparkSession实例对象时，设置参数的值：</p>
 </div></blockquote>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// 构建SparkSession实例对象</span>
-<span class="kd">val</span> <span class="n">spark</span><span class="p">:</span> <span class="nc">SparkSession</span> <span class="o">=</span> <span class="nc">SparkSession</span><span class="p">.</span><span class="n">builder</span><span class="p">()</span>
-	<span class="p">.</span><span class="n">master</span><span class="p">(</span><span class="s">&quot;local[4]&quot;</span><span class="p">)</span>
-	<span class="p">.</span><span class="n">appName</span><span class="p">(</span><span class="bp">this</span><span class="p">.</span><span class="n">getClass</span><span class="p">.</span><span class="n">getSimpleName</span><span class="p">.</span><span class="n">stripSuffix</span><span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">))</span>
+<span class="k">val</span> <span class="n">spark</span><span class="k">:</span> <span class="kt">SparkSession</span> <span class="o">=</span> <span class="nc">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">()</span>
+	<span class="o">.</span><span class="n">master</span><span class="o">(</span><span class="s">&quot;local[4]&quot;</span><span class="o">)</span>
+	<span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="n">getClass</span><span class="o">.</span><span class="n">getSimpleName</span><span class="o">.</span><span class="n">stripSuffix</span><span class="o">(</span><span class="s">&quot;$&quot;</span><span class="o">))</span>
 	<span class="c1">// TODO: 设置shuffle时分区数目</span>
-	<span class="p">.</span><span class="n">config</span><span class="p">(</span><span class="s">&quot;spark.sql.shuffle.partitions&quot;</span><span class="p">,</span> <span class="s">&quot;4&quot;</span><span class="p">)</span>
-	<span class="p">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+	<span class="o">.</span><span class="n">config</span><span class="o">(</span><span class="s">&quot;spark.sql.shuffle.partitions&quot;</span><span class="o">,</span> <span class="s">&quot;4&quot;</span><span class="o">)</span>
+	<span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
 	<span class="c1">// 导入隐式转换</span>
-<span class="k">import</span> <span class="nn">spark</span><span class="p">.</span><span class="nn">implicits</span><span class="p">.</span><span class="n">_</span>
+<span class="k">import</span> <span class="nn">spark.implicits._</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="dataset">
-<h2><span class="section-number">13.3. </span>Dataset<a class="headerlink" href="#dataset" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="dataset">
+<h2><span class="section-number">13.3. </span>Dataset<a class="headerlink" href="#dataset" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">Dataset</span></code>：<em>A DataSet is a distributed collection of data.</em> (分布式的数据集)</p>
 </div></blockquote>
@@ -312,19 +220,19 @@ $$</p>
 <blockquote>
 <div><p>Dataset =  RDD[case class] + Schema</p>
 </div></blockquote>
-</div>
-<div class="section" id="rdddataframedataset">
-<h2><span class="section-number">13.4. </span>RDD、DataFrame和Dataset之间的转化关系<a class="headerlink" href="#rdddataframedataset" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="rdddataframedataset">
+<h2><span class="section-number">13.4. </span>RDD、DataFrame和Dataset之间的转化关系<a class="headerlink" href="#rdddataframedataset" title="永久链接至标题"></a></h2>
 <p><img alt="RDD_DataFrame_DatasetTransformation" src="../_images/RDD_DataFrame_DatasetTransformation.svg" /></p>
 <p><img alt="SparkSQLStruct" src="../_images/SparkSQLStruct.svg" /></p>
-<div class="section" id="id4">
-<h3><span class="section-number">13.4.1. </span>转换关系<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<section id="id4">
+<h3><span class="section-number">13.4.1. </span>转换关系<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame</span> <span class="pre">=</span> <span class="pre">RDD[Row]+Schema</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">Dataset</span> <span class="pre">=</span> <span class="pre">RDD[case</span> <span class="pre">clase]</span> <span class="pre">+</span> <span class="pre">Schema</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">DataFrame</span> <span class="pre">=</span> <span class="pre">Dataset[Row]</span></code></p>
-</div>
-<div class="section" id="id5">
-<h3><span class="section-number">13.4.2. </span>RDD转DataFrame的方式及原因<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id5">
+<h3><span class="section-number">13.4.2. </span>RDD转DataFrame的方式及原因<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
 <p>将RDD转化为DataFrame有两种方式:</p>
 <ul>
 <li><p>方式一：通过反射推断schema 要求：RDD的元素类型必须是case class</p>
@@ -334,9 +242,9 @@ $$</p>
 <p><img alt="image-20201123203607694" src="../_images/image-20201123203607694.png" /></p>
 </li>
 </ul>
-</div>
-<div class="section" id="id6">
-<h3><span class="section-number">13.4.3. </span>理解说明<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id6">
+<h3><span class="section-number">13.4.3. </span>理解说明<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>RDD是弹性分布式数据集</p></li>
 <li><p>DataFrame类似于二维表格</p></li>
@@ -344,10 +252,10 @@ $$</p>
 <li><p>当Dataset里面装入的是不清楚结构的一些行数据，并且带有Schema信息，就成了DataFrame，这也就是说Dataset是强类型的，<strong>Dataset是强类型的数据安全的</strong>。</p></li>
 <li><p>在存储上，Dataset里的数据按照特定的形式存储，节省存储空间。</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="id7">
-<h2><span class="section-number">13.5. </span>如何理解RDD、DataFrame和Dataset<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="id7">
+<h2><span class="section-number">13.5. </span>如何理解RDD、DataFrame和Dataset<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <ul class="simple">
 <li><p>一、数据结构RDD：</p>
 <ul>
@@ -382,55 +290,38 @@ $$</p>
 </ul>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="SparkStreaming.html" class="btn btn-neutral float-right" title="14. Spark Streaming" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="SparkCore.html" class="btn btn-neutral float-left" title="12. Spark Core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="SparkStreaming.html" class="btn btn-neutral float-right" title="14. Spark Streaming" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2021, roohom.
-
-    </p>
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
   </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

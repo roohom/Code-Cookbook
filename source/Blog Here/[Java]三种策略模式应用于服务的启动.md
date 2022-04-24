@@ -62,7 +62,7 @@ private static void commandCli(String[] args) throws ParseException {
 
 上述代码解析命令行参数并封装成一个`ParameterOptions`类中，方便后续直接使用。
 
-### 1⃣️Switch简单粗暴
+### 一 Switch简单粗暴
 
 > 这其实不是策略模式，哈哈哈
 
@@ -86,7 +86,7 @@ public static void main(String[] args) {
 
 
 
-### 2⃣️Springboot自动注入
+### 二 Springboot自动注入
 
 如果我们的代码是利用Springboot写的，那么就可以利用Springboot的注入特性，将**我们的业务处理逻辑注入到一个Map中**，键为任务的名字，值为业务处理的逻辑代码(这么说不准确)，更准确地说应该是是**接口的实现类**。
 
@@ -151,7 +151,7 @@ public class Application implements CommandLineRunner {
 
 我们使用Springboot自动将实现了BaseService的实现类自动注入到一个Map中，就可以使用`@Commponent`的参数作为键，这样再通过从命令行拿到的任务名去map中匹配键拿到实际运行的实现类。
 
-### 3⃣️Java版的自动注入
+### 三 Java版的自动注入
 
 以下方法实际上是上面方法的翻译版本，当我们不使用springboot框架去实现我们的逻辑时，可以使用这种方法,参考[这篇文章](https://blog.csdn.net/the_pure/article/details/124049396)
 

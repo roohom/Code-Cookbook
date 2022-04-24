@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>29. [Java]三种策略模式应用于服务的启动 &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="30. [Java]多线程" href="%5BJava%5D%E5%A4%9A%E7%BA%BF%E7%A8%8B.html" />
+    <link rel="prev" title="28. [Java]使用Java在服务端和客户端之间传送文件" href="%5BJava%5DSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Code-Cookbook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">博客</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Boxed%20Error.html">1. [Springboot x spark]java.util.concurrent.ExecutionException: Boxed Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BApollo%5DApollo%20Config%20Center.html">2. [Apollo]Apollo Config Center</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BConfluent%5DConfluent.html">3. [Confluent]Confluent快速上手</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DCommdLine%2BSpringboot%2Bflink%E6%97%A0%E6%B3%95%E6%8C%87%E5%AE%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8.html">4. [Flink]CommdLine+Springboot+flink无法指定配置文件启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlink-connector-http.html">5. [Flink]Flink-connector-http</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlinkSource.html">6. [Flink]Flink Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DProcessFunction%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%8A%9B%E5%87%BAInvalidProgramException.html">7. [Flink]ProcessFunction无法使用，抛出InvalidProgramException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E4%BD%BF%E7%94%A8%E7%8A%B6%E6%80%81%E7%AE%97%E5%AD%90%E5%B0%86stream%E8%81%9A%E5%90%88%E8%BE%93%E5%87%BA.html">8. [Flink]使用状态算子将stream聚合输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E5%A6%82%E4%BD%95%E6%9B%B4%E9%80%9A%E7%94%A8%E5%9C%B0%E5%B0%86Kafka%28%E6%88%96%E5%85%B6%E4%BB%96%29%E6%95%B0%E6%8D%AE%E8%90%BD%E5%9C%B0Hive%EF%BC%9F.html">9. [Flink]如何更通用地将Kafka(或其他)数据落地Hive？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%8F%E5%88%97%E5%8C%96%E6%B6%88%E8%B4%B9Kafka%E6%95%B0%E6%8D%AE.html">10. [Flink]自定义序列化消费Kafka数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BGit%5DGit.html">11. [Git]Git问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BGit%5D%E8%AF%AF%E5%9C%A8Master%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B9%B6commit%E6%97%A0%E6%B3%95push.html">12. [Git]误在Master分支开发并commit无法push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHadoop%5DHadoop%20distcp.html">13. [Hadoop]Hadoop distcp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHadoop%5D%E4%B8%80%E4%BA%9BHadoop%E9%97%AE%E9%A2%98.html">14. [Hadoop]一些Hadoop问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5DHive%E5%88%86%E5%8C%BA%E8%A1%A8%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA.html">15. [Hive]Hive分区表批量删除分区</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E5%9C%A8%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E6%B7%BB%E5%8A%A0%E5%AD%97%E6%AE%B5.html">16. [Hive]在指定位置添加字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E5%A4%96%E9%83%A8%E8%A1%A8%E4%BF%AE%E6%94%B9%E4%B8%BA%E5%86%85%E9%83%A8%E8%A1%A8.html">17. [Hive]外部表修改为内部表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E6%9C%AC%E5%9C%B0%E8%BF%9E%E6%8E%A5%E9%9C%80%E8%A6%81Kerberos%E8%AE%A4%E8%AF%81%E7%9A%84Hive.html">18. [Hive]本地连接需要Kerberos认证的Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJAVA%5DJava%20Cookbook.html">19. [JAVA]JAVA Cookbook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DAnnotation.html">20. [Java]元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DAnnotation.html#id1">21. 注解解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DCollection.html">22. [Java]集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DCollection.html#id8">23. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DIO%E6%B5%81.html">24. [Java]<code class="docutils literal notranslate"><span class="pre">IO</span> <span class="pre">Stream</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DJava8%20Stream.html">25. [Java]Java8 Stream API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DOOP.html">26. [Java]Java_OOP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DSocket.html">27. [Java]Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">28. [Java]使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">29. [Java]三种策略模式应用于服务的启动</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">29.1. 背景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">29.2. 开整</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#switch">29.2.1. 1⃣️Switch简单粗暴</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#springboot">29.2.2. 2⃣️Springboot自动注入</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">29.2.3. 3⃣️Java版的自动注入</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">30. [Java]多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">31. [Java]生产者消费者模型问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%A9%E9%A1%B9%E7%9B%AE%E9%A1%BA%E5%88%A9%E8%AF%BB%E5%8F%96resources%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6.html">32. [Java]让项目顺利读取resources目录下的文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">33. [Java]设计模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html#continuing">34. Continuing…</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">35. [Java]设计模式六大原则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A2%B3%E7%90%86.html">36. [Java]面向对象知识点梳理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">37. [Java]OOP防脱发指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKerberos%5DMessage%20stream%20modified%20%2841%29%E9%94%99%E8%AF%AF.html">38. [Kerberos]Message stream modified (41)错误</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKudu%5D%E5%85%B3%E4%BA%8EKudu%20Upsert%E5%88%97%E7%9A%84%E9%97%AE%E9%A2%98.html">39. [Kudu]关于Kudu Upsert列的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKudu%5D%E5%85%B3%E4%BA%8EKudu%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BF%AE%E6%94%B9.html">40. [Kudu]关于Kudu列的顺序的修改</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BMongoDB%5DMongoDB%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2.html">41. [MongoDB]MongoDB基本查询</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BPySpark%5DPySpark.html">42. [Pyspark]PySpark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BPySpark%5DPySparkOnYarn.html">43. [PySpark]PySpark On Yarn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5DSQLIn%26NotIn.html">44. [SQL]<code class="docutils literal notranslate"><span class="pre">IN</span></code> OR <code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">IN</span></code> , IS A PROBLEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E4%B8%9A%E5%8A%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%60create_time%60%E5%92%8C%60update_time%60.html">45. [SQL]业务数据库中的<code class="docutils literal notranslate"><span class="pre">create_time</span></code>和<code class="docutils literal notranslate"><span class="pre">update_time</span></code>分析时的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E4%B8%BA%E4%BB%80%E4%B9%88LEFT%20JOIN%E5%90%8E%E6%80%BB%E6%95%B0%E5%8D%B4%E4%B8%8E%E5%8F%B3%E8%A1%A8%E7%9A%84%E6%80%BB%E6%95%B0%E4%B8%80%E6%A0%B7%E4%BA%86%EF%BC%9F.html">46. [SQL]为什么LEFT JOIN后总数却与右表的总数一样了？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E6%B1%82%E7%94%A8%E6%88%B7%E4%BB%BB%E6%84%8F%E5%A4%A9%E8%BF%9E%E7%BB%AD%E7%99%BB%E5%BD%95%28%E6%AF%8F%E5%A4%A9%E4%B8%BA%E7%AC%AC%E5%A4%9A%E5%B0%91%E5%A4%A9%E8%BF%9E%E7%BB%AD%E7%99%BB%E5%BD%95%29.html">47. [SQL]求用户任意天连续登录(每天为第多少天连续登录)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E8%AE%A1%E7%AE%97%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F%E7%9A%84%E5%B9%B4-%E5%91%A8%28%E4%B8%BA%E6%9F%90%E5%B9%B4%E7%9A%84%E7%AC%AC%E5%A4%9A%E5%B0%91%E5%91%A8%29.html">48. [SQL]计算指定日期的<strong>年-周</strong>(为某年的第多少周)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BScala%5DClosure%26Currying.html">49. [Scala]函数中闭包(Closure)和柯里化(Currying)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5DEOF.html">50. [Shell]EOF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5Dshell%E8%84%9A%E6%9C%AC%E6%97%A5%E6%9C%9F%E9%80%92%E5%A2%9E%28%E8%B5%B7%E6%AD%A2%E6%97%A5%E6%9C%9F%E5%86%85%E9%80%92%E5%A2%9E%29.html">51. [Shell]Shell脚本日期递增(起止日期内递增)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5D%E6%89%93%E5%8D%B0%E6%9C%AC%E6%9C%BAIP.html">52. [Shell]打印本机IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSparkStreaming%5D%E6%B6%88%E8%B4%B9kafka%E5%86%99%E5%85%A5Hive%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98.html">53. [SparkStreaming]消费kafka写入Hive失败的问题Lease timeout of 0 seconds expired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSparkSQL%20%E5%88%97%E8%BD%AC%E8%A1%8C%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95.html">54. [Spark]SparkSQL 列转行的一种方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSparkSQLJDBC%E5%B9%B6%E5%8F%91%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%8F%96.html">55. [Spark]SparkSQL JDBC并发连接读取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSpark%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1RSA%20premaster%20secret%20error.html">56. [Spark]Spark提交任务RSA premaster secret error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSpringboot%E6%95%B4%E5%90%88Spark%2C%20%E6%9C%AC%E5%9C%B0%E3%80%81%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.html">57. [Spark]Springboot整合Spark, 本地、集群部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5D%E4%BD%BF%E7%94%A8Java%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARow.html">58. [Spark]如何使用Java创建一个Row</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5D%E5%B0%86Spark%20DataFrame%E4%B8%AD%E7%9A%84%E6%95%B0%E5%80%BC%E5%8F%96%E5%87%BA.html">59. [Spark]将Spark DataFrame中的数值取出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpringboot%5DokHttp%E9%94%99%E8%AF%AFException%20in%20thread%20OkHttp%20Dispatcher%20java.lang.IllegalStateException%20closed.html">60. [Springboot]okHttp错误:<em>Exception</em> in thread “OkHttp Dispatcher” <em>java.lang.IllegalStateException</em>: closed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BVim%5D%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4.html">61. [Vim]Vim查找和替换命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5Bdebezium%5D%E5%9C%A8%E5%90%AF%E5%8A%A8%E4%BB%BB%E5%8A%A1%E6%97%B6%E4%BC%A0%E5%85%A5SQL%E8%AF%AD%E5%8F%A5%E7%94%9F%E6%88%90Snapshot.html">62. [debezium]在启动任务时传入SQL语句生成Snapshot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5Bdebezium%5D%E7%83%AD%E4%BF%AE%E6%94%B9DebeziumMySQLConnector%E9%85%8D%E7%BD%AE.html">63. [debezium]热修改Debezium MySQL Connector配置</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Blogs</a> &raquo;</li>
+      <li><span class="section-number">29. </span>[Java]三种策略模式应用于服务的启动</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Blog Here/[Java]三种策略模式应用于服务的启动.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="java">
+<h1><span class="section-number">29. </span>[Java]三种策略模式应用于服务的启动<a class="headerlink" href="#java" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">29.1. </span>背景<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>我们编写的大数据java代码被编译构建成jar之后，需要丢到服务器集群上去部署运行，而一个jar中往往包含很多个处理业务的应用，在我们部署jar运行的时候就需要去指定一个参数(任务名)去运行我们指定的业务逻辑。</p>
+<p>比如一个jar中包含：</p>
+<p>1、将Hive数据同步至MySQL的应用</p>
+<p>2、Flink实时消费Kafka数据Sink到下游的应用</p>
+<p>我们不希望jar运行的时候将两者同时运行，所以针对每个应用指定一个名字，在提交jar运行的时候指定我们的任务名字去运行指定的应用。OK，废话不多说。</p>
+<p>那么，<u>有没有一种简单的方法去实现这样的一个功能呢？</u></p>
+<p>下面讨论三种方法去实现该功能。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">29.2. </span>开整<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>首先我们可以使用<code class="docutils literal notranslate"><span class="pre">commons-cli</span></code>包去解析我们的命令行参数</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ParameterOptions</span> <span class="p">{</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 开始时间，默认昨天，左闭</span>
+<span class="cm">     */</span>
+    <span class="nd">@Builder.Default</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">startTime</span> <span class="o">=</span> <span class="n">DateUtil</span><span class="p">.</span><span class="na">millis2String</span><span class="p">(</span><span class="n">DateUtil</span><span class="p">.</span><span class="na">getLastOrNextNDay</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">(),</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="s">&quot;yyyy-MM-dd&quot;</span><span class="p">);</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 结束时间，默认今天，右开</span>
+<span class="cm">     */</span>
+    <span class="nd">@Builder.Default</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">endTime</span> <span class="o">=</span> <span class="n">DateUtil</span><span class="p">.</span><span class="na">millis2String</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">(),</span> <span class="s">&quot;yyyy-MM-dd&quot;</span><span class="p">);</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 任务名(要运行的唯一任务名)</span>
+<span class="cm">     */</span>
+    <span class="kd">private</span> <span class="n">String</span> <span class="n">jobName</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">commandCli</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">ParseException</span> <span class="p">{</span>
+    <span class="n">Options</span> <span class="n">options</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Options</span><span class="p">();</span>
+    <span class="n">options</span><span class="p">.</span><span class="na">addOption</span><span class="p">(</span><span class="s">&quot;st&quot;</span><span class="p">,</span> <span class="s">&quot;startTime&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s">&quot;开始时间&quot;</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="na">addOption</span><span class="p">(</span><span class="s">&quot;et&quot;</span><span class="p">,</span> <span class="s">&quot;endTime&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s">&quot;结束时间&quot;</span><span class="p">);</span>
+    <span class="n">options</span><span class="p">.</span><span class="na">addOption</span><span class="p">(</span><span class="s">&quot;jn&quot;</span><span class="p">,</span> <span class="s">&quot;jobName&quot;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="s">&quot;任务名称&quot;</span><span class="p">);</span>
+    <span class="n">CommandLine</span> <span class="n">cmd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DefaultParser</span><span class="p">().</span><span class="na">parse</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">hasOption</span><span class="p">(</span><span class="s">&quot;st&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">parameterOptions</span><span class="p">.</span><span class="na">setStartTime</span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getOptionValue</span><span class="p">(</span><span class="s">&quot;st&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">hasOption</span><span class="p">(</span><span class="s">&quot;et&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">parameterOptions</span><span class="p">.</span><span class="na">setEndTime</span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getOptionValue</span><span class="p">(</span><span class="s">&quot;et&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">hasOption</span><span class="p">(</span><span class="s">&quot;jn&quot;</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">parameterOptions</span><span class="p">.</span><span class="na">setJobName</span><span class="p">(</span><span class="n">cmd</span><span class="p">.</span><span class="na">getOptionValue</span><span class="p">(</span><span class="s">&quot;jn&quot;</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>上述代码解析命令行参数并封装成一个<code class="docutils literal notranslate"><span class="pre">ParameterOptions</span></code>类中，方便后续直接使用。</p>
+<section id="switch">
+<h3><span class="section-number">29.2.1. </span>1⃣️Switch简单粗暴<a class="headerlink" href="#switch" title="永久链接至标题"></a></h3>
+<blockquote>
+<div><p>这其实不是策略模式，哈哈哈</p>
+</div></blockquote>
+<p>如果我们想运行指定的任务，即可以使用上面的启动参数类去获得任务名，去调用指定的业务类去运行处理逻辑，比如下面这样：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">String</span> <span class="n">jobName</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">jobName</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s">&quot;flink&quot;</span><span class="p">:</span>
+            <span class="k">new</span> <span class="n">FlinkStreamJob</span><span class="p">().</span><span class="na">start</span><span class="p">();</span>
+        <span class="k">case</span> <span class="s">&quot;hive&quot;</span><span class="p">:</span>
+            <span class="k">new</span> <span class="n">Hive2MySQLJob</span><span class="p">().</span><span class="na">start</span><span class="p">();</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="k">new</span> <span class="n">Exception</span><span class="p">(</span><span class="s">&quot;没有获得可以执行的任务&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>这样写确实可以实现我们的需求，但是这样不具有拓展性，如果新加了任务，那么就得去手动更改该部分的代码，那么有没有办法去让该部分代码固定化，我们每次去新家一个业务处理逻辑，都不用去管该部分代码。</p>
+</section>
+<section id="springboot">
+<h3><span class="section-number">29.2.2. </span>2⃣️Springboot自动注入<a class="headerlink" href="#springboot" title="永久链接至标题"></a></h3>
+<p>如果我们的代码是利用Springboot写的，那么就可以利用Springboot的注入特性，将<strong>我们的业务处理逻辑注入到一个Map中</strong>，键为任务的名字，值为业务处理的逻辑代码(这么说不准确)，更准确地说应该是是<strong>接口的实现类</strong>。</p>
+<p>让我们来看一些代码。</p>
+<p>首先我们定一个名为<code class="docutils literal notranslate"><span class="pre">BaseService</span></code>的接口，让我们的负责实际业务处理逻辑的类去实现该接口。</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">BaseService</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 启动service处理</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">serviceStart</span><span class="p">(</span><span class="n">T</span> <span class="n">t</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们再定义一个名为<code class="docutils literal notranslate"><span class="pre">StreamService</span></code>的类去实现该接口</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span><span class="p">(</span><span class="s">&quot;stream&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StreamService</span> <span class="kd">implements</span> <span class="n">Serializable</span><span class="p">,</span> <span class="n">BaseService</span><span class="o">&lt;</span><span class="n">ParameterOptions</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kd">final</span> <span class="n">Logger</span> <span class="n">LOG</span> <span class="o">=</span> <span class="n">LoggerFactory</span><span class="p">.</span><span class="na">getLogger</span><span class="p">(</span><span class="n">StreamService</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+    <span class="nd">@SneakyThrows</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">launchJob</span><span class="p">(</span><span class="n">ParameterOptions</span> <span class="n">parameterOptions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//Some thing we do here.</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">serviceStart</span><span class="p">(</span><span class="n">ParameterOptions</span> <span class="n">parameterOptions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">launchJob</span><span class="p">(</span><span class="n">parameterOptions</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>​	注意我们使用<code class="docutils literal notranslate"><span class="pre">&#64;Component</span></code>注解，并且指定参数为<code class="docutils literal notranslate"><span class="pre">stream</span></code></p>
+<p>我们再去Springboot的启动程序中</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Application</span> <span class="kd">implements</span> <span class="n">CommandLineRunner</span> <span class="p">{</span>
+    <span class="nd">@Autowired</span>
+    <span class="kd">private</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">BaseService</span><span class="o">&lt;</span><span class="n">ParameterOptions</span><span class="o">&gt;&gt;</span> <span class="n">serviceMap</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">ParseException</span> <span class="p">{</span>
+        <span class="n">SpringApplication</span><span class="p">.</span><span class="na">run</span><span class="p">(</span><span class="n">Application</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="p">(</span><span class="n">String</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="p">{</span>
+        <span class="c1">//解析命令行参数</span>
+        <span class="n">ParameterOptions</span> <span class="n">parameterOptions</span> <span class="o">=</span> <span class="n">commandCli</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+        <span class="n">String</span> <span class="n">jobName</span> <span class="o">=</span> <span class="n">parameterOptions</span><span class="p">.</span><span class="na">getJobName</span><span class="p">();</span>
+        <span class="n">serviceMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">jobName</span><span class="p">).</span><span class="na">serviceStart</span><span class="p">(</span><span class="n">parameterOptions</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//省去解析命令行参数的代码</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>我们使用Springboot自动将实现了BaseService的实现类自动注入到一个Map中，就可以使用<code class="docutils literal notranslate"><span class="pre">&#64;Commponent</span></code>的参数作为键，这样再通过从命令行拿到的任务名去map中匹配键拿到实际运行的实现类。</p>
+</section>
+<section id="id3">
+<h3><span class="section-number">29.2.3. </span>3⃣️Java版的自动注入<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
+<p>以下方法实际上是上面方法的翻译版本，当我们不使用springboot框架去实现我们的逻辑时，可以使用这种方法,参考<a class="reference external" href="https://blog.csdn.net/the_pure/article/details/124049396">这篇文章</a></p>
+<p>首先定义一个注解，用来实现将实现类注入到一个Map中，得到键的名字</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * 标记类需要put到策略map中</span>
+<span class="cm"> */</span>
+<span class="nd">@Target</span><span class="p">({</span><span class="n">ElementType</span><span class="p">.</span><span class="na">TYPE</span><span class="p">})</span>
+<span class="nd">@Retention</span><span class="p">(</span><span class="n">RetentionPolicy</span><span class="p">.</span><span class="na">RUNTIME</span><span class="p">)</span>
+<span class="kd">public</span> <span class="nd">@interface</span> <span class="n">InjectToMap</span> <span class="p">{</span>
+    <span class="c1">// 策略模式名称</span>
+    <span class="n">String</span> <span class="nf">value</span><span class="p">()</span> <span class="k">default</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>再定义我们的接口</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">IJobService</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="nf">jobExecute</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>定义两个接口的实现类</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@InjectToMap</span><span class="p">(</span><span class="s">&quot;flink&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">FlinkStreamJob</span> <span class="kd">implements</span> <span class="n">IJobService</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">jobExecute</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Flink Stream job start here ...&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nd">@InjectToMap</span><span class="p">(</span><span class="s">&quot;hive&quot;</span><span class="p">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Hive2MySQLJob</span> <span class="kd">implements</span> <span class="n">IJobService</span> <span class="p">{</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">jobExecute</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Hive to MySQL job start here ...&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>定义一个处理策略的上下文</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nn">me.roohom.pattern</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">me.roohom.annotation.InjectToMap</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">org.reflections.Reflections</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Set</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.ConcurrentHashMap</span><span class="p">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StrategyContext</span> <span class="p">{</span>
+    <span class="c1">// 策略Map</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">ConcurrentHashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">IJobService</span><span class="o">&gt;</span> <span class="n">strategyMap</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ConcurrentHashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="p">(</span><span class="n">String</span> <span class="n">jobName</span><span class="p">){</span>
+        <span class="n">IJobService</span> <span class="n">jobService</span> <span class="o">=</span> <span class="n">strategyMap</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">jobName</span><span class="p">);</span>
+        <span class="n">jobService</span><span class="p">.</span><span class="na">jobExecute</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 初始化map</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">initStrategyMap</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">Reflections</span> <span class="n">reflections</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Reflections</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">getClass</span><span class="p">().</span><span class="na">getPackage</span><span class="p">());</span>
+        <span class="c1">// 获取所有包含PutInMap注解的类</span>
+        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Class</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">annotationClasses</span> <span class="o">=</span> <span class="n">reflections</span><span class="p">.</span><span class="na">getTypesAnnotatedWith</span><span class="p">(</span><span class="n">InjectToMap</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span> <span class="n">classObject</span> <span class="p">:</span> <span class="n">annotationClasses</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">InjectToMap</span> <span class="n">annotation</span> <span class="o">=</span> <span class="n">classObject</span><span class="p">.</span><span class="na">getAnnotation</span><span class="p">(</span><span class="n">InjectToMap</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+            <span class="n">IJobService</span> <span class="n">instance</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="k">try</span> <span class="p">{</span>
+                <span class="n">instance</span> <span class="o">=</span> <span class="p">(</span><span class="n">IJobService</span><span class="p">)</span> <span class="n">classObject</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span>
+            <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="n">strategyMap</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">annotation</span><span class="p">.</span><span class="na">value</span><span class="p">(),</span> <span class="n">instance</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;策略Map加入元素&quot;</span> <span class="o">+</span> <span class="n">annotation</span><span class="p">.</span><span class="na">value</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;....&quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;策略Map初始化完成&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cm">/**</span>
+<span class="cm">     * 清理map</span>
+<span class="cm">     */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">clearMap</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">strategyMap</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>OK，下面测试一下</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">StrategyContext</span> <span class="n">strategy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StrategyContext</span><span class="p">();</span>
+    <span class="n">strategy</span><span class="p">.</span><span class="na">initStrategyMap</span><span class="p">();</span>
+    <span class="n">strategy</span><span class="p">.</span><span class="na">start</span><span class="p">(</span><span class="s">&quot;flink&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>结果</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">策略Map加入元素flink</span><span class="p">....</span>
+<span class="n">策略Map加入元素hive</span><span class="p">....</span>
+<span class="n">策略Map初始化完成</span>
+<span class="n">Flink</span> <span class="n">Stream</span> <span class="n">job</span> <span class="n">start</span> <span class="n">here</span> <span class="p">...</span>
+
+<span class="n">Process</span> <span class="n">finished</span> <span class="n">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="%5BJava%5DSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html" class="btn btn-neutral float-left" title="28. [Java]使用Java在服务端和客户端之间传送文件" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="%5BJava%5D%E5%A4%9A%E7%BA%BF%E7%A8%8B.html" class="btn btn-neutral float-right" title="30. [Java]多线程" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

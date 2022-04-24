@@ -1,74 +1,35 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>17. ZookeeperAndHadoop &mdash; Code-Cookbook 0.1 文档</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>17. ZookeeperAndHadoop &mdash; Code-Cookbook 0.2 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="18. 常用软件梳理" href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" />
     <link rel="prev" title="16. Zookeeper" href="Zookeeper.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Code-Cookbook
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="在文档中搜索" />
@@ -76,19 +37,8 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
-              <p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">大数据</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Bigdata Tools</a><ul class="current">
@@ -132,93 +82,51 @@
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<p class="caption"><span class="caption-text">博客</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Blog%20Here/index.html">Blogs</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<p class="caption"><span class="caption-text">大数据辅助工具</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<p class="caption"><span class="caption-text">SQL相关</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Code-Cookbook</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">Bigdata Tools</a> &raquo;</li>
-        
       <li><span class="section-number">17. </span>ZookeeperAndHadoop</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/Bigdata Tools/ZookeeperAndHadoop.md.txt" rel="nofollow"> 查看页面源码</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="zookeeperandhadoop">
-<h1><span class="section-number">17. </span>ZookeeperAndHadoop<a class="headerlink" href="#zookeeperandhadoop" title="永久链接至标题">¶</a></h1>
+             
+  <section id="zookeeperandhadoop">
+<h1><span class="section-number">17. </span>ZookeeperAndHadoop<a class="headerlink" href="#zookeeperandhadoop" title="永久链接至标题"></a></h1>
 <p>[TOC]</p>
-<div class="section" id="zookeeper">
-<h2><span class="section-number">17.1. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id1">
-<h3><span class="section-number">17.1.1. </span>功能及应用场景<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<section id="zookeeper">
+<h2><span class="section-number">17.1. </span>Zookeeper<a class="headerlink" href="#zookeeper" title="永久链接至标题"></a></h2>
+<section id="id1">
+<h3><span class="section-number">17.1.1. </span>功能及应用场景<a class="headerlink" href="#id1" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>应用场景</p>
 <ul>
@@ -274,9 +182,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id2">
-<h3><span class="section-number">17.1.2. </span>概念<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id2">
+<h3><span class="section-number">17.1.2. </span>概念<a class="headerlink" href="#id2" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>节点</p>
 <ul>
@@ -306,9 +214,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id3">
-<h3><span class="section-number">17.1.3. </span>架构<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id3">
+<h3><span class="section-number">17.1.3. </span>架构<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>分布式主从架构：<strong>公平节点</strong></p>
 <ul>
@@ -353,9 +261,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id4">
-<h3><span class="section-number">17.1.4. </span>设计思想<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id4">
+<h3><span class="section-number">17.1.4. </span>设计思想<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>通过一个分布式的共享存储来解决分布式所存在的问题</p>
 </div></blockquote>
@@ -409,11 +317,11 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id5">
-<h3><span class="section-number">17.1.5. </span>选举机制<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
-<div class="section" id="id6">
-<h4><span class="section-number">17.1.5.1. </span>辅助选举<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="id5">
+<h3><span class="section-number">17.1.5. </span>选举机制<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<section id="id6">
+<h4><span class="section-number">17.1.5.1. </span>辅助选举<a class="headerlink" href="#id6" title="永久链接至标题"></a></h4>
 <ul class="simple">
 <li><p>zookeeper帮别的分布式框架在两个主节点之间选择一个工作的一个备份的</p></li>
 <li><p><strong>方式一</strong>：两个主节点A、B同时向zookeeper创建同一个临时节点(只有一个能创建成功)</p>
@@ -435,9 +343,9 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="zk">
-<h4><span class="section-number">17.1.5.2. </span>ZK选举<a class="headerlink" href="#zk" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="zk">
+<h4><span class="section-number">17.1.5.2. </span>ZK选举<a class="headerlink" href="#zk" title="永久链接至标题"></a></h4>
 <ul>
 <li><p>zookeeper自己内部选择leader</p></li>
 <li><p>三台zookeeper</p>
@@ -516,10 +424,10 @@ server.3<span class="o">=</span>node3:2888:3888
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id7">
-<h3><span class="section-number">17.1.6. </span>Zookeeper基本使用<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+<section id="id7">
+<h3><span class="section-number">17.1.6. </span>Zookeeper基本使用<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
 <ul>
 <li><p>Zookeeper文件系统类似于Linux，树形结构，只能使用绝对路径访问，每个节点的存储内容大小不能超过1MB</p></li>
 <li><p>启动服务端</p>
@@ -585,15 +493,15 @@ rmr /itcast/heima
 </div>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="hadoop">
-<h2><span class="section-number">17.2. </span>Hadoop<a class="headerlink" href="#hadoop" title="永久链接至标题">¶</a></h2>
+</section>
+</section>
+<section id="hadoop">
+<h2><span class="section-number">17.2. </span>Hadoop<a class="headerlink" href="#hadoop" title="永久链接至标题"></a></h2>
 <blockquote>
 <div><p>大数据生态系统</p>
 </div></blockquote>
-<div class="section" id="id8">
-<h3><span class="section-number">17.2.1. </span>功能及应用场景<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<section id="id8">
+<h3><span class="section-number">17.2.1. </span>功能及应用场景<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
 <ul class="simple">
 <li><p>功能：</p>
 <ul>
@@ -643,14 +551,14 @@ rmr /itcast/heima
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="hdfs">
-<h3><span class="section-number">17.2.2. </span><strong>HDFS</strong><a class="headerlink" href="#hdfs" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="hdfs">
+<h3><span class="section-number">17.2.2. </span><strong>HDFS</strong><a class="headerlink" href="#hdfs" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>定义：分布式文件系统</p>
 </div></blockquote>
-<div class="section" id="id9">
-<h4><span class="section-number">17.2.2.1. </span>介绍（功能）<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+<section id="id9">
+<h4><span class="section-number">17.2.2.1. </span>介绍（功能）<a class="headerlink" href="#id9" title="永久链接至标题"></a></h4>
 <ul class="simple">
 <li><p>HDFS定义：分布式文件系统</p>
 <ul>
@@ -671,15 +579,15 @@ rmr /itcast/heima
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id10">
-<h4><span class="section-number">17.2.2.2. </span>本质<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="id10">
+<h4><span class="section-number">17.2.2.2. </span>本质<a class="headerlink" href="#id10" title="永久链接至标题"></a></h4>
 <p>将多台机器的文件系统在逻辑上合并成一个整体，对外则是提供统一的文件存储服务</p>
-</div>
-<div class="section" id="id11">
-<h4><span class="section-number">17.2.2.3. </span>架构<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
-<div class="section" id="id12">
-<h5><span class="section-number">17.2.2.3.1. </span>主从架构<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h5>
+</section>
+<section id="id11">
+<h4><span class="section-number">17.2.2.3. </span>架构<a class="headerlink" href="#id11" title="永久链接至标题"></a></h4>
+<section id="id12">
+<h5><span class="section-number">17.2.2.3.1. </span>主从架构<a class="headerlink" href="#id12" title="永久链接至标题"></a></h5>
 <ul class="simple">
 <li><p>主：NameNode</p>
 <ul>
@@ -714,12 +622,12 @@ rmr /itcast/heima
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id13">
-<h4><span class="section-number">17.2.2.4. </span>读写流程<a class="headerlink" href="#id13" title="永久链接至标题">¶</a></h4>
-<div class="section" id="id14">
-<h5><span class="section-number">17.2.2.4.1. </span>写：<a class="headerlink" href="#id14" title="永久链接至标题">¶</a></h5>
+</section>
+</section>
+<section id="id13">
+<h4><span class="section-number">17.2.2.4. </span>读写流程<a class="headerlink" href="#id13" title="永久链接至标题"></a></h4>
+<section id="id14">
+<h5><span class="section-number">17.2.2.4.1. </span>写：<a class="headerlink" href="#id14" title="永久链接至标题"></a></h5>
 <ul>
 <li><p>1-客户端会请求NameNode写入HDFS，NameNode会验证请求是否合法，返回结果</p>
 <ul class="simple">
@@ -777,9 +685,9 @@ rmr /itcast/heima
 <li><p>9-不断发送下一个包，直到整个块写入完成，返回给NameNode，关联元数据</p></li>
 <li><p>重复3提交下一个块写入</p></li>
 </ul>
-</div>
-<div class="section" id="id15">
-<h5><span class="section-number">17.2.2.4.2. </span>读：<a class="headerlink" href="#id15" title="永久链接至标题">¶</a></h5>
+</section>
+<section id="id15">
+<h5><span class="section-number">17.2.2.4.2. </span>读：<a class="headerlink" href="#id15" title="永久链接至标题"></a></h5>
 <ul class="simple">
 <li><p>客户端提交读取请求给NameNode</p></li>
 <li><p>NameNode会验证这个请求是否合法，如果合法，会查询元数据</p>
@@ -799,10 +707,10 @@ rmr /itcast/heima
 </li>
 <li><p>客户端会将所有块进行合并返回给用户</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="id16">
-<h4><span class="section-number">17.2.2.5. </span>应用场景<a class="headerlink" href="#id16" title="永久链接至标题">¶</a></h4>
+</section>
+</section>
+<section id="id16">
+<h4><span class="section-number">17.2.2.5. </span>应用场景<a class="headerlink" href="#id16" title="永久链接至标题"></a></h4>
 <blockquote>
 <div><p>离线的大数据量文件存储</p>
 </div></blockquote>
@@ -816,11 +724,11 @@ rmr /itcast/heima
 </li>
 <li><p>不适合实时，频繁修改或者删除</p></li>
 </ul>
-</div>
-<div class="section" id="id17">
-<h4><span class="section-number">17.2.2.6. </span>实现逻辑<a class="headerlink" href="#id17" title="永久链接至标题">¶</a></h4>
-<div class="section" id="id18">
-<h5><span class="section-number">17.2.2.6.1. </span>分块机制<a class="headerlink" href="#id18" title="永久链接至标题">¶</a></h5>
+</section>
+<section id="id17">
+<h4><span class="section-number">17.2.2.6. </span>实现逻辑<a class="headerlink" href="#id17" title="永久链接至标题"></a></h4>
+<section id="id18">
+<h5><span class="section-number">17.2.2.6.1. </span>分块机制<a class="headerlink" href="#id18" title="永久链接至标题"></a></h5>
 <p>决定了写入HDFS的文件如何被拆分</p>
 <ul>
 <li><p>解决了HDFS如何实现分布式存储的问题</p></li>
@@ -849,10 +757,10 @@ rmr /itcast/heima
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="id19">
-<h4><span class="section-number">17.2.2.7. </span><strong>数据安全</strong><a class="headerlink" href="#id19" title="永久链接至标题">¶</a></h4>
+</section>
+</section>
+<section id="id19">
+<h4><span class="section-number">17.2.2.7. </span><strong>数据安全</strong><a class="headerlink" href="#id19" title="永久链接至标题"></a></h4>
 <ul>
 <li><p>问题：如果某台机器故障，数据怎么保证不丢失？</p>
 <ul class="simple">
@@ -886,9 +794,9 @@ rmr /itcast/heima
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id20">
-<h4><span class="section-number">17.2.2.8. </span><strong>元数据安全</strong><a class="headerlink" href="#id20" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="id20">
+<h4><span class="section-number">17.2.2.8. </span><strong>元数据安全</strong><a class="headerlink" href="#id20" title="永久链接至标题"></a></h4>
 <blockquote>
 <div><p>NameNode启动会将元数据读入内存，在运行的过程中元数据的变化都会在内存中更改，由于内存中的元数据变化都没有被写入到本地元数据文件fsimage(FileSystemImage)文件中，所以NameNode会将内存中的元数据变化写入到本地的edits文件中，预防元数据变化的丢失，在NameNode下一次启动时将edits文件中的数据写入fsimage文件中，但是又由于时间长了元数据变化量会非常大，edits文件的大小也会非常大，所以就需要定时将edits文件中的内容写入fsimage实现元数据的同步(合并)，这个定时同步的工作就是由SecondaryNameNode来做的。</p>
 </div></blockquote>
@@ -955,11 +863,11 @@ rmr /itcast/heima
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="i-o">
-<h4><span class="section-number">17.2.2.9. </span>I/O操作<a class="headerlink" href="#i-o" title="永久链接至标题">¶</a></h4>
-<div class="section" id="id21">
-<h5><span class="section-number">17.2.2.9.1. </span>序列化<a class="headerlink" href="#id21" title="永久链接至标题">¶</a></h5>
+</section>
+<section id="i-o">
+<h4><span class="section-number">17.2.2.9. </span>I/O操作<a class="headerlink" href="#i-o" title="永久链接至标题"></a></h4>
+<section id="id21">
+<h5><span class="section-number">17.2.2.9.1. </span>序列化<a class="headerlink" href="#id21" title="永久链接至标题"></a></h5>
 <ul>
 <li><ul class="simple">
 <li></li>
@@ -991,11 +899,11 @@ rmr /itcast/heima
 </ul>
 </li>
 </ul>
-</div>
-</div>
-</div>
-<div class="section" id="ha">
-<h3><span class="section-number">17.2.3. </span>HA<a class="headerlink" href="#ha" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="ha">
+<h3><span class="section-number">17.2.3. </span>HA<a class="headerlink" href="#ha" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>High Availablility</p>
 </div></blockquote>
@@ -1016,8 +924,8 @@ rmr /itcast/heima
 </li>
 </ul>
 <p><img alt="HA原理" src="../_images/HA.png" /></p>
-<div class="section" id="id22">
-<h4><span class="section-number">17.2.3.1. </span>基本使用<a class="headerlink" href="#id22" title="永久链接至标题">¶</a></h4>
+<section id="id22">
+<h4><span class="section-number">17.2.3.1. </span>基本使用<a class="headerlink" href="#id22" title="永久链接至标题"></a></h4>
 <ul>
 <li><p>第一种：单个进程启动：有些特殊场景下会用，一般用的比较少</p>
 <ul>
@@ -1056,15 +964,15 @@ stop-all.sh
 </div>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="mapreduce">
-<h3><span class="section-number">17.2.4. </span>MapReduce<a class="headerlink" href="#mapreduce" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+<section id="mapreduce">
+<h3><span class="section-number">17.2.4. </span>MapReduce<a class="headerlink" href="#mapreduce" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>主要用MapReduce2.x版本</p>
 </div></blockquote>
-<div class="section" id="id23">
-<h4><span class="section-number">17.2.4.1. </span>功能<a class="headerlink" href="#id23" title="永久链接至标题">¶</a></h4>
+<section id="id23">
+<h4><span class="section-number">17.2.4.1. </span>功能<a class="headerlink" href="#id23" title="永久链接至标题"></a></h4>
 <ul class="simple">
 <li><p>提供分布式计算服务：</p>
 <ul>
@@ -1082,16 +990,16 @@ stop-all.sh
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="yarn">
-<h3><span class="section-number">17.2.5. </span>YARN<a class="headerlink" href="#yarn" title="永久链接至标题">¶</a></h3>
+</section>
+</section>
+<section id="yarn">
+<h3><span class="section-number">17.2.5. </span>YARN<a class="headerlink" href="#yarn" title="永久链接至标题"></a></h3>
 <blockquote>
 <div><p>Yet Another Resource Negotiator</p>
 <p>定义：分布式资源管理和任务调度框架</p>
 </div></blockquote>
-<div class="section" id="id24">
-<h4><span class="section-number">17.2.5.1. </span>介绍<a class="headerlink" href="#id24" title="永久链接至标题">¶</a></h4>
+<section id="id24">
+<h4><span class="section-number">17.2.5.1. </span>介绍<a class="headerlink" href="#id24" title="永久链接至标题"></a></h4>
 <ul class="simple">
 <li><p>yarn其实是一个<strong>分布式的资源容器</strong>：将多台机器的硬件资源进行整合，构建一个整体，对外提供统一的资源服务</p></li>
 <li><p>本质：整合多台机器的CPU和内存，搭建一个资源容器，用来盛放（<strong>运行</strong>）分布式程序</p>
@@ -1101,9 +1009,9 @@ stop-all.sh
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id25">
-<h4><span class="section-number">17.2.5.2. </span>架构<a class="headerlink" href="#id25" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="id25">
+<h4><span class="section-number">17.2.5.2. </span>架构<a class="headerlink" href="#id25" title="永久链接至标题"></a></h4>
 <ul>
 <li><p>分布式主从架构</p>
 <ul class="simple">
@@ -1153,9 +1061,9 @@ stop-all.sh
 <p><img alt="Client发给RM的资源请求" src="../_images/ClientToRMRequests.png" /></p>
 </li>
 </ul>
-</div>
-<div class="section" id="id26">
-<h4><span class="section-number">17.2.5.3. </span>组件<a class="headerlink" href="#id26" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="id26">
+<h4><span class="section-number">17.2.5.3. </span>组件<a class="headerlink" href="#id26" title="永久链接至标题"></a></h4>
 <ul class="simple">
 <li><p>ResourceManager</p>
 <ul>
@@ -1190,9 +1098,9 @@ stop-all.sh
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="id27">
-<h4><span class="section-number">17.2.5.4. </span>运行流程<a class="headerlink" href="#id27" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="id27">
+<h4><span class="section-number">17.2.5.4. </span>运行流程<a class="headerlink" href="#id27" title="永久链接至标题"></a></h4>
 <p>流程</p>
 <ul class="simple">
 <li><p>1-客户端请求提交运行一个分布式程序给ResourceManager(下称RM)</p></li>
@@ -1234,57 +1142,40 @@ stop-all.sh
 <li><p>10-APPMaster将结果返回给客户端和RM</p></li>
 </ul>
 <p><img alt="YARN运行流程" src="../_images/HowYarnRun.png" /></p>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-right" title="18. 常用软件梳理" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Zookeeper.html" class="btn btn-neutral float-left" title="16. Zookeeper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="%E5%A4%A7%E6%95%B0%E6%8D%AE%E8%BD%AF%E4%BB%B6%E5%90%AF%E5%8A%A8%E6%8C%87%E5%8D%97.html" class="btn btn-neutral float-right" title="18. 常用软件梳理" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; 版权所有 2020-2021, roohom.
-
-    </p>
+    <p>&#169; 版权所有 2020-2022, roohom.</p>
   </div>
-    
-    
-    
-    利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
-    
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    
-    由 <a href="https://readthedocs.org">Read the Docs</a>开发. 
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

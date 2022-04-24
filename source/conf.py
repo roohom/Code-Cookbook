@@ -24,7 +24,7 @@ copyright = '2020-{}, roohom'.format(
 author = 'roohom'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1'
+release = '0.2'
 
 
 
@@ -120,6 +120,13 @@ notfound_context = {
 #
 html_theme = 'sphinx_rtd_theme'
 #html_theme = 'alabaster'
+
+html_theme_options = {
+    "rightsidebar": "true",
+    "relbarbgcolor": "black",
+    "body_max_width": "90%"
+}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
