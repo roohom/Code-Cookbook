@@ -20,7 +20,7 @@ java.io.IOException: Lease timeout of 0 seconds expired.
 	at org.apache.hadoop.hdfs.client.impl.LeaseRenewer$1.run(LeaseRenewer.java:307)
 	at java.lang.Thread.run(Thread.java:748)
 22/04/06 16:40:04 INFO common.FileUtils: Creating directory if it doesn't exist: hdfs://nameservice1/user/hive/warehouse/dw_csvw.db/ods_kafka_mbb_rts_trip_data/.hive-staging_hive_2022-04-06_16-40-04_089_5948812028170174027-1
-22/04/06 16:40:04 WARN ipc.Client: Exception encountered while connecting to the server : org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.token.SecretManager$InvalidToken): token (token for scb: HDFS_DELEGATION_TOKEN owner=scb@CSVW.COM, renewer=yarn, realUser=, issueDate=1648462512020, maxDate=1649067312020, sequenceNumber=5614554, masterKeyId=972) can't be found in cache
+22/04/06 16:40:04 WARN ipc.Client: Exception encountered while connecting to the server : org.apache.hadoop.ipc.RemoteException(org.apache.hadoop.security.token.SecretManager$InvalidToken): token (token for scb: HDFS_DELEGATION_TOKEN owner=xxx@XXXX.COM, renewer=yarn, realUser=, issueDate=1648462512020, maxDate=1649067312020, sequenceNumber=5614554, masterKeyId=972) can't be found in cache
 22/04/06 16:40:04 ERROR scheduler.AsyncEventQueue: Listener EventLoggingListener threw an exception
 java.io.IOException: Lease timeout of 0 seconds expired.
 	at org.apache.hadoop.hdfs.DFSOutputStream.abort(DFSOutputStream.java:795)

@@ -3,7 +3,7 @@
 Springboot应用程序登录Kerberos报错：
 
 ~~~java
-java.io.IOException: Login failure for scb@CSVW.COM from keytab /app/keytabs/prod/scb.keytab: javax.security.auth.login.LoginException: Message stream modified (41)
+java.io.IOException: Login failure for xxx@XXXX.COM from keytab /app/keytabs/prod/xxx.keytab: javax.security.auth.login.LoginException: Message stream modified (41)
 	at org.apache.hadoop.security.UserGroupInformation.loginUserFromKeytab(UserGroupInformation.java:979)
 	at com.svw.data.webhook.util.ImpalaConnection.executeSql(ImpalaConnection.java:41)
 	at com.svw.data.webhook.controller.CoreController.taskCommit(CoreController.java:69)

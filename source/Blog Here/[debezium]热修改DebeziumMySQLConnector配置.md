@@ -38,7 +38,7 @@
     "transforms.route.regex":"(.*)\\.(.*)\\.(.*)",
     "transforms.route.replacement":"cdp.$2.$3",
     "converters":"selfConvert",
-    "selfConvert.type":"com.svw.mos.debezium.UserDefineConvert",
+    "selfConvert.type":"com.test.mos.debezium.UserDefineConvert",
     "selfConvert.selector":".*"
   
 }
