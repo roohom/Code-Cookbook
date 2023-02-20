@@ -70,4 +70,46 @@ java.io.IOException: Response code from http://pushgateway.scdevops.hycs.sitc:80
 
 ## 配置Grafana
 
-待补充
+##### 添加变量
+
+有时候为了创建一个面板, 但是面板上包含很多**重复的项目**, 同时创建多个会异常繁琐, 此时考虑将我们的PromQL查询语句写成**模板**,在其中**嵌入变量,** 只要随便选择变量填入实际值就可以生成面板供查看.
+
+为此我们需要将PromQL语句写成下面的样子:
+
+1、PromQL准备
+
+~~~SQL
+sum(flink_taskmanager_job_task_operator_KafkaConsumer_records_consumed_rate{instanceId="$instanceId",job_id="$job_id",job_name="$job_name"})
+~~~
+
+其中`$instancceId`、`$job_id`、`$job_name`都是变量, 允许我们选择合适的值填入其中, 生成一个实际的查询语句.
+
+2、变量配置
+
+step1、进入自己所配置的面板中,点击小齿轮图标
+
+![config1](./flink-metrics/Snipaste_2023-02-20_19-14-23.png)
+
+step2、点击Variables
+
+![config2](./flink-metrics/Snipaste_2023-02-20_19-16-21.png)
+
+step3、点击右侧NEW新建一个
+
+![config3](./flink-metrics/Snipaste_2023-02-20_19-17-29.png)
+
+说明:
+
+![config4](./flink-metrics/image2023-2-20_16-36-33.png)
+
+我们需要为变量定一个名称,默认query0,在Query中填入实际查询公式. 举例如下:
+
+![config5](./flink-metrics/image2023-2-20_16-38-58.png)
+
+job_name的查询公式为label_values(job_name), 它的原理是: **查询所有的metrics信息(实际是一系列json), 获取并解析这些信息json, 提取其中所有的json键为job_name的值,得到一个列表供选择.**
+
+高级查询如operator_name, 它的查询方式为**级联查询**, 也就是**先由公式查询得到job_name, 再根据`flink_taskmanager_job_task_operator_numRecordsIn{job_name="$job_name"}`的查询得到一系列的metrics信息(实际为json),再在这些json信息中提取所有的operator_name得到一个列表并返回.**
+
+如此操作之后就可以在面板中得到以下的效果,如果需要查看不同的任务的信息,但是PromQL相同,就可以下拉选择.省去很多的面板配置.
+
+![config6](./flink-metrics/Snipaste_2023-02-20_19-21-45.png)
