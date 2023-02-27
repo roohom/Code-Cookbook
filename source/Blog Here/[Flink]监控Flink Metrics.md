@@ -8,6 +8,8 @@
 
 ## 配置Flink
 
+### 修改flink-conf.yml
+
 首先需要开启使用PrometheusPushGatewayReporter
 
 ~~~yaml
@@ -29,6 +31,10 @@ Fink允许使用metrics reportor将一些metrics输出到外部系统, 如果使
 ![sourcecode](./flink-metrics/image2022-11-18_17-4-52.png)
 
 
+
+### 准备与启动任务
+
+写一段从Kafka消费数据并打印到控制台的Flink程序代码,打成jar包并提交到集群, 启动应用程序, Flink将会metrics信息主动暴露给pushgateway. 默认的job名称为`Flink Streaming Job`.
 
 ### 版本问题
 
@@ -65,7 +71,189 @@ java.io.IOException: Response code from http://localhost:9091/metrics/job/flinkJ
 
 很显然第一种不可行,生产的prometheus已在使用,当然选择第二种,上flink官网后发现flink-metrics-prometheus在1.16才发生了大更新,也就是在此版本之前的该jar差异都不会很大,因此将该jar使用flink1.12对应的jar(即: flink-metrics-prometheus_2.11-1.12.2.jar), 实际使用中解决该问题,**可用**
 
+## 使用Alertmanager进行告警监控
 
+> Prometheus本身不具备告警功能,需要结合Alertmanager才能实现告警的通知.
+>
+> The [Alertmanager](https://github.com/prometheus/alertmanager) handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integration such as email, PagerDuty, or OpsGenie. It also takes care of silencing and inhibition of alerts.
+
+以下内容不涉及告警的**分组定义**和**静默定义**, 仅关注于如何实现一个告警,在实现的过程中对整个链路涉及到的组件如何的配置.
+
+
+
+### 配置Prometheus
+
+首先, 配置Prometheus添加Alertmanager, 在prometheus的配置文件`prometheus.yml`下指明alertmanager的地址
+
+~~~yml
+$ prometheus-2.40.1 cat prometheus.yml
+# my global config
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["127.0.0.1:9093"]
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+# scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['localhost:9090']
+      labels:
+        instance: prometheus
+
+  - job_name: 'pushgateway'
+    static_configs:
+    - targets: ['localhost:9091']
+      labels:
+        instance: pushgateway
+~~~
+
+Prometheus监控的一些列规则都在`rule_files`下,该key下的文件都在prometheus部署的目录下,以下举例.Prometheus会定时轮训查询expr表达式下的逻辑,如果满足告警将会触发告警,将告警发送给alertmanager
+
+~~~yml
+groups:
+  - name: 无数据流入和增长率过低监控
+    rules:
+      - alert: 没有数据流入
+        expr: sum(increase(flink_taskmanager_job_task_operator_numRecordsIn{job_name="Flink_Streaming_Job",operator_name="Sink:_Print_to_Std__Out"}[2m])) by(job_name,operator_name) == 0
+        for: 1m
+        labels:
+          bigDataDataSource: CDC
+          job_name: Flink Streaming Job
+          operator_name: Map
+          instance: "{{ $labels.instance }}"
+        annotations:
+          summary: "Job {{ $labels.job_name }} 没有数据流入"
+          description: "{{ $labels.job_name }} 持续30分钟没有数据流入."
+          value: "{{ $value }}"
+~~~
+
+添加完上述rules.yml配置, 调用prometeus的接口重载配置 `curl -X POST http://127.0.0.1:9090/-/reload*`
+
+### 配置Alertmanager
+
+在Alertmanager中需要配置接收告警组,接受人以及配置邮件基础信息.
+
+~~~yml
+global:
+  resolve_timeout: 5m #解析超时时间，也就是报警恢复不是立马发送的，而是在一个时间范围内不在触发报警，才能发送恢复报警，默认为5分钟
+  # smtp配置
+  smtp_from: "xxx@template.com" #收件人的邮箱地址
+  smtp_smarthost: 'smtp.qiye.163.com:25' #邮箱提供商的smtp地址
+  smtp_auth_username: "xxx@template.com" #收件人的邮箱账号
+  smtp_auth_password: "xxx" #邮箱授权码
+  smtp_hello: "template.com"
+  smtp_require_tls: true #是否需要tls协议，默认是true
+# 路由分组,所有报警信息进入后的根路由,用来设置报警的分发策略
+route:
+  group_by: ['job_name'] #  根据标签进行分组，alertname就是告警规则的名称，多个标签可以以逗号隔开
+  group_wait: 40s # 发送告警等待时间，也就是一个时间范围内，如果同一组中有其他报警则一并发送 
+  group_interval: 5m # 当触发了一组告警后，下一组报警触发的间隔        
+  repeat_interval: 6h # 如果一个报警信息已经发送成功了，等待6h时间来重新发送
+  receiver: 'test_alert' #默认的receiver,如果一个报警没有被route匹配，则发送给默认的接收器
+  routes:
+    - receiver: 'test_alert'
+      group_wait: 40s
+      match:
+        bigDataDataSource: ODP
+templates:
+  - 'path/to/bigdata-warn.tmpl'        
+receivers:
+  - name: 'test_alert'
+    email_configs: 
+      - to: "roohom@qq.com"
+        send_resolved: true #是否发送解决的通知邮件
+        html: '{{ template "bigdata-warn-email.html" . }}' #实用自定义的邮件模板
+~~~
+
+由于默认的邮件样式不太清晰, 我们在配置中添加自定义的告警模板, 告警模板放在alertmanager的目录下,并在`alertmanager.yml`文件中指定:
+
+~~~yaml
+templates:
+  - 'path/to/bigdata-warn.tmpl'
+~~~
+
+在接收人的配置上制定使用自定义的模板:
+
+~~~yaml
+email_configs: 
+  - to: "roohom@qq.com"
+    html: '{{ template "bigdata-warn-email.html" . }}' #实用自定义的邮件模板
+~~~
+
+
+
+告警邮件模板(Go template)如下:
+
+~~~go
+{{ define "bigdata-warning-email.html" }}
+ 
+{{- if gt (len .Alerts.Firing) 0 -}}
+<h1>Flink实时数据监控 <font color="#FF0000">告警</font></h1>
+<table border="5">
+    <tr>
+        <td>报警项</td>
+        <td>任务名</td>
+        <td>报警详情</td>
+        <td>当前值</td>
+        <td>开始时间</td>
+    </tr>
+    {{ range $i, $alert := .Alerts }}
+        <tr><td>{{ index $alert.Labels "alertname" }}</td>
+            <td>{{ index $alert.Labels "job_name" }}</td>
+            <td>{{ index $alert.Annotations "description" }}</td>
+            <td>{{ index $alert.Annotations "value" }}</td>
+            <td>{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05 Monday" }}</td>
+        </tr>
+    {{ end }}
+</table>
+{{ end }}
+{{- if gt (len .Alerts.Resolved) 0 -}}
+<h1>Flink实时数据监控 <font color="green">恢复</font></h1>
+<table border="5">
+    <tr>
+        <td>报警项</td>
+        <td>任务名</td>
+        <td>报警详情</td>
+        <td>当前值</td>
+        <td>开始时间</td>
+    </tr>
+    {{ range $i, $alert := .Alerts }}
+        <tr>
+            <td>{{ index $alert.Labels "alertname" }}</td>
+            <td>{{ index $alert.Labels "job_name" }}</td>
+            <td>{{ index $alert.Annotations "description" }}</td>
+            <td>{{ index $alert.Annotations "value" }}</td>
+            {{/* 时区问题 给时间加上8小时, 如果无时区问题则不需要加 直接使用$alert.StartsAt.Format */}}
+            <td>{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05 Monday" }}</td>
+        </tr>
+    {{ end }}
+</table>
+{{ end }}{{- end }}
+ 
+{{/* 发送邮件的主题 */}}
+{{ define "__subject" }}Flink实时数据监控-告警邮件 {{ .GroupLabels.SortedPairs.Values | join " " }} {{ if gt (len .CommonLabels) (len .GroupLabels) }}{{ end }}{{ end }}
+~~~
+
+配置完成之后通过 `curl -X POST http:*//127.0.0.1:9093/-/reload` 重新加载配置文件
+
+当触发告警后会收到邮件通知
+
+![告警邮件](./flink-metrics/Snipaste_2023-02-27_14-52-43.png)
 
 ## 配置Grafana
 
