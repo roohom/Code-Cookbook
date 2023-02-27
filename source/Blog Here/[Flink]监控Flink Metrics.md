@@ -85,7 +85,7 @@ java.io.IOException: Response code from http://localhost:9091/metrics/job/flinkJ
 
 首先, 配置Prometheus添加Alertmanager, 在prometheus的配置文件`prometheus.yml`下指明alertmanager的地址
 
-~~~yml
+~~~yaml
 $ prometheus-2.40.1 cat prometheus.yml
 # my global config
 global:
@@ -124,7 +124,7 @@ scrape_configs:
 
 Prometheus监控的一些列规则都在`rule_files`下,该key下的文件都在prometheus部署的目录下,以下举例.Prometheus会定时轮训查询expr表达式下的逻辑,如果满足告警将会触发告警,将告警发送给alertmanager
 
-~~~yml
+~~~yaml
 groups:
   - name: 无数据流入和增长率过低监控
     rules:
@@ -148,7 +148,7 @@ groups:
 
 在Alertmanager中需要配置接收告警组,接受人以及配置邮件基础信息.
 
-~~~yml
+~~~yaml
 global:
   resolve_timeout: 5m #解析超时时间，也就是报警恢复不是立马发送的，而是在一个时间范围内不在触发报警，才能发送恢复报警，默认为5分钟
   # smtp配置
