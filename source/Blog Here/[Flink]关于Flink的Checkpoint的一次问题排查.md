@@ -174,6 +174,8 @@ state.checkpoints.num-retained: 10
 
 ## 总结
 
+### 剖析
+
 检查点是所有算子状态的一个快照。而这些快找所要存储的位置就是状态后端。
 
 Flink的flink-conf.yml文件中关于checkpoint的配置：
@@ -248,3 +250,15 @@ streamExecutionEnvironment.setStateBackend(new FsStateBackend("hdfs://nameservic
 
 
 成功配置文件系统的状态后端，让checkpoint可以成功执行，消费kafka的topic的offset可以成功提交，解决了该问题。
+
+
+
+### 拓展
+
+使用广播变量算子(Broadcast)并开启了CHK时，所有的task都会广播内容的数据写入CHK。
+
+> - **All tasks checkpoint their broadcast state:** Although all tasks have the same elements in their broadcast state when a checkpoint takes place (checkpoint barriers do not overpass elements), all tasks checkpoint their broadcast state, and not just one of them. This is a design decision to avoid having all tasks read from the same file during a restore (thus avoiding hotspots), although it comes at the expense of increasing the size of the checkpointed state by a factor of p (= parallelism). Flink guarantees that upon restoring/rescaling there will be **no duplicates** and **no missing data**. In case of recovery with the same or smaller parallelism, each task reads its checkpointed state. Upon scaling up, each task reads its own state, and the remaining tasks (`p_new`-`p_old`) read checkpoints of previous tasks in a round-robin manner.
+
+所以，并行度为p，广播算子内容就会p倍被存储至状态后端指定的文件系统。
+
+所以，以上述JobGraph图来看，广播算子将数据广播到了下游的4个算子上(文最开始引用的图不是最终的，实际下游只有4个算子)，每个算子的并行度是3，那么一共的并行度为`4*3=12`，同时每一份被广播的数据大小为518Mb(成功执行的CHK的详情种可以看得到), 那么数据一共是`12*518MB/1024Mb=6.07GB`
