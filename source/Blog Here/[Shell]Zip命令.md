@@ -39,3 +39,10 @@ zip -d myfile.zip smart.txt			#删除压缩文件中的指定文件
 ~~~
 
 删除压缩文件包里面的内容不仅可以解压删除再压缩，还可以用上面的命令。
+
+比如想删除名为`flink-shaded-hadoop-3-uber-3.1.1.7.2.8.0-224-9.0.jar`的jar包里面的`javax.servlet`则可以使用以下命令
+
+~~~shell
+zip -d flink-shaded-hadoop-3-uber-3.1.1.7.2.8.0-224-9.0.jar javax/servlet/\*
+~~~
+
