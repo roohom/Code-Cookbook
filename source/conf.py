@@ -34,7 +34,8 @@ release = '0.2'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-		'recommonmark',
+		# 'recommonmark',
+		"myst_parser",
 		'sphinx.ext.autodoc',
 		'sphinx.ext.autosummary',
 		'sphinx.ext.todo',
@@ -83,10 +84,10 @@ exclude_patterns = [
 # ---------------Personal Settings---------------------
 # 支持MarkDown
 # source_suffix = '.rst'
-from recommonmark.parser import CommonMarkParser
-source_parsers = {
-    '.md': CommonMarkParser,
-}
+# from recommonmark.parser import CommonMarkParser
+# source_parsers = {
+#     '.md': CommonMarkParser,
+# }
 source_suffix = ['.rst',
 				 '.md',
 				 'MD',
