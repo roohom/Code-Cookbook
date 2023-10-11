@@ -88,6 +88,12 @@ exclude_patterns = [
 # source_parsers = {
 #     '.md': CommonMarkParser,
 # }
+
+import myst_parser
+
+source_parsers = {
+    '.md': myst_parser
+}
 source_suffix = ['.rst',
 				 '.md',
 				 'MD',
