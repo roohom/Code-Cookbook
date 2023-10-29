@@ -1,4 +1,4 @@
-# [SPARK]CDP上安装其他版本SPARK(SPARK3)
+# [Spark]CDP上安装其他版本SPARK(SPARK3)
 
 ## 背景
 
