@@ -1,4 +1,4 @@
-# [JAVA]如何根据需要动态生成Java的class
+# [Java]如何根据需要动态生成Java的class
 
 ## 需求描述
 
