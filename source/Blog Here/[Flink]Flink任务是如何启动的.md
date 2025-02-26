@@ -505,7 +505,9 @@ public static StreamExecutionEnvironment getExecutionEnvironment(Configuration c
 
 1、先得到工厂类
 
-2、调用工厂类的createLocalEnvironment方法
+2、调用工厂类的createExecutionEnvironment方法
+
+3、如果没找到工厂，则调用createLocalEnvironment方法，创建一个本地运行环境
 
 接下来，只要找到工厂类的“诞生”的位置就OK了
 
@@ -520,6 +522,12 @@ public static StreamExecutionEnvironment getExecutionEnvironment(Configuration c
 凭着大数据直觉，我们选第二个进去，此时我们来到了一个叫StreamContextEnvironment`org.apache.flink.client.program.StreamContextEnvironment`的类中，并且进入到方法`org.apache.flink.client.program.StreamContextEnvironment#setAsContext`中，还记得吗，这个方法很熟悉！
 
 什么？不熟悉？没关系，看了这么多代码一定脑子懵懵的，我们慢慢接着分析~
+
+其实这个方法就在上面的executeProgram方法中有过调用：
+
+![setAsContext](flink-startup/setAsContext.jpg)
+
+
 
 先看看这个方法干了啥：
 
@@ -560,7 +568,9 @@ public static void setAsContext(
 }
 ~~~
 
-和你想的一样，实例化一个StreamExecutionEnvironmentFactory，但是，你发现没？lambda表达式中，return的是一个StreamContextEnvironment对象，别慌~
+和你想的一样，实例化一个StreamExecutionEnvironmentFactory，但是，你发现没？lambda表达式中，return的是一个StreamContextEnvironment对象，不是我们要的工厂呀！咋回事？
+
+别慌~
 
 ![StreamContextEnvironment](flink-startup/StreamContextEnvironment.jpg)
 
