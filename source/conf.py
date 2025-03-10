@@ -142,6 +142,7 @@ html_theme = 'sphinx_rtd_theme'
 html_js_files = [
     'js/custom.js',
 ]
+mermaid_d3_zoom = True
 
 html_theme_options = {
     "rightsidebar": "true",
