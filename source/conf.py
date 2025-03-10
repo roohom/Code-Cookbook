@@ -139,7 +139,9 @@ notfound_context = {
 html_theme = 'sphinx_rtd_theme'
 #html_theme = 'alabaster'
 
-html_js_files = ["js/expand_tabs.js"]
+html_js_files = [
+    'js/custom.js',
+]
 
 html_theme_options = {
     "rightsidebar": "true",
