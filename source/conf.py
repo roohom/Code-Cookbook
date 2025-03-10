@@ -80,6 +80,7 @@ language = 'zh_CN'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = [
 	'sphinx.ext.napoleon',
+    '_build'
 ]
 
 
@@ -96,10 +97,18 @@ import myst_parser
 source_parsers = {
     '.md': myst_parser
 }
-source_suffix = ['.rst',
-				 '.md',
-				 'MD',
-                'markdown']
+# source_suffix = ['.rst',
+# 				 '.md',
+# 				 'MD',
+#                 'markdown']
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
+}
+
+myst_fence_as_directive = ["mermaid"]
+
 
 #source_suffix = ['.rst',
 #				 '.md',
