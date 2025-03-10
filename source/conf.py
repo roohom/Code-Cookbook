@@ -40,6 +40,10 @@ extensions = [
 		'sphinx.ext.autosummary',
 		'sphinx.ext.todo',
 		'sphinx.ext.autosectionlabel',
+        'sphinxcontrib.mermaid',
+        "sphinxcontrib.httpdomain",
+        "sphinxcontrib.video",
+        "sphinxemoji.sphinxemoji",
 ]
 
 
