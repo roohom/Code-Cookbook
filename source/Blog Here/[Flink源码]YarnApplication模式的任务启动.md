@@ -136,6 +136,15 @@ clusterDescriptor.deployApplicationCluster(
 
 执行的其实就是`org.apache.flink.yarn.YarnClusterDescriptor#deployApplicationCluster`
 
+### 总结
+
+~~~mermaid
+flowchart LR
+    CliFrontend.parseAndRun --> CliFrontend.runApplication --> ApplicationDeployer.run --> YarnClusterDescriptor.deployApplicationCluster
+~~~
+
+
+
 
 
 ## deployApplicationCluster
@@ -410,7 +419,7 @@ public DispatcherResourceManagerComponent create(
 
 
 
-### resourceManagerService
+### resourceManagerService的创建
 
 来看看resourceManagerService是如何创建的，它的创建通过调用ResourceManagerServiceImpl的create方法进行创建，
 
@@ -436,7 +445,7 @@ resourceManagerService =
 
 
 
-### dispatcherRunner
+### dispatcherRunner的创建
 
 dispatcherRunner和resourceManagerService的创建在同一个地方
 
@@ -817,7 +826,7 @@ public void start(LeaderContender newContender) throws Exception {
 }
 ~~~
 
-这个contender就是刚才的DefaultDispatcherRunner，上面是参数校验，直接看最后一样，这里调用了grantLeadership()，那么应该看DefaultDispatcherRunner的grantLeadership方法，OK，我们回去，又要开始剥洋葱了
+这个contender就是刚才的DefaultDispatcherRunner，上面是参数校验，直接看最后一行，这里调用了grantLeadership()，那么应该看DefaultDispatcherRunner的grantLeadership方法，OK，我们回去，又要开始剥洋葱了
 
 ~~~java
 @Override
