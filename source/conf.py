@@ -96,10 +96,14 @@ import myst_parser
 source_parsers = {
     '.md': myst_parser
 }
-source_suffix = ['.rst',
-				 '.md',
-				 'MD',
- ]
+# source_suffix = ['.rst',
+# 				 '.md',
+# 				 'MD',
+#  ]
+
+source_suffix = {
+    '.md': 'markdown'
+}
 
 #source_suffix = ['.rst',
 #				 '.md',
