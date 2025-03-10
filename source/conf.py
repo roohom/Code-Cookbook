@@ -41,8 +41,6 @@ extensions = [
 		'sphinx.ext.todo',
 		'sphinx.ext.autosectionlabel',
         'sphinxcontrib.mermaid',
-        "sphinxcontrib.httpdomain",
-        "sphinxcontrib.video",
         "sphinxemoji.sphinxemoji",
 ]
 
