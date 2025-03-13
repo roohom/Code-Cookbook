@@ -13,10 +13,52 @@
 我们通常通过以下方式启动提交一个flink on yarn application的任务
 
 ~~~shell
-./bin/flink run-application -t yarn-application ./examples/streaming/TopSpeedWindowing.jar
+./bin/flink run-application -t yarn-application ./examples/streaming/WordCount.jar
 ~~~
 
-对应源码在`org.apache.flink.client.cli.CliFrontend#parseAndRun`
+正常来说，我们会在命令行得到类似下面这样的日志输出：
+
+~~~shell
+[root@prd-cdp-gateway-03 flink-1.15.4]# ./bin/flink run-application \
+>   -t yarn-application \
+>   -Djobmanager.memory.process.size=1024m \
+>   -Dtaskmanager.memory.process.size=1024m \
+>   -c org.apache.flink.streaming.examples.wordcount.WordCount \
+>   ./examples/streaming/WordCount.jar 
+Setting HBASE_CONF_DIR=/etc/hbase/conf because no HBASE_CONF_DIR was set.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/path/to/flink/flink-1.15.4/lib/log4j-slf4j-impl-2.17.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/cloudera/parcels/CDH-7.1.7-1.cdh7.1.7.p2046.46875634/jars/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+2025-03-14 00:06:42,231 INFO  org.apache.flink.yarn.cli.FlinkYarnSessionCli                [] - Found Yarn properties file under /tmp/.yarn-properties-root.
+2025-03-14 00:06:42,231 INFO  org.apache.flink.yarn.cli.FlinkYarnSessionCli                [] - Found Yarn properties file under /tmp/.yarn-properties-root.
+2025-03-14 00:06:42,555 INFO  org.apache.hadoop.security.UserGroupInformation              [] - Login successful for user template@TEMPLATE.COM using keytab file /root/keytabs/template.keytab. Keytab auto renewal enabled : false
+2025-03-14 00:06:42,591 WARN  org.apache.flink.yarn.configuration.YarnLogConfigUtil        [] - The configuration directory ('/path/to/flink/flink-1.15.4/conf') already contains a LOG4J config file.If you want to use logback, then please delete or rename the log configuration file.
+2025-03-14 00:06:42,880 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - No path for the flink jar passed. Using the location of class org.apache.flink.yarn.YarnClusterDescriptor to locate the jar
+2025-03-14 00:06:43,052 INFO  org.apache.hadoop.conf.Configuration                         [] - resource-types.xml not found
+2025-03-14 00:06:43,053 INFO  org.apache.hadoop.yarn.util.resource.ResourceUtils           [] - Unable to find 'resource-types.xml'.
+2025-03-14 00:06:43,061 WARN  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Neither the HADOOP_CONF_DIR nor the YARN_CONF_DIR environment variable is set. The Flink YARN Client needs one of these to be set to properly load the Hadoop configuration for accessing YARN.
+2025-03-14 00:06:43,181 WARN  org.apache.flink.yarn.YarnClusterDescriptor                  [] - The specified queue ......
+2025-03-14 00:06:43,198 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Cluster specification: ClusterSpecification{masterMemoryMB=1024, taskManagerMemoryMB=1024, slotsPerTaskManager=1}
+2025-03-14 00:06:56,893 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Adding KRB5 configuration /etc/krb5.conf to the AM container local resource bucket
+2025-03-14 00:06:56,916 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Adding keytab /root/keytabs/template.keytab to the AM container local resource bucket
+2025-03-14 00:06:56,943 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Adding delegation token to the AM container.
+2025-03-14 00:06:56,944 INFO  org.apache.flink.yarn.Utils                                  [] - Obtaining delegation tokens for HDFS and HBase.
+2025-03-14 00:06:56,955 INFO  org.apache.hadoop.hdfs.DFSClient                             [] - Created token for scb: HDFS_DELEGATION_TOKEN owner=template@TEMPLATE.COM, renewer=yarn/bigdata-08.com@TEMPLATE.COM, realUser=, issueDate=1741882016949, maxDate=1742486816949, sequenceNumber=0, masterKeyId=0 on hadoop001.com:8020
+2025-03-14 00:06:56,985 INFO  org.apache.hadoop.mapreduce.security.TokenCache              [] - Got dt for hdfs://hadoop001.com:8020; Kind: HDFS_DELEGATION_TOKEN, Service: hadoop001.com:8020, Ident: (token for template: HDFS_DELEGATION_TOKEN owner=template@TEMPLATE.COM, renewer=yarn/bigdata-08.com@TEMPLATE.COM, realUser=, issueDate=1741882016949, maxDate=1742486816949, sequenceNumber=0, masterKeyId=0)
+2025-03-14 00:06:56,985 INFO  org.apache.flink.yarn.Utils                                  [] - Attempting to obtain Kerberos security token for HBase
+2025-03-14 00:06:56,986 INFO  org.apache.flink.yarn.Utils                                  [] - HBase is not available (not packaged with this application): ClassNotFoundException : "org.apache.hadoop.hbase.HBaseConfiguration".
+2025-03-14 00:06:56,992 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Submitting application master application_1731047694332_1842988
+2025-03-14 00:06:57,228 INFO  org.apache.hadoop.yarn.client.api.impl.YarnClientImpl        [] - Submitted application application_1731047694332_1842988
+2025-03-14 00:06:57,228 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Waiting for the cluster to be allocated
+2025-03-14 00:06:57,231 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Deploying cluster, current state ACCEPTED
+2025-03-14 00:07:16,125 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - YARN application has been deployed successfully.
+2025-03-14 00:07:16,127 INFO  org.apache.flink.yarn.YarnClusterDescriptor                  [] - Found Web Interface bigdata-34.com:34417 of application 'application_1731047694332_1842988'.
+[root@prd-cdp-gateway-03 flink-1.15.4]# 
+~~~
+
+提交命令背后所对应源码在`org.apache.flink.client.cli.CliFrontend#parseAndRun`
 
 ~~~java
 public int parseAndRun(String[] args) {
