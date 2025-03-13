@@ -182,10 +182,34 @@ clusterDescriptor.deployApplicationCluster(
 
 ~~~mermaid
 flowchart LR
+    CliFrontend.main --> CliFrontend.mainInternal --> CliFrontend.parseAndRun
     CliFrontend.parseAndRun --> CliFrontend.runApplication --> ApplicationDeployer.run --> YarnClusterDescriptor.deployApplicationCluster
 ~~~
 
 关于deployApplicationCluster的细节比较多，这里不作深入解析，只关注重要核心代码，尽量不干扰我们对于整个流程的理解
+
+
+
+## ApplicationMaster的启动
+
+deployApplicationCluster会进行ApplicationMaster的启动
+
+~~~mermaid
+
+graph LR
+    deployApplicationCluster[deployApplicationCluster] --> deployInternal --> isReadyForDeployment
+    isReadyForDeployment --> checkYarnQueues --> startAppMaster
+
+~~~
+
+关于startAppmater
+
+~~~mermaid
+graph LR
+初始化appContext --> resource[resource load] --> 将jobGraph暂存为文件 --> KRB[加载kerberos认证等配置文件]
+KRB --> AMContainer[初始化AM Container context] --> AMContainerResources[上传AM Container文件]
+--> 初始化ApplicationMasterEnv --> setApplicationNodeLabel --> setApplicationTags --> submitApplication
+~~~
 
 
 
@@ -201,11 +225,11 @@ flowchart LR
 >  
 > This method will block until the ApplicationMaster/JobManager have been deployed on YARN.
 >  
->  @param clusterSpecification Initial cluster specification for the Flink cluster to be deployed
->  @param applicationName name of the Yarn application to start
->  @param yarnClusterEntrypoint Class name of the Yarn cluster entry point.
->  @param jobGraph A job graph which is deployed with the Flink cluster, {@code null} if none
-> @param detached True if the cluster should be started in detached mode
+>  @param clusterSpecification Initial cluster specification for the Flink cluster to be deployed  
+>  @param applicationName name of the Yarn application to start  
+>  @param yarnClusterEntrypoint Class name of the Yarn cluster entry point.   
+>  @param jobGraph A job graph which is deployed with the Flink cluster, {@code null} if none  
+> @param detached True if the cluster should be started in detached mode    
 
 注意到这个"Flink Application Cluster"没，当我们的任务不指定job name的时候，打开web ui的时候看到的默认就是它，除此之外，最核心的一个参数其实是(String yarnClusterEntrypoint), 这里传入的是`YarnApplicationClusterEntryPoint.class.getName()`, 其实这个deployInternal里面干的事儿就是启动ApplicationMaster/JobManager，当AM启动之后需要执行的入口类就是YarnApplicationClusterEntryPoint，不妨进入YarnApplicationClusterEntryPoint里看看都有些什么：
 
