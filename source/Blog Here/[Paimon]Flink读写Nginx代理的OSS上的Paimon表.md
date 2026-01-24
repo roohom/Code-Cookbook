@@ -120,6 +120,16 @@ jindo-sdk-6.2.0.jar
 
 ### 创建catalog
 
+在读取之前，需要在flink-conf.yaml中定义类的声明
+
+~~~sql
+fs.oss.impl: com.aliyun.jindodata.oss.JindoOssFileSystem
+fs.AbstractFileSystem.oss.impl: com.aliyun.jindodata.oss.OSS
+fs.allowed-fallback-filesystems: OSS
+~~~
+
+
+
 读取部分，可以使用如下SQL，创建catalog
 
 ~~~sql
