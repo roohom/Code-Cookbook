@@ -1041,7 +1041,7 @@ private List<File> getLocalLogConfFiles() {
 以下代码可以拓展延伸至提交flink任务到yarn上，后续研究。
 
 ~~~java
-package com.csvw.pipeplat.deployment;
+package com.example.pipeplat.deployment;
 
 import org.apache.flink.client.deployment.ClusterDeploymentException;
 import org.apache.flink.client.deployment.ClusterSpecification;
@@ -1056,7 +1056,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class KubernetesDeploymentTest {
-    private static final String APPLICATION_MAIN_CLASS_NAME = "com.csvw.pipeplat.Application";
+    private static final String APPLICATION_MAIN_CLASS_NAME = "com.example.pipeplat.Application";
     private static final String FLINK_HOME = "/Users/roohom/export/service/flink-1.18.1/";
     private static final String FLINK_CONF_DIR = "/Users/roohom/export/service/flink-1.18.1/conf";
     private static final String FLINK_CONF_YAML = "/Users/roohom/export/service/flink-1.18.1/conf/flink-conf.yaml";
