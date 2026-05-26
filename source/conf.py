@@ -62,6 +62,13 @@ html_js_files = [
     'js/expand_tabs.js',
 ]
 
+html_css_files = [
+    'css/custom.css',
+]
+
+html_title = "Roohom's Code-Cookbook"
+html_short_title = 'Code-Cookbook'
+
 html_theme_options = {
     'rightsidebar': 'true',
     'relbarbgcolor': 'black',
