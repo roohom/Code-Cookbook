@@ -2,15 +2,30 @@
   --cc-bg: #f6f8fb;
   --cc-surface: #ffffff;
   --cc-text: #1f2937;
+  --cc-heading: #0f172a;
   --cc-muted: #64748b;
   --cc-border: #e2e8f0;
   --cc-code-bg: #f1f5f9;
+  --cc-code-fade-start: rgba(241, 245, 249, 0);
+  --cc-code-text: #111827;
   --cc-brand: #155e75;
   --cc-brand-dark: #0f4f6d;
   --cc-nav: #f8fafc;
   --cc-nav-soft: #eaf3f7;
+  --cc-nav-current: #ffffff;
+  --cc-nav-current-link: #eaf3f7;
+  --cc-nav-sub-current: #dbeafe;
+  --cc-input-bg: #ffffff;
+  --cc-input-text: #0f172a;
+  --cc-input-placeholder: #64748b;
+  --cc-card-bg: #ffffff;
+  --cc-table-head: #f8fafc;
+  --cc-quote-bg: #f8fafc;
+  --cc-inline-code-bg: #f8fafc;
+  --cc-inline-code-border: #dbeafe;
   --cc-nav-width: clamp(420px, 32vw, 540px);
   --cc-mobile-nav-width: 300px;
+  color-scheme: light;
 }
 
 html {
@@ -31,7 +46,7 @@ a {
 }
 
 a:hover {
-  color: #0f4f6d;
+  color: var(--cc-brand-dark);
 }
 
 .wy-body-for-nav {
@@ -42,7 +57,7 @@ a:hover {
   max-width: none;
   min-height: 100vh;
   background: var(--cc-surface);
-  box-shadow: 0 0 0 1px rgba(226, 232, 240, 0.75);
+  box-shadow: 0 0 0 1px var(--cc-border);
 }
 
 .wy-nav-content-wrap {
@@ -80,12 +95,12 @@ a:hover {
   border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 6px;
   box-shadow: none;
-  color: #0f172a;
-  background: #ffffff;
+  color: var(--cc-input-text);
+  background: var(--cc-input-bg);
 }
 
 .wy-side-nav-search input[type="text"]::placeholder {
-  color: #64748b;
+  color: var(--cc-input-placeholder);
 }
 
 .wy-menu-vertical header,
@@ -111,13 +126,13 @@ a:hover {
 
 .wy-menu-vertical li.current > a,
 .wy-menu-vertical li.on a {
-  color: #0f172a;
+  color: var(--cc-heading);
   border-color: var(--cc-brand);
-  background: #eaf3f7;
+  background: var(--cc-nav-current-link);
 }
 
 .wy-menu-vertical li.current {
-  background: #ffffff;
+  background: var(--cc-nav-current);
 }
 
 .wy-menu-vertical li.toctree-l1.current > a {
@@ -128,7 +143,7 @@ a:hover {
 .wy-menu-vertical li.toctree-l2.current > a,
 .wy-menu-vertical li.toctree-l3.current > a,
 .wy-menu-vertical li.toctree-l4.current > a {
-  background: #dbeafe;
+  background: var(--cc-nav-sub-current);
   font-weight: 700;
 }
 
@@ -147,7 +162,7 @@ a:hover {
 .rst-content h2,
 .rst-content h3,
 .rst-content h4 {
-  color: #0f172a;
+  color: var(--cc-heading);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
     "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   font-weight: 750;
@@ -186,7 +201,7 @@ a:hover {
 
 .cc-home-title {
   margin: 0;
-  color: #0f172a;
+  color: var(--cc-heading);
   font-size: clamp(2.4rem, 5vw, 5rem);
   font-weight: 800;
   letter-spacing: 0;
@@ -196,7 +211,7 @@ a:hover {
 .cc-home-subtitle {
   max-width: 760px;
   margin: 1.2rem 0 0;
-  color: #475569;
+  color: var(--cc-muted);
   font-size: 1.1rem;
   line-height: 1.8;
 }
@@ -211,7 +226,7 @@ a:hover {
 
 .cc-home-meta strong {
   display: block;
-  color: #0f172a;
+  color: var(--cc-heading);
   font-size: 1.15rem;
 }
 
@@ -229,8 +244,8 @@ a:hover {
   padding: 0 0.9rem;
   border: 1px solid var(--cc-border);
   border-radius: 6px;
-  color: #0f172a;
-  background: #ffffff;
+  color: var(--cc-heading);
+  background: var(--cc-card-bg);
   font-weight: 650;
 }
 
@@ -252,20 +267,20 @@ a:hover {
   padding: 1.2rem;
   border: 1px solid var(--cc-border);
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--cc-card-bg);
 }
 
 .cc-home-card h2 {
   margin: 0 0 0.7rem;
   padding: 0;
   border: 0;
-  color: #0f172a;
+  color: var(--cc-heading);
   font-size: 1.15rem;
 }
 
 .cc-home-card p {
   margin-bottom: 0.9rem;
-  color: #475569;
+  color: var(--cc-muted);
   font-size: 0.96rem;
 }
 
@@ -275,7 +290,7 @@ a:hover {
 
 .cc-home-section-title {
   margin-top: 2rem;
-  color: #0f172a;
+  color: var(--cc-heading);
   font-size: 1.35rem;
 }
 
@@ -297,16 +312,16 @@ a:hover {
 .rst-content blockquote {
   margin: 1.2rem 0;
   padding: 0.8rem 1rem;
-  color: #475569;
+  color: var(--cc-muted);
   border-left: 4px solid var(--cc-brand);
-  background: #f8fafc;
+  background: var(--cc-quote-bg);
 }
 
 .rst-content code.literal {
   color: #155e75;
-  border: 1px solid #dbeafe;
+  border: 1px solid var(--cc-inline-code-border);
   border-radius: 4px;
-  background: #f8fafc;
+  background: var(--cc-inline-code-bg);
   font-size: 0.9em;
 }
 
@@ -317,12 +332,82 @@ a:hover {
   background: var(--cc-code-bg);
 }
 
+.cc-code-block {
+  position: relative;
+  margin: 1.1rem 0 1.3rem;
+}
+
+.cc-code-block div[class^="highlight"],
+.cc-code-block pre.literal-block {
+  margin: 0;
+}
+
+.cc-code-footer {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 2.1rem 0 0.75rem;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(var(--cc-code-fade-start), var(--cc-code-bg) 55%);
+  pointer-events: none;
+}
+
+.cc-code-toggle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  margin: 0;
+  padding: 0 0.7rem;
+  border: 1px solid var(--cc-border);
+  border-radius: 6px;
+  color: var(--cc-heading);
+  background: var(--cc-card-bg);
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.cc-code-toggle:hover {
+  color: var(--cc-brand);
+  border-color: var(--cc-brand);
+}
+
+.cc-code-toggle:focus-visible {
+  outline: 2px solid var(--cc-brand);
+  outline-offset: 2px;
+}
+
+.cc-code-collapsible {
+  position: relative;
+  transition: max-height 180ms ease;
+}
+
+.cc-code-collapsible.is-collapsed {
+  max-height: var(--cc-code-collapsed-height);
+  overflow: hidden;
+}
+
+.cc-code-collapsible.is-collapsed::after {
+  content: none;
+}
+
 .rst-content div[class^="highlight"] pre,
 .rst-content pre.literal-block {
   padding: 1rem;
-  color: #111827;
+  color: var(--cc-code-text);
   font-size: 0.9rem;
   line-height: 1.68;
+}
+
+.cc-code-block:not(.is-collapsed) div[class^="highlight"] pre,
+.cc-code-block:not(.is-collapsed) pre.literal-block {
+  padding-bottom: 4.5rem;
 }
 
 .rst-content table.docutils {
@@ -332,7 +417,7 @@ a:hover {
 }
 
 .rst-content table.docutils thead {
-  background: #f8fafc;
+  background: var(--cc-table-head);
 }
 
 .rst-content table.docutils th,
@@ -379,6 +464,100 @@ a:hover {
 footer {
   color: var(--cc-muted);
   font-size: 0.86rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cc-bg: #0f172a;
+    --cc-surface: #111827;
+    --cc-text: #d8dee9;
+    --cc-heading: #f8fafc;
+    --cc-muted: #94a3b8;
+    --cc-border: #263244;
+    --cc-code-bg: #0b1220;
+    --cc-code-fade-start: rgba(11, 18, 32, 0);
+    --cc-code-text: #e5e7eb;
+    --cc-brand: #67c6dd;
+    --cc-brand-dark: #164e63;
+    --cc-nav: #111827;
+    --cc-nav-soft: #162235;
+    --cc-nav-current: #0f172a;
+    --cc-nav-current-link: #1e293b;
+    --cc-nav-sub-current: #24324a;
+    --cc-input-bg: #f8fafc;
+    --cc-input-text: #0f172a;
+    --cc-input-placeholder: #64748b;
+    --cc-card-bg: #151f2e;
+    --cc-table-head: #162235;
+    --cc-quote-bg: #141f2f;
+    --cc-inline-code-bg: #0b1220;
+    --cc-inline-code-border: #334155;
+    color-scheme: dark;
+  }
+
+  a {
+    color: var(--cc-brand);
+  }
+
+  a:hover {
+    color: #a5e8f5;
+  }
+
+  .wy-nav-side {
+    border-right-color: var(--cc-border);
+  }
+
+  .wy-side-nav-search {
+    background: #0f4f6d;
+    border-bottom-color: #0b4059;
+  }
+
+  .wy-menu-vertical header,
+  .wy-menu-vertical p.caption,
+  .wy-menu-vertical li.toctree-l2 a,
+  .wy-menu-vertical li.toctree-l3 a,
+  .wy-menu-vertical li.toctree-l4 a,
+  .wy-breadcrumbs,
+  .wy-breadcrumbs a {
+    color: var(--cc-muted);
+  }
+
+  .wy-menu-vertical a {
+    color: #cbd5e1;
+  }
+
+  .wy-menu-vertical a:hover {
+    color: var(--cc-heading);
+    background: var(--cc-nav-soft);
+  }
+
+  .wy-menu-vertical li.toctree-l1.current > a {
+    border-top-color: var(--cc-border);
+    border-bottom-color: var(--cc-border);
+  }
+
+  .cc-home-actions a:first-child {
+    color: #082f49;
+    border-color: var(--cc-brand);
+    background: var(--cc-brand);
+  }
+
+  .rst-content table.docutils,
+  .rst-content table.docutils th,
+  .rst-content table.docutils td {
+    border-color: var(--cc-border);
+  }
+
+  .rst-content .admonition,
+  .rst-content .note,
+  .rst-content .warning,
+  .rst-content .attention {
+    background: var(--cc-card-bg);
+  }
+
+  .highlight .hll {
+    background-color: #1e293b;
+  }
 }
 
 @media screen and (min-width: 961px) and (max-width: 1180px) {

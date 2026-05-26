@@ -60,6 +60,7 @@ html_theme = 'sphinx_rtd_theme'
 
 html_js_files = [
     'js/expand_tabs.js',
+    'js/code_blocks.js',
 ]
 
 html_css_files = [
