@@ -17,7 +17,7 @@ Roohom's Code-Cookbook
        </a>
        <nav class="cc-home-menu" aria-label="首页导航">
          <div class="cc-home-menu-item">
-           <a href="Blog%20Here/index.html">文章</a>
+           <a href="articles.html">文章</a>
            <div class="cc-home-dropdown">
              <a href="Blog%20Here/index.html">工程实践</a>
              <a href="Bigdata/index.html">大数据</a>
@@ -26,7 +26,7 @@ Roohom's Code-Cookbook
            </div>
          </div>
          <div class="cc-home-menu-item">
-           <a href="Bigdata%20Tools/index.html">项目</a>
+           <a href="projects.html">项目</a>
            <div class="cc-home-dropdown">
              <a href="Bigdata%20Tools/index.html">Bigdata Tools</a>
              <a href="Auxiliary%20tools/index.html">Auxiliary Tools</a>
@@ -42,10 +42,9 @@ Roohom's Code-Cookbook
        <div class="cc-home-center">
          <div class="cc-home-symbol" aria-hidden="true">◇</div>
          <p class="cc-home-kicker">Personal technical cookbook</p>
-         <h1 class="cc-home-title">在工程现场，写下一本安静的技术食谱。</h1>
+         <h1 class="cc-home-title">代码烹饪指南</h1>
          <p class="cc-home-subtitle">
-           Code-Cookbook 记录大数据、后端工程、SQL 与工具链里的真实问题。
-           它不追逐噪声，只收藏可复用的路径、判断和一点书卷气。
+           可能出错的地方就一定会出错。
          </p>
          <div class="cc-home-actions">
            <a href="Blog%20Here/index.html">阅读最新文章</a>
@@ -134,6 +133,8 @@ Roohom's Code-Cookbook
    
    
    Blog Here/index
+   articles
+   projects
 
 .. toctree::
    :maxdepth: 2

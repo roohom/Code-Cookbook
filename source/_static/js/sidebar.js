@@ -21,7 +21,7 @@
     if (!nav || !wrap) return;
 
     // Hide sidebar on homepage
-    if (isHomePage()) {
+    if (document.querySelector(".cc-home-shell") || isHomePage()) {
       nav.style.display = "none";
       wrap.style.marginLeft = "0";
       return;
