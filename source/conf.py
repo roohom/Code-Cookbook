@@ -59,8 +59,10 @@ latex_elements = {
 html_theme = 'sphinx_rtd_theme'
 
 html_js_files = [
+    'js/theme-toggle.js',
     'js/expand_tabs.js',
     'js/code_blocks.js',
+    'js/sidebar.js',
 ]
 
 html_css_files = [
@@ -89,3 +91,16 @@ notfound_context = {
 <p>Try using the search box or go to the homepage.</p>
 ''',
 }
+
+
+def setup(app):
+    app.add_js_file(
+        None,
+        body=(
+            '(function(){'
+            'var t=localStorage.getItem("cc-theme");'
+            'var d=t?t==="dark":matchMedia("(prefers-color-scheme:dark)").matches;'
+            'if(d)document.documentElement.classList.add("cc-dark");'
+            '})()'
+        ),
+    )

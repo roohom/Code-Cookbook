@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>48. [Java]面向对象知识点梳理 &mdash; Roohom&#39;s Code-Cookbook</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=52e5c765" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4bdbbcd3"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script>(function(){var t=localStorage.getItem("cc-theme");var d=t?t==="dark":matchMedia("(prefers-color-scheme:dark)").matches;if(d)document.documentElement.classList.add("cc-dark");})()</script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+        <script src="../_static/js/theme-toggle.js?v=9ad89d37"></script>
+        <script src="../_static/js/expand_tabs.js?v=1e151f68"></script>
+        <script src="../_static/js/code_blocks.js?v=65e6d129"></script>
+        <script src="../_static/js/sidebar.js?v=5cbd41da"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="49. [Java]OOP防脱发指南" href="%5BJava%5D%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html" />
+    <link rel="prev" title="47. [Java]设计模式六大原则" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Code-Cookbook
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">博客</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Blogs</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Boxed%20Error.html">1. [Springboot x spark]java.util.concurrent.ExecutionException: Boxed Error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BApollo%5DApollo%20Config%20Center.html">2. [Apollo]Apollo Config Center</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BConfluent%5DConfluent.html">3. [Confluent]Confluent快速上手</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DCommdLine%2BSpringboot%2Bflink%E6%97%A0%E6%B3%95%E6%8C%87%E5%AE%9A%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%90%AF%E5%8A%A8.html">4. [Flink]CommdLine+Springboot+flink无法指定配置文件启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlink%20on%20k8s%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%8F%90%E4%BA%A4%E5%92%8C%E5%AE%9E%E6%93%8D.html">5. [Flink]Flink on k8s任务的提交和实操</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlink-connector-http.html">6. [Flink]Flink-connector-http</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlinkKafkaProducer%E5%90%AF%E7%94%A8%E5%8E%8B%E7%BC%A9.html">7. [Flink]FlinkKafkaProducer启用压缩</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlinkSQL%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0.html">8. [Flink]FlinkSQL时间处理函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlinkSource.html">9. [Flink]Flink Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlink%E7%9A%84watermark%E6%9C%BA%E5%88%B6.html">10. [Flink]Flink中自定义watermark生成器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DFlink%E7%9A%84%E5%B9%B6%E8%A1%8C%E5%BA%A6%E4%B8%8ETaskSlot.html">11. [Flink]Flink的并行度与TaskSlot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5DProcessFunction%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%EF%BC%8C%E6%8A%9B%E5%87%BAInvalidProgramException.html">12. [Flink]ProcessFunction无法使用，抛出InvalidProgramException</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E4%BD%BF%E7%94%A8%E7%8A%B6%E6%80%81%E7%AE%97%E5%AD%90%E5%B0%86stream%E8%81%9A%E5%90%88%E8%BE%93%E5%87%BA.html">13. [Flink]使用状态算子将stream聚合输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E5%85%B3%E4%BA%8EFlink%E7%9A%84Checkpoint%E7%9A%84%E4%B8%80%E6%AC%A1%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5.html">14. [Flink]关于Flink的Checkpoint的一次问题排查</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E5%A6%82%E4%BD%95%E6%9B%B4%E9%80%9A%E7%94%A8%E5%9C%B0%E5%B0%86Kafka%28%E6%88%96%E5%85%B6%E4%BB%96%29%E6%95%B0%E6%8D%AE%E8%90%BD%E5%9C%B0Hive%EF%BC%9F.html">15. [Flink]如何更通用地将Kafka(或其他)数据落地Hive？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E7%9B%91%E6%8E%A7Flink%20Metrics.html">16. [Flink]监控Flink Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%5D%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BA%8F%E5%88%97%E5%8C%96%E6%B6%88%E8%B4%B9Kafka%E6%95%B0%E6%8D%AE.html">17. [Flink]自定义序列化消费Kafka数据</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%E6%BA%90%E7%A0%81%5DFlink%E4%BB%BB%E5%8A%A1%E6%98%AF%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E7%9A%84.html">18. [Flink源码]Flink任务是如何启动的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%E6%BA%90%E7%A0%81%5DYarnApplication%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%90%AF%E5%8A%A8.html">19. [Flink源码]YarnApplication模式的任务启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BFlink%E6%BA%90%E7%A0%81%5D%E6%B5%81%E5%BC%8F%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F%E4%B8%8E%E9%85%8D%E7%BD%AE%E7%9A%84%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A.html">20. [Flink源码]流式工厂模式与配置的延迟绑定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BGit%5DGit.html">21. [Git]Git问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BGit%5D%E8%AF%AF%E5%9C%A8Master%E5%88%86%E6%94%AF%E5%BC%80%E5%8F%91%E5%B9%B6commit%E6%97%A0%E6%B3%95push.html">22. [Git]误在Master分支开发并commit无法push</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHadoop%5DHadoop%20distcp.html">23. [Hadoop]Hadoop distcp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHadoop%5D%E4%B8%80%E4%BA%9BHadoop%E9%97%AE%E9%A2%98.html">24. [Hadoop]一些Hadoop问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5DHive%E5%88%86%E5%8C%BA%E8%A1%A8%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E5%88%86%E5%8C%BA.html">25. [Hive]Hive分区表批量删除分区</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5DHive%E7%9A%84Analyze%E5%87%BD%E6%95%B0%EF%BC%8CStatistics%20in%20Hive.html">26. [Hive]Hive的Analyze函数，Statistics in Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E4%BF%AE%E6%94%B9%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F%E4%B8%BAParquet%E7%9A%84Hive%E8%A1%A8%E7%9A%84%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B.html">27. [Hive]修改存储格式为Parquet的Hive表的字段类型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E5%9C%A8%E6%8C%87%E5%AE%9A%E4%BD%8D%E7%BD%AE%E6%B7%BB%E5%8A%A0%E5%AD%97%E6%AE%B5.html">28. [Hive]在指定位置添加字段</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E5%A4%96%E9%83%A8%E8%A1%A8%E4%BF%AE%E6%94%B9%E4%B8%BA%E5%86%85%E9%83%A8%E8%A1%A8.html">29. [Hive]外部表修改为内部表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E6%9B%B4%E6%96%B0Metastore%E4%B8%AD%E7%9A%84LastAccessTime.html">30. [Hive]更新Metastore中的LastAccessTime</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BHive%5D%E6%9C%AC%E5%9C%B0%E8%BF%9E%E6%8E%A5%E9%9C%80%E8%A6%81Kerberos%E8%AE%A4%E8%AF%81%E7%9A%84Hive.html">31. [Hive]本地连接需要Kerberos认证的Hive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DAnnotation.html">32. [Java]元注解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DAnnotation.html#id1">33. 注解解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DCollection.html">34. [Java]集合</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DCollection.html#id8">35. 简单(常用)数据结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DJava8%20Stream.html">36. [Java]Java8 Stream API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DSPI%E5%92%8C%E8%B4%A3%E4%BB%BB%E9%93%BE%E6%A8%A1%E5%BC%8F.html">37. [Java]SPI和责任链模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DSocket.html">38. [Java]Socket</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5DSocket%E5%8F%91%E9%80%81%E6%96%87%E4%BB%B6%E8%87%B3%E6%9C%8D%E5%8A%A1%E7%AB%AF.html">39. [Java]使用Java在服务端和客户端之间传送文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E4%B8%89%E7%A7%8D%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8%E4%BA%8E%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%90%AF%E5%8A%A8.html">40. [Java]三种策略模式应用于服务的启动</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E5%A4%9A%E7%BA%BF%E7%A8%8B.html">41. [Java]多线程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E9%9C%80%E8%A6%81%E5%8A%A8%E6%80%81%E7%94%9F%E6%88%90Java%E7%9A%84class.html">42. [Java]如何根据需要动态生成Java的class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E9%97%AE%E9%A2%98.html">43. [Java]生产者消费者模型问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%A9%E9%A1%B9%E7%9B%AE%E9%A1%BA%E5%88%A9%E8%AF%BB%E5%8F%96resources%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6.html">44. [Java]让项目顺利读取resources目录下的文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html">45. [Java]设计模式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html#continuing">46. Continuing…</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html">47. [Java]设计模式六大原则</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">48. [Java]面向对象知识点梳理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">48.1. 面向对象知识点梳理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">48.1.1. 类</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">48.1.2. 对象</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">48.1.3. 封装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">48.1.4. 构造方法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">48.1.5. 继承</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thissuper">48.1.6. this和super</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">48.1.7. 多态</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">48.1.8. 接口</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">48.2. 面向对象</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">48.2.1. 包</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">48.2.2. 访问修饰符</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api">48.3. 常用API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#object">48.3.1. Object类</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#string">48.3.2. String类</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%5BJava%5D%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html">49. [Java]OOP防脱发指南</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKerberos%5DMessage%20stream%20modified%20%2841%29%E9%94%99%E8%AF%AF.html">50. [Kerberos]Message stream modified (41)错误</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKudu%5D%E5%85%B3%E4%BA%8EKudu%20Upsert%E5%88%97%E7%9A%84%E9%97%AE%E9%A2%98.html">51. [Kudu]关于Kudu Upsert列的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BKudu%5D%E5%85%B3%E4%BA%8EKudu%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%9A%84%E4%BF%AE%E6%94%B9.html">52. [Kudu]关于Kudu列的顺序的修改</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BLogback%5D%E7%89%B9%E5%AE%9A%E4%B8%9A%E5%8A%A1%E6%97%A5%E5%BF%97%E9%87%8D%E5%AE%9A%E5%90%91.html">53. [Logback]特定业务日志重定向</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BMongoDB%5DMongoDB%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2.html">54. [MongoDB]MongoDB基本查询</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BPaimon%5DFlink%E8%AF%BB%E5%86%99Nginx%E4%BB%A3%E7%90%86%E7%9A%84OSS%E4%B8%8A%E7%9A%84Paimon%E8%A1%A8.html">55. [Paimon]Flink读写Nginx代理的OSS上的Paimon表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BPySpark%5DPySpark.html">56. [Pyspark]PySpark</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BPySpark%5DPySparkOnYarn.html">57. [PySpark]PySpark On Yarn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5DDruidSQL%E8%A7%A3%E6%9E%90%E5%99%A8.html">58. [SQL]Druid SQL解析器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5DIN%E3%80%81NOT%20IN%E3%80%81EXISTS%E3%80%81NOT%20EXISTS%E7%9A%84%E6%9B%BF%E4%BB%A3%E5%86%99%E6%B3%95.html">59. [SQL]IN/NOT IN/EXISTS/NOT EXISTS的替代写法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5DSQLIn%26NotIn.html">60. [SQL]<code class="docutils literal notranslate"><span class="pre">IN</span></code> OR <code class="docutils literal notranslate"><span class="pre">NOT</span> <span class="pre">IN</span></code> , IS A PROBLEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5Dsqllineage%E8%A7%A3%E6%9E%90SQL%E8%A1%80%E7%BC%98.html">61. [SQL]SQLLineage解析SQL血缘</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E4%B8%9A%E5%8A%A1%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%60create_time%60%E5%92%8C%60update_time%60.html">62. [SQL]业务数据库中的<code class="docutils literal notranslate"><span class="pre">create_time</span></code>和<code class="docutils literal notranslate"><span class="pre">update_time</span></code>分析时的问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E4%B8%BA%E4%BB%80%E4%B9%88LEFT%20JOIN%E5%90%8E%E6%80%BB%E6%95%B0%E5%8D%B4%E4%B8%8E%E5%8F%B3%E8%A1%A8%E7%9A%84%E6%80%BB%E6%95%B0%E4%B8%80%E6%A0%B7%E4%BA%86%EF%BC%9F.html">63. [SQL]为什么LEFT JOIN后总数却与右表的总数一样了？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E6%B1%82%E7%94%A8%E6%88%B7%E4%BB%BB%E6%84%8F%E5%A4%A9%E8%BF%9E%E7%BB%AD%E7%99%BB%E5%BD%95%28%E6%AF%8F%E5%A4%A9%E4%B8%BA%E7%AC%AC%E5%A4%9A%E5%B0%91%E5%A4%A9%E8%BF%9E%E7%BB%AD%E7%99%BB%E5%BD%95%29.html">64. [SQL]求用户任意天连续登录(每天为第多少天连续登录)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSQL%5D%E8%AE%A1%E7%AE%97%E6%8C%87%E5%AE%9A%E6%97%A5%E6%9C%9F%E7%9A%84%E5%B9%B4-%E5%91%A8%28%E4%B8%BA%E6%9F%90%E5%B9%B4%E7%9A%84%E7%AC%AC%E5%A4%9A%E5%B0%91%E5%91%A8%29.html">65. [SQL]计算指定日期的<strong>年-周</strong>(为某年的第多少周)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BScala%5DClosure%26Currying.html">66. [Scala]函数中闭包(Closure)和柯里化(Currying)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5DEOF.html">67. [Shell]EOF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5DZip%E5%91%BD%E4%BB%A4.html">68. [Shell] Zip命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5Dshell%E8%84%9A%E6%9C%AC%E6%97%A5%E6%9C%9F%E9%80%92%E5%A2%9E%28%E8%B5%B7%E6%AD%A2%E6%97%A5%E6%9C%9F%E5%86%85%E9%80%92%E5%A2%9E%29.html">69. [Shell]Shell脚本日期递增(起止日期内递增)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5D%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%95%B0%E5%AD%97%E8%BF%9B%E8%A1%8C%E5%A4%A7%E5%B0%8F%E6%AF%94%E8%BE%83.html">70. [Shell]将字符串转换为数字进行大小比较</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BShell%5D%E6%89%93%E5%8D%B0%E6%9C%AC%E6%9C%BAIP.html">71. [Shell]打印本机IP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSparkStreaming%5D%E6%B6%88%E8%B4%B9kafka%E5%86%99%E5%85%A5Hive%E5%A4%B1%E8%B4%A5%E7%9A%84%E9%97%AE%E9%A2%98.html">72. [SparkStreaming]消费kafka写入Hive失败的问题Lease timeout of 0 seconds expired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DCDP%E4%B8%8A%E5%AE%89%E8%A3%85%E5%85%B6%E4%BB%96%E7%89%88%E6%9C%ACSPARK%28SPARK3%29.html">73. [Spark]CDP上安装其他版本SPARK(SPARK3)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSparkSQL%20%E5%88%97%E8%BD%AC%E8%A1%8C%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95.html">74. [Spark]SparkSQL 列转行的一种方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSparkSQLJDBC%E5%B9%B6%E5%8F%91%E8%BF%9E%E6%8E%A5%E8%AF%BB%E5%8F%96.html">75. [Spark]SparkSQL JDBC并发连接读取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSpark%E6%8F%90%E4%BA%A4%E4%BB%BB%E5%8A%A1RSA%20premaster%20secret%20error.html">76. [Spark]Spark提交任务RSA premaster secret error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5DSpringboot%E6%95%B4%E5%90%88Spark%2C%20%E6%9C%AC%E5%9C%B0%E3%80%81%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2.html">77. [Spark]Springboot整合Spark, 本地、集群部署</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5D%E4%BD%BF%E7%94%A8Java%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARow.html">78. [Spark]如何使用Java创建一个Row</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpark%5D%E5%B0%86Spark%20DataFrame%E4%B8%AD%E7%9A%84%E6%95%B0%E5%80%BC%E5%8F%96%E5%87%BA.html">79. [Spark]将Spark DataFrame中的数值取出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BSpringboot%5DokHttp%E9%94%99%E8%AF%AFException%20in%20thread%20OkHttp%20Dispatcher%20java.lang.IllegalStateException%20closed.html">80. [Springboot]okHttp错误:<em>Exception</em> in thread “OkHttp Dispatcher” <em>java.lang.IllegalStateException</em>: closed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5BVim%5D%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%91%BD%E4%BB%A4.html">81. [Vim]Vim查找和替换命令</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5Bdebezium%5D%E5%9C%A8%E5%90%AF%E5%8A%A8%E4%BB%BB%E5%8A%A1%E6%97%B6%E4%BC%A0%E5%85%A5SQL%E8%AF%AD%E5%8F%A5%E7%94%9F%E6%88%90Snapshot.html">82. [debezium]在启动任务时传入SQL语句生成Snapshot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5Bdebezium%5D%E7%83%AD%E4%BF%AE%E6%94%B9DebeziumMySQLConnector%E9%85%8D%E7%BD%AE.html">83. [debezium]热修改Debezium MySQL Connector配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%5Bpaimon%5DPaimon%E8%A1%A8%E7%9A%84%E8%AF%BB%E5%86%99.html">84. [Paimon]Paimon表的读写</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Random ramblings</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Random%20ramblings/index.html">Random ramblings</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">大数据</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata/index.html">Bigdata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Bigdata%20Tools/index.html">Bigdata Tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">大数据辅助工具</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Auxiliary%20tools/index.html">Auxiliary tools</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">SQL相关</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SQL/index.html">SQL</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Code-Cookbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Blogs</a></li>
+      <li class="breadcrumb-item active"><span class="section-number">48. </span>[Java]面向对象知识点梳理</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Blog Here/[Java]面向对象梳理.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="java">
+<h1><span class="section-number">48. </span>[Java]面向对象知识点梳理<a class="headerlink" href="#java" title="Link to this heading"></a></h1>
+<section id="id1">
+<h2><span class="section-number">48.1. </span>面向对象知识点梳理<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<section id="id2">
+<h3><span class="section-number">48.1.1. </span>类<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul>
+<li><p>在java语言中，是使用类进行编写java程序</p></li>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">类名</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//书写java代码</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>在类中可以书写的内容有哪些？</p>
+<ul class="simple">
+<li><p>变量</p></li>
+<li><p>方法</p></li>
+</ul>
+</li>
+<li><p>在java语言中，类除了是用来定义所书写的程序外，类的另一个作用：自定义类型</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3><span class="section-number">48.1.2. </span>对象<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul>
+<li><p>当书写完自定义类后，需要对类进行初始化（数据类型  变量=初始化）</p></li>
+<li><p>怎么对类进行初始化（初始化的动作，底层：开辟堆内存空间）</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">类名</span><span class="w">  </span><span class="n">对象名</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="k">new</span><span class="w">  </span><span class="n">类名</span><span class="p">();</span>
+
+<span class="n">类名</span><span class="w"> </span><span class="err">：</span><span class="w">  </span><span class="n">数据类型</span>
+<span class="n">对象名</span><span class="w">  </span><span class="err">：</span><span class="w">  </span><span class="n">变量名</span>
+<span class="k">new</span><span class="w">  </span><span class="err">：</span><span class="w">  </span><span class="n">告知JVM要开辟堆空间</span>
+<span class="nf">类名</span><span class="p">()</span><span class="w">  </span><span class="err">：</span><span class="w">  </span><span class="n">告知JVM要开辟空间的大小</span><span class="w"> </span><span class="err">（</span><span class="w"> </span><span class="n">类中所书写的所有内容</span><span class="o">[</span><span class="n">变量</span><span class="o">]</span><span class="err">，</span><span class="n">进行换算</span><span class="err">，</span><span class="n">然后开辟空间</span><span class="w"> </span><span class="err">）</span>
+<span class="w">           </span><span class="n">自动调用构造方法</span>
+</pre></div>
+</div>
+</li>
+<li><p><img alt="avatar" src="../_images/classInit.png" /></p></li>
+</ul>
+</li>
+</ul>
+<p>小结 ：
+类在程序中可以干什么？</p>
+<ul class="simple">
+<li><p>java的书写的程序内容都是类为单位</p>
+<ul>
+<li><p>类中书写的内容：变量、方法</p></li>
+</ul>
+</li>
+<li><p>java中的类：  数据类型  （JVM基于这个数据类型，开辟堆空间）</p>
+<ul>
+<li><p>java语言提供的</p></li>
+<li><p>程序员自己定义的（自定义类）</p></li>
+</ul>
+</li>
+</ul>
+<p>类中书写的内容，想要使用，怎么办?</p>
+<ul class="simple">
+<li><p>需要对类进行初始化（JVM在堆中开辟一个空间）</p></li>
+<li><p>初始化代码： 类名  对象名 = new  类名()</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3><span class="section-number">48.1.3. </span>封装<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>在java语言中，在类中书写程序代码（变量、方法）</p>
+<ul>
+<li><p>把变量、方法封装到类中</p></li>
+</ul>
+</li>
+<li><p>在java语言中，封装的两种代码体现：</p>
+<ul>
+<li><p>方法 ， 封装的是一段代码块（所封装的代码块通常是用来解决一个问题的【功能】）</p></li>
+<li><p>类 ， 封装的是变量和方法</p>
+<ul>
+<li><p>变量，成员变量（实例变量）</p>
+<ul>
+<li><p>为什么叫成员？</p>
+<ul>
+<li><p>类需要创建对象，而通过“对象.变量”的方式去访问，称为：成员变量</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>方法，成员方法</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// 类 </span>
+<span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="p">}</span>
+<span class="c1">//在使用Student -&gt; age变量</span>
+<span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="n">stu</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">//赋值为非法数据（影响了程序安全性）</span>
+<span class="c1">//以上给age赋的值为非法数据</span>
+
+<span class="n">解决方案1</span><span class="err">：</span><span class="w">  </span>
+<span class="w">    </span><span class="n">定义一个变量</span><span class="err">，</span><span class="n">接收</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span>
+<span class="w">    </span><span class="n">判断变量是否合法</span><span class="err">，</span><span class="n">合法</span><span class="err">：</span><span class="n">再赋值给stu</span><span class="p">.</span><span class="na">age</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">){</span>
+<span class="w">        </span><span class="n">stu</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="n">解决方案2</span><span class="err">：</span><span class="w"> </span><span class="n">在Studetn类中</span><span class="w"> </span>
+<span class="w">    </span><span class="n">第1步</span><span class="err">：</span><span class="n">不让外部直接使用age变量</span><span class="w"> </span><span class="err">（</span><span class="n">使用java中的关键字</span><span class="err">：</span><span class="kd">private</span><span class="w"> </span><span class="err">）</span>
+<span class="w">    </span><span class="n">第2步</span><span class="err">：</span><span class="n">让外部间接把值给到一个方法</span><span class="err">，</span><span class="n">在方法中判断值是否合法</span>
+<span class="w">          </span><span class="n">合法</span><span class="err">：</span><span class="w"> </span><span class="n">把合法值</span><span class="err">，</span><span class="w"> </span><span class="n">赋值给</span><span class="w"> </span><span class="n">age变量</span>
+
+<span class="w">    </span>
+<span class="w"> </span><span class="n">java语言为了保证程序的安全性</span><span class="err">，</span><span class="n">提供了一些访问权限</span><span class="err">：</span><span class="w"> </span><span class="n">让程序中的代码使用添加了权限</span>
+<span class="w"> </span><span class="kd">public</span><span class="w">     </span>
+<span class="w"> </span><span class="kd">private</span><span class="w">    </span>
+<span class="w">    </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">        </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span><span class="c1">// 私有的变量（只能在Student类中使用age）</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setAge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">){</span>
+<span class="w">             </span><span class="c1">// age = age;//局部变量 = 局部变量</span>
+<span class="w">              </span><span class="c1">//就近原则：方法中的局部变量会优先使用</span>
+<span class="w">             </span><span class="c1">//在java中，区分局部变量和成员变量，使用：this关键字</span>
+<span class="w">             </span>
+<span class="w">             </span><span class="k">if</span><span class="p">(</span><span class="n">age</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">                  </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">             </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">               </span><span class="c1">// 异常 </span>
+<span class="w">               </span><span class="c1">// 日志  </span>
+<span class="w">             </span><span class="p">}</span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getAge</span><span class="p">(){</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+
+<span class="w">    </span><span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="w">    </span><span class="n">stu</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="c1">//不能赋值（编译：报错）</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//赋值合法数据：</span>
+<span class="w">    </span><span class="n">stu</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="c1">// 编译：报错</span>
+<span class="w">    </span><span class="n">stu</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="w">    </span><span class="n">stu</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">);</span><span class="c1">//传递的是一个非法数据</span>
+
+<span class="w">    </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;年龄：&quot;</span><span class="o">+</span><span class="w"> </span><span class="n">stu</span><span class="p">.</span><span class="na">getAge</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
+<p>问题：想要给类中书写变量，进行赋值操作，怎么实现？</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">//新增变量</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">gender</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">phone</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">stuId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">height</span><span class="p">;</span>
+<span class="w">    </span><span class="p">.....</span>
+<span class="w">        </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setName</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">){</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="err">。。。。</span>
+<span class="p">}</span>
+<span class="c1">//对类进行初始化</span>
+<span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="n">stu</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="s">&quot;测试&quot;</span><span class="p">);</span>
+<span class="n">stu</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="c1">//当类中书写的成员变量过多时，需要使用大量的setXxx()方法，给类中的变量赋值</span>
+
+<span class="n">另一个斛决方案</span><span class="err">：</span><span class="w"> </span><span class="n">java中的构造方法</span><span class="w">    </span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">48.1.4. </span>构造方法<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>什么是构造方法？</p>
+<p>1、和类名相同</p>
+<p>2、没有返回值类型（不需要书写void关键字）</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">gender</span><span class="p">;</span>
+<span class="w">     </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">phone</span><span class="p">;</span>
+<span class="w">     </span>
+<span class="w">    </span><span class="c1">//构造方法</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="nf">Student</span><span class="p">(){</span><span class="w"> </span><span class="c1">//空参构造方法</span>
+<span class="w">         </span>
+<span class="w">     </span><span class="p">}</span>
+<span class="w">     </span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="nf">Student</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">,...){</span>
+<span class="w">         </span><span class="c1">//考虑到非法数据问题</span>
+<span class="w">         </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">             </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">         </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">             </span>
+<span class="w">         </span><span class="p">}</span>
+<span class="w">         </span>
+<span class="w">          </span><span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="o">=</span><span class="n">name</span><span class="p">;</span>
+<span class="w">          </span><span class="p">...</span>
+<span class="w">              </span>
+<span class="w">         </span><span class="c1">//开发中有不少这样写：   </span>
+<span class="w">           </span><span class="k">this</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="n">age</span><span class="p">);</span>
+<span class="w">           </span><span class="k">this</span><span class="p">.</span><span class="na">setPhone</span><span class="p">(</span><span class="n">phone</span><span class="p">);</span>
+<span class="w">     </span><span class="p">}</span><span class="w">  </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//给私有的age变量赋值</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setAge</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">){</span>
+<span class="w">          </span>
+<span class="w">             </span><span class="k">if</span><span class="p">(</span><span class="n">age</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">                  </span><span class="k">this</span><span class="p">.</span><span class="na">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">             </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">               </span><span class="c1">// 异常 </span>
+<span class="w">               </span><span class="c1">// 日志  </span>
+<span class="w">             </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span>
+<span class="w"> </span><span class="p">}</span>
+
+<span class="n">构造方法对于书写程序的作用</span><span class="err">：</span><span class="w"> </span><span class="n">可以对类中的私有成员变量进行赋值</span>
+<span class="w">    </span>
+<span class="mi">1</span><span class="err">、</span><span class="n">当类中有私有成员时</span><span class="err">，</span><span class="n">对类中的私有成员进行赋值操作</span><span class="err">：</span><span class="n">setXxx</span><span class="p">()</span>
+<span class="mi">2</span><span class="err">、</span><span class="n">当类中有私有成员时</span><span class="err">，</span><span class="n">使用类的有参构造方法</span><span class="err">，</span><span class="n">对类中的私有成员进行赋值操作</span>
+<span class="w">    </span><span class="n">私有成员变量</span><span class="err">，</span><span class="n">只有在本类中使用</span><span class="err">（</span><span class="n">构造方法也属于本类</span><span class="err">）</span>
+</pre></div>
+</div>
+<p>小结：</p>
+<p>针对类中的私有成员变量，有两种赋值方式：</p>
+<p>1、public void setXxx(数据类型 参数)</p>
+<p>2、类中的有参构造方法</p>
+<blockquote>
+<div><p>注意：构造方法不是由书写的程序调用的，而是由JVM自动调用</p>
+<p>什么时候调用构造方法？</p>
+<p>在对类进行初始化操作时： 类名  对象名 = new 类名(); //在执行当前行代码时，自动调用构造方法</p>
+</div></blockquote>
+<p>类：自定义类型（数据类型）</p>
+<p>对象：对类进行初始化。 只有类初始化后，才可以访问类中的成员变量、成员方法</p>
+<p>当变量、方法书写在类中时，就相当于把变量和方法进行了封装</p>
+<p>为了程序中数据的安全性考虑，建议：把成员变量私有化</p>
+<p>私有化的成员变量带来一个问题：外部程序无法访问</p>
+<p>解决方案1： 提供相应的getter（获取私有成员变量的值）、setter（对私有成员变量赋值）</p>
+<p>解决方案2： 使用类中的有参构造方法 （对私有成员变量赋值）</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">48.1.5. </span>继承<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">学生管理系统</span><span class="err">：</span><span class="w"> </span><span class="n">学生</span><span class="err">、</span><span class="n">老师</span>
+<span class="n">类</span><span class="err">：</span><span class="n">老师类</span>
+<span class="n">类</span><span class="err">：</span><span class="n">学生类</span>
+<span class="c1">//学生类</span>
+<span class="kd">class</span> <span class="nf">Student</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stuId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+<span class="c1">//老师类</span>
+<span class="kd">class</span> <span class="nc">Teacher</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">teaId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">teach</span><span class="p">(){</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+<span class="n">通过观察</span><span class="err">，</span><span class="n">Teacher类和Student类</span><span class="err">，</span><span class="n">中有不少相同的代码</span><span class="err">。</span>
+<span class="n">需求1</span><span class="err">：</span><span class="n">在Teacher类和Studetn类中</span><span class="err">，</span><span class="n">新增属性</span><span class="err">：</span><span class="n">教室</span>
+<span class="c1">//学生类</span>
+<span class="kd">class</span> <span class="nf">Student</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">stuId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//新增</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">classRoom</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+<span class="c1">//老师类</span>
+<span class="kd">class</span> <span class="nc">Teacher</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">teaId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//新增</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">classRoom</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">teach</span><span class="p">(){</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+<span class="n">需求2</span><span class="err">：</span><span class="n">系统升级了</span><span class="err">，</span><span class="w">  </span><span class="n">原的学生学号和老师学号</span><span class="err">，</span><span class="n">int类型存储不下了</span><span class="err">，</span><span class="n">需要扩展类型</span><span class="err">：</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">或</span><span class="w"> </span><span class="n">String</span>
+<span class="n">再对Student类和Teacher类进行改造</span>
+<span class="w">    </span>
+
+<span class="n">通过刚才两个需求</span><span class="err">，</span><span class="n">发现</span><span class="err">：</span><span class="n">每次都要修改多个类中的代码</span><span class="err">（</span><span class="n">程序的修改过多</span><span class="err">）</span>
+<span class="n">有没有简单一些方案呢</span><span class="err">？</span>
+<span class="n">答</span><span class="err">：</span><span class="w"> </span><span class="n">继承</span><span class="w">    </span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>要实现继承需要什么?</p>
+<p>1、要定义一个父类</p>
+<p>2、要定义一个子类，子类要继承父类</p>
+<p>​     继承的关键字： extends</p>
+</div></blockquote>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//定义一个父类</span>
+<span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">teaId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+<span class="c1">//定义一个子类</span>
+<span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">         </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span><span class="w">   </span>
+<span class="p">}</span>
+<span class="c1">//定义一个子类</span>
+<span class="kd">class</span> <span class="nc">Teacher</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">teach</span><span class="p">(){</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">}</span><span class="w">  </span>
+<span class="p">}</span>
+
+<span class="n">继承的特点</span><span class="err">：</span>
+<span class="mi">1</span><span class="err">、</span><span class="n">子类在继承父类后</span><span class="err">，</span><span class="n">可以直接使用父类中的非私有成员方法</span><span class="err">、</span><span class="n">成员变量</span>
+<span class="w"> </span>
+<span class="w">    </span>
+<span class="n">需求1</span><span class="err">：</span><span class="n">在Teacher类和Studetn类中</span><span class="err">，</span><span class="n">新增属性</span><span class="err">：</span><span class="n">教室</span><span class="w"> </span>
+<span class="n">解决方案</span><span class="err">：</span><span class="n">只需要在Person类中</span><span class="err">，</span><span class="n">添加</span><span class="err">：</span><span class="n">教室</span><span class="w">   </span><span class="err">（</span><span class="n">只修改一处代码</span><span class="err">）</span>
+<span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">teaId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="c1">//新增</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">classRoom</span><span class="p">;</span><span class="w">    </span>
+<span class="p">}</span><span class="w">    </span>
+<span class="w">    </span>
+<span class="n">需求2</span><span class="err">：</span><span class="n">系统升级了</span><span class="err">，</span><span class="w">  </span><span class="n">原的学生学号和老师学号</span><span class="err">，</span><span class="n">int类型存储不下了</span><span class="err">，</span><span class="n">需要扩展类型</span><span class="err">：</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">或</span><span class="w"> </span><span class="n">String</span>
+<span class="n">解决方案</span><span class="err">：</span><span class="n">只需要修改Person类中的代码</span><span class="err">。</span><span class="w"> </span><span class="kt">int</span><span class="w">    </span><span class="o">-&gt;&lt;</span><span class="w">  </span><span class="kt">long</span><span class="w">   </span><span class="err">（</span><span class="n">只修改一个类中的代码</span><span class="err">）</span>
+<span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">teaId</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="c1">//新增</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">classRoom</span><span class="p">;</span><span class="w">    </span>
+<span class="p">}</span><span class="w">        </span>
+</pre></div>
+</div>
+<p>继承的特点：
+1、子类在继承父类后，可以直接使用父类中的非私有成员方法、成员变量</p>
+<p>2、子类只能继承一个父类（单一继承）</p>
+<p>3、子类继承一个父类，父类再继承一个爷爷类，爷爷类再继承… (多层次继承 )</p>
+<ul class="simple">
+<li><p>子类除了可以使用父类中的非私有成员外，还可以使用爷爷类中的非私有成员</p></li>
+</ul>
+<p>继承的好处：提供程序中代码的复用性</p>
+<blockquote>
+<div><p>继承中构造方法的原理：</p>
+<p>子类在初始化对象时，为了确保子类可以正常访问父类中的成员，需要先对父类进行初始化</p>
+<p>子类的构造方法中，会先调用父类的构造方法</p>
+<p>示例：</p>
+<p>class Person{</p>
+<p>public Person(){</p>
+<p>}</p>
+<p>}</p>
+<p>class Student extends Person{</p>
+<p>public Student(){</p>
+<p>​        //第一行代码： super()  //调用父类中的空参构造方法  （JVM自动添加）</p>
+<p>}</p>
+<p>}</p>
+<p>【注意】：当父类中的没有空参构造方法时，子类的构造方法中必须书写：super(参数)</p>
+</div></blockquote>
+</section>
+<section id="thissuper">
+<h3><span class="section-number">48.1.6. </span>this和super<a class="headerlink" href="#thissuper" title="Link to this heading"></a></h3>
+<p>this ： 代表当前对象</p>
+<p>super： 代表父类对象</p>
+<p>使用方式：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//成员变量</span>
+<span class="k">this</span><span class="p">.</span><span class="na">name</span><span class="p">;</span><span class="c1">//访问本类中的成员变量</span>
+<span class="kd">super</span><span class="p">.</span><span class="na">name</span><span class="p">;</span><span class="c1">//访问父类中的成员方法</span>
+
+<span class="c1">//成员方法</span>
+<span class="k">this</span><span class="p">.</span><span class="na">method</span><span class="p">();</span><span class="c1">//访问本类中的成员方法</span>
+<span class="kd">super</span><span class="p">.</span><span class="na">method</span><span class="p">();</span><span class="c1">//访问父类中的成员方法</span>
+
+<span class="c1">//构造方法</span>
+<span class="k">this</span><span class="p">();</span><span class="w">   </span><span class="k">this</span><span class="p">(</span><span class="n">参数</span><span class="p">);</span><span class="w">  </span><span class="c1">//访问本类中的构造方法</span>
+<span class="kd">super</span><span class="p">();</span><span class="w">   </span><span class="kd">super</span><span class="p">(</span><span class="n">参数</span><span class="p">);</span><span class="w"> </span><span class="c1">//访问父类中的构造方法</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3><span class="section-number">48.1.7. </span>多态<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//父类</span>
+<span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//通常父类中的方法无法明确具体的功能代码时，只需要针对方法进行声明（只定义没有方法体）</span>
+<span class="w">    </span><span class="c1">//抽象方法： 只定义没有方法体</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//子类在继承了抽象类后，必须重写抽象方法（java语法规定）</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;去校区食堂吃饭...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span>
+<span class="kd">class</span> <span class="nc">Teacher</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//子类在继承了抽象类后，必须重写抽象方法（java语法规定）</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;去校外吃饭...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="p">{</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">         </span><span class="c1">//创建学生对象</span>
+<span class="w">         </span><span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="w">       </span>
+<span class="w">         </span><span class="n">method1</span><span class="p">(</span><span class="w"> </span><span class="n">stu</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;zs&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="w">  </span><span class="p">,</span><span class="w">   </span><span class="p">.....)</span>
+<span class="w">         </span>
+<span class="w">         </span><span class="c1">//创建老师对象</span>
+<span class="w">         </span><span class="n">Teacher</span><span class="w"> </span><span class="n">tea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Teacher</span><span class="p">();</span>
+<span class="w">          </span>
+<span class="w">         </span><span class="n">method2</span><span class="p">(</span><span class="w">  </span><span class="n">tea</span><span class="w"> </span><span class="p">,</span><span class="s">&quot;ls&quot;</span><span class="w"> </span><span class="p">,</span><span class="mi">33</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">......</span><span class="w"> </span><span class="p">)</span>
+<span class="w">         </span>
+<span class="w">     </span><span class="p">}</span><span class="w">  </span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">     </span><span class="c1">//大在书写程序时：当发现有重复的代码，建议都进行抽取封装：方法、类  （复用性）</span>
+<span class="w">     </span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method1</span><span class="p">(</span><span class="w"> </span><span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">){</span>
+<span class="w">         </span><span class="n">stu</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="w">  </span><span class="p">);</span><span class="c1">//因为Student继承了Person，可以使用父类中的非私有成员</span>
+<span class="w">         </span><span class="n">stu</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="w">  </span><span class="n">age</span><span class="w">  </span><span class="p">);</span>
+<span class="w">         </span><span class="p">....</span>
+<span class="w">         </span><span class="n">stu</span><span class="p">.</span><span class="na">eat</span><span class="p">();</span><span class="w">  </span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">     </span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">metho2</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">Teacher</span><span class="w">  </span><span class="n">tea</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w">  </span><span class="p">){</span>
+<span class="w">         </span><span class="n">tea</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="p">);</span>
+<span class="w">         </span><span class="n">tea</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="w">  </span><span class="n">age</span><span class="w">  </span><span class="p">);</span>
+<span class="w">         </span><span class="p">....</span>
+<span class="w">         </span><span class="n">tea</span><span class="p">.</span><span class="na">eat</span><span class="p">();</span><span class="w"> </span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">     </span>
+<span class="w">     </span><span class="c1">//添加就业班</span>
+<span class="w">     </span>
+<span class="w">     </span><span class="c1">//观察以上两个方法中的代码：除了对象名不同，其它都一样   (99%都是重复代码)</span>
+<span class="w">     </span><span class="n">针对代码</span><span class="err">，</span><span class="n">再次精进</span><span class="err">：</span>
+<span class="w">     </span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="w">  </span><span class="o">?</span><span class="w">   </span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">...){</span>
+<span class="w">     </span>
+<span class="w">         </span><span class="o">?</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="p">);</span>
+<span class="w">         </span><span class="o">?</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="w">  </span><span class="n">age</span><span class="w">  </span><span class="p">);</span>
+<span class="w">         </span>
+<span class="w">         </span><span class="p">....</span>
+<span class="w">         </span><span class="o">?</span><span class="p">.</span><span class="na">eat</span><span class="p">();</span><span class="w">  </span>
+<span class="w">      </span><span class="p">}</span><span class="w">  </span>
+<span class="w">     </span>
+<span class="w">     </span><span class="o">?</span><span class="w"> </span><span class="n">有两个类型</span><span class="err">：</span><span class="w">  </span><span class="n">Student</span><span class="w"> </span><span class="err">、</span><span class="w"> 	</span><span class="n">Teacher</span>
+<span class="w">     </span><span class="n">Student类型和Teacher类型有什么相同</span><span class="err">？</span>
+<span class="w">     </span><span class="n">继承的父类是同一个</span><span class="w">    </span>
+<span class="w">     </span>
+<span class="w">     </span><span class="n">java语言提供了一种方案</span><span class="err">：</span><span class="n">多态</span>
+<span class="w">     </span><span class="n">多态的使用</span><span class="p">:</span>
+<span class="w">     </span><span class="mi">1</span><span class="err">、</span><span class="n">要有继承关系</span>
+<span class="w">     </span><span class="mi">2</span><span class="err">、</span><span class="n">子类要重写父类中的方法</span>
+<span class="w">     </span><span class="mi">3</span><span class="err">、</span><span class="w"> </span><span class="n">父类的引用指向子类对象</span>
+<span class="w">         </span><span class="n">父类</span><span class="w">  </span><span class="n">父引用</span><span class="w">  </span><span class="o">=</span><span class="w">  </span><span class="k">new</span><span class="w">  </span><span class="n">子类</span><span class="p">();</span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">     </span><span class="n">Person</span><span class="w"> </span><span class="n">p1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="w">     </span><span class="n">p1</span><span class="p">.</span><span class="na">setName</span><span class="p">(...)</span>
+<span class="w">     </span><span class="n">p1</span><span class="p">.</span><span class="na">eat</span><span class="p">()</span><span class="c1">//调用的是对象中的eat方法</span>
+<span class="w">         </span>
+<span class="w">     </span><span class="n">Person</span><span class="w"> </span><span class="n">p2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Teacher</span><span class="p">();</span>
+<span class="w">     </span><span class="n">p2</span><span class="p">.</span><span class="na">setName</span><span class="p">(....)</span>
+<span class="w">     </span><span class="n">p2</span><span class="p">.</span><span class="na">eat</span><span class="p">();</span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">    </span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">      </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="w">  </span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w">  </span><span class="p">,</span><span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w">  </span><span class="p">){</span>
+<span class="w">          </span>
+<span class="w">         </span><span class="n">p</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="p">);</span>
+<span class="w">         </span><span class="n">p</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="w">  </span><span class="n">age</span><span class="w">  </span><span class="p">);</span>
+<span class="w">         </span>
+<span class="w">         </span><span class="p">....</span>
+<span class="w">         </span><span class="n">p</span><span class="p">.</span><span class="na">eat</span><span class="p">();</span><span class="w">  </span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">     </span><span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="w">     </span><span class="n">Person</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="c1">//多态</span>
+<span class="w">     </span>
+<span class="w">     </span><span class="n">method</span><span class="p">(</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="p">,</span><span class="s">&quot;ls&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="p">,....);</span>
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="w">     </span><span class="n">Teacher</span><span class="w"> </span><span class="n">tea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Teacher</span><span class="p">();</span>
+<span class="w">       </span><span class="n">method</span><span class="p">(</span><span class="w"> </span><span class="n">tea</span><span class="w">   </span><span class="p">);</span>
+<span class="w">     </span>
+<span class="w">         </span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p><img alt="avatar" src="../_images/multiState.png" /></p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//父类</span>
+<span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//通常父类中的方法无法明确具体的功能代码时，只需要针对方法进行声明（只定义没有方法体）</span>
+<span class="w">    </span><span class="c1">//抽象方法： 只定义没有方法体</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//子类在继承了抽象类后，必须重写抽象方法（java语法规定）</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;去校区食堂吃饭...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span>
+<span class="kd">class</span> <span class="nc">Teacher</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//子类在继承了抽象类后，必须重写抽象方法（java语法规定）</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;去校外吃饭...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+
+
+<span class="w">     </span>
+<span class="w">     </span>
+<span class="c1">//需求升学：老师需要划分为基础班老师、就业班老师</span>
+<span class="c1">//父类</span>
+<span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="p">....</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c1">//通常父类中的方法无法明确具体的功能代码时，只需要针对方法进行声明（只定义没有方法体）</span>
+<span class="w">    </span><span class="c1">//抽象方法： 只定义没有方法体</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//子类在继承了抽象类后，必须重写抽象方法（java语法规定）</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;去校区食堂吃饭...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span>
+<span class="w">     </span>
+<span class="c1">//基础班老师    </span>
+<span class="kd">class</span> <span class="nc">BasicTeacher</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//子类在继承了抽象类后，必须重写抽象方法（java语法规定）</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;吃外卖...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w">     </span>
+<span class="c1">//就业班老师    </span>
+<span class="kd">class</span> <span class="nc">WorkTeacher</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//子类在继承了抽象类后，必须重写抽象方法（java语法规定）</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">(){</span>
+<span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;去校外吃饭...&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w">      </span>
+<span class="w">     </span>
+
+<span class="w"> </span><span class="kd">class</span> <span class="nc">Test</span><span class="p">{</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">){</span>
+<span class="w">         </span><span class="c1">//创建学生对象</span>
+<span class="w">         </span><span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+<span class="w">         </span>
+<span class="w">      </span>
+<span class="w">         </span><span class="c1">//创建基础老师对象</span>
+<span class="w">         </span><span class="n">BasicTeacher</span><span class="w"> </span><span class="n">tea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BasicTeacher</span><span class="p">();</span>
+<span class="w">         </span>
+<span class="w">         </span><span class="c1">//创建就业班老师对象</span>
+<span class="w">         </span><span class="n">WorkTeacher</span><span class="w"> </span><span class="n">tea2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WorkTeacher</span><span class="p">();</span>
+<span class="w">        </span>
+<span class="w">      </span>
+<span class="w">         </span><span class="n">method</span><span class="p">(</span><span class="w">  </span><span class="n">stu</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;zs&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="w">  </span><span class="p">)</span>
+<span class="w">         </span><span class="n">method</span><span class="p">(</span><span class="w">  </span><span class="n">tea</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ls&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="w">  </span><span class="p">)</span><span class="w">  </span>
+<span class="w">             </span>
+<span class="w">         </span><span class="n">method</span><span class="p">(</span><span class="w">  </span><span class="n">tea2</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ja&quot;</span><span class="w">  </span><span class="mi">30</span><span class="w">  </span><span class="p">)</span><span class="w">    </span>
+<span class="w">         </span>
+<span class="w">     </span><span class="p">}</span><span class="w">  </span>
+<span class="w">     </span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="w">  </span><span class="n">Person</span><span class="w">  </span><span class="n">p</span><span class="w"> </span><span class="p">,</span><span class="w">  </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">){</span>
+<span class="w">         </span><span class="n">p</span><span class="p">.</span><span class="na">setName</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">)</span>
+<span class="w">         </span><span class="n">p</span><span class="p">.</span><span class="na">setAge</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+<span class="w">         </span><span class="p">...</span>
+<span class="w">         </span>
+<span class="w">         </span><span class="n">p</span><span class="p">.</span><span class="na">eat</span><span class="p">();</span><span class="w">    </span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>在使用多态时，存在 一个问题：父引用无法使用子类中特有的成员</p>
+<p>解决方案： 使用向下转型 （强制类型转换）</p>
+<p>格式：子类  子类对象 = (子类) 父引用</p>
+<p>当在进行强制类型转换时，如果父引用指向的对象类型 和 要转换的类型不匹配，就会发生：错误</p>
+<p>父引用指向的对象类型 ：  Person p = new Student();  //类型：Student</p>
+<p>要转换的类型：  Teacher</p>
+<p>错误代码：  Teacher tea  = (Teacher ) p;//类型转换错误</p>
+<p>通常在进行向下转型时，会先进行判断：</p>
+<p>if( p  instanceo  Teacher){</p>
+<p>Teacher tea  = (Teacher ) p;</p>
+<p>}</p>
+<p>父引用  instanceof  子类类型    ：  判断父引用指向的对象类型 是否为 子类类型</p>
+</div></blockquote>
+<p>抽象类</p>
+<ul>
+<li><p>为什么有抽象类？</p>
+<ul class="simple">
+<li><p>当程序中书写的方法只有声明，没有方法体代码实现，该需要修饰为：abstract</p></li>
+<li><p>抽象方法必须存在于抽象类中</p></li>
+</ul>
+</li>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">abstract</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//抽象方法</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>抽象类的特点：</p>
+<ul class="simple">
+<li><p>不能实例化（ 不能创建对象。 只能通过子类来创建对象[多态的方式] ）</p></li>
+<li><p>抽象类和普通类，除了不能实例化、多了一个抽象方法外，其他和普通类都一样</p>
+<ul>
+<li><p>抽象类中可以书写的内容：抽象方法、构造方法、成员变量、成员方法</p></li>
+<li><p>抽象类中的构造方法的作用：为了保证子类对象创建成功</p></li>
+</ul>
+</li>
+<li><p>抽象类通常都是父类</p></li>
+<li><p>抽象类中的抽象方法，子类必须重写</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id8">
+<h3><span class="section-number">48.1.8. </span>接口<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">接口比类好的地方</span><span class="err">：</span><span class="n">可以多实现</span>
+
+<span class="n">接口在java中怎么使用</span><span class="err">：</span>
+<span class="mi">1</span><span class="err">、</span><span class="n">定义一个接口</span>
+<span class="mi">2</span><span class="err">、</span><span class="n">定义一个子类</span><span class="err">，</span><span class="n">子类实现接口</span><span class="err">，</span><span class="n">子类中并重写接口中的抽象方法</span>
+<span class="mi">3</span><span class="err">、</span><span class="n">接口要创建对象</span><span class="err">，</span><span class="n">只使用多态的形式</span><span class="err">：</span><span class="w">  </span><span class="n">接口</span><span class="w">  </span><span class="n">父引用</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w">  </span><span class="n">子类</span><span class="p">()</span>
+
+<span class="w">    </span>
+<span class="c1">//定义接口</span>
+<span class="kd">interface</span> <span class="nc">InterA</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//接口中可书写内容是固定的</span>
+<span class="w">    </span><span class="n">常量</span><span class="err">、</span><span class="n">抽象方法</span><span class="err">、</span><span class="n">静态方法</span><span class="err">、</span><span class="n">默认方法</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NUM</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span><span class="c1">//常量</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">abstract</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">();</span><span class="c1">//抽象方法</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method2</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">method3</span><span class="p">{</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//定义实现接口的类</span>
+<span class="kd">class</span> <span class="nc">MyInter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">InterA</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//重写抽象方法</span>
+<span class="p">}</span>
+<span class="c1">//使用接口：</span>
+<span class="n">InterA</span><span class="w"> </span><span class="n">inter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MyInter</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">abstract</span><span class="w"> </span><span class="n">classs</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">   </span><span class="kd">abstract</span><span class="w">  </span><span class="kt">void</span><span class="w"> </span><span class="nf">eat</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nc">BasicStudent</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nc">WorkStudent</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">InterA</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">//特有的功能</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mianshi</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">BasicTeacher</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">teach</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nc">WorkerTeacher</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">InterA</span><span class="p">{</span>
+<span class="w">     </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">teach</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">     </span><span class="c1">//特有的功能</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mianshi</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span> <span class="nc">InterA</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">mianshi</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="n">需求</span><span class="err">：</span><span class="n">学生都有学习方法</span><span class="err">、</span><span class="n">老师都讲课方法</span>
+<span class="w">    </span><span class="n">就业班学生</span><span class="err">、</span><span class="n">就业班老师都具有</span><span class="err">：</span><span class="n">面试能力</span>
+<span class="w">    </span>
+<span class="n">BasicStudent</span><span class="w"> </span><span class="n">bs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">BasicStudent</span><span class="p">();</span>
+<span class="n">WorkTeacher</span><span class="w"> </span><span class="n">tea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WorkTeacher</span><span class="p">();</span>
+
+<span class="n">接口</span><span class="err">：</span>
+<span class="w">    </span><span class="mi">1</span><span class="err">、</span><span class="n">当有部分类中的功能是相同时</span><span class="err">，</span><span class="n">可以把这部分相同的功能</span><span class="err">，</span><span class="n">抽取出来</span><span class="err">，</span><span class="n">封装到</span><span class="err">：</span><span class="n">接口</span>
+
+<span class="w"> </span>
+<span class="n">要执行就业班老师和就业班学生的</span><span class="err">：</span><span class="n">面试功能</span>
+<span class="n">WorkTeacher</span><span class="w"> </span><span class="n">tea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WorkTeacher</span><span class="p">();</span>
+<span class="n">WorkStudenet</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">WorkStudent</span><span class="p">();</span>
+<span class="n">tea</span><span class="p">.</span><span class="na">mianshi</span><span class="p">();</span>
+<span class="n">stu</span><span class="p">.</span><span class="na">mianshi</span><span class="p">();</span>
+
+
+<span class="n">method</span><span class="p">(</span><span class="w"> </span><span class="n">tea</span><span class="w"> </span><span class="p">);</span>
+<span class="n">method</span><span class="p">(</span><span class="w">  </span><span class="n">stu</span><span class="w"> </span><span class="p">)</span>
+
+
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(</span><span class="w"> </span><span class="n">InterA</span><span class="w"> </span><span class="n">inter</span><span class="w"> </span><span class="p">){</span>
+<span class="w">    </span><span class="n">inter</span><span class="p">.</span><span class="na">mianshi</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在企业开发中，大量使用接口。</p>
+<blockquote>
+<div><p>为什么？</p>
+<p>通常在开发前期，会针对开发中的功能进行制定（需求分析）</p>
+<p>前期：制定功能（没有功能代码）</p>
+<p>​           使用抽象方法</p>
+<p>问题：抽象方法是定义哪里？  抽象类  or 接口？</p>
+<p>答案： 接口  （接口可以多实现）</p>
+<p>程序开发：接口</p>
+<p>public interface 接口A｛</p>
+<p>//功能1：</p>
+<p>​                public  boolean  login(String name,Strng passwd);</p>
+<p>//功能2：</p>
+<p>​                 public  boolean  changePasswd(String name , String oldPasswd);</p>
+<p>}</p>
+<p>public interface 接口B｛</p>
+<p>…..</p>
+<p>｝</p>
+</div></blockquote>
+<p>进入到开发阶段：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//程序员01号</span>
+<span class="kd">class</span> <span class="nc">UserImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">IUser</span><span class="err">｛</span>
+<span class="w">   </span><span class="c1">//重写抽象方法 </span>
+<span class="w">    </span><span class="n">具体方法中的功能代码</span>
+<span class="err">｝</span>
+<span class="kd">class</span> <span class="nc">OrderImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w">  </span><span class="n">IOrder</span><span class="p">{</span>
+<span class="w">    </span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="nc">ManagerImpl</span><span class="w">  </span><span class="kd">implements</span><span class="w"> </span><span class="n">IManager</span><span class="p">{</span>
+<span class="w">    </span>
+<span class="p">}</span>
+<span class="w">    </span>
+<span class="o">=======================================================</span><span class="w">    </span>
+<span class="w">    </span>
+<span class="w">    </span>
+<span class="c1">//程序员02号    </span>
+<span class="kd">class</span> <span class="nc">类</span><span class="p">{</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">method</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">        </span><span class="c1">//让用户先登录</span>
+<span class="w">        </span><span class="n">IUser</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">UserImpl</span><span class="p">();</span><span class="c1">//多态  接口 </span>
+<span class="w">        </span><span class="n">user</span><span class="p">.</span><span class="na">login</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span><span class="w">    </span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">48.2. </span>面向对象<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<section id="id10">
+<h3><span class="section-number">48.2.1. </span>包<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<p>在学习java基础时，使用过Scanner。 要使用Scanner需要导入：import java.util.Scanner</p>
+<p>包是什么？</p>
+<ul class="simple">
+<li><p>文件夹</p>
+<ul>
+<li><p>可以帮我们管理文件</p></li>
+</ul>
+</li>
+</ul>
+<p>包能做什么？</p>
+<ul class="simple">
+<li><p>在开发中，程序员会书写很多的类，这些类有一些可能会出现重名</p></li>
+<li><p>在开发中，所开发的项目中，会包含不同功能模块：商品、订单、用户、….</p>
+<ul>
+<li><p>针对不同的功能模块，书写不同的java程序</p></li>
+</ul>
+</li>
+<li><p>包的作用：可以帮我们管理.java文件</p>
+<ul>
+<li><p>避免重名</p></li>
+<li><p>实现不同功能的类，可以存放在不同的功能模块下</p></li>
+</ul>
+</li>
+</ul>
+<p>怎么使用包？</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">创建包</span><span class="err">：</span><span class="kn">package</span>
+<span class="w">    </span><span class="nn">把不现的.java文件存放在不同的包下</span>
+<span class="w">    </span>
+<span class="n">导入包</span><span class="err">：</span><span class="kn">import</span><span class="w">    </span>
+<span class="w">    </span><span class="nn">当需要使用别人开发好的功能时</span><span class="err">，</span><span class="n">需要先找到功能所属的类</span><span class="err">，</span><span class="n">然后使用import导入这个类</span>
+<span class="w">    </span><span class="n">创建类对象</span><span class="err">，</span><span class="n">使用对象</span><span class="p">.</span><span class="na">功能</span><span class="p">()</span><span class="w">   </span>
+</pre></div>
+</div>
+<p>package使用注意事项：</p>
+<p>1、package必须书写在java程序的首行</p>
+<p>2、一个.java文件夹中，只能书写 一个package</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.itheima</span><span class="p">;</span><span class="w">  </span><span class="c1">//只能有一个package</span>
+<span class="c1">//package com.itcast;//报错</span>
+<span class="w">    </span>
+
+<span class="kd">class</span> <span class="nc">Itcast</span><span class="p">{</span>
+<span class="w">    </span>
+<span class="p">}</span><span class="w">    </span>
+</pre></div>
+</div>
+<p>包的命名规则：</p>
+<p>1、全部小写字母</p>
+<p>2、包名通常使用域名，倒着写的方式（企业中的标准）</p>
+<p>3、通常创建包名，都是有多个包，包之间使用.连接</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.itheima.hw.demo1</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>在书写程序时，需要引用别人写好的类中功能，需要：导包</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">package</span><span class="w"> </span><span class="nn">com.itheima</span><span class="p">;</span><span class="c1">// Test类归属的包</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span><span class="c1">//导包</span>
+
+<span class="kd">class</span> <span class="nc">Test</span><span class="p">{</span>
+<span class="w">    </span><span class="n">Scanner</span><span class="w"> </span><span class="n">sc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span><span class="c1">///要使用别人写的功能，要导入</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在书写 程序时，有两种导入包的方式：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">第一种</span><span class="err">：</span><span class="p">(</span><span class="n">不推荐</span><span class="p">)</span>
+<span class="w">    </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Scanner</span><span class="w">  </span><span class="n">sc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span><span class="c1">//书写类名时直接把包导入</span>
+
+<span class="w">    </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Scanner</span><span class="w">  </span><span class="n">sc2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Scanner</span><span class="w">  </span><span class="n">sc3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">java</span><span class="p">.</span><span class="na">util</span><span class="p">.</span><span class="na">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+
+<span class="n">第二种</span><span class="err">：</span>
+<span class="w">    </span><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Scanner</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Scanner</span><span class="w"> </span><span class="n">sc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Scanner</span><span class="w"> </span><span class="n">sc2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+<span class="w"> </span>
+<span class="w">    </span><span class="n">Scanner</span><span class="w"> </span><span class="n">sc3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3><span class="section-number">48.2.2. </span>访问修饰符<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<p>在java中为了程序的安全性，java语言提供了4种用来访问成员的权限</p>
+<p>1、public</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//公开的</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">study</span><span class="p">(){</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>2、private</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">   </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="c1">//私有的。只能本类使用</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>3、默认       什么都不书写</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="c1">//默认的访问修饰符</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>4、protected</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">pubilc</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Person</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">protected</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="c1">//受保护的（子类专用）</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>访问修饰符号的访问范围</strong></p>
+</div></blockquote>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>修饰符号 (从小到大排列)</p></th>
+<th class="head"><p>本类</p></th>
+<th class="head"><p>同一个包下的类(非子类)</p></th>
+<th class="head"><p>同一个包下的子类</p></th>
+<th class="head"><p>不同包下的类（非子类）</p></th>
+<th class="head"><p>不同包下的子类</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>private</p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+</tr>
+<tr class="row-odd"><td><p>默认</p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p>NO</p></td>
+<td><p>NO</p></td>
+</tr>
+<tr class="row-even"><td><p>protected</p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p>NO</p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p>NO</p></td>
+<td><p><strong>YES</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>public</p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p><strong>YES</strong></p></td>
+<td><p><strong>YES</strong></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</section>
+</section>
+<section id="api">
+<h2><span class="section-number">48.3. </span>常用API<a class="headerlink" href="#api" title="Link to this heading"></a></h2>
+<section id="object">
+<h3><span class="section-number">48.3.1. </span>Object类<a class="headerlink" href="#object" title="Link to this heading"></a></h3>
+<p>Object类的基本认知：</p>
+<p>1、java.lang.Object</p>
+<p>2、Obejct类是java语言中的鼻祖类（最顶层的父类）</p>
+<p>3、java中程序中所书写的类以及所使用的类，都要继承Object</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">//父类</span>
+<span class="kd">class</span> <span class="nc">Father</span><span class="p">{</span><span class="c1">//书写时没有书写继承 JVM自动会添加：class Father extends Object</span>
+<span class="w">    </span>
+<span class="p">}</span>
+<span class="c1">//子类 </span>
+<span class="kd">class</span> <span class="nc">Child</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">Father</span><span class="p">{</span>
+<span class="w">    </span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>可以使用Object类中的成员方法(功能)</p></li>
+</ul>
+<p>Object类中的成员方法 ：</p>
+<ul>
+<li><p>String   toString()</p>
+<ul class="simple">
+<li><p>功能：返回字符串格式的对象</p></li>
+</ul>
+</li>
+<li><p>boolean  equals(Object  obj)</p>
+<ul>
+<li><div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Student</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Student</span><span class="p">();</span>
+
+<span class="n">equals</span><span class="p">(</span><span class="w">  </span><span class="n">stu</span><span class="w">  </span><span class="p">)</span><span class="w">   </span><span class="c1">//   Object obj = stu;</span>
+</pre></div>
+</div>
+</li>
+<li><p>功能：比较两个对象是否相等</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="string">
+<h3><span class="section-number">48.3.2. </span>String类<a class="headerlink" href="#string" title="Link to this heading"></a></h3>
+<p>之前一直在使用：</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Student</span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>String到底是什么 东西？ 它是一种数据类型呢？还是一个类呢？</p>
+<p>String是一个类。不属于java的基本数据类型，属于引用类型</p>
+<p>在java语言中，只要书写了<code class="docutils literal notranslate"><span class="pre">&quot;....&quot;</span></code>,默认就是一个字符串对象：String类的对象</p>
+<p>简单理解：在java中只要被英文的双引号包含的内容，默认就是一个String对象</p>
+<p>String类的特点：</p>
+<p>1、被英文双引号包含的内容，都是一个String类的实例</p>
+<p>2、String中存储的字符串，不能被修改（不能对原值进行修改）</p>
+<p>String类中的常用方法 ：</p>
+<ul class="simple">
+<li><p>boolean  equals(Object obj)  :     String类重写了Object类中equals方法。</p>
+<ul>
+<li><p>String类中的equals方法 ，功能：  比较两个字符串的内容是否相等，区分大小字母</p></li>
+<li><p>在java语言中：</p>
+<ul>
+<li><p>比较字符串的地址，使用 ： ==</p></li>
+<li><p>比较字符串内容，使用： equals() 方法</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>boolean  equalsIgnoreCase(String  str)  ：   比较两个字符串是否相等，忽略大小写</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="%5BJava%5D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%85%AD%E5%A4%A7%E5%8E%9F%E5%88%99.html" class="btn btn-neutral float-left" title="47. [Java]设计模式六大原则" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="%5BJava%5D%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%84%E7%A7%8D%E5%85%B3%E7%B3%BB.html" class="btn btn-neutral float-right" title="49. [Java]OOP防脱发指南" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2020-2026, roohom。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
