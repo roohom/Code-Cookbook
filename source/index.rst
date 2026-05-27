@@ -8,62 +8,123 @@ Roohom's Code-Cookbook
 
 .. raw:: html
 
-   <div class="cc-home">
+   <main class="cc-home-shell" aria-label="Code-Cookbook home">
+     <canvas class="cc-home-particles" aria-hidden="true"></canvas>
+     <header class="cc-home-nav">
+       <a class="cc-home-brand" href="index.html" aria-label="Code-Cookbook 首页">
+         <span class="cc-home-mark" aria-hidden="true"></span>
+         <span>Code-Cookbook</span>
+       </a>
+       <nav class="cc-home-menu" aria-label="首页导航">
+         <div class="cc-home-menu-item">
+           <a href="Blog%20Here/index.html">文章</a>
+           <div class="cc-home-dropdown">
+             <a href="Blog%20Here/index.html">工程实践</a>
+             <a href="Bigdata/index.html">大数据</a>
+             <a href="SQL/index.html">SQL</a>
+             <a href="Auxiliary%20tools/index.html">工具链</a>
+           </div>
+         </div>
+         <div class="cc-home-menu-item">
+           <a href="Bigdata%20Tools/index.html">项目</a>
+           <div class="cc-home-dropdown">
+             <a href="Bigdata%20Tools/index.html">Bigdata Tools</a>
+             <a href="Auxiliary%20tools/index.html">Auxiliary Tools</a>
+           </div>
+         </div>
+         <a href="#about">关于我</a>
+         <a class="cc-home-search" href="search.html" aria-label="搜索文章">⌕</a>
+       </nav>
+       <a class="cc-home-subscribe" href="https://github.com/roohom/Code-Cookbook" target="_blank" rel="noopener">订阅</a>
+     </header>
+
      <section class="cc-home-hero">
-       <div>
-         <div class="cc-home-kicker">Personal technical cookbook</div>
-         <h1 class="cc-home-title">Code-Cookbook</h1>
+       <div class="cc-home-center">
+         <div class="cc-home-symbol" aria-hidden="true">◇</div>
+         <p class="cc-home-kicker">Personal technical cookbook</p>
+         <h1 class="cc-home-title">在工程现场，写下一本安静的技术食谱。</h1>
          <p class="cc-home-subtitle">
-           一个偏工程实践的个人技术笔记库，记录大数据、后端开发、SQL、工具使用，以及一些日常随笔。
-           它不是完整教材，更像一本持续更新的 cookbook：遇到问题、拆解问题、留下可复用的线索。
+           Code-Cookbook 记录大数据、后端工程、SQL 与工具链里的真实问题。
+           它不追逐噪声，只收藏可复用的路径、判断和一点书卷气。
          </p>
          <div class="cc-home-actions">
-           <a href="Blog%20Here/index.html">开始阅读</a>
-           <a href="SQL/index.html">SQL 笔记</a>
-           <a href="Bigdata%20Tools/index.html">大数据工具</a>
+           <a href="Blog%20Here/index.html">阅读最新文章</a>
+           <a href="#about">了解更多</a>
          </div>
        </div>
-       <aside class="cc-home-meta">
-         <div><strong>Roohom</strong>Backend / Big Data / Daily notes</div>
-         <div><strong>121+</strong>技术文章与问题记录</div>
-         <div><strong>Built with Sphinx</strong>Hosted by Read the Docs</div>
-       </aside>
      </section>
 
-     <h2 class="cc-home-section-title">主要内容</h2>
-     <section class="cc-home-grid">
-       <article class="cc-home-card">
-         <h2>博客</h2>
-         <p>工程问题、框架实践、Java/Spring/Flink/Spark 的日常记录。</p>
-         <a href="Blog%20Here/index.html">进入博客</a>
-       </article>
-       <article class="cc-home-card">
-         <h2>大数据</h2>
-         <p>数仓、数据倾斜、拉链表，以及 Hadoop、Hive、Flink、Spark 等工具。</p>
-         <a href="Bigdata/index.html">查看大数据</a>
-       </article>
-       <article class="cc-home-card">
-         <h2>SQL</h2>
-         <p>SQL 题目、JOIN、执行顺序、数据库设计和常见业务查询模式。</p>
-         <a href="SQL/index.html">查看 SQL</a>
-       </article>
-       <article class="cc-home-card">
-         <h2>辅助工具</h2>
-         <p>Docker、Avro、Sqoop 等工程辅助工具的使用记录。</p>
-         <a href="Auxiliary%20tools/index.html">查看工具</a>
-       </article>
-       <article class="cc-home-card">
-         <h2>随笔</h2>
-         <p>技术之外的观察、想法和一些不太归类的记录。</p>
-         <a href="Random%20ramblings/index.html">查看随笔</a>
-       </article>
-       <article class="cc-home-card">
-         <h2>索引</h2>
-         <p>保留 Sphinx 的全站索引和搜索能力，适合把它当知识库检索。</p>
-         <a href="genindex.html">查看索引</a>
-       </article>
+     <section class="cc-home-section cc-home-latest" data-home-reveal>
+       <div class="cc-home-section-lead">
+         <p>2026 · 持续更新</p>
+         <h2>最新思考</h2>
+       </div>
+       <div class="cc-home-articles">
+         <article class="cc-home-article-card">
+           <a href="Blog%20Here/[Flink]Flink%20on%20k8s任务的提交和实操.html">
+             <span>Flink / Kubernetes</span>
+             <h3>Flink on k8s 任务的提交和实操</h3>
+             <p>把一次真实部署过程拆成环境、命令、排错和收尾。</p>
+             <time>2026-05-27</time>
+           </a>
+         </article>
+         <article class="cc-home-article-card">
+           <a href="Blog%20Here/[Flink]监控Flink%20Metrics.html">
+             <span>Flink / Metrics</span>
+             <h3>监控 Flink Metrics</h3>
+             <p>从指标暴露到排查链路，整理流任务观测的关键线索。</p>
+             <time>2026-05-27</time>
+           </a>
+         </article>
+         <article class="cc-home-article-card">
+           <a href="SQL/index.html">
+             <span>SQL / Data</span>
+             <h3>SQL 问题与业务查询模式</h3>
+             <p>记录 JOIN、窗口函数、连续登录和宽表设计里的常见判断。</p>
+             <time>2026-05-27</time>
+           </a>
+         </article>
+       </div>
      </section>
-   </div>
+
+     <section class="cc-home-section cc-home-toolbox" data-home-reveal>
+       <h2>我的工具箱</h2>
+       <div class="cc-home-tools" aria-label="技术栈">
+         <span title="Java">Java</span>
+         <span title="Flink">Flink</span>
+         <span title="Spark">Spark</span>
+         <span title="Hive">Hive</span>
+         <span title="Kafka">Kafka</span>
+         <span title="SQL">SQL</span>
+         <span title="Docker">Docker</span>
+         <span title="Kubernetes">K8s</span>
+         <span title="Python">Python</span>
+       </div>
+     </section>
+
+     <section id="about" class="cc-home-section cc-home-about" data-home-reveal>
+       <div class="cc-home-avatar" aria-hidden="true">R</div>
+       <div>
+         <h2>关于我</h2>
+         <p>
+           我是 Roohom，长期和数据平台、后端系统、SQL 与工程工具打交道。
+           这里保存那些值得复盘的问题，也保存下一次更快抵达答案的路径。
+         </p>
+         <div class="cc-home-socials">
+           <a href="https://github.com/roohom/Code-Cookbook" target="_blank" rel="noopener">GitHub</a>
+           <a href="search.html">Search</a>
+           <a href="genindex.html">Index</a>
+         </div>
+       </div>
+     </section>
+
+     <footer class="cc-home-footer">
+       <span>© 2026 Code-Cookbook</span>
+       <a href="genindex.html">RSS</a>
+       <a href="Blog%20Here/index.html">Articles</a>
+       <a href="#about">About</a>
+     </footer>
+   </main>
 
 .. toctree::
    :maxdepth: 2

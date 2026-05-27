@@ -62,6 +62,7 @@ html_js_files = [
     'js/theme-toggle.js',
     'js/expand_tabs.js',
     'js/code_blocks.js',
+    'js/home_motion.js',
     'js/sidebar.js',
 ]
 
