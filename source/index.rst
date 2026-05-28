@@ -9,6 +9,8 @@ Roohom's Code-Cookbook
 .. raw:: html
 
    <main class="cc-home-shell" aria-label="Code-Cookbook home">
+     <div class="cc-home-aurora" aria-hidden="true"></div>
+     <div class="cc-home-grid" aria-hidden="true"></div>
      <canvas class="cc-home-particles" aria-hidden="true"></canvas>
      <header class="cc-home-nav">
        <a class="cc-home-brand" href="index.html" aria-label="Code-Cookbook 首页">
@@ -40,11 +42,9 @@ Roohom's Code-Cookbook
 
      <section class="cc-home-hero">
        <div class="cc-home-center">
-         <div class="cc-home-symbol" aria-hidden="true">◇</div>
-         <p class="cc-home-kicker">Personal technical cookbook</p>
          <h1 class="cc-home-title">代码烹饪指南</h1>
          <p class="cc-home-subtitle">
-           可能出错的地方就一定会出错。
+           可能出错的地方就一定会出错
          </p>
          <div class="cc-home-actions">
            <a href="Blog%20Here/index.html">阅读最新文章</a>

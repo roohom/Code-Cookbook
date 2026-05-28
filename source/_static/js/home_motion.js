@@ -19,65 +19,130 @@
     var width = 0;
     var height = 0;
     var dpr = 1;
-    var mouseX = 0;
-    var mouseY = 0;
-    var targetX = 0;
-    var targetY = 0;
-    var pointerActive = false;
-    var time = 0;
-    var colors = ["#315cf6", "#4a6cf7", "#5866df", "#7658c7", "#b64fa9", "#e15b8f"];
+    var startTime = 0;
+    var frameId = 0;
+    var pointer = { x: -9999, y: -9999 };
+    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var motionConfig = {
+      desktopText: "roohom dong",
+      mobileLines: ["roohom", "dong"],
+      textTransform: "lowercase",
+      textYRatioDesktop: 0.43,
+      textYRatioMobile: 0.43,
+      cellMin: 8,
+      cellMax: 13,
+      mobileCellMax: 10,
+      cellWidthRatio: 0.009,
+      cellGapRatio: 0.34,
+      letterGapRatio: 1.15,
+      lineGapRatio: 1.8,
+      assembleDuration: 3500,
+      settleDuration: 1500,
+      settleKickX: 7.5,
+      settleKickY: 5.2,
+      settleShake: 8,
+      idleDrift: 0.9
+    };
+    var glyphs = {
+      " ": ["000", "000", "000", "000", "000", "000", "000"],
+      d: ["00001", "00001", "01101", "10011", "10001", "10011", "01101"],
+      g: ["00000", "01111", "10001", "10001", "01111", "00001", "11110"],
+      h: ["10000", "10000", "10110", "11001", "10001", "10001", "10001"],
+      m: ["00000", "00000", "11010", "10101", "10101", "10101", "10101"],
+      n: ["00000", "00000", "10110", "11001", "10001", "10001", "10001"],
+      o: ["00000", "00000", "01110", "10001", "10001", "10001", "01110"],
+      r: ["00000", "00000", "10110", "11001", "10000", "10000", "10000"]
+    };
 
-    function randomColor() {
-      return colors[Math.floor(Math.random() * colors.length)];
-    }
-
-    function randomBaseX() {
-      var roll = Math.random();
-      if (roll < 0.56) {
-        return Math.pow(Math.random(), 1.75) * width;
+    function normalizeMotionText(text) {
+      if (motionConfig.textTransform === "lowercase") {
+        return text.toLowerCase();
       }
-      if (roll < 0.82) {
-        return width * (0.22 + Math.random() * 0.48);
+      if (motionConfig.textTransform === "uppercase") {
+        return text.toUpperCase();
       }
-      return width * (0.7 + Math.random() * 0.3);
+      return text;
     }
 
     function createParticles() {
       particles = [];
-      var count = width < 760 ? 190 : 390;
-      var centerX = width * 0.53;
-      var centerY = height * 0.52;
+      var lines = width < 640 ? motionConfig.mobileLines : [motionConfig.desktopText];
+      var cell = Math.max(
+        motionConfig.cellMin,
+        Math.min(
+          width * motionConfig.cellWidthRatio,
+          width < 640 ? motionConfig.mobileCellMax : motionConfig.cellMax
+        )
+      );
+      var cellGap = cell * motionConfig.cellGapRatio;
+      var letterGap = cell * motionConfig.letterGapRatio;
+      var lineGap = cell * motionConfig.lineGapRatio;
+      var lineHeight = cell * 7;
+      var textHeight = lines.length * lineHeight + (lines.length - 1) * lineGap;
+      var centerY =
+        height *
+        (width < 640 ? motionConfig.textYRatioMobile : motionConfig.textYRatioDesktop);
+      var targets = [];
+      var maxLaunchRadius = 1.5 * Math.sqrt(width * width + height * height);
 
-      for (var i = 0; i < count; i += 1) {
-        var baseX = randomBaseX();
-        var baseY = Math.random() * height;
-        var gapX = (baseX - centerX) / Math.max(width, 1);
-        var gapY = (baseY - centerY) / Math.max(height, 1);
-        var heroGap = Math.exp(-(gapX * gapX * 12 + gapY * gapY * 8));
+      var topY = centerY - textHeight / 2;
+      for (var lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+        var text = normalizeMotionText(lines[lineIndex]);
+        var textWidth = 0;
 
-        if (Math.random() < heroGap * 0.74) {
-          baseX = baseX < centerX ? baseX - width * 0.16 : baseX + width * 0.16;
-          baseY += (Math.random() > 0.5 ? 1 : -1) * height * 0.1;
+        for (var t = 0; t < text.length; t += 1) {
+          textWidth += (glyphs[text[t]] || glyphs[" "])[0].length * cell + letterGap;
         }
+        textWidth -= letterGap;
 
-        var depth = 0.35 + Math.random() * 1.25;
+        var cursorX = (width - textWidth) / 2;
+        var lineY = topY + lineIndex * (lineHeight + lineGap);
+        for (var charIndex = 0; charIndex < text.length; charIndex += 1) {
+          var glyph = glyphs[text[charIndex]] || glyphs[" "];
+          for (var row = 0; row < glyph.length; row += 1) {
+            for (var col = 0; col < glyph[row].length; col += 1) {
+              if (glyph[row][col] !== "1") {
+                continue;
+              }
+              targets.push({ x: cursorX + col * cell, y: lineY + row * cell });
+              targets.push({ x: cursorX + col * cell + cellGap, y: lineY + row * cell });
+              targets.push({ x: cursorX + col * cell, y: lineY + row * cell + cellGap });
+              targets.push({
+                x: cursorX + col * cell + cellGap,
+                y: lineY + row * cell + cellGap
+              });
+            }
+          }
+          cursorX += glyph[0].length * cell + letterGap;
+        }
+      }
+
+      for (var i = 0; i < targets.length; i += 1) {
+        var targetX = targets[i].x;
+        var targetY = targets[i].y;
+        var launchAngle = Math.random() * Math.PI * 2;
+        var launchRadius = maxLaunchRadius * (0.28 + Math.random() * 0.72);
+        var startX = targetX + Math.cos(launchAngle) * launchRadius;
+        var startY = targetY + Math.sin(launchAngle) * launchRadius;
+
         particles.push({
-          baseX: baseX,
-          baseY: baseY,
-          x: baseX,
-          y: baseY,
+          x: reducedMotion ? targetX : startX,
+          y: reducedMotion ? targetY : startY,
+          startX: startX,
+          startY: startY,
+          targetX: targetX,
+          targetY: targetY,
           vx: 0,
           vy: 0,
-          size: (0.8 + Math.random() * 1.8) * depth,
-          length: (3.5 + Math.random() * 8) * depth,
-          depth: depth,
-          angle: -0.45 + Math.random() * 1.1,
+          char: Math.random() > 0.5 ? "1" : "0",
+          size: width < 640 ? 6 : 8,
+          alpha: 0.48 + Math.random() * 0.48,
           seed: Math.random() * Math.PI * 2,
-          drift: 0.35 + Math.random() * 0.85,
-          alpha: 0.12 + Math.random() * 0.34,
-          color: randomColor()
+          settled: false
         });
       }
+
+      window.__ccParticleCount = particles.length;
     }
 
     function resize() {
@@ -90,79 +155,83 @@
       canvas.style.width = width + "px";
       canvas.style.height = height + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      targetX = mouseX = width * 0.5;
-      targetY = mouseY = height * 0.5;
+      startTime = Date.now();
       createParticles();
     }
 
     function move(event) {
-      pointerActive = true;
-      targetX = event.clientX;
-      targetY = event.clientY;
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
     }
 
     function leave() {
-      pointerActive = false;
-      targetX = width * 0.5;
-      targetY = height * 0.5;
-    }
-
-    function drawParticle(p, x, y, wave, influence) {
-      var angle = p.angle + Math.sin(time * 0.6 + p.seed) * 0.16 + influence * 0.75;
-      var len = p.length * (0.72 + Math.abs(wave) * 0.55 + influence * 0.65);
-      var radius = p.size * (0.62 + Math.abs(wave) * 0.25);
-      var x1 = x - Math.cos(angle) * len * 0.5;
-      var y1 = y - Math.sin(angle) * len * 0.5;
-      var x2 = x + Math.cos(angle) * len * 0.5;
-      var y2 = y + Math.sin(angle) * len * 0.5;
-
-      ctx.strokeStyle = p.color;
-      ctx.lineWidth = Math.max(1, radius);
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
+      pointer.x = -9999;
+      pointer.y = -9999;
     }
 
     function animate() {
-      time += 0.016;
-      mouseX += (targetX - mouseX) * 0.08;
-      mouseY += (targetY - mouseY) * 0.08;
-
       ctx.clearRect(0, 0, width, height);
+      ctx.font = (width < 640 ? 6 : 8) + "px ui-monospace, SFMono-Regular, Menlo, monospace";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      var elapsed = Date.now() - startTime;
+      var assembleDuration = motionConfig.assembleDuration;
+      var assembling = elapsed < assembleDuration;
+      var progress = Math.min(elapsed / assembleDuration, 1);
+      var easedProgress = 1 - Math.pow(1 - progress, 3);
+      var time = Date.now();
 
       for (var i = 0; i < particles.length; i += 1) {
         var p = particles[i];
-        var wave = Math.sin(time * (0.85 + p.drift) + p.seed);
-        var sway = Math.cos(time * (0.48 + p.drift * 0.28) + p.seed * 1.7);
-        var naturalX = p.baseX + wave * (7 + p.depth * 8) + sway * (2 + p.depth * 5);
-        var naturalY = p.baseY + sway * (8 + p.depth * 9) + Math.sin(time * 0.42 + p.seed) * 4;
+        if (assembling) {
+          p.x = p.startX + (p.targetX - p.startX) * easedProgress;
+          p.y = p.startY + (p.targetY - p.startY) * easedProgress;
+          p.vx = 0;
+          p.vy = 0;
+        } else if (!reducedMotion) {
+          if (!p.settled) {
+            p.vx += Math.sin(p.seed) * motionConfig.settleKickX;
+            p.vy += Math.cos(p.seed * 1.3) * motionConfig.settleKickY;
+            p.settled = true;
+          }
 
-        var dx = naturalX - mouseX;
-        var dy = naturalY - mouseY;
-        var distance = Math.sqrt(dx * dx + dy * dy) || 1;
-        var radius = width < 760 ? 135 : 210;
-        var influence = pointerActive ? Math.max(0, 1 - distance / radius) : 0;
-        var ripple = Math.sin(distance * 0.055 - time * 4.6 + p.seed) * influence;
-        var push = influence * influence * (14 + p.depth * 24);
-        var ripplePush = ripple * (10 + p.depth * 16);
-        var targetParticleX = naturalX + (dx / distance) * (push + ripplePush);
-        var targetParticleY = naturalY + (dy / distance) * (push + ripplePush) + ripple * 10;
+          var dx = p.x - pointer.x;
+          var dy = p.y - pointer.y;
+          var distance = Math.sqrt(dx * dx + dy * dy);
 
-        p.vx += (targetParticleX - p.x) * 0.035;
-        p.vy += (targetParticleY - p.y) * 0.035;
-        p.vx *= 0.84;
-        p.vy *= 0.84;
+          if (distance < 82 && distance > 0) {
+            var force = ((82 - distance) / 82) * 8;
+            p.vx += (dx / distance) * force;
+            p.vy += (dy / distance) * force;
+          }
+
+          p.vx += (p.targetX - p.x) * 0.08;
+          p.vy += (p.targetY - p.y) * 0.08;
+          p.vx *= 0.92;
+          p.vy *= 0.92;
+        }
+
         p.x += p.vx;
         p.y += p.vy;
 
-        ctx.globalAlpha = p.alpha * (0.6 + Math.abs(wave) * 0.32 + influence * 0.32);
-        drawParticle(p, p.x, p.y, wave, influence);
+        var settleElapsed = Math.max(0, elapsed - assembleDuration);
+        var settleShake =
+          settleElapsed < motionConfig.settleDuration
+            ? (1 - settleElapsed / motionConfig.settleDuration) * motionConfig.settleShake
+            : 0;
+        var drift = reducedMotion ? 0 : motionConfig.idleDrift + settleShake;
+        var drawX = p.x + Math.sin(time * 0.012 + p.seed) * drift;
+        var drawY = p.y + Math.cos(time * 0.01 + p.seed * 1.7) * drift * 0.72;
+
+        ctx.fillStyle = "rgba(50, 240, 140, " + p.alpha + ")";
+        ctx.fillText(p.char, drawX, drawY);
       }
 
       ctx.globalAlpha = 1;
-      window.requestAnimationFrame(animate);
+      if (!reducedMotion) {
+        frameId = window.requestAnimationFrame(animate);
+      }
     }
 
     function initReveal() {
@@ -193,10 +262,16 @@
 
     resize();
     initReveal();
-    window.addEventListener("pointermove", move, { passive: true });
-    window.addEventListener("pointerleave", leave, { passive: true });
+    window.addEventListener("mousemove", move, { passive: true });
+    window.addEventListener("mouseleave", leave, { passive: true });
     window.addEventListener("resize", resize);
-    window.requestAnimationFrame(animate);
+    frameId = window.requestAnimationFrame(animate);
+
+    window.addEventListener("beforeunload", function () {
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+    });
   }
 
   if (document.readyState === "loading") {

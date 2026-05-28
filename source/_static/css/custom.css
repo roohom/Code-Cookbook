@@ -219,13 +219,15 @@ body.cc-home-page .cc-sidebar-toggle {
 body:has(.cc-home-shell),
 body.cc-home-page {
   overflow-x: hidden;
-  background: #fafafa;
+  background: #0a0b0d;
 }
 
 body:has(.cc-home-shell) .wy-nav-content-wrap,
 body.cc-home-page .wy-nav-content-wrap {
   margin-left: 0;
-  background: #fafafa;
+  border: 0;
+  background: #0a0b0d;
+  box-shadow: none;
 }
 
 body:has(.cc-home-shell) .wy-nav-content,
@@ -233,7 +235,8 @@ body.cc-home-page .wy-nav-content {
   max-width: none;
   min-height: 100vh;
   padding: 0;
-  background: #fafafa;
+  border: 0;
+  background: #0a0b0d;
   box-shadow: none;
   font-size: 16px;
   line-height: 1.7;
@@ -245,6 +248,8 @@ body:has(.cc-home-shell) .document > div {
   width: 100%;
   margin: 0;
   padding: 0;
+  border: 0;
+  box-shadow: none;
 }
 
 body:has(.cc-home-shell) .rst-content > h1:first-child,
@@ -266,10 +271,74 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   isolation: isolate;
   overflow: hidden;
   min-height: 100vh;
-  background: #fafafa;
-  color: #1a1a1a;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(50, 240, 140, 0.14), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(96, 242, 189, 0.08), transparent 70%),
+    #0a0b0d;
+  color: #f5f9fe;
   font-size: 16px;
   line-height: 1.7;
+}
+
+.cc-home-shell::before {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  height: 4.1rem;
+  background: rgba(10, 11, 13, 0.72);
+  content: "";
+  pointer-events: none;
+  backdrop-filter: blur(14px);
+}
+
+.cc-home-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cc-home-aurora::before,
+.cc-home-aurora::after {
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  content: "";
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.cc-home-aurora::before {
+  top: -30%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(50, 240, 140, 0.35), transparent 60%);
+  animation: cc-aurora-a 18s ease-in-out infinite alternate;
+}
+
+.cc-home-aurora::after {
+  top: -20%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(96, 242, 189, 0.25), transparent 60%);
+  animation: cc-aurora-b 22s ease-in-out infinite alternate;
+}
+
+.cc-home-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(70% 50% at 50% 20%, #000 30%, transparent 80%);
+  pointer-events: none;
 }
 
 .cc-home-particles {
@@ -278,8 +347,28 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   z-index: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.82;
+  opacity: 0.84;
   pointer-events: none;
+}
+
+@keyframes cc-aurora-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(12%, 8%) scale(1.15);
+  }
+}
+
+@keyframes cc-aurora-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(-10%, 12%) scale(1.1);
+  }
 }
 
 .cc-home-nav,
@@ -301,7 +390,9 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   align-items: center;
   width: min(100% - 3rem, 1120px);
   height: 4.1rem;
+  border: 0;
   transform: translateX(-50%);
+  box-shadow: none;
 }
 
 .cc-home-brand,
@@ -318,7 +409,7 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   display: inline-flex;
   gap: 0.55rem;
   align-items: center;
-  color: #171717;
+  color: #f5f9fe;
   font-size: 0.96rem;
   font-weight: 760;
 }
@@ -327,9 +418,9 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   width: 1rem;
   height: 1rem;
   background:
-    linear-gradient(135deg, transparent 42%, #4a6cf7 43% 56%, transparent 57%),
-    linear-gradient(45deg, #ef5da8 0 34%, transparent 35%),
-    linear-gradient(135deg, transparent 0 58%, #f59e0b 59% 100%);
+    linear-gradient(135deg, transparent 42%, #3ee1a3 43% 56%, transparent 57%),
+    linear-gradient(45deg, #32f08c 0 34%, transparent 35%),
+    linear-gradient(135deg, transparent 0 58%, #a0fde7 59% 100%);
   clip-path: polygon(50% 0, 100% 88%, 78% 88%, 50% 38%, 22% 88%, 0 88%);
 }
 
@@ -341,13 +432,13 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
 }
 
 .cc-home-menu a {
-  color: #242424;
+  color: #a6aab5;
   font-size: 0.86rem;
   font-weight: 560;
 }
 
 .cc-home-menu a:hover {
-  color: #000000;
+  color: #f5f9fe;
 }
 
 .cc-home-menu-item {
@@ -361,10 +452,10 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   display: grid;
   min-width: 9.5rem;
   padding: 0.55rem;
-  border: 1px solid rgba(26, 26, 26, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
-  background: rgba(250, 250, 250, 0.88);
-  box-shadow: 0 18px 50px rgba(20, 24, 35, 0.08);
+  background: rgba(10, 11, 13, 0.82);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
   opacity: 0;
   transform: translateY(0.4rem);
   pointer-events: none;
@@ -382,12 +473,12 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
 .cc-home-dropdown a {
   padding: 0.42rem 0.55rem;
   border-radius: 10px;
-  color: #4b5563;
+  color: #a6aab5;
 }
 
 .cc-home-dropdown a:hover {
-  background: #f1f2f4;
-  color: #111111;
+  background: rgba(237, 239, 242, 0.08);
+  color: #f5f9fe;
 }
 
 .cc-home-search {
@@ -401,15 +492,15 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   min-height: 2rem;
   padding: 0 1rem;
   border-radius: 999px;
-  color: #ffffff;
-  background: #111111;
+  color: #0a0b0d;
+  background: #32f08c;
   font-size: 0.84rem;
   font-weight: 650;
 }
 
 .cc-home-subscribe:hover {
-  color: #ffffff;
-  background: #2a2a2a;
+  color: #0a0b0d;
+  background: #60f2bd;
 }
 
 .cc-home-hero {
@@ -426,16 +517,18 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
 }
 
 .cc-home-symbol {
+  display: none;
   margin-bottom: 0.8rem;
-  color: #1a1a1a;
+  color: #32f08c;
   font-family: "Cormorant Garamond", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
   font-size: 1.45rem;
   line-height: 1;
 }
 
 .cc-home-kicker {
+  display: none;
   margin: 0 0 0.95rem;
-  color: #6b7280;
+  color: #a6aab5;
   font-size: 0.76rem;
   font-weight: 680;
   letter-spacing: 0.1em;
@@ -449,7 +542,7 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   margin: 0 auto;
   padding-bottom: 0 !important;
   border-bottom: 0 !important;
-  color: #1a1a1a !important;
+  color: #f5f9fe !important;
   font-family: "Cormorant Garamond", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
   font-size: clamp(3.4rem, 7vw, 4.5rem) !important;
   font-weight: 650 !important;
@@ -460,7 +553,7 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
 .cc-home-subtitle {
   max-width: 680px;
   margin: 1.25rem auto 0;
-  color: #555555;
+  color: #a6aab5;
   font-size: clamp(1rem, 1.25vw, 1.12rem);
   line-height: 1.9;
 }
@@ -478,20 +571,20 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   align-items: center;
   min-height: 2.45rem;
   padding: 0 1.15rem;
-  border: 1px solid rgba(17, 17, 17, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  color: #1a1a1a;
-  background: rgba(255, 255, 255, 0.72);
+  color: #f5f9fe;
+  background: rgba(237, 239, 242, 0.04);
   font-size: 0.92rem;
   font-weight: 650;
-  box-shadow: 0 8px 26px rgba(20, 24, 35, 0.05);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(16px);
 }
 
 .cc-home-actions a:first-child {
-  color: #ffffff;
-  border-color: #111111;
-  background: #111111;
+  color: #0a0b0d;
+  border-color: #32f08c;
+  background: #32f08c;
 }
 
 .cc-home-section {
@@ -525,7 +618,7 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
 .cc-home-section h2,
 .cc-home-section-lead h2 {
   margin: 0;
-  color: #1a1a1a;
+  color: #f5f9fe;
   font-family: "Cormorant Garamond", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
   font-size: clamp(2rem, 3vw, 2.8rem);
   font-weight: 650;
@@ -542,30 +635,30 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   display: grid;
   min-height: 15rem;
   padding: 1.15rem;
-  border: 1px solid rgba(26, 26, 26, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px;
-  color: #1a1a1a;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 10px 35px rgba(20, 24, 35, 0.04);
+  color: #f5f9fe;
+  background: rgba(18, 19, 20, 0.78);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.24);
   backdrop-filter: blur(16px);
   transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
 .cc-home-article-card a:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 55px rgba(20, 24, 35, 0.11);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.36);
 }
 
 .cc-home-article-card h3 {
   margin: 0.85rem 0 0.55rem;
-  color: #1a1a1a;
+  color: #f5f9fe;
   font-size: 1.08rem;
   line-height: 1.42;
 }
 
 .cc-home-article-card p {
   margin: 0;
-  color: #5f6368;
+  color: #a6aab5;
   font-size: 0.92rem;
   line-height: 1.72;
 }
@@ -591,17 +684,17 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   align-items: center;
   min-height: 2.4rem;
   padding: 0 1rem;
-  border: 1px solid rgba(26, 26, 26, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
-  color: #3f3f46;
-  background: rgba(255, 255, 255, 0.72);
+  color: #d7dbe2;
+  background: rgba(237, 239, 242, 0.04);
   font-size: 0.92rem;
   font-weight: 650;
   transition: transform 160ms ease, border-color 160ms ease;
 }
 
 .cc-home-tools span:hover {
-  border-color: rgba(74, 108, 247, 0.35);
+  border-color: rgba(50, 240, 140, 0.45);
   transform: scale(1.08);
 }
 
@@ -617,20 +710,20 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
   display: grid;
   width: 9rem;
   height: 9rem;
-  border: 1px solid rgba(26, 26, 26, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 42% 58% 48% 52%;
-  color: #1a1a1a;
-  background: radial-gradient(circle at 35% 25%, #ffffff, #f0f1f4);
+  color: #32f08c;
+  background: radial-gradient(circle at 35% 25%, rgba(50, 240, 140, 0.16), rgba(237, 239, 242, 0.04));
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 4rem;
   place-items: center;
-  box-shadow: 0 18px 50px rgba(20, 24, 35, 0.06);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
 }
 
 .cc-home-about p {
   max-width: 36rem;
   margin: 1rem 0 0;
-  color: #555555;
+  color: #a6aab5;
   font-size: 0.98rem;
   line-height: 1.9;
 }
@@ -642,13 +735,13 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
 }
 
 .cc-home-socials a {
-  color: #4b5563;
+  color: #a6aab5;
   font-size: 0.9rem;
   font-weight: 650;
 }
 
 .cc-home-socials a:hover {
-  color: #111111;
+  color: #f5f9fe;
 }
 
 .cc-home-footer {
@@ -1111,13 +1204,16 @@ html.cc-dark .wy-menu-vertical li.toctree-l1.current > a {
 }
 
 html.cc-dark .cc-home-actions a:first-child {
-  color: #ffffff;
-  border-color: #111111;
-  background: #111111;
+  color: #0a0b0d;
+  border-color: #32f08c;
+  background: #32f08c;
 }
 
 html.cc-dark .cc-home-shell {
-  background: #fafafa;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(50, 240, 140, 0.14), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(96, 242, 189, 0.08), transparent 70%),
+    #0a0b0d;
 }
 
 html.cc-dark body:has(.cc-home-shell),
@@ -1126,25 +1222,25 @@ html.cc-dark body:has(.cc-home-shell) .wy-nav-content-wrap,
 html.cc-dark body.cc-home-page .wy-nav-content-wrap,
 html.cc-dark body:has(.cc-home-shell) .wy-nav-content,
 html.cc-dark body.cc-home-page .wy-nav-content {
-  background: #fafafa;
+  background: #0a0b0d;
 }
 
 html.cc-dark .cc-home-brand,
-html.cc-dark .cc-home-menu a,
-html.cc-dark .cc-home-symbol,
 html.cc-dark .cc-home-section h2,
 html.cc-dark .cc-home-section-lead h2 {
-  color: #1a1a1a;
+  color: #f5f9fe;
 }
 
-html.cc-dark .cc-home-kicker {
-  color: #6b7280;
-}
-
+html.cc-dark .cc-home-menu a,
+html.cc-dark .cc-home-kicker,
 html.cc-dark .cc-home-subtitle,
 html.cc-dark .cc-home-about p,
 html.cc-dark .cc-home-article-card p {
-  color: #555555;
+  color: #a6aab5;
+}
+
+html.cc-dark .cc-home-symbol {
+  color: #32f08c;
 }
 
 html.cc-dark .rst-content table.docutils,
