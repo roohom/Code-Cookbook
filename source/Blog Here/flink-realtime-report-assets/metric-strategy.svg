@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="390" viewBox="0 0 1120 390">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font:700 22px Arial,"Microsoft YaHei",sans-serif;fill:#0f172a}
+      .label{font:600 15px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:400 12px Arial,"Microsoft YaHei",sans-serif;fill:#475569}
+      .box{fill:#fff;stroke:#111827;stroke-width:1.35;rx:9}
+      .core{fill:#eef2ff;stroke:#4f46e5;stroke-width:1.5;rx:10}
+      .strategy{fill:#f0f9ff;stroke:#0284c7;stroke-width:1.35;rx:10}
+      .out{fill:#f0fdf4;stroke:#16a34a;stroke-width:1.35;rx:10}
+      .line{stroke:#475569;stroke-width:1.45;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <text x="42" y="42" class="title">指标策略编排</text>
+  <rect x="62" y="98" width="158" height="60" class="box"/>
+  <text x="105" y="124" class="label">窗口数据</text>
+  <text x="88" y="144" class="small">Iterable&lt;UnifiedData&gt;</text>
+  <rect x="62" y="202" width="158" height="60" class="box"/>
+  <text x="105" y="228" class="label">事件状态</text>
+  <text x="96" y="248" class="small">Keyed State</text>
+  <rect x="62" y="306" width="158" height="60" class="out"/>
+  <text x="105" y="332" class="label">报告对象</text>
+  <text x="98" y="352" class="small">Report Builder</text>
+
+  <rect x="338" y="176" width="180" height="74" class="core"/>
+  <text x="374" y="207" class="label">StrategyContext</text>
+  <text x="366" y="229" class="small">统一调度所有指标策略</text>
+
+  <rect x="648" y="74" width="150" height="56" class="strategy"/>
+  <text x="688" y="108" class="label">累计量策略</text>
+  <rect x="648" y="150" width="150" height="56" class="strategy"/>
+  <text x="688" y="184" class="label">最大值策略</text>
+  <rect x="648" y="226" width="150" height="56" class="strategy"/>
+  <text x="681" y="260" class="label">行为次数策略</text>
+  <rect x="648" y="302" width="150" height="56" class="strategy"/>
+  <text x="681" y="336" class="label">行为标签策略</text>
+
+  <rect x="920" y="142" width="138" height="60" class="out"/>
+  <text x="953" y="168" class="label">更新状态</text>
+  <text x="948" y="188" class="small">中间指标累计</text>
+  <rect x="920" y="246" width="138" height="60" class="out"/>
+  <text x="953" y="272" class="label">更新报告</text>
+  <text x="950" y="292" class="small">最终字段赋值</text>
+
+  <path d="M220 128 C276 128 294 195 338 195" class="line"/>
+  <path d="M220 232 L338 216" class="line"/>
+  <path d="M220 336 C280 336 294 234 338 232" class="line"/>
+  <path d="M518 213 C578 213 594 102 648 102" class="line"/>
+  <path d="M518 213 C578 213 594 178 648 178" class="line"/>
+  <path d="M518 213 C578 213 594 254 648 254" class="line"/>
+  <path d="M518 213 C578 213 594 330 648 330" class="line"/>
+  <path d="M798 102 C866 102 886 172 920 172" class="line"/>
+  <path d="M798 178 C866 178 886 172 920 172" class="line"/>
+  <path d="M798 254 C866 254 886 276 920 276" class="line"/>
+  <path d="M798 330 C866 330 886 276 920 276" class="line"/>
+</svg>

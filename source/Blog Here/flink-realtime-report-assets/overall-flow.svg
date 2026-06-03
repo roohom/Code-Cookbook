@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4b5563"/>
+    </marker>
+    <style>
+      .title{font:700 24px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .label{font:500 16px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:400 13px Arial,"Microsoft YaHei",sans-serif;fill:#4b5563}
+      .box{fill:#fff;stroke:#111827;stroke-width:1.4;rx:10}
+      .group{fill:#f8fafc;stroke:#cbd5e1;stroke-width:1.2;rx:14}
+      .accent{fill:#eff6ff;stroke:#2563eb;stroke-width:1.6;rx:10}
+      .out{fill:#f0fdf4;stroke:#16a34a;stroke-width:1.5;rx:10}
+      .err{fill:#fff7ed;stroke:#ea580c;stroke-width:1.5;rx:10}
+      .line{stroke:#4b5563;stroke-width:1.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <text x="48" y="46" class="title">多源实时行为报告总体流程</text>
+
+  <rect x="48" y="82" width="268" height="274" class="group"/>
+  <text x="72" y="114" class="label">数据接入</text>
+  <rect x="76" y="142" width="212" height="54" class="box"/>
+  <text x="104" y="174" class="label">事件周期流</text>
+  <text x="104" y="191" class="small">开始/结束消息</text>
+  <rect x="76" y="222" width="212" height="54" class="box"/>
+  <text x="104" y="254" class="label">状态数据流</text>
+  <text x="104" y="271" class="small">状态/指标信号</text>
+  <rect x="76" y="302" width="212" height="54" class="box"/>
+  <text x="104" y="334" class="label">行为埋点流</text>
+  <text x="104" y="351" class="small">功能/行为事件</text>
+
+  <rect x="374" y="82" width="248" height="274" class="group"/>
+  <text x="398" y="114" class="label">统一模型</text>
+  <rect x="404" y="146" width="188" height="54" class="box"/>
+  <text x="432" y="179" class="label">EventPeriod</text>
+  <rect x="404" y="252" width="188" height="54" class="box"/>
+  <text x="432" y="285" class="label">UnifiedData</text>
+
+  <rect x="680" y="82" width="276" height="274" class="group"/>
+  <text x="704" y="114" class="label">核心处理</text>
+  <rect x="714" y="144" width="208" height="62" class="accent"/>
+  <text x="745" y="174" class="label">KeyedCoProcessFunction</text>
+  <text x="760" y="194" class="small">状态机 / Timer / 窗口</text>
+  <rect x="714" y="232" width="92" height="48" class="box"/>
+  <text x="738" y="262" class="small">状态管理</text>
+  <rect x="830" y="232" width="92" height="48" class="box"/>
+  <text x="854" y="262" class="small">窗口缓存</text>
+  <rect x="714" y="298" width="92" height="48" class="box"/>
+  <text x="738" y="328" class="small">指标策略</text>
+  <rect x="830" y="298" width="92" height="48" class="box"/>
+  <text x="854" y="328" class="small">异常侧流</text>
+
+  <rect x="1010" y="112" width="142" height="64" class="out"/>
+  <text x="1049" y="146" class="label">报告流</text>
+  <text x="1032" y="164" class="small">Kafka / API</text>
+  <rect x="1010" y="226" width="142" height="64" class="out"/>
+  <text x="1043" y="260" class="label">结果表</text>
+  <text x="1032" y="278" class="small">湖仓 / OLAP</text>
+  <rect x="1010" y="340" width="142" height="64" class="err"/>
+  <text x="1043" y="374" class="label">异常流</text>
+  <text x="1032" y="392" class="small">补偿 / 排查</text>
+
+  <path d="M288 169 C326 169 360 173 404 173" class="line"/>
+  <path d="M288 249 C326 249 360 279 404 279" class="line"/>
+  <path d="M288 329 C326 329 360 279 404 279" class="line"/>
+  <path d="M592 173 C632 173 666 173 714 173" class="line"/>
+  <path d="M592 279 C632 279 666 193 714 193" class="line"/>
+  <path d="M922 174 C958 174 978 144 1010 144" class="line"/>
+  <path d="M922 256 C958 256 978 258 1010 258" class="line"/>
+  <path d="M922 322 C958 322 978 372 1010 372" class="line"/>
+
+  <text x="48" y="456" class="small">说明：表源、消息源和下游系统可以替换，核心不变的是“事件周期控制流 + 多源行为数据流 + 有状态报告生成”。</text>
+</svg>

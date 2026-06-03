@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1060" height="360" viewBox="0 0 1060 360">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font:700 22px Arial,"Microsoft YaHei",sans-serif;fill:#0f172a}
+      .label{font:600 15px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:400 12px Arial,"Microsoft YaHei",sans-serif;fill:#475569}
+      .state{fill:#fff;stroke:#111827;stroke-width:1.35;rx:22}
+      .ok{fill:#f0fdf4;stroke:#16a34a;stroke-width:1.5;rx:22}
+      .err{fill:#fff7ed;stroke:#ea580c;stroke-width:1.5;rx:22}
+      .line{stroke:#475569;stroke-width:1.45;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <text x="42" y="42" class="title">事件状态流转</text>
+  <rect x="50" y="138" width="128" height="54" class="state"/>
+  <text x="82" y="170" class="label">等待开始</text>
+  <rect x="260" y="138" width="128" height="54" class="state"/>
+  <text x="309" y="170" class="label">运行中</text>
+  <rect x="470" y="138" width="150" height="54" class="state"/>
+  <text x="501" y="170" class="label">等待最终窗口</text>
+  <rect x="720" y="138" width="128" height="54" class="ok"/>
+  <text x="759" y="170" class="label">已完成</text>
+  <rect x="720" y="252" width="128" height="54" class="state"/>
+  <text x="759" y="284" class="label">清理状态</text>
+  <rect x="260" y="252" width="128" height="54" class="err"/>
+  <text x="299" y="284" class="label">异常事件</text>
+  <rect x="470" y="252" width="150" height="54" class="err"/>
+  <text x="513" y="284" class="label">侧输出</text>
+
+  <path d="M178 165 L260 165" class="line"/>
+  <path d="M388 165 L470 165" class="line"/>
+  <path d="M620 165 L720 165" class="line"/>
+  <path d="M784 192 L784 252" class="line"/>
+  <path d="M178 178 C210 248 226 279 260 279" class="line"/>
+  <path d="M388 279 L470 279" class="line"/>
+  <path d="M620 279 C674 279 694 279 720 279" class="line"/>
+  <path d="M324 138 C324 96 348 78 384 96 C418 112 414 138 388 154" class="line"/>
+
+  <text x="190" y="148" class="small">开始消息</text>
+  <text x="410" y="148" class="small">结束消息</text>
+  <text x="640" y="148" class="small">Timer触发</text>
+  <text x="304" y="96" class="small">行为数据持续进入</text>
+  <text x="180" y="238" class="small">结束先到/字段缺失</text>
+  <text x="500" y="238" class="small">异常保留用于补偿</text>
+</svg>

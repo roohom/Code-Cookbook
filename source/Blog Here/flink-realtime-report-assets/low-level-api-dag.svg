@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="520" viewBox="0 0 1480 520">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font:700 24px Arial,"Microsoft YaHei",sans-serif;fill:#0f172a}
+      .label{font:600 15px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:400 13px Arial,"Microsoft YaHei",sans-serif;fill:#475569}
+      .box{fill:#fff;stroke:#111827;stroke-width:1.35;rx:9}
+      .source{fill:#fefce8;stroke:#a16207;stroke-width:1.35;rx:9}
+      .op{fill:#eef2ff;stroke:#4f46e5;stroke-width:1.5;rx:10}
+      .state{fill:#ecfeff;stroke:#0891b2;stroke-width:1.5;rx:10}
+      .sink{fill:#f0fdf4;stroke:#16a34a;stroke-width:1.5;rx:10}
+      .circle{fill:#fff;stroke:#111827;stroke-width:1.35}
+      .line{stroke:#475569;stroke-width:1.5;fill:none;marker-end:url(#arrow)}
+      .note{font:400 12px Arial,"Microsoft YaHei",sans-serif;fill:#334155}
+    </style>
+  </defs>
+
+  <text x="48" y="44" class="title">低阶 API 双流处理 DAG</text>
+
+  <rect x="52" y="116" width="112" height="58" class="source"/>
+  <text x="79" y="142" class="label">消息队列</text>
+  <text x="68" y="161" class="small">事件周期消息</text>
+  <rect x="220" y="112" width="168" height="66" class="box"/>
+  <text x="252" y="140" class="label">消息队列 Connector</text>
+  <text x="258" y="160" class="small">解析控制流</text>
+  <rect x="452" y="112" width="188" height="66" class="box"/>
+  <text x="488" y="140" class="label">EventPeriod Stream</text>
+  <text x="500" y="160" class="small">开始/结束事件</text>
+  <circle cx="725" cy="145" r="44" class="circle"/>
+  <text x="703" y="151" class="label">keyBy</text>
+
+  <rect x="52" y="310" width="112" height="58" class="source"/>
+  <text x="78" y="336" class="label">湖仓表</text>
+  <text x="66" y="355" class="small">主体行为数据</text>
+  <rect x="220" y="306" width="168" height="66" class="box"/>
+  <text x="254" y="334" class="label">表 Connector</text>
+  <text x="244" y="354" class="small">streaming query</text>
+  <rect x="452" y="306" width="188" height="66" class="box"/>
+  <text x="488" y="334" class="label">UnifiedData Stream</text>
+  <text x="486" y="354" class="small">状态/行为统一模型</text>
+  <circle cx="725" cy="339" r="44" class="circle"/>
+  <text x="703" y="345" class="label">keyBy</text>
+
+  <circle cx="900" cy="242" r="58" fill="#fff" stroke="#111827" stroke-width="2.4"/>
+  <circle cx="900" cy="242" r="50" fill="#fff" stroke="#111827" stroke-width="1.2"/>
+  <text x="876" y="248" class="label">connect</text>
+
+  <rect x="1080" y="194" width="182" height="96" class="op"/>
+  <text x="1106" y="230" class="label">process</text>
+  <text x="1101" y="252" class="small">KeyedCoProcessFunction</text>
+  <text x="1112" y="272" class="small">窗口 + 状态 + Timer</text>
+
+  <rect x="1062" y="70" width="218" height="58" class="state"/>
+  <text x="1108" y="96" class="label">MapState</text>
+  <text x="1084" y="115" class="small">subject_id + event_id → 指标状态</text>
+
+  <rect x="1340" y="212" width="96" height="60" class="sink"/>
+  <text x="1370" y="238" class="label">Sink</text>
+  <text x="1355" y="258" class="small">报告输出</text>
+
+  <path d="M164 145 L220 145" class="line"/>
+  <path d="M388 145 L452 145" class="line"/>
+  <path d="M640 145 L681 145" class="line"/>
+  <path d="M769 145 C820 150 842 202 852 222" class="line"/>
+  <path d="M164 339 L220 339" class="line"/>
+  <path d="M388 339 L452 339" class="line"/>
+  <path d="M640 339 L681 339" class="line"/>
+  <path d="M769 339 C820 334 842 282 852 262" class="line"/>
+  <path d="M958 242 L1080 242" class="line"/>
+  <path d="M1171 128 L1171 194" class="line"/>
+  <path d="M1262 242 L1340 242" class="line"/>
+
+  <text x="764" y="410" class="note">两条流必须使用共同字段 subject_id 做 keyBy，进入同一个并行子任务后再按 event_id + subject_id 维护事件状态。</text>
+  <text x="1094" y="330" class="note">process 内部完成时间范围判断、窗口缓存、指标累计、最终报告输出和状态清理。</text>
+</svg>

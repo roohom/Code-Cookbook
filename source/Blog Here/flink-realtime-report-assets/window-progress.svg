@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="330" viewBox="0 0 1120 330">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font:700 22px Arial,"Microsoft YaHei",sans-serif;fill:#0f172a}
+      .label{font:600 14px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:400 12px Arial,"Microsoft YaHei",sans-serif;fill:#475569}
+      .bar{fill:#eef2ff;stroke:#4f46e5;stroke-width:1.4;rx:8}
+      .last{fill:#fef3c7;stroke:#d97706;stroke-width:1.4;rx:8}
+      .late{fill:#f1f5f9;stroke:#64748b;stroke-width:1.2;rx:8}
+      .line{stroke:#475569;stroke-width:1.5;fill:none;marker-end:url(#arrow)}
+      .tick{stroke:#334155;stroke-width:1.2}
+    </style>
+  </defs>
+  <text x="42" y="42" class="title">业务事件内的动态窗口推进</text>
+  <line x1="82" y1="178" x2="1030" y2="178" class="line"/>
+  <line x1="110" y1="150" x2="110" y2="206" class="tick"/>
+  <line x1="350" y1="150" x2="350" y2="206" class="tick"/>
+  <line x1="590" y1="150" x2="590" y2="206" class="tick"/>
+  <line x1="780" y1="150" x2="780" y2="206" class="tick"/>
+  <line x1="930" y1="150" x2="930" y2="206" class="tick"/>
+
+  <rect x="112" y="112" width="236" height="42" class="bar"/>
+  <text x="188" y="138" class="label">窗口 1</text>
+  <rect x="352" y="112" width="236" height="42" class="bar"/>
+  <text x="428" y="138" class="label">窗口 2</text>
+  <rect x="592" y="112" width="186" height="42" class="last"/>
+  <text x="644" y="138" class="label">最后窗口</text>
+  <rect x="782" y="112" width="146" height="42" class="late"/>
+  <text x="812" y="138" class="label">允许迟到</text>
+
+  <text x="82" y="228" class="small">事件开始</text>
+  <text x="320" y="228" class="small">窗口1结束</text>
+  <text x="560" y="228" class="small">窗口2结束</text>
+  <text x="742" y="228" class="small">事件结束</text>
+  <text x="874" y="228" class="small">最终触发</text>
+
+  <text x="110" y="276" class="small">窗口边界从业务事件开始时间计算，而不是自然整点时间。</text>
+  <text x="110" y="296" class="small">结束时间到达后，最后一个窗口会被调整为真实结束时间，再等待 allowedLateness 输出最终报告。</text>
+</svg>
