@@ -29,29 +29,25 @@
       textTransform: "lowercase",
       textYRatioDesktop: 0.43,
       textYRatioMobile: 0.43,
-      cellMin: 8,
-      cellMax: 13,
-      mobileCellMax: 10,
-      cellWidthRatio: 0.009,
-      cellGapRatio: 0.34,
-      letterGapRatio: 1.15,
-      lineGapRatio: 1.8,
+      fontFamily:
+        '"JetBrains Mono", "Fira Code", "Cascadia Code", "SFMono-Regular", Menlo, Consolas, monospace',
+      fontWeight: 760,
+      fontSizeRatioDesktop: 0.122,
+      fontSizeRatioMobile: 0.18,
+      fontMinDesktop: 88,
+      fontMaxDesktop: 150,
+      fontMinMobile: 54,
+      fontMaxMobile: 78,
+      sampleStepDesktop: 6.2,
+      sampleStepMobile: 5.4,
+      maxParticlesDesktop: 1550,
+      maxParticlesMobile: 1050,
       assembleDuration: 3500,
-      settleDuration: 1500,
-      settleKickX: 7.5,
-      settleKickY: 5.2,
-      settleShake: 8,
-      idleDrift: 0.9
-    };
-    var glyphs = {
-      " ": ["000", "000", "000", "000", "000", "000", "000"],
-      d: ["00001", "00001", "01101", "10011", "10001", "10011", "01101"],
-      g: ["00000", "01111", "10001", "10001", "01111", "00001", "11110"],
-      h: ["10000", "10000", "10110", "11001", "10001", "10001", "10001"],
-      m: ["00000", "00000", "11010", "10101", "10101", "10101", "10101"],
-      n: ["00000", "00000", "10110", "11001", "10001", "10001", "10001"],
-      o: ["00000", "00000", "01110", "10001", "10001", "10001", "01110"],
-      r: ["00000", "00000", "10110", "11001", "10000", "10000", "10000"]
+      settleDuration: 2100,
+      settleKickX: 1.25,
+      settleKickY: 0.9,
+      settleShake: 1.2,
+      idleDrift: 0.16
     };
 
     function normalizeMotionText(text) {
@@ -66,54 +62,84 @@
 
     function createParticles() {
       particles = [];
-      var lines = width < 640 ? motionConfig.mobileLines : [motionConfig.desktopText];
-      var cell = Math.max(
-        motionConfig.cellMin,
+      var isMobile = width < 640;
+      var lines = isMobile ? motionConfig.mobileLines : [motionConfig.desktopText];
+      var fontSize = Math.max(
+        isMobile ? motionConfig.fontMinMobile : motionConfig.fontMinDesktop,
         Math.min(
-          width * motionConfig.cellWidthRatio,
-          width < 640 ? motionConfig.mobileCellMax : motionConfig.cellMax
+          width * (isMobile ? motionConfig.fontSizeRatioMobile : motionConfig.fontSizeRatioDesktop),
+          isMobile ? motionConfig.fontMaxMobile : motionConfig.fontMaxDesktop
         )
       );
-      var cellGap = cell * motionConfig.cellGapRatio;
-      var letterGap = cell * motionConfig.letterGapRatio;
-      var lineGap = cell * motionConfig.lineGapRatio;
-      var lineHeight = cell * 7;
-      var textHeight = lines.length * lineHeight + (lines.length - 1) * lineGap;
+      var lineHeight = fontSize * 1.02;
+      var textHeight = lines.length * lineHeight;
       var centerY =
         height *
-        (width < 640 ? motionConfig.textYRatioMobile : motionConfig.textYRatioDesktop);
+        (isMobile ? motionConfig.textYRatioMobile : motionConfig.textYRatioDesktop);
       var targets = [];
       var maxLaunchRadius = 1.5 * Math.sqrt(width * width + height * height);
+      var sampleStep = isMobile ? motionConfig.sampleStepMobile : motionConfig.sampleStepDesktop;
+      var maxParticles = isMobile
+        ? motionConfig.maxParticlesMobile
+        : motionConfig.maxParticlesDesktop;
+      var maskCanvas = document.createElement("canvas");
+      var maskCtx = maskCanvas.getContext("2d", { willReadFrequently: true });
+
+      maskCanvas.width = Math.ceil(width);
+      maskCanvas.height = Math.ceil(Math.max(height, centerY + textHeight));
+      maskCtx.fillStyle = "#fff";
+      maskCtx.textAlign = "center";
+      maskCtx.textBaseline = "middle";
+      maskCtx.font =
+        motionConfig.fontWeight + " " + fontSize + "px " + motionConfig.fontFamily;
 
       var topY = centerY - textHeight / 2;
       for (var lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
         var text = normalizeMotionText(lines[lineIndex]);
-        var textWidth = 0;
+        var lineY = topY + lineHeight * (lineIndex + 0.5);
+        maskCtx.fillText(text, width / 2, lineY);
+      }
 
-        for (var t = 0; t < text.length; t += 1) {
-          textWidth += (glyphs[text[t]] || glyphs[" "])[0].length * cell + letterGap;
+      var imageData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height);
+      var data = imageData.data;
+      for (var y = 0; y < maskCanvas.height; y += sampleStep) {
+        for (var x = 0; x < maskCanvas.width; x += sampleStep) {
+          var alphaIndex =
+            (Math.floor(y) * maskCanvas.width + Math.floor(x)) * 4 + 3;
+          if (data[alphaIndex] > 92) {
+            targets.push({
+              x: x + (Math.random() - 0.5) * 0.8,
+              y: y + (Math.random() - 0.5) * 0.8
+            });
+          }
         }
-        textWidth -= letterGap;
+      }
 
-        var cursorX = (width - textWidth) / 2;
-        var lineY = topY + lineIndex * (lineHeight + lineGap);
-        for (var charIndex = 0; charIndex < text.length; charIndex += 1) {
-          var glyph = glyphs[text[charIndex]] || glyphs[" "];
-          for (var row = 0; row < glyph.length; row += 1) {
-            for (var col = 0; col < glyph[row].length; col += 1) {
-              if (glyph[row][col] !== "1") {
-                continue;
-              }
-              targets.push({ x: cursorX + col * cell, y: lineY + row * cell });
-              targets.push({ x: cursorX + col * cell + cellGap, y: lineY + row * cell });
-              targets.push({ x: cursorX + col * cell, y: lineY + row * cell + cellGap });
+      if (targets.length > maxParticles) {
+        var stride = targets.length / maxParticles;
+        var compactTargets = [];
+        for (var targetIndex = 0; targetIndex < maxParticles; targetIndex += 1) {
+          compactTargets.push(targets[Math.floor(targetIndex * stride)]);
+        }
+        targets = compactTargets;
+      }
+
+      if (targets.length < maxParticles * 0.72 && sampleStep > 2.5) {
+        var extraStep = sampleStep * 0.62;
+        for (var extraY = extraStep / 2; extraY < maskCanvas.height; extraY += extraStep) {
+          for (var extraX = extraStep / 2; extraX < maskCanvas.width; extraX += extraStep) {
+            if (targets.length >= maxParticles) {
+              break;
+            }
+            var extraAlphaIndex =
+              (Math.floor(extraY) * maskCanvas.width + Math.floor(extraX)) * 4 + 3;
+            if (data[extraAlphaIndex] > 120) {
               targets.push({
-                x: cursorX + col * cell + cellGap,
-                y: lineY + row * cell + cellGap
+                x: extraX + (Math.random() - 0.5) * 0.65,
+                y: extraY + (Math.random() - 0.5) * 0.65
               });
             }
           }
-          cursorX += glyph[0].length * cell + letterGap;
         }
       }
 
@@ -135,8 +161,8 @@
           vx: 0,
           vy: 0,
           char: Math.random() > 0.5 ? "1" : "0",
-          size: width < 640 ? 6 : 8,
-          alpha: 0.48 + Math.random() * 0.48,
+          size: isMobile ? 6 : 7,
+          alpha: 0.54 + Math.random() * 0.42,
           seed: Math.random() * Math.PI * 2,
           settled: false
         });
@@ -171,7 +197,8 @@
 
     function animate() {
       ctx.clearRect(0, 0, width, height);
-      ctx.font = (width < 640 ? 6 : 8) + "px ui-monospace, SFMono-Regular, Menlo, monospace";
+      ctx.font =
+        (width < 640 ? 6 : 7) + "px ui-monospace, SFMono-Regular, Menlo, monospace";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
@@ -201,15 +228,15 @@
           var distance = Math.sqrt(dx * dx + dy * dy);
 
           if (distance < 82 && distance > 0) {
-            var force = ((82 - distance) / 82) * 8;
+            var force = ((82 - distance) / 82) * 4.2;
             p.vx += (dx / distance) * force;
             p.vy += (dy / distance) * force;
           }
 
-          p.vx += (p.targetX - p.x) * 0.08;
-          p.vy += (p.targetY - p.y) * 0.08;
-          p.vx *= 0.92;
-          p.vy *= 0.92;
+          p.vx += (p.targetX - p.x) * 0.065;
+          p.vy += (p.targetY - p.y) * 0.065;
+          p.vx *= 0.84;
+          p.vy *= 0.84;
         }
 
         p.x += p.vx;
@@ -221,8 +248,8 @@
             ? (1 - settleElapsed / motionConfig.settleDuration) * motionConfig.settleShake
             : 0;
         var drift = reducedMotion ? 0 : motionConfig.idleDrift + settleShake;
-        var drawX = p.x + Math.sin(time * 0.012 + p.seed) * drift;
-        var drawY = p.y + Math.cos(time * 0.01 + p.seed * 1.7) * drift * 0.72;
+        var drawX = p.x + Math.sin(time * 0.0032 + p.seed) * drift;
+        var drawY = p.y + Math.cos(time * 0.0026 + p.seed * 1.7) * drift * 0.55;
 
         ctx.fillStyle = "rgba(50, 240, 140, " + p.alpha + ")";
         ctx.fillText(p.char, drawX, drawY);
