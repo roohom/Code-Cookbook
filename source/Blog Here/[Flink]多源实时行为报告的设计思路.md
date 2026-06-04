@@ -2,9 +2,11 @@
 
 ## 背景
 
+### 概述
+
 最近做了一个实时试驾报告类的需求，用户通过系统预约试驾，到达经销商门店进行试乘试驾，整个过程中都会有消息进入大数据系统，当用户试驾结束后会发送一份试驾报告。场景抽象之后大概是这样：
 
-业务系统中存在一个明确的业务事件周期，比如一次服务、一次体验、一次流程、一次任务执行。这个周期有开始，也有结束，中间会产生很多来自不同数据源的行为数据、状态数据和埋点数据。我们希望在事件结束后，自动生成一份标准化报告。
+业务系统中存在一个明确的业务事件周期，比如一次服务、一次体验、一次流程、一次任务执行。**这个周期有开始，也有结束**，中间会产生很多来自不同数据源的行为数据、状态数据和埋点数据。我们希望在事件结束后，自动生成一份标准化报告。
 
 报告里通常会包含几类信息：
 
@@ -16,13 +18,19 @@
 
 4、异常情况，比如只有开始没有结束、只有结束没有开始、重复开始、乱序消息等
 
+### 难点
+
 这类需求看上去很像一个Join问题：拿到事件周期表，再拿行为明细表，按照主体ID和时间范围关联，最后聚合输出报告。最开始我也是这么想的，但真正往下做的时候，会发现它并不是一个普通的Join问题。
 
 它更像是一个**以业务事件生命周期为边界的多源实时状态计算问题**。
 
+难点是：**开始消息和结束消息都是随着事件真实发生而实时进入系统，在结束消息到来时出具统计报告**。
+
+
+
 所以这篇文章想记录一下这个设计思路：遇到实时计算需求时，先识别问题类型，再选择API。SQL、Table API、DataStream API都不是银弹，没有绝对正确的方案。必要的时候，要从Flink低阶API入手，动手定制一套适合自己的西装。
 
->下文经过一定的脱敏提炼，核心调研、探索和设计由我完成，博客内容由AI辅助生成。
+>下文经过一定的脱敏提炼，核心调研、探索和设计由我完成，博客内容的逻辑图由AI辅助生成。
 
 ## 问题抽象
 
@@ -30,7 +38,7 @@
 
 ### 事件周期流
 
-事件周期流用于描述一个业务事件的开始和结束。
+事件周期流用于描述一个业务事件的开始和结束。在大数据侧，这些数据通常由上游系统（比如微服务）提供，实时写入消息中间件。
 
 ~~~text
 event_id       业务事件ID
@@ -115,6 +123,8 @@ GROUP BY p.event_id, p.subject_id;
 
 事件开始消息来了，结束消息可能还没来。在结束之前，状态数据和行为数据已经源源不断到达。如果等结束消息来了再去查历史明细，会遇到回查、补算、成本和一致性问题。如果每条状态数据都先Join一次事件周期表，又会遇到事件周期不完整、乱序消息、迟到消息和状态清理的问题。
 
+
+
 在这个场景里，我们真正需要解决的是：
 
 1、如何在开始消息到达时创建一个业务事件上下文
@@ -136,6 +146,126 @@ GROUP BY p.event_id, p.subject_id;
 ### Flink SQL Join
 
 Flink SQL Join的优势是表达能力直观，代码少，维护SQL比维护复杂算子轻松。对于维度补充、两条流之间的简单时间区间关联、离线批处理口径验证，SQL是非常好的选择。
+
+#### 方案模拟
+
+SQL关联后进行GROUP BY聚合
+
+~~~sql
+   select a.subject_id as subject_id,
+          a.startTime as startTime,
+          a.endTime as endTime,
+          a.message_id as message_id,
+          max(event_time) as row_time,
+          max(case when json_value(signals, 'signalName') = '4' then 1 else 0 end) as sport_mode,
+          count(1) as cnt
+     from trip_periods as a
+left join behavior_data /*+ OPTIONS('table.exec.state.ttl'='86400000') */ as b
+       on a.subject_id = b.subject_id
+      and b.event_time BETWEEN a.startTime AND a.endTime
+ group by a.message_id,
+          a.subject_id,
+          a.startTime,
+          a.endTime
+~~~
+
+由于进行JOIN关联后，结合了GROUP BY去进行聚合计算，此时，该查询只能输出changelogStream，对于结果的输出，是更新的，即每匹配到一条数据就触发计算，输出的结果类似于
+
+~~~sql
+2> +I[SUBJECT_001, 1752737974001, 1752737975009, 10032, 1752737975003, 0, 1]
+2> -U[SUBJECT_001, 1752737974001, 1752737975009, 10032, 1752737975003, 0, 1]
+2> +U[SUBJECT_001, 1752737974001, 1752737975009, 10032, 1752737975007, 0, 2]
+~~~
+
+对于最终报告的输出，必须是单条的，且一次性触发计算完将结果发出，所以需要对该撤回流结果进行聚合，在此定义了一个全局窗口，一次性收集这些撤回流数据，统一运行一个聚合函数，将结果统一成一条，数据到下游系统
+
+~~~java
+DataStream<Row> dataStream = stEnv.toChangelogStream(table);
+dataStream
+        .keyBy(row -> row.getField("subject_id"))
+        .window(GlobalWindows.create())
+        .trigger(new TripEndTrigger())
+        .reduce(new ReduceFunction<Row>() {
+            @Override
+            public Row reduce(Row value1, Row value2) throws Exception {
+                return Long.valueOf(value1.getField("row_time").toString()) >= Long.valueOf(value2.getField("row_time").toString()) ?
+                        value1 : value2;
+            }
+        })
+        .print()
+;
+~~~
+
+**与普通窗口所不同的是，全局窗口必须自定义触发器，否则窗口不会执行，这里自定义窗口触发器**
+
+~~~java
+
+import org.apache.flink.api.common.functions.ReduceFunction;
+import org.apache.flink.api.common.state.ReducingState;
+import org.apache.flink.api.common.state.ReducingStateDescriptor;
+import org.apache.flink.api.common.typeutils.base.LongSerializer;
+import org.apache.flink.streaming.api.windowing.triggers.Trigger;
+import org.apache.flink.streaming.api.windowing.triggers.TriggerResult;
+import org.apache.flink.streaming.api.windowing.windows.GlobalWindow;
+import org.apache.flink.types.Row;
+
+public class TripEndTrigger extends Trigger<Row, GlobalWindow> {
+
+    private static final long serialVersionUID = 1L;
+
+    private final ReducingStateDescriptor<Long> stateDesc =
+            new ReducingStateDescriptor<>("max", new Max(), LongSerializer.INSTANCE);
+
+    @Override
+    public TriggerResult onElement(Row element, long timestamp, GlobalWindow window, TriggerContext ctx) throws Exception {
+        ReducingState<Long> max = ctx.getPartitionedState(stateDesc);
+        Long rowTime = element.getField("row_time") == null ? 0L : Long.valueOf(element.getField("row_time").toString());
+        Long endTime = Long.valueOf(element.getField("endTime").toString());
+        max.add(rowTime);
+
+        if (max.get() >= endTime) {
+            return TriggerResult.FIRE;
+        }
+
+        return TriggerResult.CONTINUE;
+    }
+
+    @Override
+    public TriggerResult onProcessingTime(long time, GlobalWindow window, TriggerContext ctx) throws Exception {
+        return TriggerResult.CONTINUE;
+    }
+
+    @Override
+    public TriggerResult onEventTime(long time, GlobalWindow window, TriggerContext ctx) throws Exception {
+        return TriggerResult.CONTINUE;
+    }
+
+    @Override
+    public void clear(GlobalWindow window, TriggerContext ctx) throws Exception {
+        ctx.getPartitionedState(stateDesc).clear();
+    }
+
+
+    private static class Max implements ReduceFunction<Long> {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Long reduce(Long value1, Long value2) throws Exception {
+            return value1 >= value2 ? value1 : value2;
+        }
+    }
+}
+~~~
+
+其核心目的是，在事件周期结束消息到来且结果聚合完成后，将报告发出。
+
+上述结果最终输出的是撤回流，撤回流的数据每一条对于下游算子都是可见的，所以需要一个聚合算子将结果聚合成一条再最终输出，暂定考虑使用：
+
+1、使用ReduceFunction聚合结果
+
+2、运用一个算子，前面的算子中计算每条结果数据完成时间，在当前算子中缓存完成时间，当检测到时间与当前水位线时间已经过去了8分钟(or 10分钟)即触发结果的最终输出
+
+
 
 但在这个场景里，SQL Join会比较吃力：
 
@@ -166,6 +296,52 @@ JOIN dim_table FOR SYSTEM_TIME AS OF s.proctime AS d
 
 但它解决的是“查一份相对静态或外部存储中的数据”，不是“维护一个业务事件生命周期”。
 
+在我们的场景中，可以转换一下思路，<u>当试驾开始和结束消息都到达时，把车辆信号数据表作为一个维度表</u>，但是这个违背了lookup join的设计原则，且信号表是大数据量级的表，容易引起内存灾难。
+
+
+
+#### 方案模拟
+
+以类似以下的SQL提交Flink处理任务
+
+~~~sql
+SELECT d.subject_id                                 as subject_id,
+       MAX(b.event_time) as event_time
+FROM subject_events AS d
+         JOIN behavior_data FOR SYSTEM_TIME AS OF d.ts AS b
+              ON d.carId = b.vin -- 主键字段必须出现在JOIN条件中，且是等值连接
+                  AND TO_TIMESTAMP_LTZ(b.event_time, 3)  BETWEEN TO_TIMESTAMP_LTZ(d.startTime, 3) AND TO_TIMESTAMP_LTZ(d.endTime, 3)
+GROUP BY d.subject_id
+~~~
+
+但是以上的SQL其实是有问题的，
+
+~~~shell
+Flink SQL> SELECT d.subject_id                        as subject_id,
+>        MAX(b.event_time) as event_time
+> FROM subject_events AS d
+>          JOIN behavior_data FOR SYSTEM_TIME AS OF d.ts AS b
+>               ON d.carId = b.vin -- 主键字段必须出现在JOIN条件中，且等值连接
+>                   AND TO_TIMESTAMP_LTZ(b.event_time, 3)  BETWEEN TO_TIMESTAMP_LTZ(d.startTime, 3) AND TO_TIMESTAMP_LTZ(d.endTime, 3)
+> GROUP BY d.subject_id
+> ;2025-07-24 05:07:34,460 WARN  org.apache.hadoop.metrics2.impl.MetricsConfig                [] - Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+2025-07-24 05:07:34,470 INFO  org.apache.hadoop.metrics2.impl.MetricsSystemImpl            [] - Scheduled Metric snapshot period at 10 second(s).
+2025-07-24 05:07:34,471 INFO  org.apache.hadoop.metrics2.impl.MetricsSystemImpl            [] - s3a-file-system metrics system started
+ 
+[ERROR] Could not execute SQL statement. Reason:
+org.apache.flink.table.api.ValidationException: Temporal Table Join requires primary key in versioned table, but no primary key can be found. The physical plan is:
+FlinkLogicalJoin(condition=[AND(=($0, $4), >=(TO_TIMESTAMP_LTZ(+($5, $6), 3), TO_TIMESTAMP_LTZ($1, 3)), <=(TO_TIMESTAMP_LTZ(+($5, $6), 3), TO_TIMESTAMP_LTZ($2, 3)), __INITIAL_TEMPORAL_JOIN_CONDITION($3, $8, __TEMPORAL_JOIN_LEFT_KEY($0), __TEMPORAL_JOIN_RIGHT_KEY($4)))], joinType=[inner])
+  FlinkLogicalCalc(select=[subject_id, startTime, endTime, Reinterpret(CAST(ts AS TIMESTAMP_LTZ(3) *ROWTIME*)) AS ts])
+    FlinkLogicalTableSourceScan(table=[[default_catalog, default_database, drive_events, watermark=[CAST(ts AS TIMESTAMP_LTZ(3) *ROWTIME*)], watermarkEmitStrategy=[on-periodic]]], fields=[subject_id, message_id, startTime, endTime, ts])
+  FlinkLogicalSnapshot(period=[$cor0.ts])
+    FlinkLogicalCalc(select=[vin, collect_unix_timestamp_millis, relative_millis, message_receive_unix_timestamp_millis, Reinterpret(TO_TIMESTAMP_LTZ(+(collect_unix_timestamp_millis, relative_millis), 3)) AS ts])
+      FlinkLogicalTableSourceScan(table=[[default_catalog, default_database, behavior_data, project=[vin, collect_unix_timestamp_millis, relative_millis, message_receive_unix_timestamp_millis], watermark=[TO_TIMESTAMP_LTZ(+(collect_unix_timestamp_millis, relative_millis), 3)], watermarkEmitStrategy=[on-periodic]]], fields=[vin, event_time])
+ 
+Flink SQL>
+~~~
+
+
+
 对于本文讨论的场景，Lookup Join的问题是：
 
 1、它不负责创建和关闭事件上下文
@@ -187,6 +363,16 @@ Interval Join可以表达两条流之间基于事件时间的区间关联。
 但本文场景的区间不是一个固定的前后偏移，而是由业务事件的开始和结束动态决定。并且我们不是要输出两条流匹配后的明细，而是要围绕一个事件周期不断累计，最后生成一份报告。
 
 Interval Join依旧不能很好地承担事件状态机的职责。
+
+### 异步查询Async I/O
+
+在流处理中访问外部存储（如数据库、Key-Value 存储、RPC 服务）时，传统同步请求带来的严重性能瓶颈问题。同步请求会阻塞算子任务线程，导致资源利用率低下和吞吐量受限。Flink的Async I/O(**`AsyncFunction`**)在发送I/O 请求时**不阻塞** Flink 算子任务的线程，算子线程可以立即处理下一个输入记录或发出另一个请求，而无需等待当前请求的响应，**一个算子任务同时处理多个并发的 I/O 请求**，极大地提高了吞吐量和资源（特别是 CPU）利用率。
+
+在本文所述的场景中，当大量事件在同一时间段发生时，由于信号或者行为数据量极大，会给程序带来极大的压力，同步计算极大概率会有性能问题，造成报告完成速度慢、延迟吿，为解决该问题，本方案使用异步查询的方式提交对paimon表的查询，以支持兼容多试驾车同时试驾，同时产出试驾报告的需求，不至于阻塞任务，带来高延迟的负面影响。
+
+**核心逻辑是，当事件周期结束消息到来时，以开始时间和结束时间去信号或行为表中“框选”数据，统一计算指标。**
+
+同样，异步是可以实现的，但是问题很明显，这本质也是一种跑批思维，随着数据量的增加，加工速度会变慢，而且对内存的要求较高。
 
 ### DataStream低阶API
 
@@ -327,6 +513,10 @@ report_object
 
 ![业务事件内的动态窗口推进](./flink-realtime-report-assets/window-progress.svg)
 
+同时，当前一个事件周期结束后，事实上，数据可能迟到，需要考虑延迟等待，计算并没有真正停止，而此时，下一个事件周期已经开始了，用图表示就是：
+
+![业务事件内的动态窗口推进](./flink-realtime-report-assets/windows_register_logic.svg)
+
 处理逻辑可以抽象为：
 
 ~~~java
@@ -363,7 +553,7 @@ void assignDatumToWindow(String eventKey, UnifiedData data, Long startTime, Long
 ctx.timerService().registerProcessingTimeTimer(windowEnd + allowedLateness);
 ~~~
 
-这里使用处理时间还是事件时间，需要结合实际数据情况判断。事件时间语义更标准，但如果上游数据很少，水位线不推进，窗口可能迟迟不触发。处理时间Timer则更适合“即使后续没有新数据，也要按业务时间向前推进”的报告生成场景。当然，想要严格事件事件语义，也是可以做到的，此时可能会涉及到自定义`Watermark generator`，实现`WatermarkStrategy`即可，可以见我的另一个文章[Flink中自定义watermark生成器]。
+这里使用处理时间还是事件时间，需要结合实际数据情况判断。事件时间语义更标准，但如果上游数据很少，水位线不推进，窗口可能迟迟不触发。处理时间Timer则更适合“即使后续没有新数据，也要按业务时间向前推进”的报告生成场景。当然，想要严格事件时间语义，也是可以做到的，此时可能会涉及到自定义`Watermark generator`，实现`WatermarkStrategy`即可，可以见我的另一个文章[Flink中自定义watermark生成器]。
 
 ### 指标计算层
 
