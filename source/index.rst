@@ -60,6 +60,14 @@ Roohom's Code-Cookbook
        </div>
        <div class="cc-home-articles">
          <article class="cc-home-article-card">
+           <a href="Blog%20Here/[Flink]多源实时行为报告的设计思路.html">
+             <span>Flink / 实时报告</span>
+             <h3>多源实时行为报告的设计思路</h3>
+             <p>从业务事件周期出发，拆解多数据源汇聚、状态追踪与报告自动生成的设计方法。</p>
+             <time>2026-06-04</time>
+           </a>
+         </article>
+         <article class="cc-home-article-card">
            <a href="Blog%20Here/[Flink]Flink%20on%20k8s任务的提交和实操.html">
              <span>Flink / Kubernetes</span>
              <h3>Flink on k8s 任务的提交和实操</h3>
@@ -75,28 +83,21 @@ Roohom's Code-Cookbook
              <time>2026-05-27</time>
            </a>
          </article>
-         <article class="cc-home-article-card">
-           <a href="SQL/index.html">
-             <span>SQL / Data</span>
-             <h3>SQL 问题与业务查询模式</h3>
-             <p>记录 JOIN、窗口函数、连续登录和宽表设计里的常见判断。</p>
-             <time>2026-05-27</time>
-           </a>
-         </article>
        </div>
      </section>
 
      <section class="cc-home-section cc-home-toolbox" data-home-reveal>
        <h2>我的工具箱</h2>
        <div class="cc-home-tools" aria-label="技术栈">
-         <span title="Java">Java</span>
+         <span title="AI Agent">AI Agent</span>
          <span title="Flink">Flink</span>
          <span title="Spark">Spark</span>
-         <span title="Hive">Hive</span>
          <span title="Kafka">Kafka</span>
-         <span title="SQL">SQL</span>
-         <span title="Docker">Docker</span>
          <span title="Kubernetes">K8s</span>
+         <span title="Docker">Docker</span>
+         <span title="Java">Java</span>
+         <span title="Hive">Hive</span>
+         <span title="SQL">SQL</span>
          <span title="Python">Python</span>
        </div>
      </section>

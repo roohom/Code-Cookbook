@@ -634,6 +634,7 @@ body:has(.cc-directory-page) .rst-content > section > h1:first-child,
 .cc-home-article-card a {
   display: grid;
   min-height: 15rem;
+  height: 100%;
   padding: 1.15rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 22px;
